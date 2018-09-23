@@ -36,12 +36,6 @@ public class HelloAppEngine extends HttpServlet {
   }
 
 	private String getConnection() {
-		
-	    String instanceConnectionName = "kidsaritmetica:europe-west1:kidsaritmetica";
-
-	    // TODO: fill this in
-	    // The database from which to list tables.
-	    String databaseName = "kidsaritmetica";
 
 	    String username = "juanpsm79";
 
@@ -53,17 +47,13 @@ public class HelloAppEngine extends HttpServlet {
 	   
 
 	    //[START doc-example]
-	    String jdbcUrl = String.format(
-	        "jdbc:mysql://google/%s?cloudSqlInstance=%s"
-	            + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false",
-	        databaseName,
-	        instanceConnectionName);
+	    String url = System.getProperty("cloudsql");
 	 
 	    
 	   //[END doc-example]
 	    Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(jdbcUrl, username, password);
+			connection = DriverManager.getConnection(url);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();
