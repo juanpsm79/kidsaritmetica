@@ -25,10 +25,11 @@ import kidsaritmetica.service.GeneradorSumas;
     urlPatterns = {"/hello"}
 )
 public class HelloAppEngine extends HttpServlet {
+	
+	private static final int MAX_COLISIONES = 50;
 
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) 
-      throws IOException {
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       
 	  Map<String, String> options = new LinkedHashMap<>();
 	    options.put("value1", "label1");
@@ -37,22 +38,18 @@ public class HelloAppEngine extends HttpServlet {
 	   
 	    //String conn = getConnection();
 	    GeneradorSumas generador = new GeneradorSumas();
-	    Map<Integer, List<Suma>> sumasNiveles = null;
+	    Map<String, List<Suma>> sumasNiveles = null;
 	    if (request.getSession().getAttribute("sumasNiveles")==null) {
 	    	sumasNiveles = new HashMap<>();
+	    	sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 	    	request.getSession().setAttribute("sumasNiveles", sumasNiveles);
 	    } else {
-	    	sumasNiveles = (Map<Integer, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
+	    	sumasNiveles = (Map<String, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
+	    	 if(sumasNiveles.get(request.getParameter("nivel"))==null)
+	     		sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 	    }
-	    
-	    if(sumasNiveles.get(new Integer(request.getParameter("nivel")))==null)
-    		sumasNiveles.put(new Integer(request.getParameter("nivel")), new ArrayList<>());
-	    Suma nuevaSuma = generador.obtenerSumaNivel(sumasNiveles, new Integer(request.getParameter("nivel")));
-	    
+	    Suma nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES);
 	    response.setContentType("application/json");
-	    
-	    
-	    
 	    response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
 	   //response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
   }

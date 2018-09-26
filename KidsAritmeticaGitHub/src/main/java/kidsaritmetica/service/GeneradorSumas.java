@@ -26,7 +26,7 @@ public class GeneradorSumas {
 		}
 	}*/
 	
-	public Suma obtenerSumaNivel(Map <Integer, List<Suma>> sumasNivel, int nivel) {
+	public Suma obtenerSumaNivel(List<Suma> sumasNivel, int nivel, int colisiones, int maxColisiones) {
 		Suma suma =  new Suma();
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
@@ -42,10 +42,13 @@ public class GeneradorSumas {
 			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		if (sumasNivel.get(nivel).contains(suma))
-			suma = obtenerSumaNivel(sumasNivel,nivel);
+		if (sumasNivel.contains(suma)) {
+			colisiones++;
+			if(colisiones<maxColisiones)
+				suma = obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones);
+		}
 		else {
-			sumasNivel.get(nivel).add(suma);
+			sumasNivel.add(suma);
 		}
 		return suma;
 	}
