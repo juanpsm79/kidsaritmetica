@@ -6,13 +6,19 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import kidsaritmetica.model.Suma;
+import kidsaritmetica.service.GeneradorSumas;
 
 @WebServlet(
     name = "HelloAppEngine",
@@ -29,10 +35,34 @@ public class HelloAppEngine extends HttpServlet {
 	    options.put("value2", "label2");
 	    options.put("value3", "label3");
 	   
-	    String conn = getConnection();
-
+	    //String conn = getConnection();
+	    GeneradorSumas generador = new GeneradorSumas();
+	    Map<Integer, List<Suma>> sumasNiveles = null;
+	    if (request.getSession().getAttribute("sumasNiveles")==null) {
+	    	sumasNiveles = new HashMap<>();
+	    	request.getSession().setAttribute("sumasNiveles", sumasNiveles);
+	    } else {
+	    	sumasNiveles = (Map<Integer, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
+	    }
+	    
+	    if(sumasNiveles.get(new Integer(request.getParameter("nivel")))==null)
+    		sumasNiveles.put(new Integer(request.getParameter("nivel")), new ArrayList<>());
+	    Suma nuevaSuma = generador.obtenerSumaNivel(sumasNiveles, new Integer(request.getParameter("nivel")));
+	    
 	    response.setContentType("application/json");
-	    response.getWriter().write("{\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
+	    
+	    
+	    
+	    response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
+	   //response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
+  }
+  
+  
+  @Override
+  public void doGet(HttpServletRequest request, HttpServletResponse response) 
+      throws IOException {
+      	doPost(request, response);
+	  
   }
 
 	private String getConnection() {

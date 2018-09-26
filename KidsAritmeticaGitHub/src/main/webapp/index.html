@@ -41,7 +41,8 @@
 			  data:{nivel: ''+value},
 			  dataType: "json",
 			  success : function(responseText) {
-						alert("nivel seleccionado "+responseText.tablas);
+				document.getElementById("operador1").innerHTML = ""+responseText.operador1;
+				document.getElementById("operador2").innerHTML = ""+responseText.operador2;
 			  }
 			});
   	}
@@ -106,6 +107,7 @@
     
       <input type="button" id="calcularSuma" onclick="javascript:cocoa();">Generar Suma</input>
     </div>
+    <div id = "operador1"></div><div id = "operador2"></div>
   </fieldset>
 </div>
 </div> 
