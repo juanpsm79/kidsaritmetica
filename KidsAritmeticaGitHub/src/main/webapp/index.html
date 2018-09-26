@@ -18,6 +18,23 @@
     .ui-controlgroup-horizontal .ui-spinner-input {
       width: 20px;
     }
+    #targetElement {
+    height: 200px;
+    margin: 50px;
+    background: #9cf;
+  }
+  .position1Div {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background: #080;
+  }
+   .position2Div {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    background: #080;
+  }
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
@@ -46,31 +63,8 @@
 			  }
 			});
   	}
-  $( "#position1" ).position({
-	  my: "center",
-	  at: "center",
-	  of: "#targetElement"
-	});
-	 
-	$( "#position2" ).position({
-	  my: "left top",
-	  at: "left top",
-	  of: "#targetElement"
-	});
-	 
-	$( "#position3" ).position({
-	  my: "right center",
-	  at: "right bottom",
-	  of: "#targetElement"
-	});
-	 
-	$( document ).mousemove(function( event ) {
-	  $( "#position4" ).position({
-	    my: "left+3 bottom-3",
-	    of: event,
-	    collision: "fit"
-	  });
-	});
+	  
+	
   </script>
 </head>
 
@@ -131,7 +125,11 @@
     
       <input type="button" id="calcularSuma" onclick="javascript:enviarSuma();" value="Generar Suma"/>
     </div>
-    <div id = "operador1"></div><div id = "operador2"></div>
+    <div id="targetElement">
+	    <div id = "operador1"></div>
+	    <div id = "operador2"></div>
+    </div>
+    
   </fieldset>
 </div>
 </div> 

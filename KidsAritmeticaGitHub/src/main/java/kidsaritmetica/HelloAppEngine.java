@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +49,15 @@ public class HelloAppEngine extends HttpServlet {
 	    	 if(sumasNiveles.get(request.getParameter("nivel"))==null)
 	     		sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 	    }
-	    Suma nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES);
+	    Suma nuevaSuma = null;
+	    int nivel = new Integer(request.getParameter("nivel"));
+	    
+	    if(nivel<5)
+	     nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES);
+	    else if (nivel==5) {
+	    	int nivelAleatorio = new Random().nextInt(5);
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivelAleatorio, 0,MAX_COLISIONES);
+	    }
 	    response.setContentType("application/json");
 	    response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
 	   //response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
