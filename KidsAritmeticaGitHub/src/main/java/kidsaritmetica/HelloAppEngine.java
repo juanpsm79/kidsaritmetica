@@ -51,12 +51,26 @@ public class HelloAppEngine extends HttpServlet {
 	    }
 	    Suma nuevaSuma = null;
 	    int nivel = new Integer(request.getParameter("nivel"));
-	    
+	    boolean llevada = false;
+	    int nivelAleatorio = 0;
+	    if(nivel==13)
+	    	llevada = true;
 	    if(nivel<5)
-	     nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES);
+	     nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
 	    else if (nivel==5) {
-	    	int nivelAleatorio = new Random().nextInt(5);
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivelAleatorio, 0,MAX_COLISIONES);
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, 0,MAX_COLISIONES,llevada);
+	    }else if (nivel>=6 && nivel<=10) {
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
+	    }else if (nivel==11 && nivel==12) {
+	    	nivelAleatorio = new Random().ints(6, 11).iterator().next();//NIVEL ENTRE EL 6 Y EL 10
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
+	    }else if (nivel==13)
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
+	    else if(nivel==14 || nivel == 15) {
+	    	nivelAleatorio = new Random().nextInt(14);//NIVEL ENTRE EL 0 Y EL 13
+	    	if(nivelAleatorio ==13)
+	    		llevada = true;
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
 	    }
 	    response.setContentType("application/json");
 	    response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");

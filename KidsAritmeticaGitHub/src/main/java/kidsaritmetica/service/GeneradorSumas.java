@@ -26,12 +26,41 @@ public class GeneradorSumas {
 		}
 	}*/
 	
-	public Suma obtenerSumaNivel(List<Suma> sumasNivel, int nivel, int colisiones, int maxColisiones) {
+	public Suma obtenerSumaNivel(List<Suma> sumasNivel, int nivel, int colisiones, int maxColisiones,boolean llevada) {
 		Suma suma =  new Suma();
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
-		Integer digitoOp1 = getRandomIntegerBetween(0,nivel);
-		Integer digitoOp2 = getRandomIntegerBetween(0,nivel);
+		
+		Integer digitoOp1 = null;
+		Integer digitoOp2 = null;
+		
+		if(nivel<5) {
+			digitoOp1 = getRandomIntegerBetween(0,nivel);
+			digitoOp2 = getRandomIntegerBetween(0,nivel);
+		}else if (nivel==5) {
+			Integer nivelAleatorio = new Random().nextInt(5); //límite superior exclusivo
+			digitoOp1 = getRandomIntegerBetween(0,nivelAleatorio);
+			digitoOp2 = getRandomIntegerBetween(0,nivelAleatorio);
+	    }else if (nivel>=6 && nivel<=10) {
+	    	digitoOp1 = getRandomIntegerBetween(0,nivel);
+			digitoOp2 = getRandomIntegerBetween(0,nivel);
+	    }else if (nivel==11 && nivel==12) {
+	    	digitoOp1 = getRandomIntegerBetween(0,nivel);
+			digitoOp2 = getRandomIntegerBetween(0,nivel);
+	    }else if (nivel==13) {
+	    	digitoOp1 = getRandomIntegerBetween(0,nivel);
+			digitoOp2 = getRandomIntegerBetween(0,nivel);
+	    }else if(nivel==14 || nivel == 15) {
+	    	digitoOp1 = getRandomIntegerBetween(0,nivel);
+			digitoOp2 = getRandomIntegerBetween(0,nivel);
+	    }
+
+		if (llevada) {
+			while(digitoOp1+digitoOp2<9) {
+				digitoOp1 = getRandomIntegerBetween(0,nivel);
+				digitoOp2 = getRandomIntegerBetween(0,nivel);
+			}
+		}
 		digitosOperador1.add(digitoOp1);
 		digitosOperador2.add(digitoOp2);
 		int operador1 = 0;
@@ -45,7 +74,7 @@ public class GeneradorSumas {
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
-				suma = obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones);
+				suma = obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones, llevada);
 		}
 		else {
 			sumasNivel.add(suma);
@@ -53,8 +82,8 @@ public class GeneradorSumas {
 		return suma;
 	}
 
-	private int getRandomIntegerBetween(int min, int max){
-	    return  random.nextInt(max+1);
+	private int getRandomIntegerBetween(int min, int nivel){
+	    return  random.nextInt(nivel+1);
 	}
 	
 	public static void main (String[] args) {
