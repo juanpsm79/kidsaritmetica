@@ -1,6 +1,8 @@
 package kidsaritmetica.model;
 
-public class Suma {
+import java.io.Serializable;
+
+public class Suma implements Serializable {
 	
 	private int puntos;
 	private int nivel;

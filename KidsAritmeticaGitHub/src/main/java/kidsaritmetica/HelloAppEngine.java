@@ -27,53 +27,90 @@ import kidsaritmetica.service.GeneradorSumas;
 )
 public class HelloAppEngine extends HttpServlet {
 	
-	private static final int MAX_COLISIONES = 50;
+	private static final int MAX_COLISIONES = 100;
+	private Integer colisiones = 0;
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
       
-	  Map<String, String> options = new LinkedHashMap<>();
-	    options.put("value1", "label1");
-	    options.put("value2", "label2");
-	    options.put("value3", "label3");
-	   
-	    //String conn = getConnection();
+	  	response.setContentType("application/json");
 	    GeneradorSumas generador = new GeneradorSumas();
-	    Map<String, List<Suma>> sumasNiveles = null;
+	    colisiones = 0;
 	    if (request.getSession().getAttribute("sumasNiveles")==null) {
-	    	sumasNiveles = new HashMap<>();
-	    	sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
+	    	Map<String, List<Suma>> sumasNiveles = new HashMap<>();
 	    	request.getSession().setAttribute("sumasNiveles", sumasNiveles);
-	    } else {
-	    	sumasNiveles = (Map<String, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
-	    	 if(sumasNiveles.get(request.getParameter("nivel"))==null)
-	     		sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
-	    }
+	    } 
+	    Map<String, List<Suma>> sumasNiveles = (Map<String, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
+	    if(sumasNiveles.get(request.getParameter("nivel"))==null)
+     		sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 	    Suma nuevaSuma = null;
 	    int nivel = new Integer(request.getParameter("nivel"));
-	    boolean llevada = false;
-	    int nivelAleatorio = 0;
-	    if(nivel==13)
-	    	llevada = true;
-	    if(nivel<5)
-	     nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
-	    else if (nivel==5) {
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, 0,MAX_COLISIONES,llevada);
-	    }else if (nivel>=6 && nivel<=10) {
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
-	    }else if (nivel==11 && nivel==12) {
-	    	nivelAleatorio = new Random().ints(6, 11).iterator().next();//NIVEL ENTRE EL 6 Y EL 10
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
-	    }else if (nivel==13)
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
-	    else if(nivel==14 || nivel == 15) {
-	    	nivelAleatorio = new Random().nextInt(14);//NIVEL ENTRE EL 0 Y EL 13
-	    	if(nivelAleatorio ==13)
-	    		llevada = true;
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), new Integer(request.getParameter("nivel")), 0,MAX_COLISIONES, llevada);
+	    String leyenda ="no leyenda";
+	    if(nivel<=15) {
+	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, colisiones,MAX_COLISIONES);
+	    }else if(nivel ==16) {
+	    	nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/one digit addition without regrouping";
+	    }else if(nivel ==17) {
+	    	nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/one digit addition with regrouping in units";
+	    }else if(nivel ==18) {
+	    	nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/one digit addition with regrouping in units and tens";
+	    }else if(nivel ==19 || nivel ==20) {
+	    	int nivelAleatorio =  new Random().ints(1, 16, 19).sum();
+	    	switch (nivelAleatorio) {
+			    case 16:
+			    	nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    	leyenda = "two digits/one digit addition without regrouping";
+					break;
+				case 17:
+					nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    	leyenda = "two digits/one digit addition with regrouping in units";
+			    	break;
+				case 18:
+					nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    	leyenda = "two digits/one digit addition with regrouping in units and tens";
+			    	break;
+	    	}    	
 	    }
-	    response.setContentType("application/json");
-	    response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
+	    else if (nivel ==21) {
+	    	nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/two digits without regrouping";
+	    }
+	    else if (nivel ==22) {
+	    	nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/two digits regrouping in untis";
+	    }
+	    else if (nivel ==23) {
+	    	nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/two digits regrouping in tens";
+	    }else if (nivel ==24) {
+	    	nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	leyenda = "two digits/two digits regrouping in units and tens";
+	    }else if (nivel ==25 || nivel ==26) {
+	    	int nivelAleatorio =  new Random().ints(1, 21, 25).sum();
+	    	switch (nivelAleatorio) {
+	    		case 21:
+	    			nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    			leyenda = "two digits/two digits without regrouping";
+	    			break;
+	    		case 22:
+	    			nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	    	leyenda = "two digits/two digits regrouping in untis";
+	    	    	break;
+	    		case 23:
+	    			nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	    	leyenda = "two digits/two digits regrouping in tens";
+	    	    	break;
+	    		case 24:
+	    			nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	    	leyenda = "two digits/two digits regrouping in units and tens";
+	    	    	break;
+	    	}	
+	    }
+	    
+	    response.getWriter().write("{\"colisiones\": \""+colisiones+"\",\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"leyenda\": \""+leyenda+"\"}");
 	   //response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
   }
   

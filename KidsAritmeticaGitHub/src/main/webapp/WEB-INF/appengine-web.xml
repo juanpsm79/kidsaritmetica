@@ -4,7 +4,7 @@
   <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
   <runtime>java8</runtime>
-  <service>cloudsql</service>
+  
   <system-properties>
     <property name="cloudsql" value="jdbc:mysql://google/kidsaritmetica?useSSL=false&amp;cloudSqlInstance=kidsaritmetica:europe-west1:kidsaritmetica&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=juanpsm79&amp;password=5326juan3738" />
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>

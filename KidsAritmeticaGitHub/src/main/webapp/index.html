@@ -58,6 +58,7 @@
 			  data:{nivel: ''+value},
 			  dataType: "json",
 			  success : function(responseText) {
+			  document.getElementById("leyenda").innerHTML = ""+responseText.leyenda+ " " +responseText.colisiones;
 				document.getElementById("operador1").innerHTML = ""+responseText.operador1;
 				document.getElementById("operador2").innerHTML = ""+responseText.operador2;
 			  }
@@ -117,15 +118,58 @@
       <label for="nivel10">Nivel 10</label>
       <input type="radio" name="nivel" id="nivel10" value="10">
       
-      <label for="nivel11">Nivel 11</label>
+      <label for="nivel11">Nivel 11 (All additions )</label>
       <input type="radio" name="nivel" id="nivel11" value="11">
       
-      <label for="nivel12">Nivel 12</label>
+      <label for="nivel12">Nivel 12 (Level Jump Monster)</label>
       <input type="radio" name="nivel" id="nivel12" value="12">
+      
+      <label for="nivel13">Nivel 13</label>
+      <input type="radio" name="nivel" id="nivel13" value="13">
+      
+      <label for="nivel14">Nivel 14 (all additions)</label>
+      <input type="radio" name="nivel" id="nivel14" value="14">
+      
+      <label for="nivel15">Nivel 15 (level jump monster)</label>
+      <input type="radio" name="nivel" id="nivel15" value="15">
+      
+      <label for="nivel16">Nivel 16</label>
+      <input type="radio" name="nivel" id="nivel16" value="16">
+      
+      <label for="nivel17">Nivel 17</label>
+      <input type="radio" name="nivel" id="nivel17" value="17">
+      
+      <label for="nivel18">Nivel 18</label>
+      <input type="radio" name="nivel" id="nivel18" value="18">
+      
+      <label for="nivel19">Nivel 19 (all additions)</label>
+      <input type="radio" name="nivel" id="nivel19" value="19">
+      
+      <label for="nivel20">Nivel 20 (all additions)</label>
+      <input type="radio" name="nivel" id="nivel20" value="20">
+      
+      <label for="nivel21">Nivel 21</label>
+      <input type="radio" name="nivel" id="nivel21" value="21">
+      
+      <label for="nivel22">Nivel 22</label>
+      <input type="radio" name="nivel" id="nivel22" value="22">
+      
+      <label for="nivel23">Nivel 23</label>
+      <input type="radio" name="nivel" id="nivel23" value="23">
+      
+      <label for="nivel24">Nivel 24</label>
+      <input type="radio" name="nivel" id="nivel24" value="24">
+      
+      <label for="nivel25">Nivel 25 (All additions)</label>
+      <input type="radio" name="nivel" id="nivel25" value="25">
+      
+      <label for="nivel26">Nivel 26 (Level jump monster)</label>
+      <input type="radio" name="nivel" id="nivel26" value="26">
     
       <input type="button" id="calcularSuma" onclick="javascript:enviarSuma();" value="Generar Suma"/>
     </div>
     <div id="targetElement">
+    	<div id = "leyenda"></div>
 	    <div id = "operador1"></div>
 	    <div id = "operador2"></div>
     </div>
