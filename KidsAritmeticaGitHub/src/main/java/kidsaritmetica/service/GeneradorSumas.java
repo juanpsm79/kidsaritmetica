@@ -81,6 +81,7 @@ public class GeneradorSumas {
 			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -120,7 +121,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -160,7 +161,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -200,7 +201,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -245,7 +246,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -285,7 +286,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)
@@ -299,6 +300,15 @@ public class GeneradorSumas {
 	
 	public Suma getOperandosNivel23(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
 		//two digits/two digits regrouping in tens
+		
+		if(sumasNivel.size()==0) {
+			Suma suma = new Suma();
+			suma.setOperando1(random.ints(1, 10, 25).sum());
+			suma.setOperando2(random.ints(1, 10, 25).sum());
+			suma.setResultadoSuma(suma.getOperando1()+suma.getOperando2());
+			sumasNivel.add(suma);
+			return suma;
+		}
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		int unidades1 =  random.nextInt(10);
@@ -321,8 +331,11 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
-		if (sumasNivel.contains(suma)) {
+		suma.setResultadoSuma(operador1+operador2);
+		if (sumasNivel.contains(suma) || (
+				( sumasNivel.size()>0 && (suma.getResultadoSuma()<(10+sumasNivel.get(0).getResultadoSuma()))) || 
+				( sumasNivel.size()>0 && (suma.getResultadoSuma()>(20+sumasNivel.get(0).getResultadoSuma())))
+				) ){
 			colisiones++;
 			if(colisiones<maxColisiones)
 				suma = getOperandosNivel23(sumasNivel,colisiones, maxColisiones);
@@ -357,7 +370,7 @@ public class GeneradorSumas {
 		Suma suma = new Suma();
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
-		
+		suma.setResultadoSuma(operador1+operador2);
 		if (sumasNivel.contains(suma)) {
 			colisiones++;
 			if(colisiones<maxColisiones)

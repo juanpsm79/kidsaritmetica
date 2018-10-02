@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -32,7 +33,7 @@ public class HelloAppEngine extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-      
+	  	//String tablas = getConnection();
 	  	response.setContentType("application/json");
 	    GeneradorSumas generador = new GeneradorSumas();
 	    colisiones = 0;
@@ -83,7 +84,9 @@ public class HelloAppEngine extends HttpServlet {
 	    	leyenda = "two digits/two digits regrouping in untis";
 	    }
 	    else if (nivel ==23) {
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    	sumasNiveles.get(request.getParameter("nivel")).forEach(System.out::println);
 	    	leyenda = "two digits/two digits regrouping in tens";
 	    }else if (nivel ==24) {
 	    	nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -111,7 +114,7 @@ public class HelloAppEngine extends HttpServlet {
 	    }
 	    
 	    response.getWriter().write("{\"colisiones\": \""+colisiones+"\",\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"leyenda\": \""+leyenda+"\"}");
-	   //response.getWriter().write("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"tablas\": \""+conn+"\", \"nivel\": \""+request.getParameter("nivel")+"\", \"errorMessage\": \"un error cualquiera\"}");
+	   //response.getWriter().write("{\"tablas\": \""+tablas+"\"}");
   }
   
   
@@ -134,13 +137,13 @@ public class HelloAppEngine extends HttpServlet {
 	   
 
 	    //[START doc-example]
-	    String url = System.getProperty("cloudsql");
+	    String url = "jdbc:mysql://localhost:3306/kidsaritmetica";
 	 
 	    
 	   //[END doc-example]
 	    Connection connection = null;
 		try {
-			connection = DriverManager.getConnection(url);
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/kidsaritmetica?useSSL=false&cloudSqlInstance=kidsaritmetica:europe-west1:kidsaritmetica&socketFactory=com.google.cloud.sql.mysql.SocketFactory&user=juanpsm79&password=5326juan3738");
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return e.getMessage();

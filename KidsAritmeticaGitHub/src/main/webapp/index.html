@@ -58,7 +58,7 @@
 			  data:{nivel: ''+value},
 			  dataType: "json",
 			  success : function(responseText) {
-			  document.getElementById("leyenda").innerHTML = ""+responseText.leyenda+ " " +responseText.colisiones;
+			  document.getElementById("leyenda").innerHTML = ""+responseText.leyenda+ " " +responseText.colisiones+ " tablas "+responseText.tablas;
 				document.getElementById("operador1").innerHTML = ""+responseText.operador1;
 				document.getElementById("operador2").innerHTML = ""+responseText.operador2;
 			  }

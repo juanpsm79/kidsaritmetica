@@ -6,7 +6,7 @@
   <runtime>java8</runtime>
   
   <system-properties>
-    <property name="cloudsql" value="jdbc:mysql://google/kidsaritmetica?useSSL=false&amp;cloudSqlInstance=kidsaritmetica:europe-west1:kidsaritmetica&amp;socketFactory=com.google.cloud.sql.mysql.SocketFactory&amp;user=juanpsm79&amp;password=5326juan3738" />
+    
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
 

@@ -42,6 +42,11 @@ public class Suma implements Serializable {
 		return result;
 	}
 	@Override
+	public String toString() {
+		
+		return new Integer(operando1).toString()+" + "+new Integer(operando2).toString()+ " = "+new Integer(resultadoSuma).toString();
+	}
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
