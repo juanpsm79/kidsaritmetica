@@ -300,15 +300,6 @@ public class GeneradorSumas {
 	
 	public Suma getOperandosNivel23(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
 		//two digits/two digits regrouping in tens
-		
-		if(sumasNivel.size()==0) {
-			Suma suma = new Suma();
-			suma.setOperando1(random.ints(1, 10, 25).sum());
-			suma.setOperando2(random.ints(1, 10, 25).sum());
-			suma.setResultadoSuma(suma.getOperando1()+suma.getOperando2());
-			sumasNivel.add(suma);
-			return suma;
-		}
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		int unidades1 =  random.nextInt(10);
@@ -332,18 +323,23 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma) || (
-				( sumasNivel.size()>0 && (suma.getResultadoSuma()<(10+sumasNivel.get(0).getResultadoSuma()))) || 
-				( sumasNivel.size()>0 && (suma.getResultadoSuma()>(20+sumasNivel.get(0).getResultadoSuma())))
-				) ){
-			colisiones++;
-			if(colisiones<maxColisiones)
-				suma = getOperandosNivel23(sumasNivel,colisiones, maxColisiones);
-		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
+		if(sumasNivel.size()>0) {
+			if (sumasNivel.contains(suma) || suma.getResultadoSuma()>109/*|| (
+					suma.getResultadoSuma()<(10+sumasNivel.get(0).getResultadoSuma()) || 
+					suma.getResultadoSuma()>(20+sumasNivel.get(0).getResultadoSuma())  ) */ ){
+				colisiones++;
+				if(colisiones<=maxColisiones) {
+					suma = getOperandosNivel23(sumasNivel,colisiones, maxColisiones);
+					return suma;
+				} else {
+					System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+					return suma;
+				}
+			} else {
+				return suma;
+			}
+		} else 
+			return suma;
 	}
 	
 	public Suma getOperandosNivel24(List<Suma> sumasNivel, int colisiones, int maxColisiones) {

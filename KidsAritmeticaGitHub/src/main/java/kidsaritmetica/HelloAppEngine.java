@@ -28,7 +28,7 @@ import kidsaritmetica.service.GeneradorSumas;
 )
 public class HelloAppEngine extends HttpServlet {
 	
-	private static final int MAX_COLISIONES = 100;
+	private static final int MAX_COLISIONES = 200;
 	private Integer colisiones = 0;
 
   @Override
@@ -84,8 +84,11 @@ public class HelloAppEngine extends HttpServlet {
 	    	leyenda = "two digits/two digits regrouping in untis";
 	    }
 	    else if (nivel ==23) {
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<1500) {
+	    		nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    	}
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
-	    	nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 	    	sumasNiveles.get(request.getParameter("nivel")).forEach(System.out::println);
 	    	leyenda = "two digits/two digits regrouping in tens";
 	    }else if (nivel ==24) {
