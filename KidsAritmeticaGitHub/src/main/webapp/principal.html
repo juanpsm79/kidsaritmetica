@@ -50,8 +50,20 @@
 	  var sumaAlumno = parseInt(document.getElementById('sumaUnidades').innerHTML, 10);
 	  var unidades1 = parseInt(document.getElementById('unidades1').innerHTML, 10);
 	  var unidades2 = parseInt(document.getElementById('unidades2').innerHTML, 10);
-	  if(sumaAlumno == unidades1+unidades2)
+	  if(sumaAlumno == unidades1+unidades2){
 		  alert("suma correcta");
+		  
+		  var sumasActuales = parseInt(document.getElementById('indicadorSumas').innerHTML, 10);
+		  sumasActuales++;
+		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales;
+		  document.getElementById('sumaUnidades').innerHTML ="&nbsp;";
+		  
+		  var aux = Math.floor(Math.random() * 10);
+		  document.getElementById('unidades1').innerHTML = ""+aux
+		  var aux1 = Math.floor(Math.random() * 10);
+		  document.getElementById('unidades2').innerHTML = ""+aux1
+		  
+	  }
 	  else
 		  location.href = "sumaIncorrecta.html"
   }
@@ -95,7 +107,7 @@
 						<div style="position:relative;bottom:110px;left:45px;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat">
 							<label id="sumaUnidades"style="position:relative;left:15px;color:black;
 									 font-family:Calibri;
-									 font-size: 80px">1</label>
+									 font-size: 80px">&nbsp;</label>
 						</div>
 					</div>
 					<div style="float:left;width:50%;height:100%">
@@ -108,9 +120,12 @@
 				</div>
 				
 				<div style="float:left;width:20%;height:100%">
+						<label id="indicadorSumas" style="color:black;
+									 font-family:Calibri;
+									 font-size: 60px;font-weight: bold;position:relative;left:30px;">1</label>
 						<label style="color:black;
 									 font-family:Calibri;
-									 font-size: 60px;font-weight: bold;position:relative;left:30px;">1/</label>
+									 font-size: 60px;font-weight: bold;position:relative;left:30px;">/</label>
 						<label style="color:black;
 									 font-family:Calibri;
 									 font-size: 60px;font-weight: bold;position:relative;left:30px;">10</label>
