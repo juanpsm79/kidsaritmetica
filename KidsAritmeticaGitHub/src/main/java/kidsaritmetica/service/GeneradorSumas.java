@@ -82,15 +82,19 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
+			if(colisiones<=maxColisiones) {
 				suma = obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel16(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -122,15 +126,18 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
-				suma = getOperandosNivel21(sumasNivel,colisiones, maxColisiones);
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel16(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel17(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -162,15 +169,18 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
-				suma = getOperandosNivel21(sumasNivel,colisiones, maxColisiones);
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel17(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel18(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -202,15 +212,18 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
-				suma = getOperandosNivel21(sumasNivel,colisiones, maxColisiones);
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel18(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel20(List<Suma> list, int i, int maxColisiones) {
@@ -229,8 +242,8 @@ public class GeneradorSumas {
 		
 		
 		//sin llevada
-		int decenas1 =  random.nextInt(10);
-		int decenas2 = random.nextInt(10-decenas1);
+		int decenas1 =  random.nextInt(9);
+		int decenas2 = random.ints(1, 1, 10-decenas1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -247,15 +260,18 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
+			if(colisiones<=maxColisiones) {
 				suma = getOperandosNivel21(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel22(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -287,15 +303,18 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
+			if(colisiones<=maxColisiones) {
 				suma = getOperandosNivel22(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 	
 	public Suma getOperandosNivel23(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -323,23 +342,21 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if(sumasNivel.size()>0) {
-			if (sumasNivel.contains(suma) || suma.getResultadoSuma()>109/*|| (
-					suma.getResultadoSuma()<(10+sumasNivel.get(0).getResultadoSuma()) || 
-					suma.getResultadoSuma()>(20+sumasNivel.get(0).getResultadoSuma())  ) */ ){
-				colisiones++;
-				if(colisiones<=maxColisiones) {
-					suma = getOperandosNivel23(sumasNivel,colisiones, maxColisiones);
-					return suma;
-				} else {
-					System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
-					return suma;
-				}
+		if (sumasNivel.contains(suma) || suma.getResultadoSuma()>109/*|| (
+				suma.getResultadoSuma()<(10+sumasNivel.get(0).getResultadoSuma()) || 
+				suma.getResultadoSuma()>(20+sumasNivel.get(0).getResultadoSuma())  ) */ ){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel23(sumasNivel,colisiones, maxColisiones);
+				return suma;
 			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
 				return suma;
 			}
-		} else 
+		} else {
 			return suma;
+		}
+		
 	}
 	
 	public Suma getOperandosNivel24(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
@@ -367,15 +384,19 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma)) {
+		
+		if (sumasNivel.contains(suma)){
 			colisiones++;
-			if(colisiones<maxColisiones)
+			if(colisiones<=maxColisiones) {
 				suma = getOperandosNivel24(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
 		}
-		else {
-			sumasNivel.add(suma);
-		}
-		return suma;
 	}
 
 	

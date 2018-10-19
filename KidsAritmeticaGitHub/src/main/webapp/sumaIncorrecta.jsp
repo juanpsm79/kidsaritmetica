@@ -5,11 +5,6 @@
   <style>
    
   a {
-	     
-	   
-	   
-	   
-	   
 	    color:rgb(0, 112, 192)
 	}
   
@@ -34,7 +29,7 @@
 								  
 			</div>
 		<div style="background-color:rgb(255, 255, 0);margin-top:60px">
-			<a href="principal.html" style="font-family:Calibri;
+			<a href="principal.jsp" style="font-family:Calibri;
 										 font-size: 115px;font-weight: bold;">START OVER!</a>
 		
 			</div>

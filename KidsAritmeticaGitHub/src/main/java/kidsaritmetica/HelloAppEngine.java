@@ -42,82 +42,206 @@ public class HelloAppEngine extends HttpServlet {
 	    	request.getSession().setAttribute("sumasNiveles", sumasNiveles);
 	    } 
 	    Map<String, List<Suma>> sumasNiveles = (Map<String, List<Suma>>)request.getSession().getAttribute("sumasNiveles");
-	    if(sumasNiveles.get(request.getParameter("nivel"))==null)
-     		sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
+	    if(sumasNiveles.get(request.getParameter("nivel"))!=null)
+	    	sumasNiveles.remove(request.getParameter("nivel"));
+     	sumasNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 	    Suma nuevaSuma = null;
 	    int nivel = new Integer(request.getParameter("nivel"));
 	    String leyenda ="no leyenda";
 	    if(nivel<=15) {
-	    	nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, colisiones,MAX_COLISIONES);
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, colisiones,MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }else if(nivel ==16) {
-	    	nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/one digit addition without regrouping";
+	    	leyenda = "Level 16: two digits/one digit addition without regrouping";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }else if(nivel ==17) {
-	    	nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/one digit addition with regrouping in units";
+	    	leyenda = "Level 17: two digits/one digit addition with regrouping in units";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }else if(nivel ==18) {
-	    	nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/one digit addition with regrouping in units and tens";
+	    	leyenda = "Level 18: two digits/one digit addition with regrouping in units and tens";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }else if(nivel ==19 || nivel ==20) {
 	    	int nivelAleatorio =  new Random().ints(1, 16, 19).sum();
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	switch (nivelAleatorio) {
 			    case 16:
-			    	nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-			    	leyenda = "two digits/one digit addition without regrouping";
+			    	leyenda = "Level 16: two digits/one digit addition without regrouping";
+			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+			    		nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 					break;
 				case 17:
-					nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-			    	leyenda = "two digits/one digit addition with regrouping in units";
+			    	leyenda = "Level 17: two digits/one digit addition with regrouping in units";
+			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+			    		nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
+			    	
 			    	break;
 				case 18:
-					nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-			    	leyenda = "two digits/one digit addition with regrouping in units and tens";
+			    	leyenda = "Level 18: two digits/one digit addition with regrouping in units and tens";
+			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+			    		nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 			    	break;
 	    	}    	
 	    }
 	    else if (nivel ==21) {
-	    	nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/two digits without regrouping";
+	    	leyenda = "Level 21: two digits/two digits without regrouping";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }
 	    else if (nivel ==22) {
-	    	nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/two digits regrouping in untis";
+	    	leyenda = "Level 22: two digits/two digits regrouping in untis";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }
 	    else if (nivel ==23) {
-	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<1500) {
+	    	leyenda = "Level 23: two digits/two digits regrouping in tens";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
 	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
-	    	sumasNiveles.get(request.getParameter("nivel")).forEach(System.out::println);
-	    	leyenda = "two digits/two digits regrouping in tens";
+	    	response.getWriter().write(resultado.toString());
 	    }else if (nivel ==24) {
-	    	nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	leyenda = "two digits/two digits regrouping in units and tens";
+	    	leyenda = "Level 24: two digits/two digits regrouping in units and tens";
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
+	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    		nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+	    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+	    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+	    	}
+	    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+	    	response.getWriter().write(resultado.toString());
 	    }else if (nivel ==25 || nivel ==26) {
 	    	int nivelAleatorio =  new Random().ints(1, 21, 25).sum();
+	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	switch (nivelAleatorio) {
 	    		case 21:
-	    			nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    			leyenda = "two digits/two digits without regrouping";
+	    			leyenda = "Level 21: two digits/two digits without regrouping";
+	    			while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    				nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 	    			break;
 	    		case 22:
-	    			nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	    	leyenda = "two digits/two digits regrouping in untis";
+	    	    	leyenda = "Level 22: two digits/two digits regrouping in untis";
+	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    	    		nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 	    	    	break;
 	    		case 23:
-	    			nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	    	leyenda = "two digits/two digits regrouping in tens";
+	    	    	leyenda = "Level 23: two digits/two digits regrouping in tens";
+	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    	    		nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 	    	    	break;
 	    		case 24:
-	    			nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
-	    	    	leyenda = "two digits/two digits regrouping in units and tens";
+	    	    	leyenda = "Level 24: two digits/two digits regrouping in units and tens";
+	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
+	    	    		nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
+			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+			    		resultado.append("{\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\"},");
+			    	}
+			    	resultado.deleteCharAt(resultado.lastIndexOf(","));
+			    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
+			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			    	response.getWriter().write(resultado.toString());
 	    	    	break;
 	    	}	
 	    }
-	    
-	    response.getWriter().write("{\"colisiones\": \""+colisiones+"\",\"operador1\": \""+nuevaSuma.getOperando1()+"\",\"operador2\": \""+nuevaSuma.getOperando2()+"\",\"nivel\": \""+request.getParameter("nivel")+"\", \"leyenda\": \""+leyenda+"\"}");
-	   //response.getWriter().write("{\"tablas\": \""+tablas+"\"}");
   }
   
   
