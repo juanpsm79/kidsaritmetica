@@ -75,7 +75,7 @@
   </script>
 </head>
 
-  <body style="background-image:url(fondoKitsAritmetica.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
+  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
 	
 	<div style="width:1300px;height:700px;">
 			
