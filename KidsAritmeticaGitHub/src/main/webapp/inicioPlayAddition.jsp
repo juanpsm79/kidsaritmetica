@@ -37,7 +37,7 @@
   <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
 	
 	
-	<div align ="center">
+	<div align ="center" style="margin-top:100px">
 		<div style="background-image:url(logoPlayAdditionSmall.png);background-repeat:no-repeat;background-size:cover;width:301px;height:299px;">
 		</div>
 		<div onclick="javascript:goToLevel1();" style="background-image:url(goToLevel1.png);background-repeat:no-repeat;background-size:cover;width:560px;height:299px;">

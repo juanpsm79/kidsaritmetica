@@ -31,7 +31,7 @@
 </head>
 
   <body  onclick="javascript:irPrincipal();" style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
-	<div align ="center">
+	<div align ="center" style="margin-top:100px">
 		<div style="background-image:url(logoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:592px;height:565px;">
 		</div>
 		<div style="background-image:url(contactSupport.png);background-repeat:no-repeat;background-size:cover;width:360px;height:98px;position:relative;left:325px;bottom:98px">
