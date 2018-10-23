@@ -79,47 +79,16 @@
 	
 	<div style="width:1300px;height:700px;">
 			
-			<div style="width:100%;height:15%">
-				<div style="background-image:url(level.png);background-repeat:no-repeat;">
-							<label style="color:rgb(0, 51, 204);
+			<div style="width:100%;height:20%">
+				<div style="width:30%;height:100%;float:left;background-image:url(level.png);background-repeat:no-repeat;">
+							<label style="position:relative;left:240px;top:10px;color:rgb(0, 51, 204);
 										 font-family:Berlin Sans FB Demi;
-										 font-size: 72px;"><%=nivel%></label>
-				</div>		
-		   </div>
-	
-			<div style="width:100%;height:60%">
-				<div style="width:45%;height:100%;float:left">			
-				</div>
+										 font-size: 105px;"><%=nivel%>0</label>
+				</div>	
 				
-				<div style="float:left;width:35%;height:100%">
-					<div style="float:left;width:50%;height:100%">	
-						<div style="position:relative;left:60px;top:20px"><label id="unidades1" style="color:black;
-									 font-family:Calibri;
-									 font-size: 105px;">1</label></div>
-						<div style="background-image:url(simboloSuma.png);background-repeat:no-repeat;background-size:cover;width:78px;height:78px"><label style="color:black;
-									 font-family:Calibri">&nbsp;</label></div>
-						<div style="position:relative;left:60px;bottom:30px"><label id="unidades2" style="color:black;
-									 font-family:Calibri;
-									 font-size: 105px;">0</label></div>
-						<div style="position:relative;bottom:110px;"><label style="color:black;
-									 font-family:Calibri;
-									 font-size: 80px">___</label></div>
-						<div style="position:relative;bottom:110px;left:45px;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat">
-							<label id="sumaUnidades"style="position:relative;left:15px;color:black;
-									 font-family:Calibri;
-									 font-size: 88px">&nbsp;</label>
-						</div>
-					</div>
-					<div style="float:left;width:50%;height:100%">
-						<div style="background-image:url(checkButton.png);background-repeat:no-repeat;height:100%;position:relative;top:70px;right:35px">
-							<a onclick="javascript:comprobarSuma();" style="color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;">CHECK</a>
-							
-						</div>
-					</div>
-					
-				</div>
+				<div style="width:45%;height:100%;float:left">&nbsp;</div>
 				
-				<div style="float:left;width:20%;height:100%">
+				<div style="float:left;width:25%;height:100%">
 					<div style="background-image:url(scoreboard.png);background-repeat:no-repeat;">
 						<label id="indicadorSumas" style="color:rgb(204, 51, 153);
 									 font-family:Berlin Sans FB Demi;
@@ -132,60 +101,98 @@
 									 font-size: 72px;font-weight: bold;position:relative;left:30px;">10</label>
 					</div>
 				</div>
+				
+		   </div>
+	
+			<div style="width:100%;height:70%">
+				<div style="width:40%;height:100%;float:left">			
+				</div>
+				
+				<div style="float:left;width:40%;height:100%">
+					<div style="float:left;width:50%;height:100%;position:relative;bottom:85px;">	
+						<div style="position:relative;left:60px;top:20px"><label id="unidades1" style="color:black;
+									 font-family:Calibri;
+									 font-size: 125px;">1</label></div>
+						<div style="background-image:url(simboloSuma.png);background-repeat:no-repeat;background-size:cover;width:78px;height:78px"><label style="color:black;
+									 font-family:Calibri">&nbsp;</label></div>
+						<div style="position:relative;left:60px;bottom:30px"><label id="unidades2" style="color:black;
+									 font-family:Calibri;
+									 font-size: 125px;">0</label></div>
+						<div style="position:relative;bottom:110px;"><label style="color:black;
+									 font-family:Calibri;
+									 font-size: 125px">___</label></div>
+						<div style="position:relative;bottom:110px;left:45px;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;border-color:red">
+							<label id="sumaUnidades"style="position:relative;left:15px;color:black;
+									 font-family:Calibri;
+									 font-size: 125px">&nbsp;</label>
+						</div>
+					</div>
+					<div style="float:left;width:50%;height:100%">
+						<div style="background-image:url(checkButton.png);background-repeat:no-repeat;height:100%;position:relative;top:150px;right:85px">
+							<a onclick="javascript:comprobarSuma();" style="font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;">CHECK</a>
+							
+						</div>
+					</div>
+					
+				</div>
+				
+				<div style="float:left;width:20%;height:100%">
+					&nbsp;
+				</div>
 			</div>
 			
-			<div style="width:100%;height:25%">
+			<div style="width:100%;height:10%">
 				<div style="float:left;width:80%;height:100%">
 				
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px;margin-left:50px">
-							<label id="cero" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px;margin-left:110px">
+							<label id="cero" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">0</label>
+									 font-size: 105px">0</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="uno" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="uno" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px" >1</label>
+									 font-size: 105px" >1</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="dos" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="dos" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">2</label>
+									 font-size: 105px">2</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="tres" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="tres" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">3</label>
+									 font-size: 105px">3</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="cuatro" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="cuatro" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">4</label>
+									 font-size: 105px">4</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="cinco" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="cinco" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">5</label>
+									 font-size: 105px">5</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="seis" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="seis" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">6</label>
+									 font-size: 105px">6</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="siete" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="siete" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">7</label>
+									 font-size: 105px">7</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="ocho" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="ocho" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">8</label>
+									 font-size: 105px">8</label>
 						</div>
-						<div style="width:9%;float:left;background-image:url(cuadriculaDigito.gif);background-repeat:no-repeat;margin-top:15px">
-							<label id="nueve" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:12px;color:black;
+						<div style="width:86px;height:118px;float:left;background-image:url(cuadriculaDigito.png);background-repeat:no-repeat;margin-top:10px">
+							<label id="nueve" onclick="javascript:ponerDigito(this.id)" style="position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 88px">9</label>
+									 font-size: 105px">9</label>
 						</div>
 				
 				</div>
