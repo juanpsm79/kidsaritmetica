@@ -4,7 +4,7 @@
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-  <title>Kids Aritmetica</title>
+  <title>PlayAddition</title>
   <style>
    
   a {
@@ -18,50 +18,35 @@
   <script>
   
  
-  
+	var sumaCorrecta = false;
+	var sumasActuales = 0;
 
-	function asyncCall() {
-		
+	function calcularSuma() {
+		var aux = Math.floor(Math.random() * 10);
+		var aux1 = Math.floor(Math.random() * 10);
+		if(aux+aux1<=9) {
+		  document.getElementById('unidades2').innerHTML = ""+aux1;
+		  document.getElementById('unidades1').innerHTML = ""+aux;
+		  return;
+		} else {
+			calcularSuma();
+		}
+	}
 	
-	  
-	  innerHtml="<a onclick=\"javascript:comprobarSuma();\" style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;\">CHECK</a>";
-	  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
-	  var sumasActuales = parseInt(document.getElementById('indicadorSumas').innerHTML, 10);
-	  sumasActuales++;
-	  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales;
-	  document.getElementById('sumaUnidades').innerHTML ="&nbsp;";
-	  
-	  var aux = Math.floor(Math.random() * 10);
-	  document.getElementById('unidades1').innerHTML = ""+aux
-	  var aux1 = Math.floor(Math.random() * 10);
-	  document.getElementById('unidades2').innerHTML = ""+aux1
+	function asyncCall() {
+		if(sumasActuales<10) {
+	  		document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkButton.png)";
+	  		innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 2000);\" style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;\">CHECK</a>";
+	  		document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+	  		document.getElementById('sumaUnidades').innerHTML ="&nbsp;";
+	  		calcularSuma();
+		}else{
+			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkButton.png)";
+	  		innerHtml="<a href=\"\" style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;\">congrats!</a>";
+	  		document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+		}
 	}
 
-	
-
-  
- /* function enviarSuma() {
-  		var radios = document.getElementsByName('nivel');
-  		var value="";
-		for (var i = 0, length = radios.length; i < length; i++){
-			if (radios[i].checked) {
-				value =radios[i].value;
-				break;
-			}
-		}
-		$.ajax({
-			  url: "/hello",
-			  method: "post",
-			  data:{nivel: ''+value},
-			  dataType: "json",
-			  success : function(responseText) {
-			  document.getElementById("leyenda").innerHTML = ""+responseText.leyenda+ " " +responseText.colisiones+ " tablas "+responseText.tablas;
-				document.getElementById("operador1").innerHTML = ""+responseText.operador1;
-				document.getElementById("operador2").innerHTML = ""+responseText.operador2;
-			  }
-			});
-  	}*/
-  
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
 	  document.getElementById('sumaUnidades').innerHTML = digito;
@@ -74,17 +59,18 @@
 	  if (sumaAlumno == unidades1+unidades2){
 		  var innerHtml="<label style=\"font-size: 40px;font-family:Berlin Sans FB Demi;color:rgb(0, 176, 80);position:relative;top:75px;left:35px\">CORRECT</label>";
 		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
-		  
-		  
-		  
-		 
-		  
+		  sumasActuales++;
+		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales;
+		  if(sumasActuales>9)
+			  document.getElementById("indicadorSumasDiv").style.left = "30px";
 	  } else {
 		  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkIncorrect.png)";
-		  var innerHtml="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:50px\">INCORRECT</label><BR>";
-		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:53px\">START</label><BR>";
-		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:53px\">OVER</label>";
+		  var innerHtml="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:53px\">INCORRECT</label><BR>";
+		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:56px\">START</label><BR>";
+		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:56px\">OVER</label>";
 		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+		  document.getElementById('indicadorSumas').innerHTML = "0";
+		  
 	  }
   }
 	  
@@ -92,7 +78,7 @@
   </script>
 </head>
 
-  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
+  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%" onload="javascript:calcularSuma()">
 	
 	<div style="width:1300px;height:790px;">
 			
@@ -107,12 +93,12 @@
 				
 				<div style="float:right;width:25%;height:100%">
 					<div style="background-image:url(scoreboard.png);background-repeat:no-repeat;height:100%">
-						<div style="width:50%;float:left; color:rgb(204, 51, 153);
+						<div id="indicadorSumasDiv" style="width:50%;float:left; color:rgb(204, 51, 153);
 									 font-family:Berlin Sans FB Demi;
-									 font-size: 88px;font-weight: bold;position:relative;left:55px;top:60px"><label id="indicadorSumas">1</label></div>
+									 font-size: 88px;font-weight: bold;position:relative;left:45px;top:60px"><label id="indicadorSumas">0</label></div>
 						<div style="width:50%;float:left;color:rgb(204, 51, 153);
 									 font-family:Berlin Sans FB Demi;
-									 font-size: 88px;font-weight: bold;position:relative;top:60px"><label>10</label></div>
+									 font-size: 88px;font-weight: bold;position:relative;top:60px;left:5px;"><label>10</label></div>
 					</div>
 				</div>
 				

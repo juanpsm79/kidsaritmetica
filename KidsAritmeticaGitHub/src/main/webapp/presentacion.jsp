@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-  <title>Kids Aritmetica</title>
+  <title>PlayAddition</title>
   <style>
    
   a {
@@ -34,7 +34,11 @@
 	<div align ="center" style="margin-top:100px">
 		<div style="background-image:url(logoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:592px;height:565px;">
 		</div>
-		<div style="background-image:url(contactSupport.png);background-repeat:no-repeat;background-size:cover;width:360px;height:98px;position:relative;left:325px;bottom:98px">
+		<div style="position:relative;left:325px;bottom:105px">
+			<label style="font-family:Calibri;font-size:45px;font-weight: bold">CONTACT US</label>
+		</div>
+		<div style="position:relative;left:325px;bottom:105px">
+			<label style="font-family:Calibri;font-size:38px">contact@playaddition.com</label>
 		</div>
 	</div>
   </body>
