@@ -20,6 +20,24 @@
  
 	var sumaCorrecta = false;
 	var sumasActuales = 0;
+	var nivel = <%=nivel%>;
+	
+	function subirNivel () {
+		$.ajax({
+			  url: "/hello",
+			  method: "post",
+			  data:{nivel: ''+nivel}/*,
+			  dataType: "json",
+			  success : function(responseText) {
+			  var innerhtml =""+responseText.leyenda+ "<br>";
+			  for(var i=0 ; i<responseText.sumas.length; i++){
+			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p></div>";
+				}	
+				document.getElementById("targetElement").innerHTML = ""+innerhtml;
+				
+			  }*/
+			});
+  	}
 
 	function calcularSuma() {
 		var aux = Math.floor(Math.random() * 10);
@@ -35,15 +53,17 @@
 	
 	function asyncCall() {
 		if(sumasActuales<10) {
-	  		document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkButton.png)";
-	  		innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 2000);\" style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;\">CHECK</a>";
+			var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkButton.png\"/>";
+			innerHtml+="<label style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;bottom:120px;left:55px;text-decoration-line:none\">CHECK</label></a>";
 	  		document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
 	  		document.getElementById('sumaUnidades').innerHTML ="&nbsp;";
 	  		calcularSuma();
 		}else{
-			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkButton.png)";
-	  		innerHtml="<a href=\"\" style=\"font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;\">congrats!</a>";
+			var innerHtml="<a style=\"position:relative;bottom:40px\"><img src=\"checkPasoNivel.png\"/>";
+	  		innerHtml+="<label href=\"\" style=\"font-family:Berlin Sans FB Demi;font-size:40px;color:rgb(204, 51, 153);position:relative;bottom:160px;left:60px;text-decoration-line: none;\">CONGRATULATIONS,</label><br>";
+	  		innerHtml+="<label href=\"\" style=\"font-family:Berlin Sans FB Demi;font-size:40px;color:rgb(204, 51, 153);position:relative;bottom:160px;left:60px;text-decoration-line: none;\">YOU&nbsp;LEVELED&nbsp;UP!</label></a>";
 	  		document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+	  		
 		}
 	}
 
@@ -57,20 +77,22 @@
 	  var unidades1 = parseInt(document.getElementById('unidades1').innerHTML, 10);
 	  var unidades2 = parseInt(document.getElementById('unidades2').innerHTML, 10);
 	  if (sumaAlumno == unidades1+unidades2){
-		  var innerHtml="<label style=\"font-size: 40px;font-family:Berlin Sans FB Demi;color:rgb(0, 176, 80);position:relative;top:75px;left:35px\">CORRECT</label>";
+		  var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkButton.png\"/>";
+		  innerHtml+="<label style=\"font-size: 40px;font-family:Berlin Sans FB Demi;color:rgb(0, 176, 80);position:relative;bottom:120px;left:35px\">CORRECT</label>";
 		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+		  
+		  
 		  sumasActuales++;
 		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales;
 		  if(sumasActuales>9)
 			  document.getElementById("indicadorSumasDiv").style.left = "30px";
 	  } else {
-		  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkIncorrect.png)";
-		  var innerHtml="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:53px\">INCORRECT</label><BR>";
-		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:56px\">START</label><BR>";
-		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;top:45px;left:56px\">OVER</label>";
+		 var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkIncorrect.png\"/>"; 
+		  innerHtml+="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:53px\">INCORRECT</label><BR>";
+		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">START</label><BR>";
+		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">OVER</label>";
 		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
 		  document.getElementById('indicadorSumas').innerHTML = "0";
-		  
 	  }
   }
 	  
@@ -79,7 +101,7 @@
 </head>
 
   <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%" onload="javascript:calcularSuma()">
-	
+	<div id="posAbsoluta"></div>
 	<div style="width:1300px;height:790px;">
 			
 			<div style="width:100%;height:22%">
@@ -127,16 +149,16 @@
 									 font-size: 135px">&nbsp;</label>
 						</div>
 					</div>
-					<div style="float:right;width:50%;height:100%">
-						<div id="capaBotonCheckSuma" style="background-image:url(checkButton.png);background-repeat:no-repeat;height:100%;position:relative;top:145px;right:10px">
-							<a onclick="javascript:comprobarSuma();setTimeout(asyncCall, 2000);" style="font-size: 40px;color:rgb(0, 176, 80);position:relative;top:75px;left:55px;text-decoration-line: none;">CHECK</a>
-							
+					<div style="float:right;width:50%;height:100%;overflow: visible;">
+						<div id="capaBotonCheckSuma" style="width:100%;height:100%;position:relative;top:145px;right:10px">
+							<a onclick="javascript:comprobarSuma();setTimeout(asyncCall, 1000);"><img src="checkButton.png"/>
+							<label style="font-size: 40px;color:rgb(0, 176, 80);position:relative;bottom:120px;left:55px;text-decoration-line: none">CHECK</label></a>
 						</div>
 					</div>
 					
 				</div>
 				
-				<div style="float:left;width:20%;height:100%">
+				<div id= "shrinked" style="float:left;width:20%;height:100%">
 					&nbsp;
 				</div>
 			</div>
