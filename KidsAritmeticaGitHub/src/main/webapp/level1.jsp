@@ -15,27 +15,27 @@
 	}
   
   </style>
+  <script src="./js/jquery/jquery-ui.js"></script>
+  <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script>
+  $( function() {
+  	
+  } );
   
  
-	var sumaCorrecta = false;
+	var nivelIniciado = false;
+	var cronometro = 0;
 	var sumasActuales = 0;
 	var nivel = <%=nivel%>;
 	
-	function subirNivel () {
+	function subirNivel() {
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
-			  data:{nivel: ''+nivel}/*,
-			  dataType: "json",
+			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-			  var innerhtml =""+responseText.leyenda+ "<br>";
-			  for(var i=0 ; i<responseText.sumas.length; i++){
-			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p></div>";
-				}	
-				document.getElementById("targetElement").innerHTML = ""+innerhtml;
-				
-			  }*/
+				  	location.href = "inicioPlayAddition.jsp"
+				  }
 			});
   	}
 
@@ -59,17 +59,24 @@
 	  		document.getElementById('sumaUnidades').innerHTML ="&nbsp;";
 	  		calcularSuma();
 		}else{
-			var innerHtml="<a style=\"position:relative;bottom:40px\"><img src=\"checkPasoNivel.png\"/>";
+			var innerHtml="<a onclick=\"javascript:subirNivel();\" style=\"position:relative;bottom:40px\"><img src=\"checkPasoNivel.png\"/>";
 	  		innerHtml+="<label href=\"\" style=\"font-family:Berlin Sans FB Demi;font-size:40px;color:rgb(204, 51, 153);position:relative;bottom:160px;left:60px;text-decoration-line: none;\">CONGRATULATIONS,</label><br>";
 	  		innerHtml+="<label href=\"\" style=\"font-family:Berlin Sans FB Demi;font-size:40px;color:rgb(204, 51, 153);position:relative;bottom:160px;left:60px;text-decoration-line: none;\">YOU&nbsp;LEVELED&nbsp;UP!</label></a>";
 	  		document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
+	  		nivelIniciado = false;
 	  		
 		}
 	}
+	
+	var x = setInterval(function() {
+					if(nivelIniciado)
+						document.getElementById('posAbsoluta').innerHTML =""+cronometro++;
+			}, 1000);
 
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
 	  document.getElementById('sumaUnidades').innerHTML = digito;
+	  nivelIniciado = true;
   }
   
   function comprobarSuma(){
@@ -87,7 +94,8 @@
 		  if(sumasActuales>9)
 			  document.getElementById("indicadorSumasDiv").style.left = "30px";
 	  } else {
-		 var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkIncorrect.png\"/>"; 
+		  sumasActuales = 0;
+		  var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkIncorrect.png\"/>"; 
 		  innerHtml+="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:53px\">INCORRECT</label><BR>";
 		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">START</label><BR>";
 		  innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">OVER</label>";
@@ -108,7 +116,7 @@
 				<div style="width:30%;height:100%;float:left;background-image:url(level.png);background-repeat:no-repeat;">
 							<label style="position:relative;left:240px;top:10px;color:rgb(0, 51, 204);
 										 font-family:Berlin Sans FB Demi;
-										 font-size: 105px;"><%=nivel%>0</label>
+										 font-size: 105px;"><%=nivel%></label>
 				</div>	
 				
 				<div style="width:45%;height:100%;float:left">&nbsp;</div>

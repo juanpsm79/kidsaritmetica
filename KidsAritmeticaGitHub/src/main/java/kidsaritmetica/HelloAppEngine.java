@@ -14,10 +14,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.soap.AddressingFeature.Responses;
 
 import kidsaritmetica.model.Suma;
 import kidsaritmetica.service.GeneradorSumas;
@@ -33,8 +36,17 @@ public class HelloAppEngine extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-	  	//String tablas = getConnection();
 	  	response.setContentType("application/json");
+	  	if(request.getParameter("accion").equalsIgnoreCase("subirNivel")) {
+	  		String nivel =  (String) request.getSession().getAttribute("nivel");
+	  		Integer level = new Integer(nivel);
+	  		level++;
+	  		request.getSession().setAttribute("nivel", level.toString());
+	  		response.getWriter().write("{}");
+	  		return;
+	  	}
+	  	
+	  	
 	    GeneradorSumas generador = new GeneradorSumas();
 	    colisiones = 0;
 	    if (request.getSession().getAttribute("sumasNiveles")==null) {
