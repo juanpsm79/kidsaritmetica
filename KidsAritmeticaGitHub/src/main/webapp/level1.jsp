@@ -6,7 +6,10 @@
   <head>
   <title>PlayAddition</title>
   <style>
-   
+   @font-face{
+	 	font-family:'digital-clock-font';
+ 		src: url('digital7Mono.ttf');
+	}
   a {
 	    font-family:"Berlin Sans FB Demi";  
 	    color:rgb(0, 112, 192);
@@ -109,7 +112,7 @@
 </head>
 
   <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%" onload="javascript:calcularSuma()">
-	<div id="posAbsoluta"></div>
+	<div id="posAbsoluta" style="font-family:digital-clock-font"></div>
 	<div style="width:1300px;height:790px;">
 			
 			<div style="width:100%;height:22%">

@@ -120,7 +120,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel17" value="17"/>
-				      <label for="nivel17">Nivel 17</label>
+				      <label for="nivel17">Nivel 17 (Niveles 14-16)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel18" value="18"/>
@@ -140,7 +140,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel22" value="22"/>
-				      <label for="nivel22">Nivel 22</label>
+				      <label for="nivel22">Nivel 22 (Niveles 18-21)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel23" value="23"/>
