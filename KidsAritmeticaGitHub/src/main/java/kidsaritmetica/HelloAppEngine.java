@@ -60,7 +60,11 @@ public class HelloAppEngine extends HttpServlet {
 	    Suma nuevaSuma = null;
 	    int nivel = new Integer(request.getParameter("nivel"));
 	    String leyenda ="no leyenda";
-	    if(nivel<=15) {
+	    if(nivel<=13) {
+	    	if(nivel ==12)
+	    		leyenda = "Level 12: one digit/one digit addition with regrouping in units";
+	    	if(nivel ==13)
+	    		leyenda = "Level 13: All additions Level 7 to 12";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, colisiones,MAX_COLISIONES);
@@ -71,8 +75,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if(nivel ==16) {
-	    	leyenda = "Level 16: two digits/one digit addition without regrouping";
+	    }else if(nivel ==14) {
+	    	leyenda = "Level 14: two digits/one digit addition without regrouping";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -83,8 +87,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if(nivel ==17) {
-	    	leyenda = "Level 17: two digits/one digit addition with regrouping in units";
+	    }else if(nivel ==15) {
+	    	leyenda = "Level 15: two digits/one digit addition with regrouping in units";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -95,8 +99,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if(nivel ==18) {
-	    	leyenda = "Level 18: two digits/one digit addition with regrouping in units and tens";
+	    }else if(nivel ==16) {
+	    	leyenda = "Level 16: two digits/one digit addition with regrouping in units and tens";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -107,12 +111,12 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if(nivel ==19 || nivel ==20) {
-	    	int nivelAleatorio =  new Random().ints(1, 16, 19).sum();
+	    }else if(nivel ==17) {
+	    	int nivelAleatorio =  new Random().ints(1, 14, 17).sum();
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	switch (nivelAleatorio) {
-			    case 16:
-			    	leyenda = "Level 16: two digits/one digit addition without regrouping";
+			    case 14:
+			    	leyenda = "Level 14: two digits/one digit addition without regrouping";
 			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 			    		nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -123,8 +127,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 			    	response.getWriter().write(resultado.toString());
 					break;
-				case 17:
-			    	leyenda = "Level 17: two digits/one digit addition with regrouping in units";
+				case 15:
+			    	leyenda = "Level 15: two digits/one digit addition with regrouping in units";
 			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 			    		nuevaSuma = generador.getOperandosNivel17(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -136,8 +140,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	response.getWriter().write(resultado.toString());
 			    	
 			    	break;
-				case 18:
-			    	leyenda = "Level 18: two digits/one digit addition with regrouping in units and tens";
+				case 16:
+			    	leyenda = "Level 16: two digits/one digit addition with regrouping in units and tens";
 			    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 			    		nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -150,8 +154,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	break;
 	    	}    	
 	    }
-	    else if (nivel ==21) {
-	    	leyenda = "Level 21: two digits/two digits without regrouping";
+	    else if (nivel ==18) {
+	    	leyenda = "Level 18: two digits/two digits without regrouping";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -163,8 +167,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
 	    }
-	    else if (nivel ==22) {
-	    	leyenda = "Level 22: two digits/two digits regrouping in untis";
+	    else if (nivel ==19) {
+	    	leyenda = "Level 19: two digits/two digits regrouping in untis";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -176,8 +180,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
 	    }
-	    else if (nivel ==23) {
-	    	leyenda = "Level 23: two digits/two digits regrouping in tens";
+	    else if (nivel ==20) {
+	    	leyenda = "Level 20: two digits/two digits regrouping in tens";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -188,8 +192,8 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if (nivel ==24) {
-	    	leyenda = "Level 24: two digits/two digits regrouping in units and tens";
+	    }else if (nivel ==21) {
+	    	leyenda = "Level 21: two digits/two digits regrouping in units and tens";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
@@ -200,12 +204,12 @@ public class HelloAppEngine extends HttpServlet {
 	    	resultado.append("], \"leyenda\": \""+leyenda+"\"}");
 	    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 	    	response.getWriter().write(resultado.toString());
-	    }else if (nivel ==25 || nivel ==26) {
-	    	int nivelAleatorio =  new Random().ints(1, 21, 25).sum();
+	    }else if (nivel ==22) {
+	    	int nivelAleatorio =  new Random().ints(1, 18, 22).sum();
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	switch (nivelAleatorio) {
-	    		case 21:
-	    			leyenda = "Level 21: two digits/two digits without regrouping";
+	    		case 18:
+	    			leyenda = "Level 18: two digits/two digits without regrouping";
 	    			while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    				nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -216,8 +220,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 			    	response.getWriter().write(resultado.toString());
 	    			break;
-	    		case 22:
-	    	    	leyenda = "Level 22: two digits/two digits regrouping in untis";
+	    		case 19:
+	    	    	leyenda = "Level 19: two digits/two digits regrouping in untis";
 	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    	    		nuevaSuma = generador.getOperandosNivel22(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -228,8 +232,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 			    	response.getWriter().write(resultado.toString());
 	    	    	break;
-	    		case 23:
-	    	    	leyenda = "Level 23: two digits/two digits regrouping in tens";
+	    		case 20:
+	    	    	leyenda = "Level 20: two digits/two digits regrouping in tens";
 	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    	    		nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
@@ -240,8 +244,8 @@ public class HelloAppEngine extends HttpServlet {
 			    	sumasNiveles.get(request.getParameter("nivel")).sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
 			    	response.getWriter().write(resultado.toString());
 	    	    	break;
-	    		case 24:
-	    	    	leyenda = "Level 24: two digits/two digits regrouping in units and tens";
+	    		case 21:
+	    	    	leyenda = "Level 21: two digits/two digits regrouping in units and tens";
 	    	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    	    		nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")), colisiones, MAX_COLISIONES);
 			    		sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
