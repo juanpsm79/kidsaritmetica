@@ -152,11 +152,21 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel25" value="25"/>
-				      <label for="nivel25">Nivel 25</label>
+				      <label for="nivel25">Nivel 25 (Niveles 23-24)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel26" value="26"/>
 				      <label for="nivel26">Nivel 26</label>
+				      
+				      <input type="radio" name="nivel" id="nivel26" value="27"/>
+				      <label for="nivel27">Nivel 27</label>
+				      
+				      <input type="radio" name="nivel" id="nivel28" value="28"/>
+				      <label for="nivel28">Nivel 28</label>
+				      
+				      
+				      <input type="radio" name="nivel" id="nivel29" value="29"/>
+				      <label for="nivel29">Nivel 29</label>
 				    
 				      <input type="button" id="calcularSuma" onclick="javascript:enviarSuma();" value="Generar Suma"/>
 				    </div>
