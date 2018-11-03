@@ -30,8 +30,8 @@
   </script>
 </head>
 
-  <body  onclick="javascript:irPrincipal();" style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
-	<div align ="center" style="margin-top:100px">
+  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
+	<div  onclick="javascript:irPrincipal()" align ="center" style="margin-top:100px">
 		<div style="background-image:url(logoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:592px;height:565px;">
 		</div>
 		<div style="position:relative;left:325px;bottom:105px">
