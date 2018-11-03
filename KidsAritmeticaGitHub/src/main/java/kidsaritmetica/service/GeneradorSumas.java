@@ -643,13 +643,14 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
-		//sin llevada unidades
+		//con llevada unidades
 		int unidades1 = random.ints(1, 1, 10).sum();
 		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
 				
 				
 		//llevada decenas
-		int decenas1 = random.ints(1, 1, 10).sum();
+		//+1
+		int decenas1 = random.nextInt(10);
 		int decenas2 = random.ints(1, 10-decenas1-1, 10).sum();
 		
 		int centenas1 = random.ints(1, 1, 9).sum();
@@ -686,6 +687,487 @@ public class GeneradorSumas {
 		}
 	}
 	
+	
+	public Suma getOperandosNivel30(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 30: three digits/two digits addition with regrouping in hundreds and tens
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//sin llevada unidades
+		int unidades1 = random.nextInt(10);
+		int unidades2 = random.ints(1, 0, 10-unidades1).sum();
+				
+				
+		//llevada decenas
+		int decenas1 = random.ints(1, 1, 10).sum();
+		int decenas2 = random.ints(1, 10-decenas1, 10).sum();
+		
+		int centenas1 = 9;
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	
+	public Suma getOperandosNivel31(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 31: three digits/two digits addition with regrouping in units tens and hundreds
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//con llevada unidades
+		int unidades1 = random.ints(1, 1, 10).sum();
+		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+				
+				
+		//llevada decenas
+		//+1
+		int decenas1 = random.nextInt(10);
+		int decenas2 = random.ints(1, 10-decenas1-1, 10).sum();
+		
+		int centenas1 = 9;
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	public Suma getOperandosNivel33(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 33: three digits/three digits addition without regrouping
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//sin llevada unidades
+		int unidades1 = random.nextInt(10);
+		int unidades2 = 0;
+		if(unidades1<9)
+			unidades2 = random.ints(1, 1, 10-unidades1).sum();
+								
+		//sin llevada decenas
+		int decenas1 = random.nextInt(10);
+		int decenas2 = 0;
+		if(decenas1<9)
+			decenas2 = random.ints(1, 1, 10-decenas1).sum();
+		
+		
+		//sin llevada centenas
+		int centenas1 =  random.ints(1, 1, 9).sum();
+		int centenas2 = 1;
+		if (centenas1<8)
+			centenas2 =  random.ints(1, 1, 10-centenas1).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centenas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	public Suma getOperandosNivel34(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 34: three digits/three digits addition with regrouping in units
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//llevada en las unidades
+		int unidades1 = random.ints(1, 1, 10).sum();
+		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+						
+						
+		//sin llevada decenas
+		int decenas1 = random.nextInt(8);
+		int decenas2 = 1;
+		if(decenas1<7)
+		 decenas2 = random.ints(1, 1, 9-decenas1).sum();
+		
+		
+		//sin llevada centenas
+		int centenas1 =  random.ints(1, 1, 9).sum();
+		int centanas2 = 1;
+		if(centenas1<8)
+			centanas2 =	random.ints(1, 1, 10-centenas1).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centanas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	
+	public Suma getOperandosNivel35(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 35: three digits/three digits addition with regrouping in tens
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//sin llevada unidades
+		int unidades1 = random.nextInt(10);
+		int unidades2 = 0;
+		if(unidades1<9)
+			unidades2 = random.ints(1, 1, 10-unidades1).sum();
+				
+		//llevada decenas
+		int decenas1 = random.ints(1, 1, 10).sum();
+		int decenas2 = random.ints(1, 10-decenas1, 10).sum();
+		
+		//sin llevada centenas
+		int centenas1 = random.ints(1, 1, 8).sum();
+		int centanas2 = 1;
+		if(centenas1<7)
+			centanas2 = random.ints(1, 1, 9-centenas1).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centanas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	public Suma getOperandosNivel36(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 36: three digits/three digits addition with regrouping in units and tens
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//con llevada unidades
+		int unidades1 = random.ints(1, 1, 10).sum();
+		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+						
+		//llevada decenas
+		//+1
+		int decenas1 = random.ints(1, 1, 10).sum();
+		int decenas2 = random.ints(1, 10-decenas1-1, 10).sum();
+		
+		//sin llevada centenas
+		int centenas1 = random.ints(1, 1, 8).sum();
+		int centanas2 = 1;
+		if(centenas1<7)
+			centanas2 = random.ints(1, 1, 9-centenas1).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centanas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	
+	public Suma getOperandosNivel37(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 37: three digits/three digits addition with regrouping in units and hundreds
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//llevada en las unidades
+		int unidades1 = random.ints(1, 1, 10).sum();
+		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+						
+						
+		//sin llevada decenas
+		int decenas1 = random.nextInt(8);
+		int decenas2 = 1;
+		if(decenas1<7)
+		 decenas2 = random.ints(1, 1, 9-decenas1).sum();
+		
+		
+		//con llevada centenas
+		int centenas1 = random.ints(1, 1, 10).sum();
+		int centanas2 = random.ints(1, 10-centenas1, 10).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centanas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	
+	public Suma getOperandosNivel38(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 37: three digits/three digits addition with regrouping in tens and hundreds
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//sin llevada unidades
+		int unidades1 = random.nextInt(10);
+		int unidades2 = 0;
+		if(unidades1<9)
+			unidades2 = random.ints(1, 1, 10-unidades1).sum();
+		
+		//con llevada decenas
+		int decenas1 = random.ints(1, 1, 10).sum();
+		int decenas2 = random.ints(1, 10-decenas1, 10).sum();
+				
+		//llevada centenas
+		//+1
+		int centenas1 = random.ints(1, 1, 10).sum();
+		int centenas2 = random.ints(1, 10-centenas1-1, 10).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centenas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
+	
+	public Suma getOperandosNivel39(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
+		//Level 39: three digits/three digits addition with regrouping in units tens and hundreds
+		List<Integer> digitosOperador1 = new ArrayList<Integer>();
+		List<Integer> digitosOperador2 = new ArrayList<Integer>();
+		
+		//sin llevada unidades
+		int unidades1 = random.ints(1, 1, 10).sum();
+		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		
+		//con llevada decenas
+		int decenas1 = random.ints(1, 1, 10).sum();
+		int decenas2 = random.ints(1, 10-decenas1-1, 10).sum();
+				
+		//llevada centenas
+		//+1
+		int centenas1 = random.ints(1, 1, 10).sum();
+		int centenas2 = 1;
+		if(centenas1<9)
+		  centenas2 = random.ints(1, 10-centenas1-1, 10).sum();
+		
+		digitosOperador1.add(unidades1);
+		digitosOperador1.add(decenas1);
+		digitosOperador1.add(centenas1);
+		
+		digitosOperador2.add(unidades2);
+		digitosOperador2.add(decenas2);
+		digitosOperador2.add(centenas2);
+		
+		int operador1 = 0;
+		int operador2 = 0;
+		for(int i=0; i<digitosOperador1.size();i++)
+			operador1+=Math.pow(10,i) * digitosOperador1.get(i);
+		for(int i=0; i<digitosOperador2.size();i++)
+			operador2+=Math.pow(10,i) * digitosOperador2.get(i);
+		Suma suma = new Suma();
+		suma.setOperando1(operador1);
+		suma.setOperando2(operador2);
+		suma.setResultadoSuma(operador1+operador2);
+		
+		if (sumasNivel.contains(suma)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				suma = getOperandosNivel26(sumasNivel,colisiones, maxColisiones);
+				return suma;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
+				return suma;
+			}
+		} else {
+			return suma;
+		}
+	}
 
 	
 
