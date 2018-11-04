@@ -1,4 +1,4 @@
-package kidsaritmetica.model;
+package playaddition.model;
 
 import java.io.Serializable;
 

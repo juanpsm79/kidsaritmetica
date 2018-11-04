@@ -1,4 +1,4 @@
-package kidsaritmetica.service;
+package playaddition.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import kidsaritmetica.model.Suma;
+import playaddition.model.Suma;
 
 public class GeneradorSumas {
 	
@@ -24,9 +24,9 @@ public class GeneradorSumas {
 			digitoOp1 =  random.nextInt(nivel+1);
 			digitoOp2 = random.nextInt(nivel+1);
 		}else if (nivel==5) {
-			int nivelAleatorio = random.ints(1, 1, 5).sum(); //límite superior exclusivo
-			digitoOp1 =  random.ints(1, 0, nivelAleatorio+1).sum();
-			digitoOp2 = random.ints(1, 0, nivelAleatorio+1).sum();
+			nivel = 4;
+			digitoOp1 =  random.nextInt(nivel+1);
+			digitoOp2 = random.nextInt(nivel+1);
 	    }else if (nivel>=6 && nivel<=10) {
 	    	digitoOp1 = random.nextInt(nivel);
 	    	if(nivel==6) {
@@ -57,16 +57,15 @@ public class GeneradorSumas {
 		    	digitoOp2 = random.ints(1, 0, nivel-digitoOp1).sum();
 	    	}
 	    }else if (nivel==11) {
-	    	int nivelAleatorio = random.ints(1, 6, 11).sum();
-	    	Suma suma1 = obtenerSumaNivel(sumasNivel, nivelAleatorio, colisiones, maxColisiones);
-	    	digitoOp1 = suma1.getOperando1();
-			digitoOp2 = suma1.getOperando2();
+	    	nivel = 10;
+	    	digitoOp1 = random.nextInt(nivel);
+	    	digitoOp2 = random.ints(1, 0, nivel-digitoOp1).sum();
 	    } else if (nivel==12) {
 	    	//regrouping in units
 	    	digitoOp1 =  random.ints(1, 1, 10).sum();
 	    	digitoOp2 = random.ints(1, 10-digitoOp1,10).sum();
 	    } else if(nivel==13) {
-	    	int nivelAleatorio = random.ints(1, 8, 13).sum();
+	    	int nivelAleatorio = random.ints(1, 10, 13).sum();
 	    	Suma suma1 = obtenerSumaNivel(sumasNivel, nivelAleatorio, colisiones, maxColisiones);
 	    	digitoOp1 = suma1.getOperando1();
 			digitoOp2 = suma1.getOperando2();

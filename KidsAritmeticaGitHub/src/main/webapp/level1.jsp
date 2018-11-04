@@ -1,5 +1,8 @@
 <%
-    String nivel =  (String) session.getAttribute("nivel");
+String nivel =  (String) session.getAttribute("nivel");
+if ( nivel == null)
+	session.setAttribute("nivel", "1");
+nivel =  (String) session.getAttribute("nivel");
    
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">

@@ -1,4 +1,4 @@
-package kidsaritmetica;
+package playaddition;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.ws.soap.AddressingFeature.Responses;
 
-import kidsaritmetica.model.Suma;
-import kidsaritmetica.service.GeneradorSumas;
+import playaddition.model.Suma;
+import playaddition.service.GeneradorSumas;
 
 @WebServlet(
     name = "HelloAppEngine",
@@ -64,7 +64,7 @@ public class HelloAppEngine extends HttpServlet {
 	    	if(nivel ==12)
 	    		leyenda = "Level 12: one digit/one digit addition with regrouping in units";
 	    	if(nivel ==13)
-	    		leyenda = "Level 13: All additions Level 7 to 12";
+	    		leyenda = "Level 13: All additions Level 10 to 12";
 	    	StringBuilder resultado = new StringBuilder("{\"sumas\":[");
 	    	while (sumasNiveles.get(request.getParameter("nivel")).size()<10) {
 	    		nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel, colisiones,MAX_COLISIONES);

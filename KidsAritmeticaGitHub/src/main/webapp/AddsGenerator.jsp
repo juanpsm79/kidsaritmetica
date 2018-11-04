@@ -75,7 +75,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel5" value="5"/>
-				      <label for="nivel5">Level 5 (Niveles 1-4)</label>
+				      <label for="nivel5">Level 5 (Level 4)</label>
 				      
 				      <input type="radio" name="nivel" id="nivel6" value="6"/>
 				      <label for="nivel6">Level 6 (0,5)</label>
@@ -93,7 +93,7 @@
 				      <label for="nivel10">Level 10 (0,9)</label>
 				      
 				      <input type="radio" name="nivel" id="nivel11" value="11"/>
-				      <label for="nivel11">Level 11 (Levels 6-10)</label>
+				      <label for="nivel11">Level 11 (Level 10)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel12" value="12"/>
@@ -101,7 +101,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel13" value="13"/>
-				      <label for="nivel13">Level 13</label>
+				      <label for="nivel13">Level 13 (Levels 10-12)</label>
 				      
 				      
 				      
