@@ -30,15 +30,11 @@
   </script>
 </head>
 
-  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
+  <body>
 	<div  onclick="javascript:irPrincipal()" align ="center" style="margin-top:100px">
 		<div style="background-image:url(logoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:592px;height:565px;">
 		</div>
-		<div style="position:relative;left:325px;bottom:105px">
-			<label style="font-family:Calibri;font-size:45px;font-weight: bold">CONTACT US</label>
-		</div>
-		<div style="position:relative;left:325px;bottom:105px">
-			<label style="font-family:Calibri;font-size:38px">contact@playaddition.com</label>
+		<div style="background-image:url(contactSupport.png);position:relative;left:5px">
 		</div>
 	</div>
   </body>

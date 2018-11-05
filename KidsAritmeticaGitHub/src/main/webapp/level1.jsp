@@ -109,6 +109,49 @@ nivel =  (String) session.getAttribute("nivel");
 		  document.getElementById('indicadorSumas').innerHTML = "0";
 	  }
   }
+  
+  function mueveReloj(){ 
+	   	momentoActual = new Date() 
+	   	hora = momentoActual.getHours() 
+	   	minuto = momentoActual.getMinutes() 
+	   	segundo = momentoActual.getSeconds() 
+
+	   	horaImprimible = hora + " : " + minuto + " : " + segundo 
+
+	   	document.form_reloj.reloj.value = horaImprimible 
+
+	   	setTimeout("mueveReloj()",1000) 
+	}
+  
+//Botón 1: Estado empezar: Poner en marcha el crono
+  function empezar() {
+        emp=new Date() //fecha inicial (en el momento de pulsar)
+        elcrono=setInterval(tiempo,10); //función del temporizador.
+        marcha=1 //indicamos que se ha puesto en marcha.
+        document.cron.boton1.value="Reiniciar"; //Cambiar estado del botón
+        document.cron.boton2.disabled=false; //activar botón de pausa
+        }
+  //función del temporizador			
+  function tiempo() { 
+       actual=new Date(); //fecha a cada instante
+          //tiempo del crono (cro) = fecha instante (actual) - fecha inicial (emp)
+       cro=actual-emp; //milisegundos transcurridos.
+       cr=new Date(); //pasamos el num. de milisegundos a objeto fecha.
+       cr.setTime(cro); 
+          //obtener los distintos formatos de la fecha:
+       cs=cr.getMilliseconds(); //milisegundos 
+       cs=cs/10; //paso a centésimas de segundo.
+       cs=Math.round(cs); //redondear las centésimas
+       sg=cr.getSeconds(); //segundos 
+       mn=cr.getMinutes(); //minutos 
+       ho=cr.getHours()-1; //horas 
+          //poner siempre 2 cifras en los números		 
+       if (cs<10) {cs="0"+cs;} 
+       if (sg<10) {sg="0"+sg;} 
+       if (mn<10) {mn="0"+mn;} 
+          //llevar resultado al visor.		 
+       visor.innerHTML=ho+" "+mn+" "+sg+" "+cs; 
+       }
 	  
 	
   </script>
