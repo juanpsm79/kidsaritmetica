@@ -132,7 +132,7 @@ nivel =  (String) session.getAttribute("nivel");
         document.cron.boton2.disabled=false; //activar botón de pausa
         }
   //función del temporizador			
-  function tiempo() { 
+ /* function tiempo() { 
        actual=new Date(); //fecha a cada instante
           //tiempo del crono (cro) = fecha instante (actual) - fecha inicial (emp)
        cro=actual-emp; //milisegundos transcurridos.
@@ -140,7 +140,7 @@ nivel =  (String) session.getAttribute("nivel");
        cr.setTime(cro); 
           //obtener los distintos formatos de la fecha:
        cs=cr.getMilliseconds(); //milisegundos 
-       cs=cs/10; //paso a centésimas de segundo.
+       cs=cs/10; //paso a 
        cs=Math.round(cs); //redondear las centésimas
        sg=cr.getSeconds(); //segundos 
        mn=cr.getMinutes(); //minutos 
@@ -151,74 +151,38 @@ nivel =  (String) session.getAttribute("nivel");
        if (mn<10) {mn="0"+mn;} 
           //llevar resultado al visor.		 
        visor.innerHTML=ho+" "+mn+" "+sg+" "+cs; 
-       }
+       }*/
 	  
 	
   </script>
 </head>
 
-  <body style="background-image:url(fondoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%" onload="javascript:calcularSuma()">
-	<div id="posAbsoluta" style="font-family:digital-clock-font"></div>
-	<div style="width:1300px;height:790px;">
+  <body onload="javascript:calcularSuma()">
+	<div>
 			
-			<div style="width:100%;height:22%">
-				<div style="width:30%;height:100%;float:left;background-image:url(level.png);background-repeat:no-repeat;">
-							<label style="position:relative;left:240px;top:10px;color:rgb(0, 51, 204);
-										 font-family:Berlin Sans FB Demi;
-										 font-size: 105px;"><%=nivel%></label>
+			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
+			<div style="width:100%;height:74%">
+				<div style="width:25%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 				</div>	
 				
-				<div style="width:45%;height:100%;float:left">&nbsp;</div>
+				<div style="width:60%;height:100%;float:left;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
+				</div>
 				
-				<div style="float:right;width:25%;height:100%">
-					<div style="background-image:url(scoreboard.png);background-repeat:no-repeat;height:100%">
-						<div id="indicadorSumasDiv" style="width:50%;float:left; color:rgb(204, 51, 153);
-									 font-family:Berlin Sans FB Demi;
-									 font-size: 88px;font-weight: bold;position:relative;left:45px;top:60px"><label id="indicadorSumas">0</label></div>
-						<div style="width:50%;float:left;color:rgb(204, 51, 153);
-									 font-family:Berlin Sans FB Demi;
-									 font-size: 88px;font-weight: bold;position:relative;top:60px;left:5px;"><label>10</label></div>
-					</div>
+				<div style="width:15%;height:100%;float:left;background-image:url(cerrarAspa.png);background-repeat:no-repeat;position:relative;right:220px">
 				</div>
 				
 		   </div>
-	
-			<div style="width:100%;height:58%">
-				<div style="width:40%;height:100%;float:left">			
-				</div>
-				
-				<div style="float:left;width:40%;height:100%">
-					<div style="float:left;width:50%;height:100%;position:relative;bottom:100px;">	
-						<div style="position:relative;left:70px;top:20px"><label id="unidades1" style="color:black;
-									 font-family:Calibri;
-									 font-size: 135px;">1</label></div>
-						<div style="background-image:url(simboloSuma.png);background-repeat:no-repeat;background-size:cover;width:78px;height:78px"><label style="color:black;
-									 font-family:Calibri">&nbsp;</label></div>
-						<div style="position:relative;left:65px;bottom:30px"><label id="unidades2" style="color:black;
-									 font-family:Calibri;
-									 font-size: 135px;">0</label></div>
-						<div style="position:relative;bottom:140px;"><label style="color:black;
-									 font-family:Calibri;
-									 font-size: 135px">___</label></div>
-						<div style="position:relative;bottom:140px;left:50px;background-image:url(casillaBlancoSuma.png);width:96px;height:117px;background-repeat:no-repeat;border:5px solid red">
-							<label id="sumaUnidades"style="position:relative;left:15px;bottom:25px;color:black;
-									 font-family:Calibri;
-									 font-size: 135px">&nbsp;</label>
-						</div>
-					</div>
-					<div style="float:right;width:50%;height:100%;overflow: visible;">
-						<div id="capaBotonCheckSuma" style="width:100%;height:100%;position:relative;top:145px;right:10px">
-							<a onclick="javascript:comprobarSuma();setTimeout(asyncCall, 1000);"><img src="checkButton.png"/>
-							<label style="font-size: 40px;color:rgb(0, 176, 80);position:relative;bottom:120px;left:55px;text-decoration-line: none">CHECK</label></a>
-						</div>
+			
+			<!-- CAPA DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
+			<div style="width:100%;height:26%">
+					<div style="float:left;width:75%;height:100%;background-image:url(tablaNumeros.png);background-repeat:no-repeat">	
 					</div>
 					
-				</div>
-				
-				<div id= "shrinked" style="float:left;width:20%;height:100%">
-					&nbsp;
-				</div>
+					<div style="float:left;width:25%;height:100%;background-image:url(checkBoton.png);background-repeat:no-repeat;position:relative;bottom:30px;right:127px">
+					</div>
 			</div>
+			
+			<!-- 
 			
 			<div style="width:100%;height:20%">
 				<div style="float:left;width:80%;height:100%">
@@ -279,6 +243,10 @@ nivel =  (String) session.getAttribute("nivel");
 						<a href="index.jsp" style="color:red;font-size: 48px;font-family:Berlin Sans FB Demi;position:relative;left:45px;top:25px;text-decoration-line: none;">MENU</a>
 				</div>
 		   </div> 
+	
+			 -->
+	
+	
 	
 	</div>
 	

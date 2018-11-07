@@ -28,7 +28,7 @@
   
   function goToLevel1(nivel){
 
-	  location.href = "level1.jsp"
+	  location.href = "plantilla1.jsp"
 }
 	  
 	
