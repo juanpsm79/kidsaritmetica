@@ -156,7 +156,7 @@ nivel =  (String) session.getAttribute("nivel");
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">
-							<label id ="indicadorSumas">7/10</label>
+							<label id ="indicadorSumas">1/10</label>
 					</div>
 					<div style="width:261px;position:relative;top:15px;color:black;font-family:Times New Roman;font-size:70px;text-align:center">
 							<label id ="minutero" style="font-family:digital7mono">00:00</label>
@@ -165,9 +165,15 @@ nivel =  (String) session.getAttribute("nivel");
 				</div>	
 				
 				<div style="width:62%;height:100%;float:left;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
-						<div id="llevadaDecenas" style="width:32px;height:49px;position:relative;top:23px;left:303px;float:left;background-image:url(casillaLlevada.png);background-repeat:no-repeat">
+						<div id="llevadaDecenas" style="width:32px;height:49px;position:relative;top:23px;left:303px;float:left">
+							<a>
+								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>
+							</a>
 						</div>
-						<div id="llevadaCentenas" style="width:32px;height:50px;position:relative;top:23px;left:395px;float:left;background-image:url(casillaLlevada.png);background-repeat:no-repeat">
+						<div id="llevadaCentenas" style="width:32px;height:50px;position:relative;top:23px;left:395px;float:left">
+							<a>
+								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
+							</a>
 						</div>
 				</div>
 				
