@@ -175,10 +175,10 @@ nivel =  (String) session.getAttribute("nivel");
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
 							</a>
 						</div>
-						<div id="sumaMillares" style="width:101px;height:124px;position:relative;top:400px;left:53px;float:left;border:7px solid black"></div>
-						<div id="sumaCentenas" style="width:101px;height:124px;position:relative;top:400px;left:90px;float:left;border:7px solid black"></div>
-						<div id="sumaDecenas" style="width:101px;height:124px;position:relative;top:400px;left:150px;float:left;border:7px solid black"></div>
-						<div id="sumaUnidades" style="width:101px;height:124px;position:relative;top:400px;left:200px;float:left;border:7px solid red"></div>
+						<div id="sumaMillares" style="width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black"></div>
+						<div id="sumaCentenas" style="width:96px;height:122px;position:relative;top:394px;left:98px;float:left;border:5px solid black"></div>
+						<div id="sumaDecenas" style="width:96px;height:122px;position:relative;top:394px;left:120px;float:left;border:5px solid black"></div>
+						<div id="sumaUnidades" style="width:96px;height:122px;position:relative;top:394px;left:140px;float:left;border:5px solid red"></div>
 				</div>
 				
 				<div style="width:15%;height:100%;float:left;position:relative;right:220px">
