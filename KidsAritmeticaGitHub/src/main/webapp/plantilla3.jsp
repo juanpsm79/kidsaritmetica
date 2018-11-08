@@ -82,7 +82,18 @@ nivel =  (String) session.getAttribute("nivel");
 
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
-	  document.getElementById('sumaUnidades').innerHTML = digito;
+	  document.getElementById(''+digitoSuma).innerHTML = digito;
+	  document.getElementById(''+digitoSuma).style.borderColor="black";
+      if (digitoSuma=='sumaCentenas') {
+			document.getElementById("sumaMillares").style.borderColor="red";
+			digitoSuma = 'sumaMillares';
+		} else if (digitoSuma=='sumaDecenas') {
+			document.getElementById("sumaCentenas").style.borderColor="red";
+			digitoSuma = 'sumaCentenas';
+		} else if (digitoSuma=='sumaUnidades') {
+			document.getElementById("sumaDecenas").style.borderColor="red";
+			digitoSuma = 'sumaDecenas';
+		}
 	  nivelIniciado = true;
   }
   
@@ -119,6 +130,8 @@ nivel =  (String) session.getAttribute("nivel");
   }
   
   var emp;
+  var digitoSuma='sumaUnidades';
+  
   function iniciarCrono() {
         emp=new Date();
         elcrono=setInterval(tiempo,10);
@@ -141,12 +154,37 @@ nivel =  (String) session.getAttribute("nivel");
        document.getElementById('minutero').innerHTML =""+mn+":"+sg;
       // document.getElementById('secundero').innerHTML =""+sg;
     }
+  
+  	function setSelected (id){
+  		digitoSuma = id;
+  		if (id=='sumaMillares') {
+  			document.getElementById("sumaMillares").style.borderColor="red";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaCentenas') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="red";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaDecenas') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="red";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaUnidades') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="red";
+  		}
+  	}
 	  
   </script>
 </head>
 
   <body onload="javascript:iniciarCrono()">
-	<div style="height:765px">
+	<div style="width:1560px;height:765px">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
 			<div style="width:100%;height:73%">
@@ -175,11 +213,12 @@ nivel =  (String) session.getAttribute("nivel");
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
 							</a>
 						</div>
-						<div id="sumaMillares" style="width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black"></div>
+						<div id="sumaMillares" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black"
+						onclick="javascript:setSelected(this.id)"></div>
 						<div id="coma" style="font-family:Calibri;font-size:107px;position:relative;top:420px;left:63px;float:left">,</div>
-						<div id="sumaCentenas" style="width:96px;height:122px;position:relative;top:394px;left:73px;float:left;border:5px solid black"></div>
-						<div id="sumaDecenas" style="width:96px;height:122px;position:relative;top:394px;left:95px;float:left;border:5px solid black"></div>
-						<div id="sumaUnidades" style="width:96px;height:122px;position:relative;top:394px;left:115px;float:left;border:5px solid red"></div>
+						<div id="sumaCentenas" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:73px;float:left;border:5px solid black"></div>
+						<div id="sumaDecenas" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:95px;float:left;border:5px solid black"></div>
+						<div id="sumaUnidades" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:115px;float:left;border:5px solid red"></div>
 				</div>
 				
 				<div style="width:15%;height:100%;float:left;position:relative;right:220px">
