@@ -176,9 +176,10 @@ nivel =  (String) session.getAttribute("nivel");
 							</a>
 						</div>
 						<div id="sumaMillares" style="width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black"></div>
-						<div id="sumaCentenas" style="width:96px;height:122px;position:relative;top:394px;left:98px;float:left;border:5px solid black"></div>
-						<div id="sumaDecenas" style="width:96px;height:122px;position:relative;top:394px;left:120px;float:left;border:5px solid black"></div>
-						<div id="sumaUnidades" style="width:96px;height:122px;position:relative;top:394px;left:140px;float:left;border:5px solid red"></div>
+						<div id="coma" style="font-family:Calibri;font-size:107px;position:relative;top:420px;left:63px;float:left">,</div>
+						<div id="sumaCentenas" style="width:96px;height:122px;position:relative;top:394px;left:73px;float:left;border:5px solid black"></div>
+						<div id="sumaDecenas" style="width:96px;height:122px;position:relative;top:394px;left:95px;float:left;border:5px solid black"></div>
+						<div id="sumaUnidades" style="width:96px;height:122px;position:relative;top:394px;left:115px;float:left;border:5px solid red"></div>
 				</div>
 				
 				<div style="width:15%;height:100%;float:left;position:relative;right:220px">
