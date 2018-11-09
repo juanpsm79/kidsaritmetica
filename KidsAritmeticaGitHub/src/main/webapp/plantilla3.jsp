@@ -82,9 +82,12 @@ nivel =  (String) session.getAttribute("nivel");
 
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
-	  document.getElementById(''+digitoSuma).innerHTML = digito;
+	  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
 	  document.getElementById(''+digitoSuma).style.borderColor="black";
-      if (digitoSuma=='sumaCentenas') {
+	  var sigCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling.firstElementChild;
+      sigCifra.style.borderColor="red";
+	  digitoSuma=''+sigCifra.id;
+	  /*if (digitoSuma=='sumaCentenas') {
 			document.getElementById("sumaMillares").style.borderColor="red";
 			digitoSuma = 'sumaMillares';
 		} else if (digitoSuma=='sumaDecenas') {
@@ -93,7 +96,7 @@ nivel =  (String) session.getAttribute("nivel");
 		} else if (digitoSuma=='sumaUnidades') {
 			document.getElementById("sumaDecenas").style.borderColor="red";
 			digitoSuma = 'sumaDecenas';
-		}
+		}*/
 	  nivelIniciado = true;
   }
   
@@ -213,13 +216,28 @@ nivel =  (String) session.getAttribute("nivel");
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
 							</a>
 						</div>
-						<div id="sumaMillares" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black"
-						onclick="javascript:setSelected(this.id)"></div>
+						<div>
+							<a id="sumaMillares" 
+								style="width:96px;height:122px;position:relative;top:394px;left:60px;float:left;border:5px solid black" 
+								onclick="javascript:setSelected(this.id)">
+									<label onMouseOver="this.style.cursor='pointer'" style="position:relative;font-family:Calibri;font-size:150px"></label></a></div>
 						<div id="coma" style="font-family:Calibri;font-size:107px;position:relative;top:420px;left:63px;float:left">,</div>
-						<div id="sumaCentenas" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:73px;float:left;border:5px solid black"></div>
-						<div id="sumaDecenas" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:95px;float:left;border:5px solid black"></div>
-						<div id="sumaUnidades" onclick="javascript:setSelected(this.id)" style="font-family:Calibri;font-size:150px;width:96px;height:122px;position:relative;top:394px;left:115px;float:left;border:5px solid red"></div>
-				</div>
+						<div>
+							<a id="sumaCentenas" onclick="javascript:setSelected(this.id)" 
+								style="width:96px;height:122px;
+								position:relative;top:394px;left:73px;float:left;border:5px solid black">
+									<label onMouseOver="this.style.cursor='pointer'" style="position:relative;font-family:Calibri;font-size:150px"></label></a></div>
+						<div>
+							<a id="sumaDecenas" onclick="javascript:setSelected(this.id)" 
+								style="width:96px;height:122px;
+								position:relative;top:394px;left:95px;float:left;border:5px solid black">
+									<label onMouseOver="this.style.cursor='pointer'" style="position:relative;font-family:Calibri;font-size:150px"></label></a></div>
+						<div>
+							<a id="sumaUnidades" onclick="javascript:setSelected(this.id)" 
+								style="z-index:10;width:96px;height:122px;
+								position:relative;top:394px;left:115px;float:left;border:5px solid red">
+									<label onMouseOver="this.style.cursor='pointer'" style="position:relative;font-family:Calibri;font-size:150px"></label></a></div>
+					</div>
 				
 				<div style="width:15%;height:100%;float:left;position:relative;right:220px">
 					<a onclick="javascript:comprobarSuma()"><img src="cerrarAspa.png"/></a>
