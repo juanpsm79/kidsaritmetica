@@ -7,6 +7,7 @@ nivel =  (String) session.getAttribute("nivel");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"/>
   <title>PlayAddition</title>
   <style>
    @font-face{
@@ -305,30 +306,30 @@ nivel =  (String) session.getAttribute("nivel");
 								style="width:96px;height:118px;position:relative;float:left;border:5px solid black" 
 								onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id);document.getElementById('coma').style.visibility='hidden'">
 									<label id="sumaMillaresCifra"onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:42px;left:10px;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black"></label></a></div>
+									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
+									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div id="coma" style="visibility:hidden;font-family:Calibri;font-size:107px;position:relative;top:25px;left:3px;float:left">,</div>
 						<div style="float:left">
 							<a id="sumaCentenas" onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)" 
 								style="width:96px;height:118px;
 								position:relative;left:13px;float:left;border:5px solid black">
 									<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:42px;left:10px;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black"></label></a></div>
+									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
+									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div style="float:left">
 							<a id="sumaDecenas" onclick=";makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)" 
 								style="width:96px;height:118px;
 								position:relative;left:35px;float:left;border:5px solid black">
 									<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:42px;left:10px;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black"></label></a></div>
+									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
+									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div style="float:left">
 							<a id="sumaUnidades" onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)"
 								style="width:96px;height:118px;
 								position:relative;left:55px;float:left;border:5px solid red">
 									<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:42px;left:10px;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black"></label></a></div>
+									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
+									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 					</div>
 				
 				</div>
