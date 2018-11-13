@@ -233,11 +233,69 @@ nivel =  (String) session.getAttribute("nivel");
  		 if (window.getSelection) {window.getSelection().removeAllRanges();}
  		 else if (document.selection) {document.selection.empty();}
  	}
+  	
+  	var navegador;
+  	
+  	function detectarNavegador(){
+  		if(navigator.userAgent.indexOf("Chrome")>=0){
+  			navegador = "Chrome";
+  		}else if(navigator.userAgent.indexOf("Firefox")>=0){
+  			navegador = "Firefox";
+  		}else if(navigator.userAgent.indexOf("Chrome")==-1 && navigator.userAgent.indexOf("Safari")>=0){
+  			document.getElementById("cero").style.left = "22px";
+  			document.getElementById("uno").style.left = "53px";
+  			document.getElementById("dos").style.left = "86px";
+  			document.getElementById("tres").style.left = "118px";
+  			document.getElementById("cuatro").style.left = "153px";
+  			document.getElementById("cinco").style.left = "187px";
+  			document.getElementById("seis").style.left = "219px";
+  			document.getElementById("siete").style.left = "252px";
+  			document.getElementById("ocho").style.left = "285px";
+  			document.getElementById("nueve").style.left = "317px";
+  			
+  			document.getElementById("cero").style.bottom = "2px";
+  			document.getElementById("uno").style.bottom = "2px";
+  			document.getElementById("dos").style.bottom = "2px";
+  			document.getElementById("tres").style.bottom = "2px";
+  			document.getElementById("cuatro").style.bottom = "2px";
+  			document.getElementById("cinco").style.bottom = "2px";
+  			document.getElementById("seis").style.bottom = "2px";
+  			document.getElementById("siete").style.bottom = "2px";
+  			document.getElementById("ocho").style.bottom = "2px";
+  			document.getElementById("nueve").style.bottom = "2px";
+  			
+  			
+  			
+  			document.getElementById("sumaUnidadesCifra").style.bottom = "30px";
+  			document.getElementById("sumaDecenasCifra").style.bottom = "30px";
+  			document.getElementById("sumaCentenasCifra").style.bottom = "30px";
+  			document.getElementById("sumaMillaresCifra").style.bottom = "30px";
+  			
+  			navegador = "Safari";
+  			
+  		}else if(navigator.userAgent.indexOf("Chrome")==-1 && navigator.userAgent.indexOf("Firefox")==-1 && navigator.userAgent.indexOf("Windows")>=0){
+  			navegador = "IExplorer";
+  		}
+  		document.getElementById("cero").style.visibility='visible';
+  		document.getElementById("uno").style.visibility='visible';
+		document.getElementById("dos").style.visibility='visible';
+		document.getElementById("tres").style.visibility='visible';
+		document.getElementById("cuatro").style.visibility='visible';
+		document.getElementById("cinco").style.visibility='visible';
+		document.getElementById("seis").style.visibility='visible';
+		document.getElementById("siete").style.visibility='visible';
+		document.getElementById("ocho").style.visibility='visible';
+		document.getElementById("nueve").style.visibility='visible';
+		
+		//document.getElementById("contenedor").width=""+window.innerWidth;
+		//document.getElementById("contenedor").height=""+window.innerHeight;
+		//document.getElementById("contenedor").style.visibility='visible';
+  	}
 	  
   </script>
 </head>
 
-  <body onload="javascript:calcularSuma();iniciarCrono()">
+  <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()">
 	<div id="contenedor" class="unselectable" style="width:1560px;height:765px">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
@@ -346,34 +404,34 @@ nivel =  (String) session.getAttribute("nivel");
 					<div style="float:left;width:75%;height:100%;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
 						<a id="cero" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:18px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">0</a>
+									 font-size: 145px;visibility:hidden">0</a>
 						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:50px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">1</a>
+									 font-size: 145px;visibility:hidden">1</a>
 						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:82px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">2</a>
+									 font-size: 145px;visibility:hidden">2</a>
 						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:114px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">3</a>
+									 font-size: 145px;visibility:hidden">3</a>
 						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:146px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">4</a>
+									 font-size: 145px;visibility:hidden">4</a>
 						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:178px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">5</a>
+									 font-size: 145px;visibility:hidden">5</a>
 						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:210px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">6</a>
+									 font-size: 145px;visibility:hidden">6</a>
 						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:242px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">7</a>
+									 font-size: 145px;visibility:hidden">7</a>
 						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:274px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">8</a>
+									 font-size: 145px;visibility:hidden">8</a>
 						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:306px;bottom:5px;color:black;
 									 font-family:Calibri;
-									 font-size: 145px">9</a>
+									 font-size: 145px;visibility:hidden">9</a>
 					</div>
 					
 					<div style="float:left;width:25%;height:100%;position:relative;bottom:25px;right:110px">
