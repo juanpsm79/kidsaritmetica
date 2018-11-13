@@ -135,7 +135,7 @@ nivel =  (String) session.getAttribute("nivel");
 	  } else {
 		  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='startOverBoton.png'/>";
 		  sumasActuales = 0;
-		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"0/10";
+		  document.getElementById('indicadorSumas').innerHTML = "0/10";
 	  }
 	  
   }
