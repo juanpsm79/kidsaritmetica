@@ -93,12 +93,14 @@ nivel =  (String) session.getAttribute("nivel");
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
 	  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-	  document.getElementById(''+digitoSuma).style.borderColor="black";
-	  var sigCifra;
-	  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
-	  sigCifra = divCifra.firstElementChild;
-      sigCifra.style.borderColor="red";
-	  digitoSuma=''+sigCifra.id;
+	  if(digitoSuma=='sumaUnidades'){
+		  document.getElementById(''+digitoSuma).style.borderColor="black";
+		  var sigCifra;
+		  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
+		  sigCifra = divCifra.firstElementChild;
+	      sigCifra.style.borderColor="red";
+		  digitoSuma=''+sigCifra.id;
+	  }
 	  
   }
   
@@ -246,7 +248,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:Berlin Sans FB Demi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">40</label>
+							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">

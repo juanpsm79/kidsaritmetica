@@ -82,7 +82,6 @@ nivel =  (String) session.getAttribute("nivel");
 	
 	function asyncCall() {
 		if(sumasActuales<10) {
-			//var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkButton.png\"/>";
 			var innerHtml="";
 	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 600)\"/>";
 	  		calcularSuma();
@@ -112,39 +111,9 @@ nivel =  (String) session.getAttribute("nivel");
 	  sigCifra = divCifra.firstElementChild;
       sigCifra.style.borderColor="red";
 	  digitoSuma=''+sigCifra.id;
-	  
   }
   
-  /*function comprobarSuma(){
-	  var sumaAlumno = parseInt(document.getElementById('sumaUnidades').innerHTML, 10);
-	  var unidades1 = parseInt(document.getElementById('unidades1').innerHTML, 10);
-	  var unidades2 = parseInt(document.getElementById('unidades2').innerHTML, 10);
-	  if (sumaAlumno == unidades1+unidades2){
-		  var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkButton.png\"/></a>";
-		  //innerHtml+="<label style=\"font-size: 40px;font-family:Berlin Sans FB Demi;color:rgb(0, 176, 80);position:relative;bottom:120px;left:35px\">CORRECT</label>";
-		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
-		  
-		  
-		  sumasActuales++;
-		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales;
-		  if(sumasActuales>9)
-			  document.getElementById("indicadorSumasDiv").style.left = "30px";
-	  } else {
-		  sumasActuales = 0;
-		  var innerHtml="<a onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 1000);\"><img src=\"checkIncorrect.png\"/></a>"; 
-		  //innerHtml+="<label style=\"font-size: 25px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:53px\">INCORRECT</label><BR>";
-		  //innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">START</label><BR>";
-		  //innerHtml+="<label style=\"font-size: 42px;font-family:Berlin Sans FB Demi;color:yellow;position:relative;bottom:160px;left:56px\">OVER</label>";
-		  document.getElementById('capaBotonCheckSuma').innerHTML =""+innerHtml;
-		  //document.getElementById('indicadorSumas').innerHTML = "0";
-	  }
-  }*/
-  
-  
-  
   function comprobarSuma(){
-	  
-	  
 	  var millares = document.getElementById('sumaMillaresCifra').innerHTML;
 	  if(document.getElementById('sumaMillaresCifra').innerHTML=='' ||
 			  document.getElementById('sumaMillaresCifra').innerHTML==null)
@@ -302,7 +271,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:Berlin Sans FB Demi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">40</label>
+							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">

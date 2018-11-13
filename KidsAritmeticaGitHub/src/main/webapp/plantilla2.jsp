@@ -97,12 +97,14 @@ nivel =  (String) session.getAttribute("nivel");
   function ponerDigito (idDigito) {
 	  var digito = document.getElementById(idDigito).innerHTML;
 	  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-	  document.getElementById(''+digitoSuma).style.borderColor="black";
-	  var sigCifra;
-	  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
-	  sigCifra = divCifra.firstElementChild;
-      sigCifra.style.borderColor="red";
-	  digitoSuma=''+sigCifra.id;
+	  if(digitoSuma=='sumaUnidades' || digitoSuma=='sumaDecenas'){
+		  document.getElementById(''+digitoSuma).style.borderColor="black";
+		  var sigCifra;
+		  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
+		  sigCifra = divCifra.firstElementChild;
+	      sigCifra.style.borderColor="red";
+		  digitoSuma=''+sigCifra.id;
+	  }
 	  
   }
   
@@ -258,7 +260,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:Berlin Sans FB Demi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">40</label>
+							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">
@@ -270,7 +272,7 @@ nivel =  (String) session.getAttribute("nivel");
 				</div>	
 				
 				<div style="width:62%;height:100%;float:left;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
-						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:49px;position:relative;top:21px;left:311px;float:left">
+						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:49px;position:relative;top:21px;left:308px;float:left">
 							<a id="llevadaCentenas" style="width:32px;height:50px">
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>
 							</a>
