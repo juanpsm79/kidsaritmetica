@@ -30,8 +30,8 @@
   </script>
 </head>
 
-  <body style="width:100%;height:100%">
-		<div style="width:100%;height:100%">
+  <body>
+		<div style="width:1560px;height:765px">
 			<div id="izquierda" style="float:left;position:relative;left:50px;z-index:10">
 	  			<div>	
 	  				<img src="followUs.png">
@@ -48,17 +48,19 @@
 	  				</div>
 	  			</div>
 	  		</div>
-			<div id="centro" onclick="javascript:irPrincipal()" style="width:592px;height:565px;margin-top:100px;float:left;position:relative;right:125px;cursor: pointer">
+			<div id="centro" onclick="javascript:irPrincipal()" style="margin-top:100px;float:left;position:relative;right:125px;cursor: pointer">
 				<img src="logoPlayAddition.png">
 			</div>
-			<div id="derecha" style="position:relative;right:260px">
-					<div style="float:left;position:relative;left:200px;cursor:pointer">
-	  					<img src="signUp.png">
+			<div id="derecha" style="height:100%">
+					<div>
+						<div style="float:left;cursor:pointer;position:relative;right:255px">
+		  					<img src="signUp.png">
+		  				</div>
+		  				<div style="float:left;position:relative;right:255px;cursor:pointer">
+		  					<img src="loginBoton.png">
+		  				</div>
 	  				</div>
-	  				<div style="float:left;position:relative;left:200px;cursor:pointer">
-	  					<img src="loginBoton.png">
-	  				</div>
-	  				<div style="position:relative;top:550px;right:120px;cursor:pointer">
+	  				<div style="cursor:pointer;position:relative;top:550px;right:428px">
 						<img src="contactSupport.png">
 					</div>
   			</div>
