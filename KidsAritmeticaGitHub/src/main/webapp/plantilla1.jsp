@@ -212,8 +212,8 @@ nivel =  (String) session.getAttribute("nivel");
   			
   			
   			
-  			document.getElementById("sumaUnidadesCifra").style.bottom = "30px";
-  			document.getElementById("sumaDecenasCifra").style.bottom = "30px";
+  			document.getElementById("sumaUnidadesCifra").style.bottom = "32px";
+  			document.getElementById("sumaDecenasCifra").style.bottom = "32px";
   			
   			
   			

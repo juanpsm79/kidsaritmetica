@@ -77,6 +77,7 @@ nivel =  (String) session.getAttribute("nivel");
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
 		 document.getElementById('sumaCentenasCifra').innerHTML ="";
 	     document.getElementById('sumaMillaresCifra').innerHTML ="";
+	     document.getElementById('coma').style.visibility='hidden';
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -235,10 +236,10 @@ nivel =  (String) session.getAttribute("nivel");
   			
   			
   			
-  			document.getElementById("sumaUnidadesCifra").style.bottom = "30px";
-  			document.getElementById("sumaDecenasCifra").style.bottom = "30px";
-  			document.getElementById("sumaCentenasCifra").style.bottom = "30px";
-  			document.getElementById("sumaMillaresCifra").style.bottom = "30px";
+  			document.getElementById("sumaUnidadesCifra").style.bottom = "32px";
+  			document.getElementById("sumaDecenasCifra").style.bottom = "32px";
+  			document.getElementById("sumaCentenasCifra").style.bottom = "32px";
+  			document.getElementById("sumaMillaresCifra").style.bottom = "32px";
   			
   			navegador = "Safari";
   			

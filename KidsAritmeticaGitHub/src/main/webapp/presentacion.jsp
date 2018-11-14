@@ -30,12 +30,38 @@
   </script>
 </head>
 
-  <body>
-	<div  onclick="javascript:irPrincipal()" align ="center" style="margin-top:100px">
-		<div style="background-image:url(logoPlayAddition.png);background-repeat:no-repeat;background-size:cover;width:592px;height:565px;">
+  <body style="width:100%;height:100%">
+		<div style="width:100%;height:100%">
+			<div id="izquierda" style="float:left;position:relative;left:50px;z-index:10">
+	  			<div>	
+	  				<img src="followUs.png">
+	  			</div>
+	  			<div>
+	  				<div style="float:left;cursor:pointer">
+	  					<img src="twitter.png" style="cursor:pointer">
+	  				</div>
+	  				<div style="float:left;cursor:pointer;position:relative;left:3px;bottom:1px">
+	  					<img src="facebook.png" style="cursor:pointer">
+	  				</div>
+	  				<div style="float:left;position:relative;left:3px;bottom:1px">
+	  					<img src="instagram.png" style="cursor:pointer">
+	  				</div>
+	  			</div>
+	  		</div>
+			<div id="centro" onclick="javascript:irPrincipal()" style="width:592px;height:565px;margin-top:100px;float:left;position:relative;right:125px;cursor: pointer">
+				<img src="logoPlayAddition.png">
+			</div>
+			<div id="derecha" style="position:relative;right:260px">
+					<div style="float:left;position:relative;left:200px;cursor:pointer">
+	  					<img src="signUp.png">
+	  				</div>
+	  				<div style="float:left;position:relative;left:200px;cursor:pointer">
+	  					<img src="loginBoton.png">
+	  				</div>
+	  				<div style="position:relative;top:550px;right:120px;cursor:pointer">
+						<img src="contactSupport.png">
+					</div>
+  			</div>
 		</div>
-		<div style="background-image:url(contactSupport.png);position:relative;left:5px">
-		</div>
-	</div>
   </body>
 </html>
