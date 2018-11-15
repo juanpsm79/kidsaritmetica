@@ -42,12 +42,6 @@ nivel =  (String) session.getAttribute("nivel");
   $( function() {
   	
   } );
-  
- 
-	var nivelIniciado = true;
-	var cronometro = 0;
-	var sumasActuales = 0;
-	var nivel = <%=nivel%>;
 	
 	function subirNivel() {
 		$.ajax({
@@ -78,79 +72,69 @@ nivel =  (String) session.getAttribute("nivel");
 		 document.getElementById('sumaCentenasCifra').innerHTML ="";
 	     document.getElementById('sumaMillaresCifra').innerHTML ="";
 	     document.getElementById('coma').style.visibility='hidden';
+	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+		 document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
 	}
 	
 	function asyncCall() {
 		if(sumasActuales<10) {
-			var innerHtml="";
-	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma();setTimeout(asyncCall, 600)\"/>";
 	  		calcularSuma();
-		}else{
-			var innerHtml="<img src='levelUpBoton.png'/>";
+	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma()\"/>";
+	  		bloquearInteracciones = false;
+		}else {
 	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png'/>";
 	  		nivelIniciado = false;
 		}
-		document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
-		document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	}
 
-  function ponerDigito (idDigito) {
-	  var digito = document.getElementById(idDigito).innerHTML;
-	  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-	  if(digitoSuma=='sumaMillares'){
-		  document.getElementById(''+digitoSuma).parentElement.nextElementSibling.style.visibility='visible';
-		  return;
-	  }
-	  document.getElementById(''+digitoSuma).style.borderColor="black";
-	  var sigCifra;
-	  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
-	  if(divCifra.id=='coma'){
-		  
-		  divCifra = divCifra.previousElementSibling;
-	  }
-	  sigCifra = divCifra.firstElementChild;
-      sigCifra.style.borderColor="red";
-	  digitoSuma=''+sigCifra.id;
-  }
+  
   
   function comprobarSuma(){
-	  var millares = document.getElementById('sumaMillaresCifra').innerHTML;
-	  if(document.getElementById('sumaMillaresCifra').innerHTML=='' ||
-			  document.getElementById('sumaMillaresCifra').innerHTML==null)
-		  millares="0";
-	  
-	  var sumaAlumno = (1000*parseInt(millares, 10)+
-			  100*parseInt(document.getElementById('sumaCentenasCifra').innerHTML, 10)+
-			  10*parseInt(document.getElementById('sumaDecenasCifra').innerHTML, 10) +
-		  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
-	  
-	  var operador1 = (100*parseInt(document.getElementById('centenasCifra1').innerHTML, 10)+
-			  10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
-		  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
-	  
-	  
-	  var operador2 = (100*parseInt(document.getElementById('centenasCifra2').innerHTML, 10)+
-			  10*parseInt(document.getElementById('decenasCifra2').innerHTML, 10) +
-		  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
-	  
-	  if (sumaAlumno == operador1+operador2){
-		  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='correctBoton.png'/>";
-		  sumasActuales++;
-		  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/10";
-		  
+	  if( (document.getElementById('sumaMillaresCifra').innerHTML=='' || document.getElementById('sumaMillaresCifra').innerHTML==null) &&
+	      (document.getElementById('sumaCentenasCifra').innerHTML=='' || document.getElementById('sumaCentenasCifra').innerHTML==null) &&	
+	      (document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null) &&
+	      (document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null) ) {
+		  	return;
 	  } else {
-		  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='startOverBoton.png'/>";
-		  sumasActuales = 0;
-		  document.getElementById('indicadorSumas').innerHTML = "0/10";
-	  }
-	  
-  }
+		  if (!bloquearInteracciones) {
+			  bloquearInteracciones = true;
+			  var millares = document.getElementById('sumaMillaresCifra').innerHTML;
+			  if(document.getElementById('sumaMillaresCifra').innerHTML=='' ||
+					  document.getElementById('sumaMillaresCifra').innerHTML==null)
+				  millares="0";
+			  var sumaAlumno = (1000*parseInt(millares, 10)+
+					  100*parseInt(document.getElementById('sumaCentenasCifra').innerHTML, 10)+
+					  10*parseInt(document.getElementById('sumaDecenasCifra').innerHTML, 10) +
+				  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
+			  
+			  var operador1 = (100*parseInt(document.getElementById('centenasCifra1').innerHTML, 10)+
+					  10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
+				  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
+			  
+			  
+			  var operador2 = (100*parseInt(document.getElementById('centenasCifra2').innerHTML, 10)+
+					  10*parseInt(document.getElementById('decenasCifra2').innerHTML, 10) +
+				  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
+			  
+			  if (sumaAlumno == operador1+operador2){
+				  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='correctBoton.png'/>";
+				  sumasActuales++;
+				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/10";
+			  } else {
+				  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='startOverBoton.png'/>";
+				  sumasActuales = 0;
+				  document.getElementById('indicadorSumas').innerHTML = "0/10";
+			  }
+			  setTimeout(asyncCall, 600)
+		  } else
+			  return;
+  		}
+  	}
   
-  var emp;
-  var digitoSuma='sumaUnidades';
-  
-  function iniciarCrono() {
+
+
+   function iniciarCrono() {
         emp=new Date();
         elcrono=setInterval(tiempo,10);
    }
@@ -173,38 +157,6 @@ nivel =  (String) session.getAttribute("nivel");
 	       document.getElementById('minutero').innerHTML =""+mn+":"+sg;
 	  }
     }
-  
-  	function setSelected (id){
-  		digitoSuma = id;
-  		if (id=='sumaMillares') {
-  			document.getElementById("sumaMillares").style.borderColor="red";
-  			document.getElementById("sumaCentenas").style.borderColor="black";
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  		} else if (id=='sumaCentenas') {
-  			document.getElementById("sumaMillares").style.borderColor="black";
-  			document.getElementById("sumaCentenas").style.borderColor="red";
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  		} else if (id=='sumaDecenas') {
-  			document.getElementById("sumaMillares").style.borderColor="black";
-  			document.getElementById("sumaCentenas").style.borderColor="black";
-  			document.getElementById("sumaDecenas").style.borderColor="red";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  		} else if (id=='sumaUnidades') {
-  			document.getElementById("sumaMillares").style.borderColor="black";
-  			document.getElementById("sumaCentenas").style.borderColor="black";
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="red";
-  		}
-  	}
-  	
-  	function makeUnselectable() {
- 		 if (window.getSelection) {window.getSelection().removeAllRanges();}
- 		 else if (document.selection) {document.selection.empty();}
- 	}
-  	
-  	var navegador;
   	
   	function detectarNavegador(){
   		if(navigator.userAgent.indexOf("Chrome")>=0){
@@ -261,7 +213,79 @@ nivel =  (String) session.getAttribute("nivel");
 		//document.getElementById("contenedor").height=""+window.innerHeight;
 		//document.getElementById("contenedor").style.visibility='visible';
   	}
-	  
+  	
+  	function clickCifraSuma(cifra) {
+  		makeUnselectable();
+  		if(!bloquearInteracciones) {
+  			setSelected(cifra.id);
+  		}
+  	}
+  	
+  	
+  	function dobleClickCifraSuma(cifra) {
+  		makeUnselectable();
+  		if(!bloquearInteracciones) {
+  			cifra.firstElementChild.innerHTML ="";
+  			setSelected(cifra.id);
+  		}
+  	}
+  	
+  	function ponerDigito (idDigito) {
+  	  if(!bloquearInteracciones) {
+  		  var digito = document.getElementById(idDigito).innerHTML;
+  		  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
+  		  if(digitoSuma=='sumaMillares') {
+  			  document.getElementById(''+digitoSuma).parentElement.nextElementSibling.style.visibility='visible';
+  			  return;
+  		  }
+  		  document.getElementById(''+digitoSuma).style.borderColor="black";
+  		  var sigCifra;
+  		  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
+  		  if(divCifra.id=='coma')
+  			  divCifra = divCifra.previousElementSibling;
+  		  sigCifra = divCifra.firstElementChild;
+  	      sigCifra.style.borderColor="red";
+  		  digitoSuma=''+sigCifra.id;
+  	  }
+    }
+  	
+  	function setSelected (id) {
+  		digitoSuma = id;
+  		if (id=='sumaMillares') {
+  			document.getElementById("sumaMillares").style.borderColor="red";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaCentenas') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="red";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaDecenas') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="red";
+  			document.getElementById("sumaUnidades").style.borderColor="black";
+  		} else if (id=='sumaUnidades') {
+  			document.getElementById("sumaMillares").style.borderColor="black";
+  			document.getElementById("sumaCentenas").style.borderColor="black";
+  			document.getElementById("sumaDecenas").style.borderColor="black";
+  			document.getElementById("sumaUnidades").style.borderColor="red";
+  		}
+  	}
+  	
+  	function makeUnselectable() {
+ 		 if (window.getSelection) {window.getSelection().removeAllRanges();}
+ 		 else if (document.selection) {document.selection.empty();}
+ 	}
+  	
+  	var emp;
+  	var digitoSuma='sumaUnidades';
+  	var nivelIniciado = true;
+  	var sumasActuales = 0;
+  	var nivel = <%=nivel%>;
+  	var bloquearInteracciones = false;
+  	var navegador;  
   </script>
 </head>
 
@@ -332,27 +356,27 @@ nivel =  (String) session.getAttribute("nivel");
 						<div style="float:left">
 							<a id="sumaMillares" 
 								style="width:96px;height:118px;position:relative;float:left;border:5px solid black" 
-								onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id);document.getElementById('coma').style.visibility='hidden'">
+								onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this);javascript:{if(!bloquearInteracciones){document.getElementById('coma').style.visibility='hidden'}}">
 									<label id="sumaMillaresCifra"onMouseOver="this.style.cursor='pointer'"
 									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
 									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div id="coma" style="visibility:hidden;font-family:Calibri;font-size:107px;position:relative;top:25px;left:3px;float:left">,</div>
 						<div style="float:left">
-							<a id="sumaCentenas" onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)" 
+							<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 								style="width:96px;height:118px;
 								position:relative;left:13px;float:left;border:5px solid black">
 									<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"
 									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
 									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div style="float:left">
-							<a id="sumaDecenas" onclick=";makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)" 
+							<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 								style="width:96px;height:118px;
 								position:relative;left:35px;float:left;border:5px solid black">
 									<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'"
 									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
 									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
 						<div style="float:left">
-							<a id="sumaUnidades" onclick="makeUnselectable();setSelected(this.id)" ondblclick="this.firstElementChild.innerHTML ='';setSelected(this.id)"
+							<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
 								style="width:96px;height:118px;
 								position:relative;left:55px;float:left;border:5px solid red">
 									<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"
@@ -405,7 +429,7 @@ nivel =  (String) session.getAttribute("nivel");
 					</div>
 					
 					<div style="float:left;width:25%;height:100%;position:relative;bottom:25px;right:110px">
-						<a id="capaBotonCheckSuma"><img src="checkBoton.png" onclick="javascript:comprobarSuma();setTimeout(asyncCall, 600)"/></a>
+						<a id="capaBotonCheckSuma"><img src="checkBoton.png" onclick="javascript:comprobarSuma()"/></a>
 					</div>
 			</div>
 	</div>
