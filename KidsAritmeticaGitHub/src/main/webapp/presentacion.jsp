@@ -11,16 +11,16 @@
 
   <body>
 		<div id="izquierda" style="float:left;z-index:10">
-			<div style="height:60%">
+			<div style="position:relative;top:100px;width:400px;height:100px;left:20px">
 				<div style="float:left;cursor:pointer">
 					<img src="appstoreBoton.png" style="cursor:pointer">
 				</div>
-				<div style="cursor:pointer">
+				<div style="float:left;cursor:pointer">
 					<img src="googlePlayBoton.png" style="cursor:pointer">
 				</div>
 			</div>
 			
-			<div style="height:30%">
+			<div style="position:relative;top:100px;left:20px;">
 				<div>	
 					<img src="followUs.png">
 				</div>
@@ -35,8 +35,8 @@
 				</div>
 			</div>
 	 		
- 			<div style="cursor:pointer;width:328px;height:91px">
-				<img src="contactSupport.png" style="float:left;cursor:pointer">
+ 			<div style="position:relative;top:370px;left:20px;cursor:pointer;width:328px;height:91px">
+				<img src="contactSupport.png" style="cursor:pointer">
 			</div>
 	 		</div>
  		
@@ -44,7 +44,7 @@
 				<img src="logoPlayAddition.png">
 		</div>
 			
-		<div id="derecha" style="float:left;cursor:pointer">
+		<div id="derecha" style="float:left;cursor:pointer;position:relative;top:100px;right:80px">
 	  		<img src="loginBoton.png">
  		</div>
  		
