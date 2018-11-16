@@ -4,7 +4,7 @@
   <title>PlayAddition</title>
   <script>
   function irPrincipal(){
-		 location.href = "inicioPlayAddition.jsp"
+		 location.href = "seleccionNivel.jsp"
   }
   </script>
 </head>
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 	 		
- 			<div style="position:relative;top:370px;left:20px;cursor:pointer;width:328px;height:91px">
+ 			<div style="position:relative;top:377px;left:20px;cursor:pointer;width:333px;height:91px">
 				<img src="contactSupport.png" style="cursor:pointer">
 			</div>
 	 		</div>
@@ -43,9 +43,15 @@
  		<div id="centro" onclick="javascript:irPrincipal()" style="float:left;margin-top:100px;cursor: pointer">
 				<img src="logoPlayAddition.png">
 		</div>
-			
-		<div id="derecha" style="float:left;cursor:pointer;position:relative;top:100px;right:80px">
-	  		<img src="loginBoton.png">
+		
+		
+		<div id="derecha" style="float:left;width:328px;height:600px">	
+			<div style="float:right;cursor:pointer;position:relative;top:100px;right:90px">
+	  			<img src="loginBoton.png">
+ 			</div>
+ 			<div style="float:right;cursor:pointer;position:relative;top:360px;right:80px">
+	  			<img src="playBoton.png">
+ 			</div>
  		</div>
  		
   </body>

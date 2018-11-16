@@ -67,10 +67,6 @@ nivel =  (String) session.getAttribute("nivel");
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
 		
-
-
-	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
-		 document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -95,9 +91,9 @@ nivel =  (String) session.getAttribute("nivel");
 	  } else {
 		  if (!bloquearInteracciones) {
 			  bloquearInteracciones = true;
-			  var decenas = document.getElementById('decenasCifra1').innerHTML;
-			  if(document.getElementById('decenasCifra1').innerHTML=='' ||
-					  document.getElementById('decenasCifra1').innerHTML==null)
+			  var decenas = document.getElementById('sumaDecenasCifra').innerHTML;
+			  if(document.getElementById('sumaDecenasCifra').innerHTML=='' ||
+					  document.getElementById('sumaDecenasCifra').innerHTML==null)
 				  decenas="0";
 			  var sumaAlumno = (10*parseInt(decenas, 10) +
 				  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
