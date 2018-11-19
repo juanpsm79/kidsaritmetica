@@ -2,7 +2,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <title>PlayAddition</title>
+  <script src="./js/jquery/jquery-3.3.1.js"></script>
+  <script src="./js/jquery.flip.min.js"></script>
   <script>
+  $( function() {
+  } );
   var nivelAnterior =null;
   
   function irPrincipal(){
@@ -10,27 +14,19 @@
   }
   
   function seleccionarNivel(idNivel){
-	  
-	  
-	  
 	  if(nivelAnterior!=null){
 		  document.getElementById(''+nivelAnterior).style.borderColor="rgb(32, 56, 100)";
-		  /*izquierda = parseInt(nivelAnterior, 10)+1;
-		  abajo = parseInt(nivelAnterior, 10)+10;
-		  if(document.getElementById(''+izquierda)!=null)
-			  document.getElementById(''+izquierda).style.borderLeftColor="rgb(32, 56, 100)";
-		  if(document.getElementById(''+abajo)!=null)
-			  document.getElementById(''+abajo).style.borderTopColor="rgb(32, 56, 100)";*/
 	  }
-	  
-	  //var izquierda = parseInt(idNivel, 10)+1;
-	  //var abajo = parseInt(idNivel, 10)+10;
 	  document.getElementById(''+idNivel).style.borderColor="red";
-	  /*if(document.getElementById(''+izquierda)!=null)
-		  document.getElementById(''+izquierda).style.borderLeftColor="red";
-	  if(document.getElementById(''+abajo)!=null)
-		  document.getElementById(''+abajo).style.borderTopColor="red";*/
 	  nivelAnterior = idNivel;
+  }
+	
+  function flip (idNivel) {
+	  $("#"+idNivel).flip({
+		  axis: 'y',
+		  trigger: 'hover',
+		  reverse: true
+	  });
   }
   </script>
 </head>
@@ -48,20 +44,25 @@
 		<div style="width:1140px;height:750px">
 			
 			<div style="width:1140px;height:95px">
-	  			<div id="1" onclick="seleccionarNivel('1')" style="cursor:pointer;width:100px;height:95px;float:left;background-image:url(fondoNivelNormal.png);
+	  			<div id="1" onclick="seleccionarNivel('1')" onmouseover="flip('1')" style="cursor:pointer;width:100px;height:95px;float:left;background-image:url(fondoNivelNormal.png);
 	  			background-repeat:no-repeat;text-align: center;border: solid;border-width: 4px 2px 2px 4px;border-color:rgb(32, 56, 100)">
-					<div style="text-align:center">
-							<label onclick="seleccionarNivel('1')" style="position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
+	  				<div class="front">
+						<div style="text-align:center">
+								<label onclick="seleccionarNivel('1')" style="position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
+						</div>
+						
+						<div style="text-align:center">
+								<label onclick="seleccionarNivel('1')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:44px;font-weight:bold">1</label>
+						</div>
 					</div>
-					
-					<div style="text-align:center">
-							<label onclick="seleccionarNivel('1')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:44px;font-weight:bold">1</label>
-					</div>
+					<div class="back" style="background-image:url(1c.png)">
+  					</div>
 				</div>
 				
-				<div id="2" onclick="seleccionarNivel('2')" style="cursor:pointer;width:100px;height:95px;float:left;background-image:url(fondoNivelNormal.png);
+				<div id="2" onclick="seleccionarNivel('2')" onmouseover="flip('2')" style="cursor:pointer;width:100px;height:95px;float:left;background-image:url(fondoNivelNormal.png);
 				background-repeat:no-repeat;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
 				">
+				<div class="front">
 					<div style="text-align:center">
 							<label onclick="seleccionarNivel('2')" style="position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
 					</div>
@@ -69,6 +70,10 @@
 					<div style="text-align:center">
 							<label onclick="seleccionarNivel('2')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:44px;font-weight:bold">2</label>
 					</div>
+				</div>	
+				<div class="back" style="background-image:url(2c.png)">
+    					
+  					</div>	
 				</div>
 				
 				<div id="3" onclick="seleccionarNivel('3')" style="cursor:pointer;width:100px;height:95px;float:left;background-image:url(fondoNivelNormal.png);
