@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayAddition</title>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/jquery.flip.min.js"></script>
@@ -77,7 +78,12 @@
   <body onload="seleccionarNivel('1')">
 		<div style="width:100%;height:350px;position:relative;top:50px;left:20px">
 			<div style="float:left">
-				<img src="selectYourLevel.png" style="cursor:pointer">
+				<div>
+					<img src="selectYourLevel.png" style="cursor:pointer">
+				</div>
+				<div>
+						<a style="font-family:Berlin Sans FB Demi;font-size:70px;font-color:rgb(46, 117, 182)">See all levels</a>
+				 </div>
 			</div>
 			<div style="float:left;cursor:pointer">
 				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer">
@@ -759,7 +765,7 @@
  			
  			
  			<div style="float:left;cursor:pointer;top:100px" onclick="irPrincipal()">
-	  			<img src="goToLevel.png">
+	  			<img src="playSelectAllLevel.png">
  			</div>
  		</div>
   </body>

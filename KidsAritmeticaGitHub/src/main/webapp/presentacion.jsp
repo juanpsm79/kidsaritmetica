@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayAddition</title>
   <script>
   function irPrincipal(){
@@ -45,9 +46,14 @@
 		</div>
 		
 		
-		<div id="derecha" style="float:left;width:328px;height:600px">	
+		<div id="derecha" style="position:relative;right:90px;float:left;width:378px;height:600px">	
 			<div style="float:right;cursor:pointer;position:relative;top:100px;right:90px">
-	  			<img src="loginBoton.png">
+				<div style="float:left;width:154px;height:95px">
+	  				<img src="espaniol.png">
+	  			</div>
+				<div style="float:left;width:222px;height:115px">
+	  				<img src="loginBoton.png">
+	  			</div>
  			</div>
  			<div style="float:right;cursor:pointer;position:relative;top:360px;right:80px">
 	  			<img src="playBoton.png">
