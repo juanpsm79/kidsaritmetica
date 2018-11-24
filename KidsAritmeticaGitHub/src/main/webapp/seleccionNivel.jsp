@@ -85,12 +85,10 @@
 						<a style="font-family:Berlin Sans FB Demi;font-size:70px;font-color:rgb(46, 117, 182)">See all levels</a>
 				 </div>
 			</div>
-			<div style="float:left;cursor:pointer">
-				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer">
-			</div>
+			
 		</div>
 			
-		<div style="width:1140px;height:750px">
+		<div style="width:1140px;height:750px;float:left">
 			
 			<div style="width:1140px;height:95px">
 	  			<div id="1" onclick="seleccionarNivel('1')"  style="width:100px;height:95px;cursor:pointer;cursor:pointer;float:left;
@@ -764,9 +762,15 @@
  			</div>
  			
  			
- 			<div style="float:left;cursor:pointer;top:100px" onclick="irPrincipal()">
-	  			<img src="playSelectAllLevel.png">
- 			</div>
+ 			
  		</div>
+ 		<div style="float:left;height:750px" onclick="irPrincipal()">
+ 			<div style="position:relative;float:left;cursor:pointer;bottom:300px;left:85px">
+				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer">
+			</div>
+	  			<div style="position:relative;top:150px;cursor:pointer">
+	  				<img src="playSelectAllLevel.png">
+	  			</div>
+ 			</div>
   </body>
 </html>
