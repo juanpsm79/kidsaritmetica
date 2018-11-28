@@ -7,49 +7,49 @@
   <script src="./js/jquery.flip.min.js"></script>
   <script>
   $( function() {
-	  $("#1").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#2").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#3").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#4").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#5").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#6").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#7").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#8").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#9").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#10").flip({axis: 'y',trigger: 'hover', reverse: true});
+	  $("#1").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#2").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#3").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#4").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#5").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#6").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#7").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#8").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#9").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#10").flip({axis: 'y',trigger: 'click', reverse: true});
 	  
-	  $("#11").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#12").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#13").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#14").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#15").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#16").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#17").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#18").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#19").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#20").flip({axis: 'y',trigger: 'hover', reverse: true});
+	  $("#11").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#13").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#14").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#15").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#16").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#17").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#18").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#19").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#20").flip({axis: 'y',trigger: 'click', reverse: true});
 	  
-	  $("#21").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#22").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#23").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#24").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#25").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#26").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#27").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#28").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#29").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#30").flip({axis: 'y',trigger: 'hover', reverse: true});
+	  $("#21").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#22").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#23").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#24").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#25").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#26").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#27").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#28").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#29").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#30").flip({axis: 'y',trigger: 'click', reverse: true});
 	  
-	  $("#31").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#32").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#33").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#34").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#35").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#36").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#37").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#38").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#39").flip({axis: 'y',trigger: 'hover', reverse: true});
-	  $("#40").flip({axis: 'y',trigger: 'hover', reverse: true});
+	  $("#31").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#32").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#33").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#34").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#35").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#36").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#37").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#38").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#39").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});
   } );
   var nivelAnterior =null;
   
@@ -61,7 +61,7 @@
 	  if(nivelAnterior!=null){
 		  document.getElementById(''+nivelAnterior).style.borderColor="rgb(32, 56, 100)";
 		 // $("#"+nivelAnterior).flip({axis: 'y',trigger: 'hover', reverse: true});
-		 // $("#"+nivelAnterior).flip(false);
+		  $("#"+nivelAnterior).flip(false);
 	  }
 	  document.getElementById(''+idNivel).style.borderColor="red";
 	  //$("#"+idNivel).flip(true);
@@ -76,13 +76,13 @@
 </head>
 
   <body onload="seleccionarNivel('1')">
-		<div style="width:100%;height:350px;position:relative;top:50px;left:20px">
+		<div style="height:350px;position:relative;top:50px;left:20px">
 			<div style="float:left">
 				<div>
-					<img src="selectYourLevel.png" style="cursor:pointer">
+					<img src="selectYourLevel.png">
 				</div>
-				<div>
-						<a style="font-family:Berlin Sans FB Demi;font-size:70px;font-color:rgb(46, 117, 182)">See all levels</a>
+				<div style="position:relative;left:7px">
+						<a style="text-decoration: underline;font-family:Berlin Sans FB Demi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</a>
 				 </div>
 			</div>
 			
@@ -765,11 +765,11 @@
  			
  		</div>
  		<div style="float:left;height:750px" onclick="irPrincipal()">
- 			<div style="position:relative;float:left;cursor:pointer;bottom:300px;left:85px">
+ 			<div style="position:relative;float:left;bottom:300px">
 				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer">
 			</div>
-	  			<div style="position:relative;top:150px;cursor:pointer">
-	  				<img src="playSelectAllLevel.png">
+	  			<div style="position:relative;top:130px;width:200px;height:167px;right:70px">
+	  				<img src="playSelectAllLevel.png" style="cursor:pointer">
 	  			</div>
  			</div>
   </body>
