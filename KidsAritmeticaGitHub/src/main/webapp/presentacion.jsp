@@ -36,12 +36,12 @@
 				</div>
 			</div>
 	 		
- 			<div style="position:relative;top:377px;left:20px;cursor:pointer;width:333px;height:91px">
-				<img src="contactSupport.png" style="cursor:pointer">
+ 			<div style="position:relative;top:377px;left:20px;width:333px;height:91px">
+				<img src="contactSupport.png">
 			</div>
 	 		</div>
  		
- 		<div id="centro" onclick="javascript:irPrincipal()" style="float:left;margin-top:100px;cursor: pointer">
+ 		<div id="centro" style="float:left;margin-top:100px">
 				<img src="logoPlayAddition.png">
 		</div>
 		
@@ -56,7 +56,7 @@
 	  			</div>
  			</div>
  			<div style="float:right;cursor:pointer;position:relative;top:360px;right:80px">
-	  			<img src="playBoton.png">
+	  			<img src="playBoton.png" onclick="javascript:irPrincipal()" style="cursor:pointer">
  			</div>
  		</div>
  		

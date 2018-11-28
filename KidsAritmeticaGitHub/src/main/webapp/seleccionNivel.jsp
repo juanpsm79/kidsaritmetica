@@ -53,9 +53,13 @@
   } );
   var nivelAnterior =null;
   
+  function irPresentacion(){
+		 location.href = "presentacion.jsp"
+  }
+  
   function irPrincipal(){
 		 location.href = "inicioPlayAddition.jsp"
-  }
+}
   
   function seleccionarNivel(idNivel){
 	  if(nivelAnterior!=null){
@@ -764,12 +768,12 @@
  			
  			
  		</div>
- 		<div style="float:left;height:750px" onclick="irPrincipal()">
+ 		<div style="float:left;height:750px">
  			<div style="position:relative;float:left;bottom:300px">
-				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer">
+				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer" onclick="irPresentacion()">
 			</div>
 	  			<div style="position:relative;top:130px;width:200px;height:167px;right:70px">
-	  				<img src="playSelectAllLevel.png" style="cursor:pointer">
+	  				<img src="playSelectAllLevel.png" style="cursor:pointer" onclick="irPrincipal()">
 	  			</div>
  			</div>
   </body>
