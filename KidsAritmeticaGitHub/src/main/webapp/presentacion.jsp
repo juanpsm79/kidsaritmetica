@@ -46,7 +46,7 @@
 		</div>
 		
 		
-		<div id="derecha" style="position:relative;right:90px;float:left;height:600px;width:380px">	
+		<div id="derecha" style="position:relative;right:90px;float:left;height:600px;width:370px">	
 			<div style="float:right;cursor:pointer;position:relative;top:100px;right:90px;width:379px">
 				<div style="float:left;width:154px;height:95px">
 	  				<img src="espaniol.png">

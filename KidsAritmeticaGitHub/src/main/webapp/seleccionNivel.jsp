@@ -73,20 +73,22 @@
 	  nivelAnterior = idNivel;
   }
 	
-  
+  function openDoc(){
+	  window.open("./doc/SeeLevels.docx")
+  }
   
   
   </script>
 </head>
 
   <body onload="seleccionarNivel('1')">
-		<div style="height:350px;position:relative;top:50px;left:20px">
+		<div style="height:300px;position:relative;left:20px">
 			<div style="float:left">
 				<div>
 					<img src="selectYourLevel.png">
 				</div>
 				<div style="position:relative;left:7px">
-						<a style="text-decoration: underline;font-family:Berlin Sans FB Demi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</a>
+						<a href="./doc/SeeLevels.docx" target="_self" style="text-decoration: underline;font-family:Berlin Sans FB Demi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</a>
 				 </div>
 			</div>
 			
