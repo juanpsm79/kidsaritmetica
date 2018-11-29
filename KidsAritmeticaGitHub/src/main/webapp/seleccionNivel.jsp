@@ -3,6 +3,12 @@
   <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PlayAddition</title>
+  <style type="text/css">
+  	@font-face{
+	 	font-family:'BerlinDemi';
+ 		src: url('BerlinDemi.ttf');
+	}
+  </style>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/jquery.flip.min.js"></script>
   <script>
@@ -88,7 +94,7 @@
 					<img src="selectYourLevel.png">
 				</div>
 				<div style="position:relative;left:7px">
-						<a href="./doc/SeeLevels.docx" target="_self" style="text-decoration: underline;font-family:Berlin Sans FB Demi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</a>
+						<a onclick="openDoc()" style="text-decoration: underline;font-family:BerlinDemi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</a>
 				 </div>
 			</div>
 			
