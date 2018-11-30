@@ -80,7 +80,7 @@
   }
 	
   function openDoc(){
-	  window.open("./doc/SeeLevels.docx")
+	  window.open("./doc/SeeLevels.pdf")
   }
   
   

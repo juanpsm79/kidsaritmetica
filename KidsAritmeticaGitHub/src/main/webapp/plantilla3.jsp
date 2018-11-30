@@ -11,6 +11,10 @@ nivel =  (String) session.getAttribute("nivel");
   <title>PlayAddition</title>
   <style>
    @font-face{
+	 	font-family:'BerlinDemi';
+ 		src: url('BerlinDemi.ttf');
+	}
+   @font-face{
 	 	font-family:'digital7';
  		src: url('digital7.ttf');
 	}
@@ -295,7 +299,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
-					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:Berlin Sans FB Demi;font-size:70px;text-align: center">
+					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
 							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
 					</div>
 					
