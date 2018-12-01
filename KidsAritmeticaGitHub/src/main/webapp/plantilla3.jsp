@@ -1,9 +1,8 @@
+<%@page import="playaddition.model.Suma"%>
+<%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
-if ( nivel == null)
-	session.setAttribute("nivel", "1");
-nivel =  (String) session.getAttribute("nivel");
-   
+List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");   
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -46,31 +45,76 @@ nivel =  (String) session.getAttribute("nivel");
   $( function() {
   	
   } );
-	
+
+  var sumas = [];
+  var indexSuma = 0;
+ <%Iterator<Suma> iter = sumas.iterator();
+   int i = 0;
+   while(iter.hasNext()){
+ 	  Suma suma = iter.next();%>
+ 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
+  <%i++;}%>
+  
 	function subirNivel() {
+		nivel++;
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  	location.href = "inicioPlayAddition.jsp"
+				  if(nivel<=13)
+						location.href = "plantilla1.jsp";
+					else if(nivel<=22)
+						location.href = "plantilla2.jsp";
+					else
+						location.href = "plantilla3.jsp";
 				  }
 			});
   	}
 
 	function calcularSuma() {
-		var centenas1 = Math.floor(Math.random() * 10);
+		/*var centenas1 = Math.floor(Math.random() * 10);
 		if (centenas1==0)
 			centenas1++
 		var centenas2 = Math.floor(Math.random() * 10);
 		if (centenas2==0)
-			centenas2++
-		 document.getElementById('centenasCifra1').innerHTML = ""+centenas1;
-		 document.getElementById('centenasCifra2').innerHTML = ""+centenas2;
-		 document.getElementById('decenasCifra1').innerHTML = ""+Math.floor(Math.random() * 10);
-		 document.getElementById('decenasCifra2').innerHTML = ""+Math.floor(Math.random() * 10);
-		 document.getElementById('unidadesCifra1').innerHTML = ""+Math.floor(Math.random() * 10);
-		 document.getElementById('unidadesCifra2').innerHTML = ""+Math.floor(Math.random() * 10);
+			centenas2++*/
+			
+			
+		 if (parseInt(sumas[indexSuma].operador1, 10)<10){
+			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
+			 document.getElementById('decenasCifra1').innerHTML = "";
+			 document.getElementById('centenasCifra1').innerHTML = "";
+			 document.getElementById("unidadesCifra1").style.left = "146px";
+		 }else if(parseInt(sumas[indexSuma].operador1, 10)<100){
+			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
+			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
+			 document.getElementById('centenasCifra1').innerHTML = "";
+			 document.getElementById("unidadesCifra1").style.left = "116px";
+			 document.getElementById("decenasCifra1").style.left = "43px";
+		 } else {
+			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(2);
+			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
+			 document.getElementById('centenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
+		 }
+		 
+		 if (parseInt(sumas[indexSuma].operador2, 10)<10){
+			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
+			 document.getElementById('decenasCifra2').innerHTML = "";
+			 document.getElementById('centenasCifra2').innerHTML = "";
+			 document.getElementById("unidadesCifra2").style.left = "165px";
+		 }else if(parseInt(sumas[indexSuma].operador2, 10)<100){
+			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(1);
+			 document.getElementById('decenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(0);
+			 document.getElementById('centenasCifra2').innerHTML = "";
+			 document.getElementById("unidadesCifra2").style.left = "80px";
+			 document.getElementById("decenasCifra2").style.left = "80px";
+		 } else {
+			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(2);
+			 document.getElementById('decenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(1);
+			 document.getElementById('centenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(0);
+		 }
+		
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
 		 document.getElementById('sumaCentenasCifra').innerHTML ="";
@@ -79,6 +123,8 @@ nivel =  (String) session.getAttribute("nivel");
 	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 		 document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
+	     indexSuma++;
+	     
 	}
 	
 	function asyncCall() {
@@ -87,7 +133,7 @@ nivel =  (String) session.getAttribute("nivel");
 	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma()\"/>";
 	  		bloquearInteracciones = false;
 		}else {
-	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png'/>";
+	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png' onclick=\"javascript:subirNivel()\"/>";
 	  		nivelIniciado = false;
 		}
 	}
@@ -116,9 +162,16 @@ nivel =  (String) session.getAttribute("nivel");
 					  10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
 				  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
 			  
-			  
-			  var operador2 = (100*parseInt(document.getElementById('centenasCifra2').innerHTML, 10)+
-					  10*parseInt(document.getElementById('decenasCifra2').innerHTML, 10) +
+			  var decenas = document.getElementById('decenasCifra2').innerHTML;
+			  if(document.getElementById('decenasCifra2').innerHTML=='' ||
+					  document.getElementById('decenasCifra2').innerHTML==null)
+				  decenas="0";
+			  var centenas = document.getElementById('centenasCifra2').innerHTML;
+			  if(document.getElementById('centenasCifra2').innerHTML=='' ||
+					  document.getElementById('centenasCifra2').innerHTML==null)
+				  centenas="0";
+			  var operador2 = (100*parseInt(centenas, 10)+
+					  10*parseInt(decenas, 10) +
 				  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
 			  
 			  if (sumaAlumno == operador1+operador2){
@@ -300,7 +353,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
+							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel"><%=nivel%></label>
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">

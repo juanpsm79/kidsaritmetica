@@ -64,7 +64,26 @@
   }
   
   function irPrincipal(){
-		 location.href = "inicioPlayAddition.jsp"
+	  $.ajax({
+		  url: "/hello",
+		  method: "post",
+		  data:{nivel: ''+nivelAnterior},
+		 // dataType: "json",
+		  success : function(responseText) {
+		  /*var innerhtml =""+responseText.leyenda+ "<br>";
+		  for(var i=0 ; i<responseText.sumas.length; i++){
+		  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p></div>";
+			}	
+			document.getElementById("targetElement").innerHTML = ""+innerhtml;*/
+			if(nivelAnterior<=13)
+				location.href = "plantilla1.jsp";
+			else if(nivelAnterior<=22)
+				location.href = "plantilla2.jsp";
+			else
+				location.href = "plantilla3.jsp";
+		  }
+		});
+		 
 }
   
   function seleccionarNivel(idNivel){
@@ -190,7 +209,7 @@
 				</div>
 				
 				
-				<div id="6" onclick="seleccionarNivel('6')" onmouseover="flip('6')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="6" onclick="seleccionarNivel('6')"  style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -207,7 +226,7 @@
 				</div>
 				
 				
-				<div id="7" onclick="seleccionarNivel('7')" onmouseover="flip('7')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="7" onclick="seleccionarNivel('7')"  style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -224,7 +243,7 @@
 				</div>
 
 				
-				<div id="8" onclick="seleccionarNivel('8')" onmouseover="flip('8')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="8" onclick="seleccionarNivel('8')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -240,7 +259,7 @@
   					</div>	
 				</div>
 				
-				<div id="9" onclick="seleccionarNivel('9')" onmouseover="flip('9')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="9" onclick="seleccionarNivel('9')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 2px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -257,7 +276,7 @@
 
 				</div>
 				
-				<div id="10" onclick="seleccionarNivel('10')" onmouseover="flip('10')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 4px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="10" onclick="seleccionarNivel('10')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 4px 4px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -280,7 +299,7 @@
  			
  			
  			<div style="width:1140px;height:95px">
-	  			<div id="11" onclick="seleccionarNivel('11')" onmouseover="flip('11')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
+	  			<div id="11" onclick="seleccionarNivel('11')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
 							<label onclick="seleccionarNivel('11')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
@@ -295,7 +314,7 @@
   					</div>	
 				</div>
 				
-				<div id="12" onclick="seleccionarNivel('12')" onmouseover="flip('12')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="12" onclick="seleccionarNivel('12')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -312,7 +331,7 @@
 				</div>
 
 				
-				<div id="13" onclick="seleccionarNivel('13')" onmouseover="flip('13')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="13" onclick="seleccionarNivel('13')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -328,7 +347,7 @@
   					</div>	
 				</div>
 				
-				<div id="14" onclick="seleccionarNivel('14')" onmouseover="flip('14')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="14" onclick="seleccionarNivel('14')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -344,7 +363,7 @@
   					</div>	
 				</div>
 				
-				<div id="15" onclick="seleccionarNivel('15')" onmouseover="flip('15')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="15" onclick="seleccionarNivel('15')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -360,7 +379,7 @@
   					</div>	
 				</div>
 				
-				<div id="16" onclick="seleccionarNivel('16')" onmouseover="flip('16')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="16" onclick="seleccionarNivel('16')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -377,7 +396,7 @@
 				</div>
 
 				
-				<div id="17" onclick="seleccionarNivel('17')" onmouseover="flip('17')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="17" onclick="seleccionarNivel('17')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -393,7 +412,7 @@
   					</div>	
 				</div>
 				
-				<div id="18" onclick="seleccionarNivel('18')" onmouseover="flip('18')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="18" onclick="seleccionarNivel('18')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -409,7 +428,7 @@
   					</div>	
 				</div>
 				
-				<div id="19" onclick="seleccionarNivel('19')" onmouseover="flip('19')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="19" onclick="seleccionarNivel('19')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -426,7 +445,7 @@
 
 				</div>
 				
-				<div id="20" onclick="seleccionarNivel('20')" onmouseover="flip('20')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="20" onclick="seleccionarNivel('20')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -446,7 +465,7 @@
  			
  			
   			<div style="width:1140px;height:95px">
-	  			<div id="21" onclick="seleccionarNivel('21')" onmouseover="flip('21')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
+	  			<div id="21" onclick="seleccionarNivel('21')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
 							<label onclick="seleccionarNivel('21')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
@@ -461,7 +480,7 @@
   					</div>	
 				</div>
 				
-				<div id="22" onclick="seleccionarNivel('22')" onmouseover="flip('22')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="22" onclick="seleccionarNivel('22')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -478,7 +497,7 @@
 
 				</div>
 				
-				<div id="23" onclick="seleccionarNivel('23')" onmouseover="flip('23')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="23" onclick="seleccionarNivel('23')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -494,7 +513,7 @@
   					</div>	
 				</div>
 				
-				<div id="24" onclick="seleccionarNivel('24')" onmouseover="flip('24')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="24" onclick="seleccionarNivel('24')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -511,7 +530,7 @@
 				</div>
 
 				
-				<div id="25" onclick="seleccionarNivel('25')" onmouseover="flip('25')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="25" onclick="seleccionarNivel('25')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -527,7 +546,7 @@
   					</div>	
 				</div>
 				
-				<div id="26" onclick="seleccionarNivel('26')" onmouseover="flip('26')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="26" onclick="seleccionarNivel('26')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -543,7 +562,7 @@
   					</div>	
 				</div>
 				
-				<div id="27" onclick="seleccionarNivel('27')" onmouseover="flip('27')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="27" onclick="seleccionarNivel('27')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -559,7 +578,7 @@
   					</div>	
 				</div>
 				
-				<div id="28" onclick="seleccionarNivel('28')" onmouseover="flip('28')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="28" onclick="seleccionarNivel('28')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -576,7 +595,7 @@
 				</div>
 
 				
-				<div id="29" onclick="seleccionarNivel('29')" onmouseover="flip('29')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
+				<div id="29" onclick="seleccionarNivel('29')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: 2px solid;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -592,7 +611,7 @@
   					</div>	
 				</div>
 				
-				<div id="30" onclick="seleccionarNivel('30')" onmouseover="flip('30')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 2px 2px;border-color:rgb(32, 56, 100);
+				<div id="30" onclick="seleccionarNivel('30')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 2px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -611,7 +630,7 @@
  			
  			
  			<div style="width:1140px;height:95px">
-	  			<div id="31" onclick="seleccionarNivel('31')" onmouseover="flip('31')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 4px;border-color:rgb(32, 56, 100)">
+	  			<div id="31" onclick="seleccionarNivel('31')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
 							<label onclick="seleccionarNivel('31')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:18px;font-weight:bold">LEVEL</label>
@@ -627,7 +646,7 @@
 				</div>
 
 				
-				<div id="32" onclick="seleccionarNivel('32')" onmouseover="flip('32')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="32" onclick="seleccionarNivel('32')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -644,7 +663,7 @@
 				</div>
 
 				
-				<div id="33" onclick="seleccionarNivel('33')" onmouseover="flip('33')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="33" onclick="seleccionarNivel('33')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -660,7 +679,7 @@
   					</div>	
 				</div>
 				
-				<div id="34" onclick="seleccionarNivel('34')" onmouseover="flip('34')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="34" onclick="seleccionarNivel('34')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -677,7 +696,7 @@
 				</div>
 
 				
-				<div id="35" onclick="seleccionarNivel('35')" onmouseover="flip('35')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="35" onclick="seleccionarNivel('35')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -692,7 +711,7 @@
   					</div>	
 				</div>
 				
-				<div id="36" onclick="seleccionarNivel('36')" onmouseover="flip('36')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="36" onclick="seleccionarNivel('36')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -708,7 +727,7 @@
   					</div>
   				</div>
 				
-				<div id="37" onclick="seleccionarNivel('37')" onmouseover="flip('37')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="37" onclick="seleccionarNivel('37')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -724,7 +743,7 @@
   					</div>	
 				</div>
 				
-				<div id="38" onclick="seleccionarNivel('38')" onmouseover="flip('38')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="38" onclick="seleccionarNivel('38')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -740,7 +759,7 @@
   					</div>	
 				</div>
 				
-				<div id="39" onclick="seleccionarNivel('39')" onmouseover="flip('39')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="39" onclick="seleccionarNivel('39')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
@@ -756,7 +775,7 @@
   					</div>	
 				</div>
 				
-				<div id="40" onclick="seleccionarNivel('40')" onmouseover="flip('40')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 4px 2px;border-color:rgb(32, 56, 100);
+				<div id="40" onclick="seleccionarNivel('40')" style="cursor:pointer;width:100px;height:95px;float:left;text-align: center;border: solid;border-width: 2px 4px 4px 2px;border-color:rgb(32, 56, 100);
 				">
 				<div class="front" style="width:100px;height:95px;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">

@@ -1,9 +1,8 @@
+<%@page import="playaddition.model.Suma"%>
+<%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
-if ( nivel == null)
-	session.setAttribute("nivel", "1");
-nivel =  (String) session.getAttribute("nivel");
-   
+List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");   
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -46,31 +45,44 @@ nivel =  (String) session.getAttribute("nivel");
   $( function() {
 	  	
   } );
+ var sumas = [];
+ var indexSuma = 0;
+<%Iterator<Suma> iter = sumas.iterator();
+  int i = 0;
+  while(iter.hasNext()){
+	  Suma suma = iter.next();%>
+	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
+ <%i++;}%>
 	
 	function subirNivel() {
+		nivel++;
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  	location.href = "inicioPlayAddition.jsp"
+				  if(nivel<=13)
+						location.href = "plantilla1.jsp";
+					else if(nivel<=22)
+						location.href = "plantilla2.jsp";
+					else
+						location.href = "plantilla3.jsp";
 				  }
 			});
   	}
 
 	function calcularSuma() {
-		var unidades1 = Math.floor(Math.random() * 10);
+		/*var unidades1 = Math.floor(Math.random() * 10);
 		if (unidades1==0)
 			unidades1++
 		var unidades2 = Math.floor(Math.random() * 10);
 		if (unidades2==0)
-			unidades2++
-		 
-		 document.getElementById('unidadesCifra1').innerHTML = ""+unidades1;
-		 document.getElementById('unidadesCifra2').innerHTML = ""+unidades2;
+			unidades2++*/
+		 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;//unidades1;
+		 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
-		
+		 indexSuma++
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -80,7 +92,7 @@ nivel =  (String) session.getAttribute("nivel");
 	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma()\"/>";
 	  		bloquearInteracciones = false;
 		}else {
-	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png'/>";
+	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png' onclick=\"javascript:subirNivel()\"/>";
 	  		nivelIniciado = false;
 		}
 	}
@@ -272,7 +284,7 @@ nivel =  (String) session.getAttribute("nivel");
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
 					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel">1</label>
+							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel"><%=nivel%></label>
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">
