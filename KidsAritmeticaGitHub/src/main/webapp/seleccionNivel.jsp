@@ -796,11 +796,9 @@
  			
  		</div>
  		<div style="float:left;height:750px">
- 			<div style="position:relative;float:left;bottom:300px">
-				<img src="aspaCerrarSelectYourLevel.png" style="cursor:pointer" onclick="irPresentacion()">
+ 			<div onclick="irPresentacion()" style="width:124px;height:103px;position:relative;float:left;bottom:300px;background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;cursor:pointer">
 			</div>
-	  			<div style="position:relative;top:130px;width:200px;height:167px;right:70px">
-	  				<img src="playSelectAllLevel.png" style="cursor:pointer" onclick="irPrincipal()">
+	  			<div onclick="irPrincipal()" style="position:relative;top:230px;width:200px;height:167px;right:70px;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat;cursor:pointer">
 	  			</div>
  			</div>
   </body>
