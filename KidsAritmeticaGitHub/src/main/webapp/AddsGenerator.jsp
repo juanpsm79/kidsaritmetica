@@ -38,7 +38,7 @@
 			  success : function(responseText) {
 			  var innerhtml =""+responseText.leyenda+ "<br>";
 			  for(var i=0 ; i<responseText.sumas.length; i++){
-			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p><p>____</p><p>____</p></div>";
+			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p style='text-align:right'>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"<br>____<br>"+responseText.sumas[i].resultado+"</p></div>";
 			  }	
 			  document.getElementById("targetElement").innerHTML = ""+innerhtml;
 			  }
@@ -75,7 +75,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel5" value="5"/>
-				      <label for="nivel5">Level 5 (Level 4)</label>
+				      <label for="nivel5">Level 5 (Levels 1-4)</label>
 				      
 				      <input type="radio" name="nivel" id="nivel6" value="6"/>
 				      <label for="nivel6">Level 6 (0,5)</label>
@@ -218,15 +218,9 @@
 				    	<div id = "leyenda"></div>
 					    <div id = "operador1"></div>
 					    <div id = "operador2"></div>
-					    <div>____</div>
-					    <div id = "resultadoSuma"></div>
 				    </div>
 				    
 				  </fieldset>
 		</div>
-		
-		
-
-   
   </body>
 </html>

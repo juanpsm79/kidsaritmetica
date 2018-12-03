@@ -45,14 +45,19 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   $( function() {
 	  	
   } );
- var sumas = [];
- var indexSuma = 0;
-<%Iterator<Suma> iter = sumas.iterator();
-  int i = 0;
-  while(iter.hasNext()){
-	  Suma suma = iter.next();%>
-	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
- <%i++;}%>
+  var sumas = [];
+  var indexSuma = 0;
+ <%
+   int sumasNecesarias = 10;
+   if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
+		  nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("25") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
+	  			sumasNecesarias = 15;
+   Iterator<Suma> iter = sumas.iterator();
+   int i = 0;
+   while(iter.hasNext()){
+ 	  Suma suma = iter.next();%>
+ 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
+  <%i++;}%>
 	
 	function subirNivel() {
 		nivel++;
@@ -81,7 +86,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 	}
 	
 	function asyncCall() {
-		if(sumasActuales<10) {
+		if(sumasActuales<<%=sumasNecesarias%>) {
 	  		calcularSuma();
 	  		document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 	  		bloquearInteracciones = false;
@@ -116,7 +121,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			  if (sumaAlumno == operador1+operador2){
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(correctBoton.png)";
 				  sumasActuales++;
-				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/10";
+				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/<%=sumasNecesarias%>";
 				  setTimeout(asyncCall, 600);
 			  } else {
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
@@ -127,7 +132,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			  			document.getElementById('capaBotonCheckSuma').onclick=function(){comprobarSuma()}
 			  	  };
 				  sumasActuales = 0;
-				  document.getElementById('indicadorSumas').innerHTML = "0/10";
+				  document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 			  }
 			  
 		  } else
@@ -285,7 +290,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>
 					
 					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">
-							<label id ="indicadorSumas">0/10</label>
+							<label id ="indicadorSumas">0/<%=sumasNecesarias%></label>
 					</div>
 					<div style="width:261px;position:relative;top:15px;color:black;font-family:Times New Roman;font-size:70px;text-align:center">
 							<label id ="minutero" style="font-family:digital7mono">00:00</label>
