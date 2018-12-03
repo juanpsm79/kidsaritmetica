@@ -651,6 +651,8 @@ public class GeneradorSumas {
 		//+1
 		int decenas1 = random.nextInt(10);
 		int decenas2 = random.ints(1, 10-decenas1-1, 10).sum();
+		if(decenas2==0)
+			decenas2=1;
 		
 		int centenas1 = random.ints(1, 1, 9).sum();
 		

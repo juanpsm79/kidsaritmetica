@@ -73,12 +73,6 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	}
 
 	function calcularSuma() {
-		/*var decenas1 = Math.floor(Math.random() * 10);
-		if (decenas1==0)
-			decenas1++
-		var decenas2 = Math.floor(Math.random() * 10);
-		if (decenas2==0)
-			decenas2++*/
 		 if(sumas[indexSuma].operador1<10){
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
 			 document.getElementById('decenasCifra1').innerHTML = "";
@@ -111,21 +105,21 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 	function asyncCall() {
 		if(sumasActuales<10) {
 	  		calcularSuma();
-	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='checkBoton.png' onclick=\"javascript:comprobarSuma()\"/>";
+	  		document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 	  		bloquearInteracciones = false;
 		}else {
-	  		document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='levelUpBoton.png' onclick=\"javascript:subirNivel()\"/>";
+			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
+	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
 		}
 	}
 
   
   
   function comprobarSuma(){
-	  if( 
-	      (document.getElementById('sumaCentenasCifra').innerHTML=='' || document.getElementById('sumaCentenasCifra').innerHTML==null) &&	
-	      (document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null) &&
-	      (document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null) ) {
+	  if( 	
+	      document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null ||
+	      document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null ) {
 		  	return;
 	  } else {
 		  if (!bloquearInteracciones) {
@@ -149,15 +143,22 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
 			  
 			  if (sumaAlumno == operador1+operador2){
-				  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='correctBoton.png'/>";
+				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(correctBoton.png)";
 				  sumasActuales++;
 				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/10";
+				  setTimeout(asyncCall, 600);
 			  } else {
-				  document.getElementById('capaBotonCheckSuma').innerHTML ="<img src='startOverBoton.png'/>";
+				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
+				  document.getElementById('capaBotonCheckSuma').onclick = function(){
+					  	calcularSuma();
+			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
+			  			bloquearInteracciones = false;
+			  			document.getElementById('capaBotonCheckSuma').onclick=function(){comprobarSuma()}
+			  	  };
 				  sumasActuales = 0;
 				  document.getElementById('indicadorSumas').innerHTML = "0/10";
 			  }
-			  setTimeout(asyncCall, 600)
+			  
 		  } else
 			  return;
   		}
@@ -389,8 +390,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>
 				
 				</div>
-				<div style="width:15%;height:100%;float:left;position:relative;right:220px">
-					<a href="inicioPlayAddition.jsp"><img src="cerrarAspa.png"/></a>
+				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:220px">
 				</div>
 				
 		   </div>
@@ -430,8 +430,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 									 font-size: 145px;visibility:hidden">9</a>
 					</div>
 					
-					<div style="float:left;width:25%;height:100%;position:relative;bottom:25px;right:110px">
-						<a id="capaBotonCheckSuma"><img src="checkBoton.png" onclick="javascript:comprobarSuma();setTimeout(asyncCall, 600)"/></a>
+					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:25px;right:110px;background-image:url(checkBoton.png);background-repeat:no-repeat">
 					</div>
 			</div>
 	</div>

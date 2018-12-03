@@ -38,10 +38,9 @@
 			  success : function(responseText) {
 			  var innerhtml =""+responseText.leyenda+ "<br>";
 			  for(var i=0 ; i<responseText.sumas.length; i++){
-			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p></div>";
-				}	
-				document.getElementById("targetElement").innerHTML = ""+innerhtml;
-				
+			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p><p>____</p><p>____</p></div>";
+			  }	
+			  document.getElementById("targetElement").innerHTML = ""+innerhtml;
 			  }
 			});
   	}
@@ -219,6 +218,8 @@
 				    	<div id = "leyenda"></div>
 					    <div id = "operador1"></div>
 					    <div id = "operador2"></div>
+					    <div>____</div>
+					    <div id = "resultadoSuma"></div>
 				    </div>
 				    
 				  </fieldset>
