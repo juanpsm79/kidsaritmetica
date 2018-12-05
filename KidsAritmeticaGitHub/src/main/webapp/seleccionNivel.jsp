@@ -70,17 +70,7 @@
 		  data:{nivel: ''+nivelAnterior},
 		 // dataType: "json",
 		  success : function(responseText) {
-		  /*var innerhtml =""+responseText.leyenda+ "<br>";
-		  for(var i=0 ; i<responseText.sumas.length; i++){
-		  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"</p></div>";
-			}	
-			document.getElementById("targetElement").innerHTML = ""+innerhtml;*/
-			if(nivelAnterior<=13)
-				location.href = "plantilla1.jsp";
-			else if(nivelAnterior<=22)
-				location.href = "plantilla2.jsp";
-			else
-				location.href = "plantilla3.jsp";
+				location.href = "descripcionNivel.jsp";
 		  }
 		});
 		 

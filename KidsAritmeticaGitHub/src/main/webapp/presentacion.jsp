@@ -61,7 +61,7 @@
 	  				<img src="loginBoton.png">
 	  			</div>
  			</div>
- 			<div style="float:right;cursor:pointer;position:relative;top:360px;right:80px">
+ 			<div style="float:right;cursor:pointer;position:relative;top:380px;right:80px">
 	  			<img src="playBoton.png" onclick="javascript:irPrincipal()" style="cursor:pointer">
  			</div>
  		</div>

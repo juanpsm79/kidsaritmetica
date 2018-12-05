@@ -50,7 +50,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   var indexSuma = 0;
  <%
    int sumasNecesarias = 10;
-   if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
+   if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
 		  nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("25") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
 	  			sumasNecesarias = 15;
    Iterator<Suma> iter = sumas.iterator();
