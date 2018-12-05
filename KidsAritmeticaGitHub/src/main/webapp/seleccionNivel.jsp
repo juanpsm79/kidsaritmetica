@@ -89,7 +89,7 @@
   }
 	
   function openDoc(){
-	  window.open("./doc/SeeLevels.pdf")
+	  window.open("./selectAllLevels.jsp")
   }
   
   
