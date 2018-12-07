@@ -26,11 +26,20 @@
 			<div style="position:relative;top:356px;left:495px">
 				<a onclick="selectNivel(1)" style="cursor:pointer;position:relative;top:100px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 1</a>
 				<a onclick="selectNivel(2)" style="cursor:pointer;position:relative;top:163px;right:195px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 2</a>
-				<a onclick="selectNivel(3)" style="cursor:pointer;position:relative;top:224px;right:380px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 3</a>
-				<a onclick="selectNivel(4)" style="cursor:pointer;position:relative;top:286px;right:565px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 4</a>
+				<a onclick="selectNivel(3)" style="cursor:pointer;position:relative;top:223px;right:380px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 3</a>
+				<a onclick="selectNivel(4)" style="cursor:pointer;position:relative;top:284px;right:565px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 4</a>
 			</div>
  		</div>
-		<div style="position:relative;top:53px;left:100px;width:1196px;height:692px;background-image:url(sal2.png);background-repeat:no-repeat">
+		<div style="position:relative;top:40px;left:100px;width:1196px;height:692px;background-image:url(sal2.png);background-repeat:no-repeat">
+			<div style="position:relative;left:545px">
+				<a onclick="selectNivel(5)" style="cursor:pointer;position:relative;bottom:10px;left:90px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 5</a>
+				<a onclick="selectNivel(6)" style="cursor:pointer;position:relative;top:51px;right:150px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 6</a>
+				<a onclick="selectNivel(7)" style="cursor:pointer;position:relative;top:112px;right:335px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 7</a>
+				<a onclick="selectNivel(8)" style="cursor:pointer;position:relative;top:175px;right:525px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 8</a>
+				<a onclick="selectNivel(9)" style="cursor:pointer;position:relative;top:236px;right:715px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 9</a>
+				<div style="z-index:10"><a onclick="selectNivel(10)" style="cursor:pointer;position:relative;top:253px;left:210px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 10</a></div>
+				<a onclick="selectNivel(11)" style="cursor:pointer;position:relative;top:270px;left:125px;font-family:Calibri;font-size:36px;color:red">GO TO LEVEL 11</a>
+			</div>
 		</div>
 		<div style="position:relative;top:70px;left:100px;width:1201px;height:477px;background-image:url(sal3.png);background-repeat:no-repeat">
 		</div>
