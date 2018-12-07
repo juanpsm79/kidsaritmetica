@@ -87,9 +87,17 @@
 	  //$("#"+idNivel).off(".flip");
 	  nivelAnterior = idNivel;
   }
+  
+  var docLevelsWindow;
 	
   function openDoc(){
-	  window.open("./selectAllLevels.jsp")
+	  docLevelsWindow = window.open("./selectAllLevels.jsp")
+  }
+  
+  function callback(nivel){
+	  nivelAnterior = nivel;
+	  docLevelsWindow.close();
+	  irPrincipal();
   }
   
   
