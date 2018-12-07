@@ -280,7 +280,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 </head>
 
   <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()">
-	<div id="contenedor" class="unselectable" style="width:1560px;height:765px">
+	<div id="contenedor" class="unselectable" style="width:1560px;height:750px">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
 			<div style="width:100%;height:73%">
@@ -333,7 +333,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>
 				
 				</div>
-				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:220px">
+				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:245px">
 				</div>
 				
 		   </div>
@@ -347,33 +347,33 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:50px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">1</a>
-						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:82px;bottom:5px;color:black;
+						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:81px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">2</a>
-						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:114px;bottom:5px;color:black;
+						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:111px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">3</a>
-						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:146px;bottom:5px;color:black;
+						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:141px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">4</a>
-						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:178px;bottom:5px;color:black;
+						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:167px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">5</a>
-						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:210px;bottom:5px;color:black;
+						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:201px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">6</a>
-						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:242px;bottom:5px;color:black;
+						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:230px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">7</a>
-						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:274px;bottom:5px;color:black;
+						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:261px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">8</a>
-						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:306px;bottom:5px;color:black;
+						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:291px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">9</a>
 					</div>
 					
-					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:25px;right:110px;background-image:url(checkBoton.png);background-repeat:no-repeat">
+					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:30px;right:120px;background-image:url(checkBoton.png);background-repeat:no-repeat">
 					</div>
 			</div>
 	</div>

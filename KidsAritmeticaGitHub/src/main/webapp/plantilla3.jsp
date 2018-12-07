@@ -348,12 +348,12 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 </head>
 
   <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()">
-	<div id="contenedor" class="unselectable" style="width:1560px;height:765px">
+	<div id="contenedor" class="unselectable" style="width:1560px;height:755px">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
 			<div style="width:100%;height:73%">
 				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
-					<div style="width:261px;position:relative;bottom:7px;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
+					<div style="width:261px;position:relative;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
 							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel"><%=nivel%></label>
 					</div>
 					
@@ -366,19 +366,19 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				</div>	
 				
 				<div style="width:62%;height:100%;float:left;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
-						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:49px;position:relative;top:23px;left:303px;float:left">
+						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:49px;position:relative;top:23px;left:293px;float:left">
 							<a id="llevadaCentenas" style="width:32px;height:50px">
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>
 							</a>
 						</div>
-						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:50px;position:relative;top:23px;left:395px;float:left">
+						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:50px;position:relative;top:23px;left:385px;float:left">
 							<a id="llevadaDecenas" style="width:32px;height:50px">
 								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
 							</a>
 						</div>
 						
 						<!--PRIMER OPERADOR  -->
-					<div style="width:100%;height:160px;float:left;position:relative;left:280px">	
+					<div style="width:100%;height:160px;float:left;position:relative;left:270px">	
 						<div style="position:relative;float:left"> 
 								<label id="centenasCifra1" style="position:relative;font-family:Calibri;
 										font-size:160px;font-weight:bold;font-color:black">1</label>
@@ -394,7 +394,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>	
 						
 					<!--SEGUNDO OPERADOR  -->
-					<div style="width:100%;height:160px;position:relative;top:8px;left:280px;float:left">	 
+					<div style="width:100%;height:160px;position:relative;left:270px;float:left">	 
 						<div style="position:relative;float:left">
 							<label id="centenasCifra2" style="position:relative;font-family:Calibri;
 									font-size:160px;font-weight:bold;font-color:black">1</label>
@@ -410,7 +410,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>
 					
 					<!--RESULTADO SUMA -->
-					<div style="float:left;width:100%;height:160px;position:relative;top:25px;left:125px">
+					<div style="float:left;width:100%;height:160px;position:relative;top:15px;left:115px">
 						<div style="float:left">
 							<a id="sumaMillares" 
 								style="width:96px;height:118px;position:relative;float:left;border:5px solid black" 
@@ -445,7 +445,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				</div>
 					
 				
-				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:220px">
+				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:245px">
 				</div>
 				
 		   </div>
@@ -459,33 +459,33 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:50px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">1</a>
-						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:82px;bottom:5px;color:black;
+						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:81px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">2</a>
-						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:114px;bottom:5px;color:black;
+						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:111px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">3</a>
-						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:146px;bottom:5px;color:black;
+						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:141px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">4</a>
-						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:178px;bottom:5px;color:black;
+						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:167px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">5</a>
-						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:210px;bottom:5px;color:black;
+						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:201px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">6</a>
-						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:242px;bottom:5px;color:black;
+						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:230px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">7</a>
-						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:274px;bottom:5px;color:black;
+						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:261px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">8</a>
-						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:306px;bottom:5px;color:black;
+						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:291px;bottom:5px;color:black;
 									 font-family:Calibri;
 									 font-size: 145px;visibility:hidden">9</a>
 					</div>
 					
-					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:25px;right:110px;background-image:url(checkBoton.png);background-repeat:no-repeat">
+					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:30px;right:120px;background-image:url(checkBoton.png);background-repeat:no-repeat">
 					</div>
 			</div>
 	</div>
