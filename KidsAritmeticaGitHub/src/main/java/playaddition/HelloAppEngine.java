@@ -29,7 +29,7 @@ import playaddition.service.GeneradorSumas;
 public class HelloAppEngine extends HttpServlet {
 
 	private static final int MAX_COLISIONES = 200;
-	private static final int NUMSUMAS = 30;
+	private static final int NUMSUMAS = 50;
 	private Integer colisiones = 0;
 
 	@Override
@@ -64,8 +64,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel==13) {
 			int contador10 = 0;
@@ -103,8 +103,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 10 :" + contador10 + ", Level 11 :" + contador11 + ", Level 12 :" + contador12 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 14) {
 			leyenda = "Level 14: two digits/one digit addition without regrouping";
@@ -118,8 +118,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 15) {
 			leyenda = "Level 15: two digits/one digit addition with regrouping in units";
@@ -133,8 +133,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 16) {
 			leyenda = "Level 16: two digits/one digit addition with regrouping in units and tens";
@@ -148,8 +148,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 17) {
 			int contador14 = 0;
@@ -187,8 +187,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 14 :" + contador14 + ", Level 15 :" + contador15 + ", Level 16 :" + contador16 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 18) {
 			leyenda = "Level 18: two digits/two digits without regrouping";
@@ -202,8 +202,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 19) {
 			leyenda = "Level 19: two digits/two digits regrouping in untis";
@@ -217,8 +217,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 20) {
 			leyenda = "Level 20: two digits/two digits regrouping in tens";
@@ -232,8 +232,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 21) {
 			leyenda = "Level 21: two digits/two digits regrouping in units and tens";
@@ -247,8 +247,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 22) {
 			int contador18 = 0;
@@ -295,8 +295,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 18 :" + contador18 + ", Level 19 :" + contador19 + ", Level 20 :" + contador20 + ", Level 21 :" + contador21 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 23) {
 			leyenda = "Level 23: three digits/one digit addition without regrouping";
@@ -325,8 +325,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 25) {
 			int contador23 = 0;
@@ -355,8 +355,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 23 :" + contador23 + ", Level 24 :" + contador24 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 26) {
 			leyenda = "Level 26: three digits/two digits addition without regrouping";
@@ -370,8 +370,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 27) {
 			leyenda = "Level 27: three digits/two digits addition with regrouping in units";
@@ -385,8 +385,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 28) {
 			leyenda = "Level 28: three digits/two digits addition with regrouping in tens";
@@ -400,8 +400,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 29) {
 			leyenda = "Level 29: three digits/two digits addition with regrouping in units and tens";
@@ -415,8 +415,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 30) {
 			leyenda = "Level 30: three digits/two digits addition with regrouping in tens and hundreds";
@@ -430,8 +430,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 31) {
 			leyenda = "Level 31: three digits/two digits addition with regrouping in units tens and hundreds";
@@ -445,8 +445,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 32) {
 			int contador26 = 0;
@@ -511,8 +511,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 26 :" + contador26 + ", Level 27 :" + contador27 + ", Level 28 :" + contador28 + ", Level 29 :" + contador29 + ", Level 30 :" + contador30 + ", Level 31 :" + contador31 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 33) {
 			leyenda = "Level 33: three digits/three digits addition without regrouping";
@@ -526,8 +526,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 34) {
 			leyenda = "Level 34: three digits/three digits addition with regrouping in units";
@@ -541,8 +541,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 35) {
 			leyenda = "Level 35: three digits/three digits addition with regrouping in tens";
@@ -556,8 +556,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 36) {
 			leyenda = "Level 36: three digits/three digits addition with regrouping in units and tens";
@@ -571,8 +571,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 37) {
 			leyenda = "Level 37: three digits/three digits addition with regrouping in units and hundreds";
@@ -586,8 +586,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 38) {
 			leyenda = "Level 38: three digits/three digits addition with regrouping in tens and hundreds";
@@ -601,8 +601,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 39) {
 			leyenda = "Level 39: three digits/three digits addition with regrouping in units tens and hundreds";
@@ -616,8 +616,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 40) {
 			int contador33 = 0;
@@ -691,8 +691,8 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"Level 33 :" + contador33 + ", Level 34 :" + contador34 + ", Level 35 :" + contador35 + ", Level 36 :" + contador36 + ", Level 37 :" + contador37 + ", Level 38 :" + contador38 + ", Level 39 :" + contador39 + "\"}");
-			sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());
+			/*sumasNiveles.get(request.getParameter("nivel"))
+					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 
 		}

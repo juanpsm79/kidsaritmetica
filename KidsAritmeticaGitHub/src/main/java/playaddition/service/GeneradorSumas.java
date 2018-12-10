@@ -20,32 +20,34 @@ public class GeneradorSumas {
 		Integer digitoOp1 = null;
 		Integer digitoOp2 = null;
 		
-		if(nivel<5) {
+		if(nivel<3) {
 			digitoOp1 =  random.nextInt(nivel+1);
 			digitoOp2 = random.nextInt(nivel+1);
-		}else if (nivel==5) {
-			nivel = 4;
-			digitoOp1 =  random.nextInt(nivel+1);
-			digitoOp2 = random.nextInt(nivel+1);
+		}else if(nivel==3) {
+			digitoOp1 =  random.ints(1, 1, 4).sum();
+			digitoOp2 = random.ints(1, 1, 4).sum();
+		}else if (nivel==4 || nivel ==5) {
+			digitoOp1 =  random.ints(1, 2, 5).sum();
+			digitoOp2 = random.ints(1, 2, 5).sum();
 	    }else if (nivel>=6 && nivel<=10) {
-	    	digitoOp1 = random.nextInt(nivel);
 	    	if(nivel==6) {
+	    		digitoOp1 = random.ints(1, 2, 6).sum();
 		    	if(digitoOp1<5)
-		    		digitoOp2 = random.nextInt(nivel);
+		    		digitoOp2 = random.ints(1, 2, 6).sum();
 		    	else
-		    		digitoOp2 = random.ints(1, 0, nivel-digitoOp1).sum();
+		    		digitoOp2 = random.ints(1, 2, 5).sum();
 	    	} else if(nivel==7) {
-	    		digitoOp1 = random.nextInt(nivel);
+	    		digitoOp1 = random.ints(1, 2, 7).sum();
 		    	if(digitoOp1<4)
-		    		digitoOp2 = random.nextInt(nivel);
+		    		digitoOp2 = random.ints(1, 2, 7).sum();
 		    	else
-		    		digitoOp2 = random.ints(1, 0, nivel-digitoOp1).sum();
+		    		digitoOp2 = random.ints(1, 2, 10-digitoOp1).sum();
 	    	} else if(nivel==8) {
-	    		digitoOp1 = random.nextInt(nivel);
+	    		digitoOp1 = random.ints(1, 1, 8).sum();
 		    	if(digitoOp1<3)
-		    		digitoOp2 = random.nextInt(nivel);
+		    		digitoOp2 = random.ints(1, 1, 8).sum();
 		    	else
-		    		digitoOp2 = random.ints(1, 0, nivel-digitoOp1).sum();
+		    		digitoOp2 = random.ints(1, 1, 10-digitoOp1).sum();
 	    	} else if(nivel==9) {
 	    		digitoOp1 = random.nextInt(nivel);
 		    	if(digitoOp1<2)
@@ -102,8 +104,13 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
 		//sin llevada
-		int unidades1 =  random.nextInt(10);
-		int unidades2 = random.nextInt(10-unidades1);
+		int unidades1 =  random.nextInt(8);
+		int unidades2 = 0;
+		
+		if(unidades1<7)
+			unidades2 = random.ints(1, 2, 10-unidades1).sum();
+		else 
+			unidades2 = 2;
 		
 		
 		//sin llevada
@@ -144,10 +151,13 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
-		//regrouping in untis
+		//regrouping in units
 		int unidades1 =  random.ints(1, 1, 10).sum();
-		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
-		
+		int unidades2 = 0;
+		if(unidades1<8)
+			unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		else
+			unidades2 = random.ints(1, 2, 10).sum();
 		
 		//sin llevada
 		int decenas1 =  random.ints(1, 1, 9).sum();
@@ -187,9 +197,13 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
-		//regrouping in untis
+		//regrouping in units
 		int unidades1 =  random.ints(1, 1, 10).sum();
-		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		int unidades2 = 0;
+		if(unidades1<8)
+			unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		else
+			unidades2 = random.ints(1, 2, 10).sum();
 		
 		
 		//sin llevada
@@ -339,7 +353,7 @@ public class GeneradorSumas {
 		suma.setOperando1(operador1);
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
-		if (sumasNivel.contains(suma) || suma.getResultadoSuma()>109){
+		if (sumasNivel.contains(suma) ){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
 				suma = getOperandosNivel20(sumasNivel,colisiones, maxColisiones);
@@ -399,8 +413,14 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
-		int unidades1 = random.nextInt(10);
-		int unidades2 = random.nextInt(10-unidades1);
+		//sin llevada
+		int unidades1 =  random.nextInt(8);
+		int unidades2 = 0;
+		
+		if(unidades1<7)
+			unidades2 = random.ints(1, 2, 10-unidades1).sum();
+		else 
+			unidades2 = 2;
 		
 		int decenas1 =  random.ints(1, 1, 10).sum();
 		
@@ -444,8 +464,12 @@ public class GeneradorSumas {
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 		
 		//regrouping in units
-		int unidades1 = random.ints(1, 1, 10).sum();
-		int unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		int unidades1 =  random.ints(1, 1, 10).sum();
+		int unidades2 = 0;
+		if(unidades1<8)
+			unidades2 = random.ints(1, 10-unidades1, 10).sum();
+		else
+			unidades2 = random.ints(1, 2, 10).sum();
 				
 				
 		//sin llevada
