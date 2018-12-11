@@ -38,7 +38,7 @@
 			  success : function(responseText) {
 			  var innerhtml =""+responseText.leyenda+ "<br>";
 			  for(var i=0 ; i<responseText.sumas.length; i++){
-			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p style='text-align:right'>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"<br>____<br>"+responseText.sumas[i].resultado+"</p></div>";
+			  	innerhtml += "<div style=\"float:left;margin-left:20px\"><p style='text-align:right'>("+responseText.sumas[i].nivel+")<br>" +responseText.sumas[i].operador1+ "<br>"+responseText.sumas[i].operador2+"<br>____<br>"+responseText.sumas[i].resultado+"</p></div>";
 			  }	
 			  document.getElementById("targetElement").innerHTML = ""+innerhtml;
 			  }
