@@ -99,7 +99,7 @@ public class GeneradorSumas {
 				return suma;
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
-				return suma;
+				return null;
 			}
 		} else {
 			return suma;

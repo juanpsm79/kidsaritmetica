@@ -31,7 +31,7 @@ import playaddition.service.GeneradorSumas;
 @WebServlet(name = "HelloAppEngine", urlPatterns = { "/hello" })
 public class HelloAppEngine extends HttpServlet {
 
-	private static final int MAX_COLISIONES = 200;
+	private static final int MAX_COLISIONES = 300;
 	private static final int NUMSUMAS = 50;
 	private Integer colisiones = 0;
 
@@ -61,54 +61,60 @@ public class HelloAppEngine extends HttpServlet {
 			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
 				nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel,
 						colisiones, MAX_COLISIONES);
-				sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-				resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-						+ nuevaSuma.getOperando2() + "\"},");
+				if(nuevaSuma!=null) {
+					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
+					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
+						+ nuevaSuma.getOperando2() + "\",\"nivel\": \""+nuevaSuma.getNivel() +"\"},");
+				} else {
+					List<Suma> sumasNivel = sumasNiveles.get(request.getParameter("nivel"));
+					int sumasGeneradas = sumasNivel.size();
+					int sumasPendientes = 50 - sumasGeneradas;
+					for(int i=0;i<sumasPendientes;i++) {
+						Suma suma = sumasNivel.get((i+sumasGeneradas)%sumasGeneradas);
+						sumasNivel.add(suma);
+						resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+								+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+					}
+					
+				}
+				
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel==13) {
-			int contador10 = 0;
-			int contador11 = 0;
-			int contador12 = 0;
+			//13 ---> 10:(15) y el 12:(35)
+            //            (3),         (7)
+			List<Suma> sumas10 = new ArrayList<Suma>();
+			List<Suma> sumas12 = new ArrayList<Suma>();
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
-				int nivelAleatorio = new Random().ints(1, 10, 12).sum();
-				switch (nivelAleatorio) {
-					case 10:
-						contador10++;
-						nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel,
-								colisiones, MAX_COLISIONES);
-						sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-						resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-								+ nuevaSuma.getOperando2() + "\"},");
-						break;
-					case 11:
-						contador11++;
-						nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel,
-								colisiones, MAX_COLISIONES);
-						sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-						resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-								+ nuevaSuma.getOperando2() + "\"},");
-						break;
-					case 12:
-						contador12++;
-						nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), nivel,
-								colisiones, MAX_COLISIONES);
-						sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-						resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-								+ nuevaSuma.getOperando2() + "\"},");
-						break;
-				}
+			for (int i=0;i<15;i++) {
+				nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), 10,
+						colisiones, MAX_COLISIONES);
+				sumas10.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<35;i++) {
+				nuevaSuma = generador.obtenerSumaNivel(sumasNiveles.get(request.getParameter("nivel")), 12,
+						colisiones, MAX_COLISIONES);
+				sumas12.add(nuevaSuma);
+			}
+				
+			ordenarSumasNivel25(sumas10,sumas12,sumasNiveles.get(request.getParameter("nivel")));
+			List<Suma> sumas = sumasNiveles.get(request.getParameter("nivel"));
+			Iterator<Suma> iter = sumas.iterator();
+			while (iter.hasNext()) {
+				Suma suma = iter.next();
+				if (suma!=null)
+					resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+						+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+				
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
-			resultado.append("], \"leyenda\": \"Level 10 :" + contador10 + ", Level 11 :" + contador11 + ", Level 12 :" + contador12 + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			resultado.append("], \"leyenda\": \"Level 10 : 15, Level 12 : 35\"}");
 			response.getWriter().write(resultado.toString());
+						
+
 		} else if (nivel == 14) {
 			leyenda = "Level 14: two digits/one digit addition without regrouping";
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
@@ -121,8 +127,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 15) {
 			leyenda = "Level 15: two digits/one digit addition with regrouping in units";
@@ -136,8 +140,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 16) {
 			leyenda = "Level 16: two digits/one digit addition with regrouping in units and tens";
@@ -151,47 +153,43 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 17) {
-			int contador14 = 0;
-			int contador15 = 0;
-			int contador16 = 0;
+			//17 ---> 14:(10), 15:(15), 16:(25)
+            //            (2),     (3),     (5)
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
-				int nivelAleatorio = new Random().ints(1, 14, 17).sum();
-				switch (nivelAleatorio) {
-				case 14:
-					contador14++;
-					nuevaSuma = generador.getOperandosNivel14(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 15:
-					contador15++;
-					nuevaSuma = generador.getOperandosNivel15(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 16:
-					contador16++;
-					nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				}
+			List<Suma> sumas14 = new ArrayList<Suma>();
+			List<Suma> sumas15 = new ArrayList<Suma>();
+			List<Suma> sumas16 = new ArrayList<Suma>();
+			for (int i=0;i<10;i++) {
+				nuevaSuma = generador.getOperandosNivel14(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas14.add(nuevaSuma);
 			}
+			
+			for (int i=0;i<15;i++) {
+				nuevaSuma = generador.getOperandosNivel15(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas15.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<25;i++) {
+				nuevaSuma = generador.getOperandosNivel16(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas16.add(nuevaSuma);
+			}
+			ordenarSumasNivel17(sumas14,sumas15,sumas16, sumasNiveles.get(request.getParameter("nivel")));
+			List<Suma> sumas = sumasNiveles.get(request.getParameter("nivel"));
+			Iterator<Suma> iter = sumas.iterator();
+			while (iter.hasNext()) {
+				Suma suma = iter.next();
+				if (suma!=null)
+					resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+						+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+				
+			}		
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
-			resultado.append("], \"leyenda\": \"Level 14 :" + contador14 + ", Level 15 :" + contador15 + ", Level 16 :" + contador16 + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			resultado.append("], \"leyenda\": \"Level 14: 10, Level 15: 15, Level 16: 25\"}");
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 18) {
 			leyenda = "Level 18: two digits/two digits without regrouping";
@@ -205,8 +203,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 19) {
 			leyenda = "Level 19: two digits/two digits regrouping in untis";
@@ -220,8 +216,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 20) {
 			leyenda = "Level 20: two digits/two digits regrouping in tens";
@@ -235,8 +229,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 21) {
 			leyenda = "Level 21: two digits/two digits regrouping in units and tens";
@@ -250,56 +242,53 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 22) {
-			int contador18 = 0;
-			int contador19 = 0;
-			int contador20 = 0;
-			int contador21 = 0;
+			//22 ---> 18:(5), 19:(10), 20:(15), 21:(20)
+	        //           (1),     (2),     (3),     (4)
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
-				int nivelAleatorio = new Random().ints(1, 18, 22).sum();
-				switch (nivelAleatorio) {
-				case 18:
-					contador18++;
-					nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 19:
-					contador19++;
-					nuevaSuma = generador.getOperandosNivel19(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 20:
-					contador20++;
-					nuevaSuma = generador.getOperandosNivel20(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 21:
-					contador21++;
-					nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				}
+			List<Suma> sumas18 = new ArrayList<Suma>();
+			List<Suma> sumas19 = new ArrayList<Suma>();
+			List<Suma> sumas20 = new ArrayList<Suma>();
+			List<Suma> sumas21 = new ArrayList<Suma>();
+
+
+			for (int i=0;i<5;i++) {
+				nuevaSuma = generador.getOperandosNivel18(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas18.add(nuevaSuma);
 			}
+			
+			for (int i=0;i<10;i++) {
+				nuevaSuma = generador.getOperandosNivel19(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas19.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<15;i++) {
+				nuevaSuma = generador.getOperandosNivel20(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas20.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<20;i++) {
+				nuevaSuma = generador.getOperandosNivel21(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas21.add(nuevaSuma);
+			}
+				
+			ordenarSumasNivel22(sumas18,sumas19,sumas20, sumas21, sumasNiveles.get(request.getParameter("nivel")));
+			List<Suma> sumas = sumasNiveles.get(request.getParameter("nivel"));
+			Iterator<Suma> iter = sumas.iterator();
+			while (iter.hasNext()) {
+				Suma suma = iter.next();
+				if (suma!=null)
+					resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+						+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+				
+			}		
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
-			resultado.append("], \"leyenda\": \"Level 18 :" + contador18 + ", Level 19 :" + contador19 + ", Level 20 :" + contador20 + ", Level 21 :" + contador21 + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			resultado.append("], \"leyenda\": \"Level 18: 5, Level 19: 10, Level 20: 15, Level 21: 20\"}");
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 23) {
 			leyenda = "Level 23: three digits/one digit addition without regrouping";
@@ -328,38 +317,37 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 25) {
-			int contador23 = 0;
-			int contador24 = 0;
+			///25 ---> 23:(15), 24:(35) 
+            ///            (3),     (7)
+			List<Suma> sumas23 = new ArrayList<Suma>();
+			List<Suma> sumas24 = new ArrayList<Suma>();
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
-				int nivelAleatorio = new Random().ints(1, 23, 25).sum();
-				switch (nivelAleatorio) {
-				case 23:
-					contador23++;
-					nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 24:
-					contador24++;
-					nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				}
+			for (int i=0;i<15;i++) {
+				nuevaSuma = generador.getOperandosNivel23(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas23.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<35;i++) {
+				nuevaSuma = generador.getOperandosNivel24(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas24.add(nuevaSuma);
+			}
+				
+			ordenarSumasNivel25(sumas23,sumas24,sumasNiveles.get(request.getParameter("nivel")));
+			List<Suma> sumas = sumasNiveles.get(request.getParameter("nivel"));
+			Iterator<Suma> iter = sumas.iterator();
+			while (iter.hasNext()) {
+				Suma suma = iter.next();
+				if (suma!=null)
+					resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+						+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+				
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
-			resultado.append("], \"leyenda\": \"Level 23 :" + contador23 + ", Level 24 :" + contador24 + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			resultado.append("], \"leyenda\": \"Level 23 : 15, Level 24 : 35\"}");
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 26) {
 			leyenda = "Level 26: three digits/two digits addition without regrouping";
@@ -373,8 +361,7 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 27) {
 			leyenda = "Level 27: three digits/two digits addition with regrouping in units";
@@ -388,8 +375,7 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 28) {
 			leyenda = "Level 28: three digits/two digits addition with regrouping in tens";
@@ -403,8 +389,7 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 29) {
 			leyenda = "Level 29: three digits/two digits addition with regrouping in units and tens";
@@ -418,8 +403,7 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 30) {
 			leyenda = "Level 30: three digits/two digits addition with regrouping in tens and hundreds";
@@ -433,8 +417,7 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 31) {
 			leyenda = "Level 31: three digits/two digits addition with regrouping in units tens and hundreds";
@@ -448,74 +431,61 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 32) {
-			int contador26 = 0;
-			int contador27 = 0;
-			int contador28 = 0;
-			int contador29 = 0;
-			int contador30 = 0;
-			int contador31 = 0;
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
-				int nivelAleatorio = new Random().ints(1, 26, 32).sum();
-				switch (nivelAleatorio) {
-				case 26:
-					contador26++;
-					nuevaSuma = generador.getOperandosNivel26(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 27:
-					contador27++;
-					nuevaSuma = generador.getOperandosNivel27(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 28:
-					contador28++;
-					nuevaSuma = generador.getOperandosNivel28(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 29:
-					contador29++;
-					nuevaSuma = generador.getOperandosNivel29(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 30:
-					contador30++;
-					nuevaSuma = generador.getOperandosNivel30(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				case 31:
-					contador31++;
-					nuevaSuma = generador.getOperandosNivel31(sumasNiveles.get(request.getParameter("nivel")),
-							colisiones, MAX_COLISIONES);
-					sumasNiveles.get(request.getParameter("nivel")).add(nuevaSuma);
-					resultado.append("{\"resultado\": \"" + nuevaSuma.getResultadoSuma() + "\",\"operador1\": \"" + nuevaSuma.getOperando1() + "\",\"operador2\": \""
-							+ nuevaSuma.getOperando2() + "\"},");
-					break;
-				}
+			//32 ---> 26:(5), 27:(5), 28:(5), 29:(10), 30:(10), 31:(15)
+	        //////////   (1),    (1),    (1),     (2),    (2),     (3),
+			List<Suma> sumas26 = new ArrayList<Suma>();
+			List<Suma> sumas27 = new ArrayList<Suma>();
+			List<Suma> sumas28 = new ArrayList<Suma>();
+			List<Suma> sumas29 = new ArrayList<Suma>();
+			List<Suma> sumas30 = new ArrayList<Suma>();
+			List<Suma> sumas31 = new ArrayList<Suma>();
+			for (int i=0;i<5;i++) {
+				nuevaSuma = generador.getOperandosNivel26(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas26.add(nuevaSuma);
+				
+				nuevaSuma = generador.getOperandosNivel27(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas27.add(nuevaSuma);
+				
+				nuevaSuma = generador.getOperandosNivel28(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas28.add(nuevaSuma);
+			}
+			
+			for (int i=0;i<10;i++) {
+				nuevaSuma = generador.getOperandosNivel29(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas29.add(nuevaSuma);
+				
+				nuevaSuma = generador.getOperandosNivel30(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas30.add(nuevaSuma);
+				
+			}
+			
+			for (int i=0;i<15;i++) {
+				nuevaSuma = generador.getOperandosNivel31(sumasNiveles.get(request.getParameter("nivel")),
+						colisiones, MAX_COLISIONES);
+				sumas31.add(nuevaSuma);
+				
+				
+			}
+			ordenarSumasNivel32(sumas26,sumas27,sumas28,sumas29,sumas30,sumas31, sumasNiveles.get(request.getParameter("nivel")));
+			List<Suma> sumas = sumasNiveles.get(request.getParameter("nivel"));
+			Iterator<Suma> iter = sumas.iterator();
+			while (iter.hasNext()) {
+				Suma suma = iter.next();
+				if (suma!=null)
+					resultado.append("{\"resultado\": \"" + suma.getResultadoSuma() + "\",\"operador1\": \"" + suma.getOperando1() + "\",\"operador2\": \""
+						+ suma.getOperando2() + "\",\"nivel\": \""+suma.getNivel() +"\"},");
+				
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
-			resultado.append("], \"leyenda\": \"Level 26 :" + contador26 + ", Level 27 :" + contador27 + ", Level 28 :" + contador28 + ", Level 29 :" + contador29 + ", Level 30 :" + contador30 + ", Level 31 :" + contador31 + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
+			resultado.append("], \"leyenda\": \"Level 26 : 5, Level 27 : 5, Level 28 :5, Level 29 :10 Level 30 :10, Level 31 :15\"}");
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 33) {
 			leyenda = "Level 33: three digits/three digits addition without regrouping";
@@ -529,8 +499,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 34) {
 			leyenda = "Level 34: three digits/three digits addition with regrouping in units";
@@ -544,8 +512,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 35) {
 			leyenda = "Level 35: three digits/three digits addition with regrouping in tens";
@@ -559,8 +525,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 36) {
 			leyenda = "Level 36: three digits/three digits addition with regrouping in units and tens";
@@ -574,8 +538,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 37) {
 			leyenda = "Level 37: three digits/three digits addition with regrouping in units and hundreds";
@@ -589,8 +551,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 38) {
 			leyenda = "Level 38: three digits/three digits addition with regrouping in tens and hundreds";
@@ -604,8 +564,6 @@ public class HelloAppEngine extends HttpServlet {
 			}
 			resultado.deleteCharAt(resultado.lastIndexOf(","));
 			resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
-			/*sumasNiveles.get(request.getParameter("nivel"))
-					.sort(Comparator.comparingInt(Suma::getResultadoSuma).reversed());*/
 			response.getWriter().write(resultado.toString());
 		} else if (nivel == 39) {
 			leyenda = "Level 39: three digits/three digits addition with regrouping in units tens and hundreds";
@@ -629,7 +587,6 @@ public class HelloAppEngine extends HttpServlet {
 			List<Suma> sumas38 = new ArrayList<Suma>();
 			List<Suma> sumas39 = new ArrayList<Suma>();
 			StringBuilder resultado = new StringBuilder("{\"sumas\":[");
-			//while (sumasNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
 			//33:(5), 34:(5), 35:(5), 36:(10), 37:(5), 38:(5), 39:(15)
 			for (int i=0;i<5;i++) {
 				nuevaSuma = generador.getOperandosNivel33(sumasNiveles.get(request.getParameter("nivel")),
@@ -679,6 +636,608 @@ public class HelloAppEngine extends HttpServlet {
 
 		}
 		request.getSession().setAttribute("sumas", sumasNiveles.get(request.getParameter("nivel")));
+	}
+
+	private void ordenarSumasNivel17(List<Suma> sumas14, List<Suma> sumas15, List<Suma> sumas16, List<Suma> sumas) {
+		//17 ---> 14:(10), 15:(15), 16:(25)
+        //            (2),     (3),     (5)
+		for (int i=0;i<50;i++)
+			sumas.add(null);
+		int posicionLibre = 0;
+		
+			while (sumas.get(0)== null || sumas.get(1)==null || sumas.get(2)==null || sumas.get(3)==null || sumas.get(4)==null ||
+					sumas.get(5)== null || sumas.get(6)==null || sumas.get(7)==null || sumas.get(8)==null || sumas.get(9)==null) {
+				
+				//14
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas14.get(0));
+				sumas.add(posicionLibre, sumas14.get(1));
+				//15
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas15.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas15.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas15.get(2));
+				//16
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas16.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas16.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas16.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas16.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas16.get(4));
+			}
+			
+			while(sumas.get(10)== null || sumas.get(11)==null || sumas.get(12)==null || sumas.get(13)==null || sumas.get(14)==null ||
+					sumas.get(15)== null || sumas.get(16)==null || sumas.get(17)==null || sumas.get(18)==null || sumas.get(19)==null) {
+				
+				//14
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas14.get(2));
+				sumas.add(posicionLibre, sumas14.get(3));
+				//15
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas15.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas15.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas15.get(5));
+				//16
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas16.get(5));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas16.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas16.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas16.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas16.get(9));
+			}
+			while(sumas.get(20)== null || sumas.get(21)==null || sumas.get(22)==null || sumas.get(23)==null || sumas.get(24)==null ||
+					sumas.get(25)== null || sumas.get(26)==null || sumas.get(27)==null || sumas.get(28)==null || sumas.get(29)==null) {
+				
+				//14
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas14.get(4));
+				sumas.add(posicionLibre, sumas14.get(5));
+				//15
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas15.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas15.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas15.get(8));
+				//16
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas16.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas16.get(11));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas16.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas16.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas16.get(14));
+			}
+			while(sumas.get(30)== null || sumas.get(31)==null || sumas.get(32)==null || sumas.get(33)==null || sumas.get(34)==null ||
+					sumas.get(35)== null || sumas.get(36)==null || sumas.get(37)==null || sumas.get(38)==null || sumas.get(39)==null) {
+				
+				//14
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas14.get(6));
+				sumas.add(posicionLibre, sumas14.get(7));
+				//15
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas15.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas15.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas15.get(11));
+				//16
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas16.get(15));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas16.get(16));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas16.get(17));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas16.get(18));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas16.get(19));
+			}
+			while(sumas.get(40)== null || sumas.get(41)==null || sumas.get(42)==null || sumas.get(43)==null || sumas.get(44)==null ||
+					sumas.get(45)== null || sumas.get(46)==null || sumas.get(47)==null || sumas.get(48)==null || sumas.get(49)==null) {
+				
+				//14
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas14.get(8));
+				sumas.add(posicionLibre, sumas14.get(9));
+				//15
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas15.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas15.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas15.get(14));
+				//16
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas16.get(20));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas16.get(21));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas16.get(22));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas16.get(23));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas16.get(24));
+			}
+		
+	}
+
+	private void ordenarSumasNivel22(List<Suma> sumas18, List<Suma> sumas19, List<Suma> sumas20, List<Suma> sumas21,
+			List<Suma> sumas) {
+		//22 ---> 18:(5), 19:(10), 20:(15), 21:(20)
+        //           (1),     (2),     (3),     (4)
+		for (int i=0;i<50;i++)
+			sumas.add(null);
+		int posicionLibre = 0;
+		
+			while (sumas.get(0)== null || sumas.get(1)==null || sumas.get(2)==null || sumas.get(3)==null || sumas.get(4)==null ||
+					sumas.get(5)== null || sumas.get(6)==null || sumas.get(7)==null || sumas.get(8)==null || sumas.get(9)==null) {
+				
+				//18
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas18.get(0));
+				//19
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas19.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas19.get(1));
+				//20
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas20.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas20.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas20.get(2));
+				//21
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas21.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas21.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas21.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas21.get(3));
+			}
+			
+			while(sumas.get(10)== null || sumas.get(11)==null || sumas.get(12)==null || sumas.get(13)==null || sumas.get(14)==null ||
+					sumas.get(15)== null || sumas.get(16)==null || sumas.get(17)==null || sumas.get(18)==null || sumas.get(19)==null) {
+				
+				//18
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas18.get(1));
+				//19
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas19.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas19.get(3));
+				//20
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas20.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas20.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas20.get(5));
+				//21
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas21.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas21.get(5));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas21.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas21.get(7));
+			}
+			while(sumas.get(20)== null || sumas.get(21)==null || sumas.get(22)==null || sumas.get(23)==null || sumas.get(24)==null ||
+					sumas.get(25)== null || sumas.get(26)==null || sumas.get(27)==null || sumas.get(28)==null || sumas.get(29)==null) {
+				
+				//18
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas18.get(2));
+				//19
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas19.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas19.get(5));
+				//20
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas20.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas20.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas20.get(8));
+				//21
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas21.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas21.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas21.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas21.get(11));
+			}
+			while(sumas.get(30)== null || sumas.get(31)==null || sumas.get(32)==null || sumas.get(33)==null || sumas.get(34)==null ||
+					sumas.get(35)== null || sumas.get(36)==null || sumas.get(37)==null || sumas.get(38)==null || sumas.get(39)==null) {
+				
+				//18
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas18.get(3));
+				//19
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas19.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas19.get(7));
+				//20
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas20.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas20.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas20.get(11));
+				//21
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas21.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas21.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas21.get(14));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas21.get(15));
+			}
+			while(sumas.get(40)== null || sumas.get(41)==null || sumas.get(42)==null || sumas.get(43)==null || sumas.get(44)==null ||
+					sumas.get(45)== null || sumas.get(46)==null || sumas.get(47)==null || sumas.get(48)==null || sumas.get(49)==null) {
+				
+				//18
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas18.get(4));
+				//19
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas19.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas19.get(9));
+				//20
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas20.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas20.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas20.get(14));
+				//21
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas21.get(16));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas21.get(17));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas21.get(18));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas21.get(19));
+			}
+		
+	}
+
+	private void ordenarSumasNivel25(List<Suma> sumas23, List<Suma> sumas24, List<Suma> sumas) {
+		///25 ---> 23:(15), 24:(35) 
+        ///            (3),     (7),
+		for (int i=0;i<50;i++)
+			sumas.add(null);
+		int posicionLibre = 0;
+		
+			while (sumas.get(0)== null || sumas.get(1)==null || sumas.get(2)==null || sumas.get(3)==null || sumas.get(4)==null ||
+					sumas.get(5)== null || sumas.get(6)==null || sumas.get(7)==null || sumas.get(8)==null || sumas.get(9)==null) {
+				
+				//23
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas23.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas23.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas23.get(2));
+				
+				//24
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(5));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas24.get(6));
+			}
+			
+			while(sumas.get(10)== null || sumas.get(11)==null || sumas.get(12)==null || sumas.get(13)==null || sumas.get(14)==null ||
+					sumas.get(15)== null || sumas.get(16)==null || sumas.get(17)==null || sumas.get(18)==null || sumas.get(19)==null) {
+				
+				//23
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas23.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas23.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas23.get(5));
+				
+				//24
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(11));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas24.get(13));
+			}
+			while(sumas.get(20)== null || sumas.get(21)==null || sumas.get(22)==null || sumas.get(23)==null || sumas.get(24)==null ||
+					sumas.get(25)== null || sumas.get(26)==null || sumas.get(27)==null || sumas.get(28)==null || sumas.get(29)==null) {
+				
+				//23
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas23.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas23.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas23.get(8));
+				
+				//24
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(14));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(15));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(16));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(17));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(18));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(19));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas24.get(20));
+			}
+			while(sumas.get(30)== null || sumas.get(31)==null || sumas.get(32)==null || sumas.get(33)==null || sumas.get(34)==null ||
+					sumas.get(35)== null || sumas.get(36)==null || sumas.get(37)==null || sumas.get(38)==null || sumas.get(39)==null) {
+				
+				//23
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas23.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas23.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas23.get(11));
+				
+				//24
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(21));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(22));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(23));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(24));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(25));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(26));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas24.get(27));
+			}
+			while(sumas.get(40)== null || sumas.get(41)==null || sumas.get(42)==null || sumas.get(43)==null || sumas.get(44)==null ||
+					sumas.get(45)== null || sumas.get(46)==null || sumas.get(47)==null || sumas.get(48)==null || sumas.get(49)==null) {
+				
+				//23
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas23.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas23.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas23.get(14));
+				
+				//24
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(28));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(29));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(30));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(31));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(32));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(33));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas24.get(34));
+			}
+		
+	}
+
+	private void ordenarSumasNivel32(List<Suma> sumas26, List<Suma> sumas27, List<Suma> sumas28, List<Suma> sumas29,
+			List<Suma> sumas30, List<Suma> sumas31, List<Suma> sumas) {
+		///32 ---> 26:(5), 27:(5), 28:(5), 29:(10), 30:(10), 31:(15)
+       ////////////// (1),    (1),    (1),     (2),    (2),     (3),
+		
+		for (int i=0;i<50;i++)
+			sumas.add(null);
+		int posicionLibre = 0;
+		
+			while (sumas.get(0)== null || sumas.get(1)==null || sumas.get(2)==null || sumas.get(3)==null || sumas.get(4)==null ||
+					sumas.get(5)== null || sumas.get(6)==null || sumas.get(7)==null || sumas.get(8)==null || sumas.get(9)==null) {
+				
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas26.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas27.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas28.get(0));
+				
+				//29
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas29.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas29.get(1));
+				
+				//30
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas30.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas30.get(1));
+				
+				//31
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas31.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas31.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
+				sumas.add(posicionLibre, sumas31.get(2));
+			}
+			
+			while(sumas.get(10)== null || sumas.get(11)==null || sumas.get(12)==null || sumas.get(13)==null || sumas.get(14)==null ||
+					sumas.get(15)== null || sumas.get(16)==null || sumas.get(17)==null || sumas.get(18)==null || sumas.get(19)==null) {
+				
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas26.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas27.get(1));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas28.get(1));
+				
+				//29
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas29.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas29.get(3));
+				
+				//30
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas30.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas30.get(3));
+				
+				//31
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas31.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas31.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
+				sumas.add(posicionLibre, sumas31.get(5));
+			}
+			while(sumas.get(20)== null || sumas.get(21)==null || sumas.get(22)==null || sumas.get(23)==null || sumas.get(24)==null ||
+					sumas.get(25)== null || sumas.get(26)==null || sumas.get(27)==null || sumas.get(28)==null || sumas.get(29)==null) {
+				
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas26.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas27.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas28.get(2));
+				
+				//29
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas29.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas29.get(5));
+				
+				//30
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas30.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas30.get(5));
+				
+				//31
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas31.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas31.get(7));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
+				sumas.add(posicionLibre, sumas31.get(8));
+			}
+			while(sumas.get(30)== null || sumas.get(31)==null || sumas.get(32)==null || sumas.get(33)==null || sumas.get(34)==null ||
+					sumas.get(35)== null || sumas.get(36)==null || sumas.get(37)==null || sumas.get(38)==null || sumas.get(39)==null) {
+				
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas26.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas27.get(3));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas28.get(3));
+				
+				//29
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas29.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas29.get(7));
+				
+				//30
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas30.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas30.get(7));
+				
+				//31
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas31.get(9));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas31.get(10));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
+				sumas.add(posicionLibre, sumas31.get(11));
+			}
+			while(sumas.get(40)== null || sumas.get(41)==null || sumas.get(42)==null || sumas.get(43)==null || sumas.get(44)==null ||
+					sumas.get(45)== null || sumas.get(46)==null || sumas.get(47)==null || sumas.get(48)==null || sumas.get(49)==null) {
+				
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas26.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas27.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas28.get(4));
+				
+				//29
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas29.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas29.get(9));
+				
+				//30
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas30.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas30.get(9));
+				
+				//31
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas31.get(12));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas31.get(13));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
+				sumas.add(posicionLibre, sumas31.get(14));
+			}
+		
 	}
 
 	private void ordenarSumasNivel40(List<Suma> sumas33, List<Suma> sumas34, List<Suma> sumas35, List<Suma> sumas36,
