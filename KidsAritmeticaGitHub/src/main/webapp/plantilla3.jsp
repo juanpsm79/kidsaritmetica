@@ -368,11 +368,55 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	var sumasActuales = 0;
   	var nivel = <%=nivel%>;
   	var bloquearInteracciones = false;
-  	var navegador;  
+  	var navegador; 
+  	
+  	function borrarNumero(evObject) {
+  		if(!bloquearInteracciones) {
+	  		makeUnselectable();
+	  		if(window.event)
+	  	      var keyCode = window.event.keyCode;       // IE
+	  	   else
+	  	      var keyCode = evObject.which;
+	  		if(keyCode==8 || keyCode==46){
+	  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
+	  		}
+  		}
+  	}
+  	
+  	function ponerNumero(evObject) {
+  		if(!bloquearInteracciones) {
+	  		makeUnselectable();
+	  		if(window.event)
+	  	      var keyCode = window.event.keyCode;       // IE
+	  	   else
+	  	      var keyCode = evObject.which;
+			 if(keyCode==48)
+	  	    	ponerDigito("cero");
+	  	    else if(keyCode==49)
+		    	ponerDigito("uno");
+	  	  	else if(keyCode==50)
+		    	ponerDigito("dos");
+	  		else if(keyCode==51)
+	    		ponerDigito("tres");
+	  		else if(keyCode==52)
+	    		ponerDigito("cuatro");
+	  		else if(keyCode==53)
+	    		ponerDigito("cinco");
+	  		else if(keyCode==54)
+	    		ponerDigito("seis");
+	  		else if(keyCode==55)
+	    		ponerDigito("siete");
+	  		else if(keyCode==56)
+	    		ponerDigito("ocho");
+	  		else if(keyCode==57)
+	    		ponerDigito("nueve");
+  		}
+  	}
+	  
   </script>
 </head>
 
-  <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()">
+  <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
 	<div id="contenedor" class="unselectable" style="width:1560px;height:755px">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
