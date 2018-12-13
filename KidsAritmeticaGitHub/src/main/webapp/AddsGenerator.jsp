@@ -75,7 +75,7 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel5" value="5"/>
-				      <label for="nivel5">Level 5 (Levels 1-4)</label>
+				      <label for="nivel5">Level 5 (Levels 4)</label>
 				      
 				      <input type="radio" name="nivel" id="nivel6" value="6"/>
 				      <label for="nivel6">Level 6 (2,3,4,5)</label>

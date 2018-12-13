@@ -46,7 +46,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 	  	
   } );
   var sumas = [];
-  var indexSuma = 0;
+  var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
  if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
@@ -56,7 +56,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
    int i = 0;
    while(iter.hasNext()){
  	  Suma suma = iter.next();%>
- 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
+ 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoSuma()%>"};
   <%i++;}%>
 	
 	function subirNivel() {
@@ -77,11 +77,13 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	}
 
 	function calcularSuma() {
+		 indexSuma++;
 		 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;//unidades1;
 		 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
-		 indexSuma++
+		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
+		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -124,6 +126,17 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/<%=sumasNecesarias%>";
 				  setTimeout(asyncCall, 600);
 			  } else {
+				  if(sumas[indexSuma].resultado.length == 2) {
+					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
+						  document.getElementById('sumaDecenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaUnidadesCifra').innerHTML)
+						  document.getElementById('sumaUnidadesCifra').style.color="red";
+			  	  } else if(sumas[indexSuma].resultado.length == 1) {
+			  		  if(document.getElementById('sumaDecenasCifra').innerHTML!="0")  
+			  			  document.getElementById('sumaDecenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaUnidadesCifra').innerHTML)
+						  document.getElementById('sumaUnidadesCifra').style.color="red";
+			  	  }
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
 				  document.getElementById('capaBotonCheckSuma').onclick = function(){
 					  	calcularSuma();
@@ -307,7 +320,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					</div>	
 						
 					<!--SEGUNDO OPERADOR  -->
-					<div style="width:100%;height:160px;position:relative;left:260px;float:left;bottom:3px">	 
+					<div style="width:100%;height:160px;position:relative;left:260px;float:left;bottom:6px">	 
 						<div style="position:relative;left:10px;float:left">
 							<label id="unidadesCifra2" style="position:relative;font-family:Calibri;
 									font-size:160px;font-weight:bold;font-color:black">3</label>

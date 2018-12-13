@@ -2,6 +2,7 @@ package playaddition.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -16,7 +17,7 @@ public class GeneradorSumas {
 		Suma suma =  new Suma();
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
-		System.out.println("colisiones: "+colisiones);
+		
 		Integer digitoOp1 = null;
 		Integer digitoOp2 = null;
 		suma.setNivel(nivel);
@@ -92,20 +93,31 @@ public class GeneradorSumas {
 		suma.setOperando2(operador2);
 		suma.setResultadoSuma(operador1+operador2);
 		
-		if (sumasNivel.contains(suma)){
+		if (nivelContainsSuma(sumasNivel, suma)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
-				suma = obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones);
-				return suma;
+				System.out.println("colisiones: "+colisiones+" Nivel: "+nivel+" Suma "+suma);
+				return obtenerSumaNivel(sumasNivel,nivel,colisiones, maxColisiones);
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+suma);
 				return null;
 			}
 		} else {
+			System.out.println("Generada Suma "+suma);
 			return suma;
 		}
 	}
 	
+	private boolean nivelContainsSuma(List<Suma> sumasNivel, Suma suma) {
+		Iterator<Suma> iter = sumasNivel.iterator();
+		while (iter.hasNext()) {
+			Suma sum = iter.next();
+			if (sum.getOperando1()==suma.getOperando1() && sum.getOperando2()==suma.getOperando2())
+				return true;
+		}
+		return false;
+	}
+
 	public Suma getOperandosNivel14(List<Suma> sumasNivel, int colisiones, int maxColisiones) {
 		//two digits/one digit addition without regrouping
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();

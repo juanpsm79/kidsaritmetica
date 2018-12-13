@@ -55,11 +55,9 @@ public class Suma implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Suma other = (Suma) obj;
-		if (operando1 != other.operando1)
-			return false;
-		if (operando2 != other.operando2)
-			return false;
-		return true;
+		if (operando1 == other.operando1 && operando2 == other.operando2)
+			return true;
+		return false;
 	}
 	public int getOperando1() {
 		return operando1;

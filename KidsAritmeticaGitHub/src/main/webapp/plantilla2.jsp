@@ -47,7 +47,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   } );           
   
   var sumas = [];
-  var indexSuma = 0;
+  var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
  if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
@@ -57,7 +57,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
    int i = 0;
    while(iter.hasNext()){
  	  Suma suma = iter.next();%>
- 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>"};
+ 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoSuma()%>"};
   <%i++;}%>
 	
 	function subirNivel() {
@@ -78,6 +78,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	}
 
 	function calcularSuma() {
+		indexSuma++
 		 if(sumas[indexSuma].operador1<10){
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
 			 document.getElementById('decenasCifra1').innerHTML = "";
@@ -99,12 +100,15 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
 		 document.getElementById('sumaCentenasCifra').innerHTML ="";
-
+		 
+		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
+		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
+		 document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
 
 	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 		 document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
-	     indexSuma++
+	     
 	}
 	
 	function asyncCall() {
@@ -153,6 +157,21 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/<%=sumasNecesarias%>";
 				  setTimeout(asyncCall, 600);
 			  } else {
+				  if(sumas[indexSuma].resultado.length == 3) {
+					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaCentenasCifra').innerHTML)
+						  document.getElementById('sumaCentenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaDecenasCifra').innerHTML)
+						  document.getElementById('sumaDecenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(2)!=document.getElementById('sumaUnidadesCifra').innerHTML)
+						  document.getElementById('sumaUnidadesCifra').style.color="red";
+				  }else if(sumas[indexSuma].resultado.length == 2) {
+					  if(document.getElementById('sumaCentenasCifra').innerHTML!="0")  
+			  			  document.getElementById('sumaCentenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
+						  document.getElementById('sumaDecenasCifra').style.color="red";
+					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaUnidadesCifra').innerHTML)
+						  document.getElementById('sumaUnidadesCifra').style.color="red";
+				  }
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
 				  document.getElementById('capaBotonCheckSuma').onclick = function(){
 					  	calcularSuma();
