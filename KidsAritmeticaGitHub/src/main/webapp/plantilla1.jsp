@@ -96,6 +96,14 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
+	  		document.body.onkeydown = function(evObject){
+	  			if(window.event)
+	  		  	      var keyCode = window.event.keyCode;       // IE
+	  		  	else
+	  		  	      var keyCode = evObject.which;
+  		  		if (keyCode==13)
+  		  			subirNivel();
+  			};
 		}
 	}
 
