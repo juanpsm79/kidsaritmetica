@@ -143,7 +143,45 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 			  			bloquearInteracciones = false;
 			  			document.getElementById('capaBotonCheckSuma').onclick=function(){comprobarSuma()}
+			  			document.body.onkeydown = function(evObject){
+				  			if(window.event)
+				  		  	      var keyCode = window.event.keyCode;       // IE
+				  		  	else
+				  		  	      var keyCode = evObject.which;
+				  	  		if(!bloquearInteracciones) {
+				  		  		makeUnselectable();
+				  		  		if(keyCode==8 || keyCode==46)
+				  		  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
+				  		  		else if (keyCode==13)
+				  		  			comprobarSuma();
+				  	  		}
+			  			};
 			  	  };
+			  	  document.body.onkeydown = function(evObject){
+		  			if(window.event)
+		  		  	      var keyCode = window.event.keyCode;       // IE
+		  		  	else
+		  		  	      var keyCode = evObject.which;
+		  	  		if (keyCode==13){
+			  	  		calcularSuma();
+			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
+			  			bloquearInteracciones = false;
+			  			document.getElementById('capaBotonCheckSuma').onclick=function(){comprobarSuma()}
+			  			document.body.onkeydown = function(evObject){
+				  			if(window.event)
+				  		  	      var keyCode = window.event.keyCode;       // IE
+				  		  	else
+				  		  	      var keyCode = evObject.which;
+				  	  		if(!bloquearInteracciones) {
+				  		  		makeUnselectable();
+				  		  		if(keyCode==8 || keyCode==46)
+				  		  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
+				  		  		else if (keyCode==13)
+				  		  			comprobarSuma();
+				  	  		}
+			  			};
+			  	  	}
+	  			  };
 				  sumasActuales = 0;
 				  document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 			  }
@@ -186,15 +224,15 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   			navegador = "Firefox";
   		}else if(navigator.userAgent.indexOf("Chrome")==-1 && navigator.userAgent.indexOf("Safari")>=0){
   			document.getElementById("cero").style.left = "22px";
-  			document.getElementById("uno").style.left = "53px";
-  			document.getElementById("dos").style.left = "86px";
-  			document.getElementById("tres").style.left = "118px";
-  			document.getElementById("cuatro").style.left = "153px";
-  			document.getElementById("cinco").style.left = "187px";
-  			document.getElementById("seis").style.left = "219px";
-  			document.getElementById("siete").style.left = "252px";
-  			document.getElementById("ocho").style.left = "285px";
-  			document.getElementById("nueve").style.left = "317px";
+  			document.getElementById("uno").style.left = "51px";
+  			document.getElementById("dos").style.left = "82px";
+  			document.getElementById("tres").style.left = "113px";
+  			document.getElementById("cuatro").style.left = "144px";
+  			document.getElementById("cinco").style.left = "175px";
+  			document.getElementById("seis").style.left = "206px";
+  			document.getElementById("siete").style.left = "237px";
+  			document.getElementById("ocho").style.left = "268px";
+  			document.getElementById("nueve").style.left = "299px";
   			
   			document.getElementById("cero").style.bottom = "2px";
   			document.getElementById("uno").style.bottom = "2px";
@@ -323,15 +361,16 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	}
   	
   	function borrarNumero(evObject) {
+  		if(window.event)
+	  	      var keyCode = window.event.keyCode;       // IE
+	  	else
+	  	      var keyCode = evObject.which;
   		if(!bloquearInteracciones) {
 	  		makeUnselectable();
-	  		if(window.event)
-	  	      var keyCode = window.event.keyCode;       // IE
-	  	   else
-	  	      var keyCode = evObject.which;
-	  		if(keyCode==8 || keyCode==46){
+	  		if(keyCode==8 || keyCode==46)
 	  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
-	  		}
+	  		else if (keyCode==13)
+	  			comprobarSuma();
   		}
   	}
   	
