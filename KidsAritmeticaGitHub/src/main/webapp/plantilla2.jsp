@@ -60,22 +60,18 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
  	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoSuma()%>"};
   <%i++;}%>
 	
-	function subirNivel() {
+  function subirNivel() {
 		nivel++;
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  if(nivel<=13)
-						location.href = "plantilla1.jsp";
-					else if(nivel<=22)
-						location.href = "plantilla2.jsp";
-					else
-						location.href = "plantilla3.jsp";
-				  }
+				  location.href = "descripcionNivel.jsp";
+			  }  
 			});
-  	}
+	}
+  
 
 	function calcularSuma() {
 		indexSuma++

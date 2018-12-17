@@ -66,15 +66,11 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  if(nivel<=13)
-						location.href = "plantilla1.jsp";
-					else if(nivel<=22)
-						location.href = "plantilla2.jsp";
-					else
-						location.href = "plantilla3.jsp";
-				  }
+				  location.href = "descripcionNivel.jsp";
+			  } 
 			});
-  	}
+  		}
+	
 
 	function calcularSuma() {
 		 indexSuma++;
