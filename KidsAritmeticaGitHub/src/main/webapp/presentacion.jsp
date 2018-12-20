@@ -17,53 +17,42 @@
 </head>
 
   <body>
-		<div id="izquierda" style="float:left;z-index:10">
-			<div style="position:relative;top:100px;width:400px;height:100px;left:20px">
+		<div id="izquierda" style="float:left;width:27vw">
+			<div>
 				<div style="float:left;cursor:pointer">
-					<img src="appstoreBoton.png" style="cursor:pointer">
+					<img src="appstoreBoton.png" style="cursor:pointer;width:13vw">
 				</div>
 				<div style="float:left;cursor:pointer">
-					<img src="googlePlayBoton.png" style="cursor:pointer">
+					<img src="googlePlayBoton.png" style="cursor:pointer;width:13vw">
 				</div>
 			</div>
 			
-			<div style="position:relative;top:100px;left:20px;">
+			<div style="float:left;position:relative;top:13vh">
 				<div>	
-					<img src="followUs.png">
+					<img src="followUs.png" style="cursor:pointer;width:25vw">
 				</div>
-				<div style="float:left;cursor:pointer">
-					<img src="twitter.png" style="cursor:pointer">
+				<div style="float:left">
+					<img src="twitter.png" style="cursor:pointer;width:5vw">
 				</div>
-				<div style="float:left;cursor:pointer">
-					<img src="facebook.png" style="cursor:pointer">
+				<div style="float:left">
+					<img src="facebook.png" style="cursor:pointer;width:5vw">
 				</div>
-				<div style="cursor:pointer">
-					<img src="instagram.png" style="cursor:pointer">
+				<div style="float:left">
+					<img src="instagram.png" style="cursor:pointer;width:5vw">
 				</div>
 			</div>
 	 		
- 			<div style="position:relative;top:377px;left:20px;width:333px;height:91px">
-				<img src="contactSupport.png">
+ 			<div style="float:left;position:relative;top:27vh">
+				<img src="contactSupport.png" style="float:left;cursor:pointer;width:20vw">
 			</div>
-	 		</div>
- 		
- 		<div id="centro" style="float:left;margin-top:100px">
-				<img src="logoPlayAddition.png">
-		</div>
-		
-		
-		<div id="derecha" style="position:relative;right:90px;float:left;height:600px;width:370px">	
-			<div style="float:right;cursor:pointer;position:relative;top:100px;right:90px;width:379px">
-				<div style="float:left;width:154px;height:95px">
-	  				<img src="espaniol.png">
-	  			</div>
-				<div style="float:left;width:222px;height:115px">
-	  				<img src="loginBoton.png">
-	  			</div>
- 			</div>
- 			<div style="float:right;cursor:pointer;position:relative;top:380px;right:80px">
-	  			<img src="playBoton.png" onclick="javascript:irPrincipal()" style="cursor:pointer">
- 			</div>
+	 	</div>
+
+		<div id="derecha" style="float:left;width:69vw">	
+				<img src="logoPlayAddition.png" style="float:left;width:51vw">
+				<img src="espaniol.png" style="position:relative;right:9vw;float:left;width:9vw">
+				<img src="loginBoton.png" style="position:relative;right:9vw;float:left;width:9vw">
+				<img src="playBoton.png" onclick="javascript:irPrincipal()" 
+				     style="position:relative;right:18vw;top:42vh;cursor:pointer;width:13vw">
  		</div>
  		
   </body>
