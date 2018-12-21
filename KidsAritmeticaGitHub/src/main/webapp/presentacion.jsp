@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			
-			<div style="float:left;position:relative;top:13vh">
+			<div style="float:left;position:relative;top:7vw">
 				<div>	
 					<img src="followUs.png" style="cursor:pointer;width:25vw">
 				</div>
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 	 		
- 			<div style="float:left;position:relative;top:27vh">
+ 			<div style="float:left;position:relative;top:21vw">
 				<img src="contactSupport.png" style="float:left;cursor:pointer;width:20vw">
 			</div>
 	 	</div>
@@ -52,7 +52,7 @@
 				<img src="espaniol.png" style="position:relative;right:9vw;float:left;width:9vw">
 				<img src="loginBoton.png" style="position:relative;right:9vw;float:left;width:9vw">
 				<img src="playBoton.png" onclick="javascript:irPrincipal()" 
-				     style="position:relative;right:18vw;top:42vh;cursor:pointer;width:13vw">
+				     style="position:relative;right:20vw;top:25vw;cursor:pointer;width:13vw">
  		</div>
  		
   </body>

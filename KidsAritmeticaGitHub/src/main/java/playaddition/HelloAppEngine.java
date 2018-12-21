@@ -651,6 +651,7 @@ public class HelloAppEngine extends HttpServlet {
 				//14
 				posicionLibre = calcularPosicionLibreRango(sumas,10);
 				sumas.add(posicionLibre, sumas14.get(0));
+				posicionLibre = calcularPosicionLibreRango(sumas,10);
 				sumas.add(posicionLibre, sumas14.get(1));
 				//15
 				posicionLibre = calcularPosicionLibreRango(sumas,10);
@@ -678,6 +679,7 @@ public class HelloAppEngine extends HttpServlet {
 				//14
 				posicionLibre = calcularPosicionLibreRango(sumas,20);
 				sumas.add(posicionLibre, sumas14.get(2));
+				posicionLibre = calcularPosicionLibreRango(sumas,20);
 				sumas.add(posicionLibre, sumas14.get(3));
 				//15
 				posicionLibre = calcularPosicionLibreRango(sumas,20);
@@ -704,6 +706,7 @@ public class HelloAppEngine extends HttpServlet {
 				//14
 				posicionLibre = calcularPosicionLibreRango(sumas,30);
 				sumas.add(posicionLibre, sumas14.get(4));
+				posicionLibre = calcularPosicionLibreRango(sumas,30);
 				sumas.add(posicionLibre, sumas14.get(5));
 				//15
 				posicionLibre = calcularPosicionLibreRango(sumas,30);
@@ -730,6 +733,7 @@ public class HelloAppEngine extends HttpServlet {
 				//14
 				posicionLibre = calcularPosicionLibreRango(sumas,40);
 				sumas.add(posicionLibre, sumas14.get(6));
+				posicionLibre = calcularPosicionLibreRango(sumas,40);
 				sumas.add(posicionLibre, sumas14.get(7));
 				//15
 				posicionLibre = calcularPosicionLibreRango(sumas,40);
@@ -756,6 +760,7 @@ public class HelloAppEngine extends HttpServlet {
 				//14
 				posicionLibre = calcularPosicionLibreRango(sumas,50);
 				sumas.add(posicionLibre, sumas14.get(8));
+				posicionLibre = calcularPosicionLibreRango(sumas,50);
 				sumas.add(posicionLibre, sumas14.get(9));
 				//15
 				posicionLibre = calcularPosicionLibreRango(sumas,50);
