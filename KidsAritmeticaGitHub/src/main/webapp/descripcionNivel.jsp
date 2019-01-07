@@ -29,6 +29,16 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 		 location.href = "seleccionNivel.jsp"
   }
   </script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131500537-1');
+</script>
+  
 </head>
 
   <body>

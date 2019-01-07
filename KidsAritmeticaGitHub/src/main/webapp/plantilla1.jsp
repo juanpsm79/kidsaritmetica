@@ -41,6 +41,16 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-131500537-1');
+</script>
+  
   <script>
   $( function() {
 
