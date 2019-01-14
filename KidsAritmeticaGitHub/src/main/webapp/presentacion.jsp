@@ -27,13 +27,13 @@
 </head>
 
   <body>
-		<div id="izquierda" style="float:left;width:27vw">
+		<div id="izquierda" style="float:left;width:25vw">
 			<div>
 				<div style="float:left;cursor:pointer">
-					<img src="appstoreBoton.png" style="cursor:pointer;width:13vw">
+					<img src="appstoreBoton.png" style="cursor:pointer;width:12vw">
 				</div>
 				<div style="float:left;cursor:pointer">
-					<img src="googlePlayBoton.png" style="cursor:pointer;width:13vw">
+					<img src="googlePlayBoton.png" style="cursor:pointer;width:12vw">
 				</div>
 			</div>
 			
