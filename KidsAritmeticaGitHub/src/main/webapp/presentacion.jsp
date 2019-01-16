@@ -28,7 +28,7 @@
 
   <body>
 		<div id="izquierda" style="float:left;width:25vw">
-			<div>
+			<div style="width:25vw">
 				<div style="float:left;cursor:pointer">
 					<img src="appstoreBoton.png" style="cursor:pointer;width:12vw">
 				</div>
@@ -37,7 +37,7 @@
 				</div>
 			</div>
 			
-			<div style="float:left;position:relative;top:7vw">
+			<div style="position:relative;top:7vw;width:25vw">
 				<div>	
 					<img src="followUs.png" style="cursor:pointer;width:25vw">
 				</div>
@@ -52,18 +52,23 @@
 				</div>
 			</div>
 	 		
- 			<div style="float:left;position:relative;top:21vw">
-				<img src="contactSupport.png" style="float:left;cursor:pointer;width:20vw">
-			</div>
+ 			
 	 	</div>
 
-		<div id="derecha" style="float:left;width:69vw">	
-				<img src="logoPlayAddition.png" style="float:left;width:51vw">
-				<img src="espaniol.png" style="position:relative;right:9vw;float:left;width:9vw">
-				<img src="loginBoton.png" style="position:relative;right:9vw;float:left;width:9vw">
-				<img src="playBoton.png" onclick="javascript:irPrincipal()" 
-				     style="position:relative;right:20vw;top:25vw;cursor:pointer;width:13vw">
+		<div id="derecha" style="position:absolute;left:25vw;width:74vw">	
+				<img src="logoPlayAddition.png" style="width:74vw">
  		</div>
+ 		
+ 		  
+ 		<div style="position:absolute;right:0vw">
+ 				<img src="loginBoton.png" style="float:right;width:9vw;height:6vw">
+ 				<img src="espaniol.png" style="float:right;width:9vw;height:6vw">
+				<img src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:14vw;top:45vw;cursor:pointer;width:15vw;height:10vw">
+		</div>
+		<div style="position:absolute;top:49vw;left:5vw">
+				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
+		</div>
+		
  		
   </body>
 </html>
