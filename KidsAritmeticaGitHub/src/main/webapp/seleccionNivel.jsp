@@ -5,8 +5,8 @@
   <title>PlayAddition</title>
   <style type="text/css">
   	@font-face{
-	 	font-family:'BerlinDemi';
- 		src: url('BerlinDemi.ttf') format('truetype')
+	 	font-family:'BerlinDvwi';
+ 		src: url('BerlinDvwi.ttf') format('truetype')
 	}
   </style>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
@@ -78,11 +78,11 @@
   
   function seleccionarNivel(idNivel){
 	  if(nivelAnterior!=null){
-		  document.getElementById(''+nivelAnterior).style.borderColor="rgb(32, 56, 100)";
+		  document.getElvwentById(''+nivelAnterior).style.borderColor="rgb(32, 56, 100)";
 		 // $("#"+nivelAnterior).flip({axis: 'y',trigger: 'hover', reverse: true});
 		  $("#"+nivelAnterior).flip(false);
 	  }
-	  document.getElementById(''+idNivel).style.borderColor="red";
+	  document.getElvwentById(''+idNivel).style.borderColor="red";
 	  //$("#"+idNivel).flip(true);
 	  //$("#"+idNivel).off(".flip");
 	  nivelAnterior = idNivel;
@@ -106,31 +106,27 @@
 
   <body onload="seleccionarNivel('1')">
   
-  <div style="width:74vw">
-		<div style="position:relative;width:74vw">
+		<div style="position:absolute;width:85vw">
 			<div>
-				<div>
-					<img src="selectYourLevel.png">
-				</div>
-				<div>
-						<a onclick="openDoc()"><label style="text-decoration: underline;font-family:BerlinDemi;font-size:70px;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
-				 </div>
+				<img src="selectYourLevel.png" style="width:74vw">
 			</div>
-			
+			<div style="width:74vw">
+					<a onclick="openDoc()"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:4.75vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
+			 </div>
 		</div>
 			
-		<div style="width:74vw">
+		<div style="position:absolute;width:85vw;top:24vw">
 			
-			<div style="width:74vw;height:7vw">
+			<div style="position:absolute;top:0vw;width:85vw;height:7vw">
 	  			<div id="1" onclick="seleccionarNivel('1')"  style="width:7vw;height:7vw;cursor:pointer;cursor:pointer;float:left;
 	  			text-align: center;border: solid;border-width: 4px 2px 2px 4px;border-color:rgb(32, 56, 100)">
 	  				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 						<div style="text-align:center">
-								<label onclick="seleccionarNivel('1')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+								<label onclick="seleccionarNivel('1')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 						</div>
 												
 						<div style="text-align:center">
-								<label onclick="seleccionarNivel('1')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">1</label>
+								<label onclick="seleccionarNivel('1')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">1</label>
 						</div>
 					</div>
 					<div class="back" style="background-image:url(1c.png);background-repeat:no-repeat">
@@ -143,11 +139,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('2')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('2')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('2')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">2</label>
+							<label onclick="seleccionarNivel('2')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">2</label>
 					</div>
 				</div>	
 				<div class="back" style="background-image:url(2c.png);background-repeat:no-repeat">
@@ -160,11 +156,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('3')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('3')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('3')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">3</label>
+							<label onclick="seleccionarNivel('3')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">3</label>
 					</div>
 					</div>	
 					<div class="back" style="background-image:url(3c.png);background-repeat:no-repeat">	
@@ -177,11 +173,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('4')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('4')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('4')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">4</label>
+							<label onclick="seleccionarNivel('4')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">4</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(4c.png);background-repeat:no-repeat">
@@ -194,11 +190,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('5')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('5')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('5')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">5</label>
+							<label onclick="seleccionarNivel('5')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">5</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(5c.png);background-repeat:no-repeat">
@@ -210,11 +206,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('6')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('6')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('6')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">6</label>
+							<label onclick="seleccionarNivel('6')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">6</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(6c.png);background-repeat:no-repeat">
@@ -227,11 +223,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('7')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('7')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('7')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">7</label>
+							<label onclick="seleccionarNivel('7')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">7</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(7c.png);background-repeat:no-repeat">
@@ -244,11 +240,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('8')" style="position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('8')" style="position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('8')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">8</label>
+							<label onclick="seleccionarNivel('8')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">8</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(8c.png);background-repeat:no-repeat">
@@ -260,11 +256,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('9')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('9')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('9')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">9</label>
+							<label onclick="seleccionarNivel('9')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">9</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(9c.png);background-repeat:no-repeat">
@@ -277,11 +273,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('10')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('10')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('10')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">10</label>
+							<label onclick="seleccionarNivel('10')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">10</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(10c.png);background-repeat:no-repeat">
@@ -295,15 +291,15 @@
  			
  			
  			
- 			<div style="width:74vw;height:7vw">
+ 			<div style="position:absolute;top:7vw;width:85vw;height:7vw">
 	  			<div id="11" onclick="seleccionarNivel('11')" style="cursor:pointer;width:7vw;height:7vw;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('11')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('11')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('11')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">11</label>
+							<label onclick="seleccionarNivel('11')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">11</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(11c.png);background-repeat:no-repeat">
@@ -315,11 +311,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('12')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('12')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('12')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">12</label>
+							<label onclick="seleccionarNivel('12')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">12</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(12c.png);background-repeat:no-repeat">
@@ -332,11 +328,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('13')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('13')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('13')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">13</label>
+							<label onclick="seleccionarNivel('13')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">13</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(13c.png);background-repeat:no-repeat">
@@ -348,11 +344,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('14')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('14')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('14')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">14</label>
+							<label onclick="seleccionarNivel('14')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">14</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(14c.png);background-repeat:no-repeat">
@@ -364,11 +360,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('15')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('15')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('15')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">15</label>
+							<label onclick="seleccionarNivel('15')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">15</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(15c.png);background-repeat:no-repeat">
@@ -380,11 +376,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('16')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('16')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('16')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">16</label>
+							<label onclick="seleccionarNivel('16')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">16</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(16c.png);background-repeat:no-repeat">
@@ -397,11 +393,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('17')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('17')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('17')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">17</label>
+							<label onclick="seleccionarNivel('17')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">17</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(17c.png);background-repeat:no-repeat">
@@ -413,11 +409,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('18')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('18')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('18')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">18</label>
+							<label onclick="seleccionarNivel('18')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">18</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(18c.png);background-repeat:no-repeat">
@@ -429,11 +425,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('19')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('19')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('19')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">19</label>
+							<label onclick="seleccionarNivel('19')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">19</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(19c.png);background-repeat:no-repeat">
@@ -446,11 +442,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('20')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('20')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('20')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">20</label>
+							<label onclick="seleccionarNivel('20')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">20</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(20c.png);background-repeat:no-repeat">
@@ -461,15 +457,15 @@
 
  			
  			
-  			<div style="width:74vw;height:7vw">
+  			<div style="position:absolute;top:14vw;width:85vw;height:7vw">
 	  			<div id="21" onclick="seleccionarNivel('21')" style="cursor:pointer;width:7vw;height:7vw;float:left;text-align: center;border: solid;border-width: 2px 2px 2px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('21')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('21')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('21')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">21</label>
+							<label onclick="seleccionarNivel('21')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">21</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(21c.png);background-repeat:no-repeat">
@@ -481,11 +477,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('22')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('22')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('22')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">22</label>
+							<label onclick="seleccionarNivel('22')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">22</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(22c.png);background-repeat:no-repeat">
@@ -498,11 +494,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('23')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('23')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('23')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">23</label>
+							<label onclick="seleccionarNivel('23')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">23</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(23c.png);background-repeat:no-repeat">
@@ -514,11 +510,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('24')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('24')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('24')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">24</label>
+							<label onclick="seleccionarNivel('24')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">24</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(24c.png);background-repeat:no-repeat">
@@ -531,11 +527,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('25')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('25')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('25')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">25</label>
+							<label onclick="seleccionarNivel('25')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">25</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(25c.png);background-repeat:no-repeat">
@@ -547,11 +543,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('26')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('26')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('26')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">26</label>
+							<label onclick="seleccionarNivel('26')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">26</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(26c.png);background-repeat:no-repeat">
@@ -563,11 +559,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('27')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('27')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('27')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">27</label>
+							<label onclick="seleccionarNivel('27')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">27</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(27c.png);background-repeat:no-repeat">
@@ -579,11 +575,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('28')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('28')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('28')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">28</label>
+							<label onclick="seleccionarNivel('28')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">28</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(28c.png);background-repeat:no-repeat">
@@ -596,11 +592,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('29')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('29')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('29')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">29</label>
+							<label onclick="seleccionarNivel('29')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">29</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(29c.png);background-repeat:no-repeat">
@@ -612,11 +608,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('30')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('30')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('30')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">30</label>
+							<label onclick="seleccionarNivel('30')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">30</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(30c.png);background-repeat:no-repeat">
@@ -626,15 +622,15 @@
  			</div>			
  			
  			
- 			<div style="width:74vw;height:7vw">
+ 			<div style="position:absolute;top:21vw;width:85vw;height:7vw">
 	  			<div id="31" onclick="seleccionarNivel('31')" style="cursor:pointer;width:7vw;height:7vw;float:left;text-align: center;border: solid;border-width: 2px 2px 4px 4px;border-color:rgb(32, 56, 100)">
 	  			<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('31')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('31')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('31')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">31</label>
+							<label onclick="seleccionarNivel('31')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">31</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(31c.png);background-repeat:no-repeat">
@@ -647,11 +643,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('32')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('32')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('32')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">32</label>
+							<label onclick="seleccionarNivel('32')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">32</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(32c.png);background-repeat:no-repeat">
@@ -664,11 +660,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('33')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('33')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('33')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">33</label>
+							<label onclick="seleccionarNivel('33')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">33</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(33c.png);background-repeat:no-repeat">
@@ -680,11 +676,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('34')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('34')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('34')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">34</label>
+							<label onclick="seleccionarNivel('34')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">34</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(34c.png);background-repeat:no-repeat">
@@ -697,11 +693,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('35')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('35')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('35')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">35</label>
+							<label onclick="seleccionarNivel('35')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">35</label>
 					</div>
 					</div>	
 					<div class="back" style="background-image:url(35c.png);background-repeat:no-repeat">
@@ -712,11 +708,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('36')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('36')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('36')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">36</label>
+							<label onclick="seleccionarNivel('36')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">36</label>
 					</div>
 				</div>
 				<div class="back" style="background-image:url(36c.png);background-repeat:no-repeat">
@@ -728,11 +724,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('37')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('37')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('37')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">37</label>
+							<label onclick="seleccionarNivel('37')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">37</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(37c.png);background-repeat:no-repeat">
@@ -744,11 +740,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('38')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('38')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('38')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">38</label>
+							<label onclick="seleccionarNivel('38')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">38</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(38c.png);background-repeat:no-repeat">
@@ -760,11 +756,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('39')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('39')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('39')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">39</label>
+							<label onclick="seleccionarNivel('39')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">39</label>
 					</div>
 					</div>	
 				<div class="back" style="background-image:url(39c.png);background-repeat:no-repeat">
@@ -776,11 +772,11 @@
 				">
 				<div class="front" style="width:7vw;height:7vw;background-image:url(fondoNivelNormal.png)">
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('40')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125em;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('40')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:1.125vw;font-weight:bold">LEVEL</label>
 					</div>
 					
 					<div style="text-align:center">
-							<label onclick="seleccionarNivel('40')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75em;font-weight:bold">40</label>
+							<label onclick="seleccionarNivel('40')" style="cursor:pointer;position:relative;color:white;font-family:Calibri;font-size:2.75vw;font-weight:bold">40</label>
 					</div>
 					</div>	
 					<div class="back" style="background-image:url(40c.png);background-repeat:no-repeat">
@@ -790,11 +786,9 @@
  			</div>
  		</div>
  		
- 		</div>
- 		
- 		<div style="position:relative;width:14vw;bottom:45vw;left:75vw">
+ 		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<img onclick="irPresentacion()" src="aspaCerrarSelectYourLevel.png" style="position:absolute;width:7vw;height:7vw;cursor:pointer;right:0vw">
- 			<img onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:0vw;cursor:pointer;top:37.5vw">
+ 			<img onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:0vw;cursor:pointer;top:43.5vw">
  		</div>
   </body>
 </html>
