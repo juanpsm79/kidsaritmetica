@@ -88,7 +88,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 		 if(sumas[indexSuma].operador1<10){
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
 			 document.getElementById('decenasCifra1').innerHTML = "";
-			 document.getElementById("unidadesCifra1").style.left = "84px";
+			// document.getElementById("unidadesCifra1").style.left = "84px";
 		 }else {
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
 			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
@@ -97,7 +97,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 		 if(sumas[indexSuma].operador2<10){
 			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 			 document.getElementById('decenasCifra2').innerHTML = "";
-			 document.getElementById("unidadesCifra2").style.left = "84px";
+			 //document.getElementById("unidadesCifra2").style.left = "84px";
 		 }else {
 			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(1);
 			 document.getElementById('decenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(0);
@@ -111,8 +111,8 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
 		 document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
 
-	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
-		 document.getElementById('llevadaDecenas').innerHTML="<img src='casillaLlevada.png' onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+		 document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
 	     
 	}
@@ -266,58 +266,6 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 	  }
     }
   	
-  	function detectarNavegador(){
-  		if(navigator.userAgent.indexOf("Chrome")>=0){
-  			navegador = "Chrome";
-  		}else if(navigator.userAgent.indexOf("Firefox")>=0){
-  			navegador = "Firefox";
-  		}else if(navigator.userAgent.indexOf("Chrome")==-1 && navigator.userAgent.indexOf("Safari")>=0){
-  			document.getElementById("cero").style.left = "22px";
-  			document.getElementById("uno").style.left = "51px";
-  			document.getElementById("dos").style.left = "82px";
-  			document.getElementById("tres").style.left = "113px";
-  			document.getElementById("cuatro").style.left = "144px";
-  			document.getElementById("cinco").style.left = "175px";
-  			document.getElementById("seis").style.left = "206px";
-  			document.getElementById("siete").style.left = "237px";
-  			document.getElementById("ocho").style.left = "268px";
-  			document.getElementById("nueve").style.left = "299px";
-  			
-  			document.getElementById("cero").style.bottom = "2px";
-  			document.getElementById("uno").style.bottom = "2px";
-  			document.getElementById("dos").style.bottom = "2px";
-  			document.getElementById("tres").style.bottom = "2px";
-  			document.getElementById("cuatro").style.bottom = "2px";
-  			document.getElementById("cinco").style.bottom = "2px";
-  			document.getElementById("seis").style.bottom = "2px";
-  			document.getElementById("siete").style.bottom = "2px";
-  			document.getElementById("ocho").style.bottom = "2px";
-  			document.getElementById("nueve").style.bottom = "2px";
-  			
-  			
-  			
-  			document.getElementById("sumaUnidadesCifra").style.bottom = "32px";
-  			document.getElementById("sumaDecenasCifra").style.bottom = "32px";
-  			document.getElementById("sumaCentenasCifra").style.bottom = "32px";
-  			
-  			
-  			navegador = "Safari";
-  			
-  		}else if(navigator.userAgent.indexOf("Chrome")==-1 && navigator.userAgent.indexOf("Firefox")==-1 && navigator.userAgent.indexOf("Windows")>=0){
-  			navegador = "IExplorer";
-  		}
-  		document.getElementById("cero").style.visibility='visible';
-  		document.getElementById("uno").style.visibility='visible';
-		document.getElementById("dos").style.visibility='visible';
-		document.getElementById("tres").style.visibility='visible';
-		document.getElementById("cuatro").style.visibility='visible';
-		document.getElementById("cinco").style.visibility='visible';
-		document.getElementById("seis").style.visibility='visible';
-		document.getElementById("siete").style.visibility='visible';
-		document.getElementById("ocho").style.visibility='visible';
-		document.getElementById("nueve").style.visibility='visible';
-  	}
-  	
   	function clickCifraSuma(cifra) {
   		makeUnselectable();
   		if(!bloquearInteracciones) {
@@ -340,11 +288,9 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	 	document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
   	  	if(digitoSuma=='sumaUnidades' || digitoSuma=='sumaDecenas'){
   		  document.getElementById(''+digitoSuma).style.borderColor="black";
-  		  var sigCifra;
-  		  var divCifra = document.getElementById(''+digitoSuma).parentElement.previousElementSibling;
-  		  sigCifra = divCifra.firstElementChild;
-  	      sigCifra.style.borderColor="red";
-  		  digitoSuma=''+sigCifra.id;
+		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
+		  divCifra.style.borderColor="red";
+		  digitoSuma=''+divCifra.id;
   	  	}
   	  }
     }
@@ -429,129 +375,85 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   </script>
 </head>
 
-  <body onload="javascript:detectarNavegador();calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
-	<div id="contenedor" class="unselectable" style="width:1560px;height:750px">
+  <body onload="javascript:calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
+	<div id="contenedor" class="unselectable" style="position:absolute;width:99vw">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
-			<div style="width:100%;height:73%">
-				<div style="width:23%;height:100%;float:left;background-image:url(marcador.png);background-repeat:no-repeat">
-					<div style="width:261px;position:relative;color:white;font-family:BerlinDemi;font-size:70px;text-align: center">
-							<label style="font-size:50px">LEVEL&nbsp;</label><label id ="nivel"><%=nivel%></label>
-					</div>
+			<div style="position:absolute;width:16.17vw;height:20vw;background-image:url(marcador.png);background-repeat:no-repeat;background-size:16.15vw 19.15vw;text-align:center">
+				<div style="width:16.15vw;position:absolute">
+						<label style="color:white;font-family:BerlinDemi;font-size:3.2vw;">LEVEL&nbsp;</label><label id="nivel" style="color:white;font-family:BerlinDemi;font-size:4.5vw;"><%=nivel%></label>
+				</div>
+				
+				<div style="width:16.15vw;position:absolute;top:4vw">
+						<label id="indicadorSumas" style="color:rgb(99, 43, 141);font-family:Times New Roman;font-size:6.3vw;font-weight:bold">0/<%=sumasNecesarias%></label>
+				</div>
+				<div style="width:16.15vw;position:absolute;top:13.5vw">
+						<label id="minutero" style="color:black;font-size:4.4vw;font-family:digital7mono">00:00</label>
+				</div>
+			</div>
+				
+			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
+				<!--CASILLAS LLEVADA -->
+				<div style="width:62vw;left:19vw;position:absolute;top:1vw">
+					<a id="llevadaCentenas" style="position:absolute">
+							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">
+						</a>
+						<a id="llevadaDecenas" style="position:absolute;left:8.1vw">
+							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
+						</a>
+				</div>
 					
-					<div style="width:261px;position:relative;bottom:15px;color:rgb(99, 43, 141);font-family:Times New Roman;font-size:105px;font-weight:bold;text-align:center">
-							<label id ="indicadorSumas">0/<%=sumasNecesarias%></label>
-					</div>
-					<div style="width:261px;position:relative;top:15px;color:black;font-family:Times New Roman;font-size:70px;text-align:center">
-							<label id ="minutero" style="font-family:digital7mono">00:00</label>
-					</div>
+				<!--PRIMER OPERADOR  -->
+				<div style="width:62vw;left:17.5vw;position:absolute;bottom:31.5vw">
+							<label id="decenasCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black;display:block">2</label>
+							<label id="unidadesCifra1" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
 				</div>	
-				
-				<div style="width:62%;height:100%;float:left;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
-						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:49px;position:relative;top:21px;left:308px;float:left">
-							<a id="llevadaCentenas" style="width:32px;height:50px">
-								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>
-							</a>
-						</div>
-						<div onMouseOver="this.style.cursor='pointer'" style="z-index:10;width:32px;height:50px;position:relative;top:23px;left:395px;float:left;visibility:hidden">
-							<a id="llevadaDecenas" style="width:32px;height:50px">
-								<img src="casillaLlevada.png" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}"/>	
-							</a>
-						</div>
-						
-						<!--PRIMER OPERADOR  -->
-					<div style="width:100%;height:160px;float:left;position:relative;left:280px">	
-							
-							<div style="position:relative;left:2px;float:left">
-								<label id="decenasCifra1" style="position:relative;font-family:Calibri;
-										font-size:160px;font-weight:bold;font-color:black;display:block">2</label>
-							</div>
-							<div style="position:relative;left:50px;float:left;display:block">
-								<label id="unidadesCifra1" style="position:relative;font-family:Calibri;
-										font-size:160px;font-weight:bold;font-color:black">3</label>
-							</div>
-					</div>	
-						
-					<!--SEGUNDO OPERADOR  -->
-					<div style="width:100%;height:160px;position:relative;left:280px;float:left">	 
-						<div style="position:relative;left:2px;float:left">
-							<label id="decenasCifra2" style="position:relative;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black">2</label>
-						</div>
-						<div style="position:relative;left:50px;float:left">
-							<label id="unidadesCifra2" style="position:relative;font-family:Calibri;
-									font-size:160px;font-weight:bold;font-color:black">3</label>
-						</div>
-					</div>
 					
-					<!--RESULTADO SUMA -->
-					<div style="float:left;width:100%;height:160px;position:relative;top:15px;left:125px">
-						<div style="float:left">
-							<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-								style="width:96px;height:118px;
-								position:relative;left:15px;float:left;border:5px solid black">
-									<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
-									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
-						<div style="float:left">
-							<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
-								style="width:96px;height:118px;
-								position:relative;left:38px;float:left;border:5px solid black">
-									<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
-									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
-						<div style="float:left">
-							<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-								style="width:96px;height:118px;
-								position:relative;left:60px;float:left;border:5px solid red">
-									<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"
-									style="position:relative;bottom:40px;left:10px;font-family:Calibri;
-									font-size:158px;font-weight:bold;font-color:black"></label></a></div>
-					</div>
-				
-				</div>
-				<div onclick="javascript:location.href='seleccionNivel.jsp'" style="cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:160px;height:140px;float:left;position:relative;right:245px">
+				<!--SEGUNDO OPERADOR  -->
+				<div style="width:62vw;left:17.5vw;position:absolute;top:13vw">	 
+						<label id="decenasCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">2</label>
+						<label id="unidadesCifra2" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
 				</div>
 				
-		   </div>
+				<!--RESULTADO SUMA -->
+				<div style="width:62vw;position:absolute;top:24vw;left:0.6vw">
+						<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
+							style="position:absolute;left:8.1vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black;">
+								<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
+						</a>
+					
+						<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
+							style="position:absolute;left:16.2vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black">
+								<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;position:absolute;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
+						</a>
+					
+						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
+							style="position:absolute;left:24.3vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid red">
+								<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
+						</a>
+				</div>
 			
-			<!-- CAPA DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
-			<div style="width:100%;height:27%">
-					<div style="float:left;width:75%;height:100%;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
-						<a id="cero" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:18px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">0</a>
-						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:50px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">1</a>
-						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:81px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">2</a>
-						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:111px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">3</a>
-						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:141px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">4</a>
-						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:167px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">5</a>
-						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:201px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">6</a>
-						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:230px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">7</a>
-						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:261px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">8</a>
-						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="float:left;position:relative;left:291px;bottom:5px;color:black;
-									 font-family:Calibri;
-									 font-size: 145px;visibility:hidden">9</a>
-					</div>
-					
-					<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="cursor:pointer;float:left;width:221px;height:209px;position:relative;bottom:30px;right:120px;background-image:url(checkBoton.png);background-repeat:no-repeat">
-					</div>
+			</div>
+				
+			<div onclick="javascript:location.href='seleccionNivel.jsp'" style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+			</div>
+				
+		   
+			
+			<!-- CAPAS DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
+			<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
+						<a id="cero" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:1vw;color:black;font-family:Calibri;font-size:9vw">0</a>
+						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:7.5vw;color:black;font-family:Calibri;font-size:9vw">1</a>
+						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:14vw;color:black;font-family:Calibri;font-size:9vw">2</a>
+						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:20.5vw;color:black;font-family:Calibri;font-size:9vw">3</a>
+						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:27vw;color:black;font-family:Calibri;font-size:9vw">4</a>
+						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:33.5vw;color:black;font-family:Calibri;font-size:9vw">5</a>
+						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:40vw;color:black;font-family:Calibri;font-size:9vw">6</a>
+						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:46.5vw;color:black;font-family:Calibri;font-size:9vw">7</a>
+						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:53vw;color:black;font-family:Calibri;font-size:9vw">8</a>
+						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:59.5vw;color:black;font-family:Calibri;font-size:9vw">9</a>
+			</div>
+			<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 			</div>
 	</div>
   </body>

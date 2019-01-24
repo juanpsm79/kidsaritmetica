@@ -413,7 +413,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
 			
 			<!-- CAPA DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
-			<div style="position:absolute;width:65.5vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
+			<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
 						<a id="cero" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:1vw;color:black;font-family:Calibri;font-size:9vw">0</a>
 						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:7.5vw;color:black;font-family:Calibri;font-size:9vw">1</a>
 						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:14vw;color:black;font-family:Calibri;font-size:9vw">2</a>
@@ -425,7 +425,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:53vw;color:black;font-family:Calibri;font-size:9vw">8</a>
 						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:59.5vw;color:black;font-family:Calibri;font-size:9vw">9</a>
 			</div>
-			<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:65.22vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+			<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 			</div>
 	</div>
   </body>
