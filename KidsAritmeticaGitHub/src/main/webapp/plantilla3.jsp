@@ -318,25 +318,11 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   			  return;
   		  }
   		  document.getElementById(''+digitoSuma).style.borderColor="black";
-  		  //var sigCifra;
   		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
   		  if(divCifra.id=='coma')
   			  divCifra = divCifra.previousElementSibling;
   		  divCifra.style.borderColor="red";
 		  digitoSuma=''+divCifra.id;
-  		  
-  		  
-  		  
-  		  
-  		//var digito = document.getElementById(idDigito).innerHTML;
-  	 	//document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-  	  	//if(digitoSuma=='sumaUnidades' || digitoSuma=='sumaDecenas'){
-  		 // document.getElementById(''+digitoSuma).style.borderColor="black";
-		//  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
-		//  divCifra.style.borderColor="red";
-		//  digitoSuma=''+divCifra.id;
-  	  	//}
-  		  
   	  }
     }
   	
@@ -475,7 +461,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 								<label id="sumaMillaresCifra"onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;position:absolute;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
 						</a>
 						
-						<div id="coma" style="position:absolute;top:7.2vw;left:14.3px"><label style="font-family:Calibri;font-size:9vw;">,</label></div>
+						<div id="coma" style="position:absolute;top:0.1vw;left:14.38vw;top:3,3vw"><label style="font-family:Calibri;font-size:7vw">,</label></div>
 					
 						<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 							style="position:absolute;left:16.3vw;width:6vw;height:7.4vw;border:0.3vw solid black">
