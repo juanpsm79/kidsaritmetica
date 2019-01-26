@@ -55,17 +55,17 @@
  			
 	 	</div>
 
-		<div id="derecha" style="position:absolute;left:25vw;width:74vw">	
-				<img src="logoPlayAddition.png" style="width:74vw">
+		<div id="derecha" style="position:absolute;left:25vw;width:70vw">	
+				<img src="logoPlayAddition.png" style="width:68vw">
  		</div>
  		
  		  
  		<div style="position:absolute;right:0vw">
  				<img src="loginBoton.png" style="float:right;width:9vw;height:6vw">
  				<img src="espaniol.png" style="float:right;width:9vw;height:6vw">
-				<img src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:14vw;top:45vw;cursor:pointer;width:15vw;height:10vw">
+				<img src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:14vw;top:41vw;cursor:pointer;width:15vw;height:10vw">
 		</div>
-		<div style="position:absolute;top:49vw;left:5vw">
+		<div style="position:absolute;top:45vw;left:5vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
 		

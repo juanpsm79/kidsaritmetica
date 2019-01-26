@@ -42,14 +42,14 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 </head>
 
   <body>
- 		<div style="position:absolute;left:10vw;width:50vw;height:70vw;background-size:50vw 60vw;background-image:url(<%=nombreImagen%>);background-repeat:no-repeat;float:left">	
+ 		<div style="position:absolute;left:10vw;width:45vw;height:55vw;background-size:45vw 53vw;background-image:url(<%=nombreImagen%>);background-repeat:no-repeat">	
 		</div>
 		
 		
-		<div style="position:absolute;width:30vw;left:65vw">	
+		<div style="position:absolute;width:30vw;left:60vw">	
 			<div style="top:2vw;width:30vw;height:35vw;position:absolute;background-size:25vw 35vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
- 			<div style="width:30vw;height:13vw;position:absolute;cursor:pointer;background-size:15vw 13vw;top:45vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat" onclick="irNivel()">
+ 			<div style="width:30vw;height:13vw;position:absolute;cursor:pointer;background-size:15vw 13vw;top:40vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat" onclick="irNivel()">
  			</div>
  		</div>
  		

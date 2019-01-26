@@ -430,27 +430,27 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				
 			<div style="position:absolute;left:22.45vw;width:41.8vw;height:34.5vw;background-size:41.8vw 33.5vw;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
 			<!--CASILLAS LLEVADA -->
-				<div style="width:62vw;left:18.4vw;position:absolute;top:1vw">
+				<div style="width:62vw;left:18.5vw;position:absolute;top:1vw">
 					<a id="llevadaCentenas" style="position:absolute">
 							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">
 						</a>
-						<a id="llevadaDecenas" style="position:absolute;left:7.65vw">
+						<a id="llevadaDecenas" style="position:absolute;left:7.9vw">
 							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
 						</a>
 				</div>
 				
 				<!--PRIMER OPERADOR  -->
-				<div style="width:62vw;left:17vw;position:absolute;bottom:19vw">	
-					<label id="centenasCifra1" style="position:relative;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">1</label>
-					<label id="decenasCifra1" style="position:relative;left:2.5vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">2</label>
-					<label id="unidadesCifra1" style="position:relative;left:5vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
+				<div style="width:62vw;left:17vw;position:absolute;bottom:31.5vw">	
+					<label id="centenasCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">1</label>
+					<label id="decenasCifra1" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">2</label>
+					<label id="unidadesCifra1" style="position:absolute;left:16.2vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
 				</div>	
 					
 				<!--SEGUNDO OPERADOR  -->
 				<div style="width:62vw;left:17vw;position:absolute;top:13vw"> 
-					<label id="centenasCifra2" style="position:relative;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">1</label>
-					<label id="decenasCifra2" style="position:relative;left:2.5vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">2</label>
-					<label id="unidadesCifra2" style="position:relative;left:5vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
+					<label id="centenasCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">1</label>
+					<label id="decenasCifra2" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">2</label>
+					<label id="unidadesCifra2" style="position:absolute;left:16.2vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
 				</div>
 				
 				
@@ -461,7 +461,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 								<label id="sumaMillaresCifra"onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;position:absolute;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
 						</a>
 						
-						<div id="coma" style="position:absolute;top:0.1vw;left:14.38vw;top:3,3vw"><label style="font-family:Calibri;font-size:7vw">,</label></div>
+						<div id="coma" style="position:absolute;top:1.25vw;left:14.5vw;top:3,3vw"><label style="font-family:Calibri;font-size:7vw">,</label></div>
 					
 						<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 							style="position:absolute;left:16.3vw;width:6vw;height:7.4vw;border:0.3vw solid black">
