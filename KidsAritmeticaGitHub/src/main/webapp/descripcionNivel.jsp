@@ -46,10 +46,12 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 		</div>
 		
 		
-		<div style="position:absolute;width:30vw;left:60vw">	
-			<div style="top:2vw;width:30vw;height:35vw;position:absolute;background-size:25vw 35vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
+		<div style="position:absolute;width:30vw;left:60vw">
+			<div style="top:2vw;width:30vw;height:13vw;position:absolute;background-size:10vw 8vw;background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat">
+ 			</div>	
+			<div style="top:11.5vw;width:30vw;height:35vw;position:absolute;background-size:22vw 32vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
- 			<div style="width:30vw;height:13vw;position:absolute;cursor:pointer;background-size:15vw 13vw;top:40vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat" onclick="irNivel()">
+ 			<div style="width:30vw;height:13vw;position:absolute;cursor:pointer;background-size:10vw 8vw;top:45vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat" onclick="javascript:location.href='seleccionNivel.jsp'">
  			</div>
  		</div>
  		
