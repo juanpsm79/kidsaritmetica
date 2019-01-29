@@ -108,6 +108,9 @@
 	  if(document.documentElement.clientWidth<document.documentElement.clientHeight) {
 		  document.getElementById('capaNiveles').style.top="26vw"
 		  document.getElementById('playSelectAllLevel').style.top="46vw"
+	  } else{
+		  document.getElementById('capaNiveles').style.top="16vw"
+			  document.getElementById('playSelectAllLevel').style.top="36vw"
 	  }
 		  //alert("[Landscape] ViewPortWH = ["+document.documentElement.clientWidth+", "+document.documentElement.clientHeight+"], PageWH = ["+document.documentElement.offsetWidth+", "+document.documentElement.offsetHeight+"]");
 	 // else{
