@@ -56,6 +56,7 @@
 	  $("#38").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#39").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});
+	  window.addEventListener("orientationchange", resizePage);
 	  for (i = 1; i <= 40; i++)
 		  	document.getElementById(''+i).style.position="absolute";
   } );
@@ -101,23 +102,39 @@
 	  irPrincipal();
   }
   
+
   
+  function resizePage(){
+	  if(document.documentElement.clientWidth<document.documentElement.clientHeight) {
+		  document.getElementById('capaNiveles').style.top="26vw"
+		  document.getElementById('playSelectAllLevel').style.top="46vw"
+	  }
+		  //alert("[Landscape] ViewPortWH = ["+document.documentElement.clientWidth+", "+document.documentElement.clientHeight+"], PageWH = ["+document.documentElement.offsetWidth+", "+document.documentElement.offsetHeight+"]");
+	 // else{
+	//	  alert("[Landscape]");
+	//	  document.getElementById('playBoton').style.top="80vh"
+	//	  document.getElementById('contactSupport').style.top="80vh"
+	 // }
+		  //document.documentElement.offsetWidth, document.documentElement.offsetHeight
+		  //document.documentElement.clientWidth, document.documentElement.clientHeight
+		  //alert("[Landscape] ViewPortWH = ["+document.documentElement.clientWidth+", "+document.documentElement.clientHeight+"], PageWH = ["+document.documentElement.offsetWidth+", "+document.documentElement.offsetHeight+"]");
+  }
   
   </script>
 </head>
 
-  <body onload="seleccionarNivel('1')">
+  <body onload="seleccionarNivel('1');resizePage()">
   
-		<div style="position:absolute;width:85vw;min-height:35vh">
+		<div style="position:absolute;width:50vw;min-height:35vh">
 			<div>
-				<img src="selectYourLevel.png" style="width:74vw">
+				<img src="selectYourLevel.png" style="width:50vw">
 			</div>
-			<div style="width:74vw">
-					<a onclick="openDoc()"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:4.75vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
+			<div style="left:1vw; width:60vw">
+					<a onclick="openDoc()"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
 			 </div>
 		</div>
 
-		<div style="position:absolute;width:75vw;top:26vw">
+		<div id="capaNiveles" style="position:absolute;width:75vw;top:16vw">
 			
 			<div style="position:absolute;top:0vw;width:75vw;height:7vw">
 			
@@ -584,8 +601,8 @@
  		</div>
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
- 			<img onclick="irPresentacion()" src="aspaCerrarSelectYourLevel.png" style="position:absolute;width:7vw;height:7vw;cursor:pointer;right:10vw">
- 			<img onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:46vw">
+ 			<img onclick="irPresentacion()" src="aspaCerrarSelectYourLevel.png" style="position:absolute;width:7vw;height:7vw;cursor:pointer;right:11vw">
+ 			<img id="playSelectAllLevel" onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:36vw">
  		</div>
   </body>
 </html>

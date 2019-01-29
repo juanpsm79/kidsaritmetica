@@ -22,6 +22,22 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-130256336-1');
+  window.addEventListener("orientationchange", resizePage);
+  
+  function resizePage(){
+	  //if(window.orientation == 0 || (document.documentElement.clientWidth<document.documentElement.clientHeight)){
+		 
+	 // }
+		  //alert("[Landscape] ViewPortWH = ["+document.documentElement.clientWidth+", "+document.documentElement.clientHeight+"], PageWH = ["+document.documentElement.offsetWidth+", "+document.documentElement.offsetHeight+"]");
+	 // else{
+	//	  alert("[Landscape]");
+	//	  document.getElementById('playBoton').style.top="80vh"
+	//	  document.getElementById('contactSupport').style.top="80vh"
+	 // }
+		  //document.documentElement.offsetWidth, document.documentElement.offsetHeight
+		  //document.documentElement.clientWidth, document.documentElement.clientHeight
+		  //alert("[Landscape] ViewPortWH = ["+document.documentElement.clientWidth+", "+document.documentElement.clientHeight+"], PageWH = ["+document.documentElement.offsetWidth+", "+document.documentElement.offsetHeight+"]");
+  }
 </script>
   
 </head>
@@ -55,17 +71,17 @@
  			
 	 	</div>
 
-		<div id="derecha" style="position:absolute;left:25vw;width:70vw">	
-				<img src="logoPlayAddition.png" style="width:68vw">
+		<div id="derecha" style="position:absolute;left:25vw;width:65vw">	
+				<img src="logoPlayAddition.png" style="width:59vw">
  		</div>
  		
  		  
- 		<div style="position:absolute;right:0vw">
+ 		<div style="position:absolute;right:2.5vw">
  				<img src="loginBoton.png" style="float:right;width:9vw;height:6vw">
  				<img src="espaniol.png" style="float:right;width:9vw;height:6vw">
-				<img src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:14vw;top:41vw;cursor:pointer;width:15vw;height:10vw">
+				<img id= "playBoton" src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:16vw;top:36vw;cursor:pointer;width:15vw;height:10vw">
 		</div>
-		<div style="position:absolute;top:45vw;left:5vw">
+		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
 		
