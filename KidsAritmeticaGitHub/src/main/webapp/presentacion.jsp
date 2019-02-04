@@ -13,23 +13,39 @@
   function irPrincipal(){
 		 location.href = "seleccionNivel.jsp"
   }
+  
+  function irTwitter(){
+	  window.open("https://twitter.com/PlayAddition")
+  }
+  
+  function irFaceBook(){
+	  window.open("https://www.facebook.com/PlayAddition-244230309834319");
+  }
+  
+  function irInstagram(){
+	  window.open("https://www.instagram.com/playaddition");
+  }
   </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-130256336-1');
-  window.addEventListener("orientationchange", resizePage);
-  
+  //gtag('config', 'UA-130256336-1'); //test
+  gtag('config', 'UA-130256336-2'); //beta
+  window.addEventListener("orientationchange", resizePage);  
 </script>
   
 </head>
 
   <body>
 		<div id="izquierda" style="float:left;width:25vw">
+		
+			<!--  
+		
 			<div style="width:25vw">
 				<div style="float:left;cursor:pointer">
 					<img src="appstoreBoton.png" style="cursor:pointer;width:12vw">
@@ -38,19 +54,20 @@
 					<img src="googlePlayBoton.png" style="cursor:pointer;width:12vw">
 				</div>
 			</div>
+			-->
 			
 			<div style="position:relative;top:7vw;width:25vw">
 				<div>	
 					<img src="followUs.png" style="cursor:pointer;width:25vw">
 				</div>
 				<div style="float:left">
-					<img src="twitter.png" style="cursor:pointer;width:5vw">
+					<img src="twitter.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irTwitter()">
 				</div>
 				<div style="float:left">
-					<img src="facebook.png" style="cursor:pointer;width:5vw">
+					<img src="facebook.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irFaceBook()">
 				</div>
 				<div style="float:left">
-					<img src="instagram.png" style="cursor:pointer;width:5vw">
+					<img src="instagram.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irInstagram()">
 				</div>
 			</div>
 	 		
@@ -63,8 +80,10 @@
  		
  		  
  		<div style="position:absolute;right:5vw">
- 				<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
- 				<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
+ 				<!--  
+ 					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
+ 					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
+ 				-->
 				<img id= "playBoton" src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:17vw;top:35.5vw;cursor:pointer;width:14vw;height:9vw">
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
