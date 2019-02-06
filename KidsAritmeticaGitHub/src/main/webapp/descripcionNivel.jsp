@@ -46,7 +46,7 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 		</div>
 		
 		
-		<div style="position:absolute;width:30vw;left:55vw">
+		<div style="position:absolute;width:30vw;left:68vw">
 			<div onclick="irPrincipal()" style="top:2vw;width:30vw;height:13vw;position:absolute;left:10vw;background-size:8vw 7vw;background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;cursor:pointer">
  			</div>	
 			<div style="top:9.5vw;width:20vw;height:30vw;position:absolute;background-size:18vw 28vw;background-image:url(instrucciones.png);background-repeat:no-repeat">

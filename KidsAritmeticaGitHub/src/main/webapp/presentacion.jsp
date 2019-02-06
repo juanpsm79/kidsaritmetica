@@ -5,11 +5,45 @@
   <title>PlayAddition</title>
   <style type="text/css">
   	@font-face{
-	 	font-family:'BerlinDemi';
- 		src: url('BerlinDemi.ttf');
+	 	font-family:'BerlinDvwi';
+ 		src: url('BerlinDemi.ttf') format('truetype')
 	}
   </style>
+  <script src="./js/jquery/jquery-ui.js"></script>
+<script src="./js/jquery/jquery-3.3.1.js"></script>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130256336-3');
+</script>
+
+
+
+
+
+
+<script>
+(function(w,d,s,g,js,fs){
+  g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
+  js=d.createElement(s);fs=d.getElementsByTagName(s)[0];
+  js.src='https://apis.google.com/js/platform.js';
+  fs.parentNode.insertBefore(js,fs);js.onload=function(){g.load('analytics');};
+}(window,document,'script'));
+</script>
+
   <script>
+  var token;
+  $( function() {
+		
+  } );
+  
   function irPrincipal(){
 		 location.href = "seleccionNivel.jsp"
   }
@@ -25,24 +59,48 @@
   function irInstagram(){
 	  window.open("https://www.instagram.com/playaddition");
   }
+
   </script>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
+  
 <script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  //gtag('config', 'UA-130256336-1'); //test
-  gtag('config', 'UA-130256336-2'); //beta
-  window.addEventListener("orientationchange", resizePage);  
+gapi.analytics.ready(function() {
+	$.ajax({
+		  url: "/getToken",
+		  method: "post",
+		  data:{accion:'obtenerToken'},
+		  success : function(responseText) {
+			  token = responseText.token
+			  gapi.analytics.auth.authorize({
+				    'serverAuth': {
+				      'access_token': ''+token
+				    }
+				  });
+				  var report = new gapi.analytics.report.Data({
+					  query: {
+						  'ids': 'ga:189296074', // <-- Replace with the ids value for your view.
+					      'start-date': '2018-11-01',
+					      'end-date': 'yesterday',
+					      'metrics': 'ga:users'
+					  }
+					});
+				  	report.on('success', function(response) {
+					  handleReportingResults(response)
+					});
+					report.execute();
+		  } 
+	});	
+	
+  
+	function handleReportingResults(response){
+		document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
+	}
+});
 </script>
   
 </head>
 
   <body>
-		<div id="izquierda" style="float:left;width:25vw">
+		<div id="izquierda" style="position:absolute;width:25vw">
 		
 			<!--  
 		
@@ -56,9 +114,9 @@
 			</div>
 			-->
 			
-			<div style="position:relative;top:7vw;width:25vw">
+			<div style="position:absolute;top:1vw;width:25vw">
 				<div>	
-					<img src="followUs.png" style="cursor:pointer;width:25vw">
+					<img src="followUs.png" style="cursor:pointer;width:24vw">
 				</div>
 				<div style="float:left">
 					<img src="twitter.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irTwitter()">
@@ -80,11 +138,12 @@
  		
  		  
  		<div style="position:absolute;right:5vw">
+ 				<div id="contador" style="position:absolute;width:9vw;height:6vw;right:10vw;text-decoration:underline;font-family:BerlinDvwi;font-size:1.5vw;color:rgb(46, 117, 182)"></div>
  				<!--  
  					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
  					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
  				-->
-				<img id= "playBoton" src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:17vw;top:35.5vw;cursor:pointer;width:14vw;height:9vw">
+				<img id= "playBoton" src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw">
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">

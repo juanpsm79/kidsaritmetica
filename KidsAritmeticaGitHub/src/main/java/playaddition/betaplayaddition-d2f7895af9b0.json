@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "betaplayaddition",
+  "private_key_id": "d2f7895af9b03bee7ce5559530bb1df1449b3eff",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDihxPt+XhVH7aC\nbw1loUBC2nq09Mbps2As0R/m1HUMOpwSN28ou0jx48wxU64kDO/MaSe6JnPg8hcv\nOvp1ucH67EBGxU6eUwF8sQ9L0Gbu1tMw4Z8OQ/bMag6F0wWHujWU4fs2+rP8daJP\nnFtd5O7UJJtjkyd12LC4zLFUw+XjxXs7AqTf894qL2USFpi5+AnSx/vVP/tk34mk\nz0h52xbN9LJHN8QGpu5bVs+IDGHqIn8mi46ABIdaaOBG4fy5bPCtHpmc7b6g8bql\nVueIAWJ0osoluHVYoPGl41dAuXHaQoGmZnwtGhM/OnMlK1N9U6mAsCdGcyAFcBLw\nUFqmFvtfAgMBAAECggEABhuMPwNV6j2jpxqlatMRL3xCiLR81HpAopS03n1l9oFy\nCc+y0I9UJSl2LPJLpK8wm/tN1egJgcwlMeHONPRgNYq/JOlW+E/Wn20Ks4mX7OKf\n6RZ8Ol88vUAyygrpgEJWBYCeTFowFiN5z9mwYPS2N8QQ6HtkOfowsZrbQSTTAvQY\nIiLsq6ml+sX8yWCthtrQrWLN0FY/f7WHLSauHqbtSV43LzELwIBfbG5WERHEuqOt\nEOSBr9pO1SNQ5mZF4DmeDrZxHLxoZTAvsd9Gv6zrXzaLquHy/fSjgj2Xfx1chVcP\nN1ojHsQnwtfK2pobCg1rXLXgPnkt7/5XQyHxwBT8WQKBgQD7QV/va2OxiDBM8Asw\nD427WdlH9X5agU3650imVkisezBbHeLZZ0RnTv1QFIyZnzFzRfwVZaDwKEc4/baP\nijjr2A3tpIkxJQxYFX23kE0r1kMWVDl2qWciEsnWoxyDXqTwhgLwf4TJcI3HGptO\nN5lU1aSILVSfT7WDzu/pMJSn9QKBgQDmzinogyZR80cpnEEsLJyAkjdnEXDPZq34\nZzL/07y6iw1HdKKUVzenh4fug5rCSywzDox91P44q6mwTzq+Y5PjLDWkHv/89DSm\ngFm/1rhDWUdhUg8FpwVxRrvy95pgZoYpMGtM9bFRfHLDvoHf3vFTDkCnTjpnnvFJ\nOv2CHcBFgwKBgQCdvNU1wf28nvtz0d+0NI+OZ0H54y2INFV4h2scwl6tqkkZaxHX\n2vUexoBRnhUG/OJWtEEmTb9UBnVwWhga1XQW3HUiFIHs0I2HXzal33oTY1iK1CWf\nUYrl4VXF4nEsKGb0ea2uvt/mdzsLHLET0eP5VocM1yihO7GBJpGHnHA3YQKBgQCL\nNFb0ZH1tOeR2xUZNhU6TAR0nLc6zWIOe6WdKAwO2Iv3MVh1kiMIJaeXjRj7F5p7u\n4Fx93EPEHE0JCJAumlJs1pI3vXa5svQ6Y/k9ihyyihtSKDLlPto6euYK4ambcNqD\n5y8gSKM8uWlig/lC8+zrIhJ+leEF9Egk2c5idt0rTwKBgH92WXfChbyZr729Jwoe\nZLt6rRsy/ZfH4qS7sjWwwZ5JqHJhaMB43OIt3MwvZpqKJ1A/CAcLRr66IUjEr7zl\nw4bGbuK6mrgYGShfpIFsL6P1QrTiMUBTp696Lhs7I1FweuD+2D4oiQ5p2VbgHf/7\nZ0uuNHL58EbroeU++DwGWl0S\n-----END PRIVATE KEY-----\n",
+  "client_email": "betaplayadditionanalytics@betaplayaddition.iam.gserviceaccount.com",
+  "client_id": "105205696186634548901",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/betaplayadditionanalytics%40betaplayaddition.iam.gserviceaccount.com"
+}

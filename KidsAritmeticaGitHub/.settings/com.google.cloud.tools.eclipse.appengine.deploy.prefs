@@ -1,8 +1,9 @@
 account.email=juanpsm79@playaddition.com
 eclipse.preferences.version=1
 include.optional.configuration.files=true
+project.allowObsoleteRuntime=false
 project.bucket=
-project.id=testplayaddition
+project.id=playaddition
 project.previousVersion.stop=true
 project.promote=true
 project.version=

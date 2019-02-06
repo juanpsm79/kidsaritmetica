@@ -20,50 +20,6 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 
 
 <script>
-  // Replace with your view ID.
-  var VIEW_ID = 'ga:189013339';
-
-  // Query the API and print the results to the page.
-  function queryReports() {
-    gapi.client.request({
-      path: '/v4/reports:batchGet',
-      root: 'https://analyticsreporting.googleapis.com/',
-      method: 'POST',
-      body: {
-        reportRequests: [
-          {
-            viewId: VIEW_ID,
-            dateRanges: [
-              {
-                startDate: '7daysAgo',
-                endDate: 'today'
-              }
-            ],
-            metrics: [
-              {
-                expression: 'ga:sessions'
-              }
-            ]
-          }
-        ]
-      }
-    }).then(displayResults, console.error.bind(console));
-  }
-
-  function displayResults(response) {
-    var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
-  }
-</script>
-
-<!-- Load the JavaScript API client and Sign-in library. -->
-<script src="https://apis.google.com/js/client:platform.js"></script>
-
-
-
-
-<script>
-
 gapi.analytics.ready(function() {
 
   /**
@@ -71,7 +27,7 @@ gapi.analytics.ready(function() {
    */
   gapi.analytics.auth.authorize({
     'serverAuth': {
-      'access_token': 'ya29.c.ElmmBg2d33KVKVaG2jU5WO-gXO3fFncx_JLgULJthpbR4eaYiIqxbjaLqFC2ajZYo6bMEq_HIjzm_PhF67cuoSVOsOiFeWW6iKXnsyUz32_g7d_8BzOGsk3phQ'
+      'access_token': 'ya29.c.ElmnBjCfI0-5b-BL0D_eeMuUNy1qZLYlSsKgDFByQuKq1hVOyEr7w_liS_8isGYsiBbOn8JWq3q-sRMjRcoePgkkUKgh62Z5N_S47-SpP73zDlj4WHnc6xqCVA'
     }
   });
   
@@ -102,7 +58,7 @@ gapi.analytics.ready(function() {
   
   
   
-  /*var report = new gapi.analytics.report.Data({
+  var report = new gapi.analytics.report.Data({
 	  query: {
 		  'ids': 'ga:189013339', // <-- Replace with the ids value for your view.
 	      'start-date': '2018-11-01',
@@ -111,13 +67,17 @@ gapi.analytics.ready(function() {
 	  }
 	});
 
-	report.on('success', handleReportingResults);
+  	report.on('success', function(response) {
+	  handleReportingResults(response)
+	});
 
-	report.execute();*/
+	report.execute();
 	
+	function handleReportingResults(response){
+		alert(""+response.rows[0][0]);
+	}
 	
-	
-	new gapi.client.analyticsreporting.reports.batchGet( {
+	/*new gapi.client.analyticsreporting.reports.batchGet( {
 		  "reportRequests":[
 		  {
 		    "viewId":"ga:189013339",
@@ -171,7 +131,7 @@ gapi.analytics.ready(function() {
 
 		  
 		}
-	}
+	}*/
 
 
   /**
