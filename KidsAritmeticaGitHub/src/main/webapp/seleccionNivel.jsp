@@ -22,7 +22,17 @@
   gtag('config', 'UA-130256336-3');
 </script>
 
-  
+
+<!-- Global site tag (gtag.js) - Google Analytics 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130256336-1');
+</script>
+-->  
   
   <script src="./js/current-device.min.js"></script>
   <script>
@@ -126,6 +136,7 @@
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";
 	   			document.getElementById('capaNiveles').style.top="18vw";
 				document.getElementById('playSelectAllLevel').style.top="38vw";
+				document.getElementById('selectYourLevel').style.width="50vw";
 	     }else { //0 ->Portrait Mode
 	    	  	document.getElementById('seeAllLevels').style.top="11vw";
 				document.getElementById('capaNiveles').style.top="20vw";
@@ -140,11 +151,11 @@
   <body onload="seleccionarNivel('1');resizePage()">
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
-			<img src="selectYourLevel.png" style="position:absolute;width:50vw">
-			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:11vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
+			<img id="selectYourLevel" src="selectYourLevel.png" style="position:absolute;width:48vw">
+			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:9.75vw;left:0.5vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
 		</div>
 
-		<div id="capaNiveles" style="position:absolute;width:75vw;top:16vw">
+		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
 			
 			<div style="position:absolute;top:0vw;width:75vw;height:7vw">
 			
@@ -612,7 +623,7 @@
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<img onclick="irPresentacion()" src="aspaCerrarSelectYourLevel.png" style="position:absolute;width:7vw;height:7vw;cursor:pointer;right:11vw">
- 			<img id="playSelectAllLevel" onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:36vw">
+ 			<img id="playSelectAllLevel" onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:34.5vw">
  		</div>
   </body>
 </html>

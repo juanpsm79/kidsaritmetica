@@ -26,7 +26,17 @@
 
 
 
+<!-- Global site tag (gtag.js) - Google Analytics 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-130256336-1');
+</script>
+
+-->
 
 
 <script>
@@ -77,7 +87,8 @@ gapi.analytics.ready(function() {
 				  });
 				  var report = new gapi.analytics.report.Data({
 					  query: {
-						  'ids': 'ga:189296074', // <-- Replace with the ids value for your view.
+						  'ids': 'ga:189296074', // <-- playAddition.
+						  //'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
 					      'metrics': 'ga:users'
@@ -115,18 +126,23 @@ gapi.analytics.ready(function() {
 			-->
 			
 			<div style="position:absolute;top:1vw;width:25vw">
-				<div>	
+			
+				<div style="position:absolute">	
 					<img src="followUs.png" style="cursor:pointer;width:24vw">
 				</div>
-				<div style="float:left">
+				
+				<div style="position:absolute;top:5vw">
 					<img src="twitter.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irTwitter()">
 				</div>
-				<div style="float:left">
-					<img src="facebook.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irFaceBook()">
+				
+				<div style="position:absolute;top:5vw;left:6.5vw">
+					<img src="facebook.png" style="cursor:pointer;width:5.25vw"  onclick="javascritp:irFaceBook()">
 				</div>
-				<div style="float:left">
+				
+				<div style="position:absolute;top:5vw;left:13.25vw">
 					<img src="instagram.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irInstagram()">
 				</div>
+				
 			</div>
 	 		
  			
@@ -138,7 +154,9 @@ gapi.analytics.ready(function() {
  		
  		  
  		<div style="position:absolute;right:5vw">
- 				<div id="contador" style="position:absolute;width:9vw;height:6vw;right:10vw;text-decoration:underline;font-family:BerlinDvwi;font-size:1.5vw;color:rgb(46, 117, 182)"></div>
+ 				<div id="contador" style="position:absolute;top:1vw;width:9vw;height:6vw;right:7vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
+ 					<img src="loading.gif" style="width:2.5vw">
+ 				</div>
  				<!--  
  					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
  					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
