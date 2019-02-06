@@ -131,15 +131,15 @@ gapi.analytics.ready(function() {
 					<img src="followUs.png" style="cursor:pointer;width:24vw">
 				</div>
 				
-				<div style="position:absolute;top:5vw">
+				<div style="position:absolute;top:3vw;left:2vw">
 					<img src="twitter.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irTwitter()">
 				</div>
 				
-				<div style="position:absolute;top:5vw;left:6.5vw">
+				<div style="position:absolute;top:3vw;left:8.5vw">
 					<img src="facebook.png" style="cursor:pointer;width:5.25vw"  onclick="javascritp:irFaceBook()">
 				</div>
 				
-				<div style="position:absolute;top:5vw;left:13.25vw">
+				<div style="position:absolute;top:3vw;left:15.25vw">
 					<img src="instagram.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irInstagram()">
 				</div>
 				
