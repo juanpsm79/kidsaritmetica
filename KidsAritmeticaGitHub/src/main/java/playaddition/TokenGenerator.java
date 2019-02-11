@@ -23,16 +23,9 @@ public class TokenGenerator extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
 		try {
-		 /*GoogleCredentials utilCredentials =  GoogleCredentials.fromStream(this.getClass().getResourceAsStream("playaddition-317446f475bf.json"))
-		            .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/analytics.readonly"));
-		            AccessToken accessToken = utilCredentials.refreshAccessToken();*/
-			GoogleCredentials utilCredentials =  GoogleCredentials.fromStream(this.getClass().getResourceAsStream("playaddition-317446f475bf.json"))
+		 GoogleCredentials utilCredentials =  GoogleCredentials.fromStream(this.getClass().getResourceAsStream("playaddition-317446f475bf.json"))
 		            .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/analytics.readonly"));
 		            AccessToken accessToken = utilCredentials.refreshAccessToken();
-		            
-		            
-		    
-		   
 			StringBuilder resultado = new StringBuilder();
 			System.out.println(accessToken.getTokenValue());
 			resultado.append("{\"token\": \"" + accessToken.getTokenValue() + "\"}");

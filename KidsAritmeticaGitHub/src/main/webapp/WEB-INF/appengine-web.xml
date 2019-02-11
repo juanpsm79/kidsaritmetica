@@ -4,10 +4,13 @@
   <threadsafe>true</threadsafe>
   <sessions-enabled>true</sessions-enabled>
   <runtime>java8</runtime>
-  
+  <env-variables>
+    <env-var name="CLOUD_SQL_CONNECTION_NAME" value="playaddition:us-central1:playaddition" />
+    <env-var name="DB_USER" value="playaddition" />
+    <env-var name="DB_PASS" value="playaddition" />
+    <env-var name="DB_NAME" value="playaddition" />
+  </env-variables>
   <system-properties>
-    
     <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
   </system-properties>
-
 </appengine-web-app>

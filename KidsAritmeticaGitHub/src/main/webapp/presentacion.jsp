@@ -69,10 +69,23 @@
   function irInstagram(){
 	  window.open("https://www.instagram.com/playaddition");
   }
+  
+  function resizePage(){
+		 if(device.type=='tablet' || device.type=='mobile'){
+		     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
+		      	  	
+		     }else { //0 ->Portrait Mode
+		    	  	document.getElementById('twitter').style.top="7vw";
+					document.getElementById('facebook').style.top="7vw";
+					document.getElementById('instagram').style.top="7vw";
+		   	 }
+		 }
+	  }
 
   </script>
   
 <script>
+
 gapi.analytics.ready(function() {
 	$.ajax({
 		  url: "/getToken",
@@ -105,12 +118,13 @@ gapi.analytics.ready(function() {
 	function handleReportingResults(response){
 		document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
 	}
+	
 });
 </script>
   
 </head>
 
-  <body>
+  <body onload="resizePage()">
 		<div id="izquierda" style="position:absolute;width:25vw">
 		
 			<!--  
@@ -131,15 +145,15 @@ gapi.analytics.ready(function() {
 					<img src="followUs.png" style="cursor:pointer;width:24vw">
 				</div>
 				
-				<div style="position:absolute;top:3vw;left:2vw">
+				<div id="twitter" style="position:absolute;top:3vw;left:2vw">
 					<img src="twitter.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irTwitter()">
 				</div>
 				
-				<div style="position:absolute;top:3vw;left:8.5vw">
+				<div id="facebook" style="position:absolute;top:3vw;left:8.5vw">
 					<img src="facebook.png" style="cursor:pointer;width:5.25vw"  onclick="javascritp:irFaceBook()">
 				</div>
 				
-				<div style="position:absolute;top:3vw;left:15.25vw">
+				<div id="instagram" style="position:absolute;top:3vw;left:15.25vw">
 					<img src="instagram.png" style="cursor:pointer;width:5vw"  onclick="javascritp:irInstagram()">
 				</div>
 				
