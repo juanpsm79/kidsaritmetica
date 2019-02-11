@@ -12,7 +12,7 @@
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/jquery.flip.min.js"></script>
   
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -21,9 +21,9 @@
 
   gtag('config', 'UA-130256336-3');
 </script>
+-->
 
-
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->  
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -32,7 +32,7 @@
 
   gtag('config', 'UA-130256336-1');
 </script>
--->  
+
   
   <script src="./js/current-device.min.js"></script>
   <script>

@@ -10,11 +10,11 @@
 	}
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
-<script src="./js/jquery/jquery-3.3.1.js"></script>
+  <script src="./js/jquery/jquery-3.3.1.js"></script>
+  <script src="./js/current-device.min.js"></script>
 
 
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -24,9 +24,9 @@
   gtag('config', 'UA-130256336-3');
 </script>
 
+-->
 
-
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -36,7 +36,7 @@
   gtag('config', 'UA-130256336-1');
 </script>
 
--->
+
 
 
 <script>
@@ -75,9 +75,9 @@
 		     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 		      	  	
 		     }else { //0 ->Portrait Mode
-		    	  	document.getElementById('twitter').style.top="7vw";
-					document.getElementById('facebook').style.top="7vw";
-					document.getElementById('instagram').style.top="7vw";
+		    	  	document.getElementById('twitter').style.top="4.5vw";
+					document.getElementById('facebook').style.top="4.5vw";
+					document.getElementById('instagram').style.top="4.5vw";
 		   	 }
 		 }
 	  }
@@ -100,8 +100,8 @@ gapi.analytics.ready(function() {
 				  });
 				  var report = new gapi.analytics.report.Data({
 					  query: {
-						  'ids': 'ga:189296074', // <-- playAddition.
-						  //'ids': 'ga:185994770',   // <-- testPlayAddition.
+						  //'ids': 'ga:189296074', // <-- playAddition.
+						  'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
 					      'metrics': 'ga:users'

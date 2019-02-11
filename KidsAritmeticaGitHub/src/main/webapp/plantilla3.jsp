@@ -41,15 +41,32 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
+  
+  
+  
+<!-- Global site tag (gtag.js) - Google Analytics 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-131500537-1');
+  gtag('config', 'UA-130256336-3');
 </script>
+
+-->
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130256336-1');
+</script>
+
+
   
   <script>
   $( function() {
@@ -216,6 +233,8 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 				  }
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
 				  document.getElementById('capaBotonCheckSuma').onclick = function(){
+					  	sumasActuales = 0;
+					  	document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 					  	calcularSuma();
 			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 			  			bloquearInteracciones = false;
@@ -259,8 +278,6 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			  			};
 			  	  	}
 	  			  };
-				  sumasActuales = 0;
-				  document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 			  }
 		  } else
 			  return;
@@ -311,7 +328,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	
   	function ponerDigito (idDigito) {
   	  if(!bloquearInteracciones) {
-  		  var digito = document.getElementById(idDigito).innerHTML;
+  			var digito = document.getElementById(idDigito).firstElementChild.firstChild.nodeValue;
   		  document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
   		  if(digitoSuma=='sumaMillares') {
   			  document.getElementById(''+digitoSuma).nextElementSibling.style.visibility='visible';
@@ -381,30 +398,62 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   	function ponerNumero(evObject) {
   		if(!bloquearInteracciones) {
 	  		makeUnselectable();
+	  		var obj;
 	  		if(window.event)
 	  	      var keyCode = window.event.keyCode;       // IE
 	  	   else
 	  	      var keyCode = evObject.which;
-			 if(keyCode==48)
+			 if (keyCode==48) {
+				obj = document.getElementById("cero");
+				obj.style.backgroundColor="rgb(236, 178, 178)";
 	  	    	ponerDigito("cero");
-	  	    else if(keyCode==49)
+			 } else if(keyCode==49){
+				obj = document.getElementById("uno");
+				obj.style.backgroundColor="rgb(236, 178, 178)";
 		    	ponerDigito("uno");
-	  	  	else if(keyCode==50)
+	  	     } else if(keyCode==50){
+	  	    	obj = document.getElementById("dos");
+	  	    	obj.style.backgroundColor="rgb(236, 178, 178)";
 		    	ponerDigito("dos");
-	  		else if(keyCode==51)
+	  	  	 } else if(keyCode==51){
+	  	  		obj = document.getElementById("tres");
+	  	  	obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("tres");
-	  		else if(keyCode==52)
+	  		 } else if(keyCode==52){
+	  			obj = document.getElementById("cuatro");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("cuatro");
-	  		else if(keyCode==53)
+	  		 } else if(keyCode==53){
+	  			obj = document.getElementById("cinco");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("cinco");
-	  		else if(keyCode==54)
+	  		 } else if(keyCode==54){
+	  			obj = document.getElementById("seis");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("seis");
-	  		else if(keyCode==55)
+	  		 } else if(keyCode==55){
+	  			obj = document.getElementById("siete");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("siete");
-	  		else if(keyCode==56)
+	  		 } else if(keyCode==56){
+	  			obj = document.getElementById("ocho");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("ocho");
-	  		else if(keyCode==57)
+	  		} else if(keyCode==57){
+	  			obj = document.getElementById("nueve");
+	  			obj.style.backgroundColor="rgb(236, 178, 178)";
 	    		ponerDigito("nueve");
+	  		}
+			setTimeout(function(){obj.style.backgroundColor=""},500);
+  		}
+  	}
+  	
+  	function onClickCifra(obj){
+  		if(!bloquearInteracciones) {
+  			makeUnselectable();
+  			obj.style.backgroundColor="rgb(236, 178, 178)";
+  			ponerDigito(obj.id);
+  			setTimeout(function(){obj.style.backgroundColor=""},500);
   		}
   	}
 	  
@@ -487,16 +536,36 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			
 			<!-- CAPAS DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
 			<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
-						<a id="cero" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:1vw;color:black;font-family:Calibri;font-size:9vw">0</a>
-						<a id="uno" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:7.5vw;color:black;font-family:Calibri;font-size:9vw">1</a>
-						<a id="dos" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:14vw;color:black;font-family:Calibri;font-size:9vw">2</a>
-						<a id="tres" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:20.5vw;color:black;font-family:Calibri;font-size:9vw">3</a>
-						<a id="cuatro" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:27vw;color:black;font-family:Calibri;font-size:9vw">4</a>
-						<a id="cinco" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:33.5vw;color:black;font-family:Calibri;font-size:9vw">5</a>
-						<a id="seis" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:40vw;color:black;font-family:Calibri;font-size:9vw">6</a>
-						<a id="siete" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:46.5vw;color:black;font-family:Calibri;font-size:9vw">7</a>
-						<a id="ocho" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:53vw;color:black;font-family:Calibri;font-size:9vw">8</a>
-						<a id="nueve" onclick="makeUnselectable();ponerDigito(this.id)" style="position:absolute;bottom:-0.4vw;left:59.5vw;color:black;font-family:Calibri;font-size:9vw">9</a>
+				<div id="cero" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:0.46vw;width:6.105vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.6vw;color:black;font-family:Calibri;font-size:9vw">0</a>
+				</div>
+				<div id="uno" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:6.86vw;width:6.11vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.7vw;color:black;font-family:Calibri;font-size:9vw">1</a>
+				</div>
+				<div id="dos" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:13.35vw;width:6.12vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">2</a>
+				</div>
+				<div id="tres" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:19.85vw;width:6.11vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">3</a>
+				</div>
+				<div id="cuatro" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:26.3vw;width:6.12vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">4</a>
+				</div>
+				<div id="cinco" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:32.85vw;width:6.21vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">5</a>
+				</div>
+				<div id="seis" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:39.35vw;width:6.21vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">6</a>
+				</div>
+				<div id="siete" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:45.9vw;width:6.11vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">7</a>
+				</div>
+				<div id="ocho" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:52.33vw;width:6.19vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">8</a>
+				</div>
+				<div id="nueve" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:58.85vw;width:6.21vw;height:9.175vw">
+					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">9</a>
+				</div>
 			</div>
 			<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 			</div>

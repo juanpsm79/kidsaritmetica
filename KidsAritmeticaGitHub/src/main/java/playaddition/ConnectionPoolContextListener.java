@@ -123,9 +123,7 @@ public class ConnectionPoolContextListener implements ServletContextListener {
 
   @Override
   public void contextInitialized(ServletContextEvent event) {
-    // This function is called when the application starts and will safely create a connection pool
-    // that can be used to connect to.
-    DataSource pool = (DataSource) event.getServletContext().getAttribute("my-pool");
+    /*DataSource pool = (DataSource) event.getServletContext().getAttribute("my-pool");
     if (pool == null) {
       pool = createConnectionPool();
       event.getServletContext().setAttribute("my-pool", pool);
@@ -135,7 +133,7 @@ public class ConnectionPoolContextListener implements ServletContextListener {
     } catch (SQLException ex) {
       throw new RuntimeException("Unable to verify table schema. Please double check the steps"
           + "in the README and try again.", ex);
-    }
+    }*/
     
   }
   
