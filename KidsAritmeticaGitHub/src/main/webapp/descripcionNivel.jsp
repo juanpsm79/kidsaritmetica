@@ -15,8 +15,8 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 	}
   </style>
   <script>
-//var dominio = "test.playaddition.com";
-  var dominio = "playaddition.com";
+var dominio = "test.playaddition.com";
+//  var dominio = "playaddition.com";
   var nivel = <%=nivel%>;
   function irNivel(obj){
 	  obj.style.backgroundImage="url(playBotonSS.png)";
@@ -34,7 +34,7 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 		 location.href = "seleccionNivel.jsp"
   }
   </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -43,8 +43,8 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 
   gtag('config', 'UA-130256336-3');
 </script>
-
-<!-- Global site tag (gtag.js) - Google Analytics 
+-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -53,7 +53,7 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 
   gtag('config', 'UA-130256336-1');
 </script>
--->
+
   
 </head>
 

@@ -36,8 +36,8 @@
   
   <script src="./js/current-device.min.js"></script>
   <script>
-//var dominio = "test.playaddition.com";
-  var dominio = "playaddition.com";
+var dominio = "test.playaddition.com";
+//  var dominio = "playaddition.com";
   var check = false;
   $( function() {
 	  $("#1").flip({axis: 'y',trigger: 'click', reverse: true});
@@ -52,7 +52,7 @@
 	  $("#10").flip({axis: 'y',trigger: 'click', reverse: true});
 	  
 	  $("#11").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
+	 /* $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#13").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#14").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#15").flip({axis: 'y',trigger: 'click', reverse: true});
@@ -82,9 +82,9 @@
 	  $("#37").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#38").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#39").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});*/
 	  window.addEventListener("orientationchange", resizePageHandler);
-	  for (i = 1; i <= 40; i++)
+	  for (i = 1; i <= 11; i++)
 	   	document.getElementById(''+i).style.position="absolute";
   } );
   
@@ -101,12 +101,12 @@
 	  obj.style.backgroundImage="url(playBotonSS.png)";
 	  setTimeout(function(){
 		  $.ajax({
-			  url: "/hello",
+			  url: "/restas",
 			  method: "post",
 			  data:{nivel: ''+nivelAnterior},
 			 // dataType: "json",
 			  success : function(responseText) {
-					location.href = "descripcionNivel.jsp";
+					location.href = "plantilla1resta.jsp";
 			  }
 			})
 		  },500);
@@ -174,7 +174,9 @@
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
 			<img id="selectYourLevel" src="selectYourLevel.png" style="position:absolute;width:48vw">
+			<!-- 
 			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:9.75vw;left:0.5vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
+			 -->
 		</div>
 
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
@@ -295,11 +297,25 @@
 
  			</div>
  			
+ 			<div style="position:absolute;top:7.6vw;width:75vw;height:7vw">
+			
+	  			<div id="11" onclick="seleccionarNivel('11')" style="position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;
+	  			 text-align:center">
+	  			 
+	  				<div class="front" style="position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormal.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:rgb(32, 56, 100)">
+								<label onclick="seleccionarNivel('11')" style="position:absolute;left:0.9vw;top:0.8vw;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold">LEVEL</label>
+								<label onclick="seleccionarNivel('11')" style="position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold">11</label>
+					</div>	
+					<div class="back" style="position:absolute;background:url(11c.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:red">
+  					</div>
+  					
+  					
+				</div>
+			</div>
  			
  			
  			
- 			
- 			
+ 			<!--  
  			<div style="position:absolute;top:7.6vw;width:75vw;height:7vw">
 			
 	  			<div id="11" onclick="seleccionarNivel('11')" style="position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;
@@ -641,6 +657,8 @@
 				</div>
 
  			</div>
+ 			
+ 			-->
  		</div>
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">

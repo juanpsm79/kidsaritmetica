@@ -50,8 +50,8 @@
 
   <script>
   var token;
-  //var dominio = "test.playaddition.com";
-  var dominio = "playaddition.com";
+  var dominio = "test.playaddition.com";
+  //var dominio = "playaddition.com";
   $( function() {
 		
   } );
@@ -59,6 +59,10 @@
   function irPrincipal(obj){
 	  	 obj.style.backgroundImage="url(playBotonSS.png)";
 	  	 setTimeout(function(){location.href = "seleccionNivel.jsp"},500);
+  }
+  
+  function irPlaySubtraction(){
+	  location.href = "seleccionNivelSubtraction.jsp"
   }
   
   function irTwitter(){
@@ -184,7 +188,7 @@ gapi.analytics.ready(function() {
 				<div id= "playBoton" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:16vw 11vw;float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'" onclick="javascript:irPrincipal(this)" ></div>
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
-				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
+				<img src="contactSupport.png" style="cursor:pointer;width:20vw"><a onclick="irPlaySubtraction()" style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">Ir a PlaySubtraction</a>
 		</div>
 		
  		
