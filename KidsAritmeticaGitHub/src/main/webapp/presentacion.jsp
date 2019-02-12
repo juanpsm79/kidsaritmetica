@@ -12,8 +12,6 @@
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/current-device.min.js"></script>
-
-
 <!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
@@ -37,8 +35,6 @@
 </script>
 
 
-
-
 <script>
 (function(w,d,s,g,js,fs){
   g=w.gapi||(w.gapi={});g.analytics={q:[],ready:function(f){this.q.push(f);}};
@@ -48,14 +44,21 @@
 }(window,document,'script'));
 </script>
 
+
+
+
+
   <script>
   var token;
+  //var dominio = "test.playaddition.com";
+  var dominio = "playaddition.com";
   $( function() {
 		
   } );
   
-  function irPrincipal(){
-		 location.href = "seleccionNivel.jsp"
+  function irPrincipal(obj){
+	  	 obj.style.backgroundImage="url(playBotonSS.png)";
+	  	 setTimeout(function(){location.href = "seleccionNivel.jsp"},500);
   }
   
   function irTwitter(){
@@ -100,7 +103,7 @@ gapi.analytics.ready(function() {
 				  });
 				  var report = new gapi.analytics.report.Data({
 					  query: {
-						  //'ids': 'ga:189296074', // <-- playAddition.
+						 // 'ids': 'ga:189296074', // <-- playAddition.
 						  'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
@@ -124,20 +127,23 @@ gapi.analytics.ready(function() {
   
 </head>
 
-  <body onload="resizePage()">
+  <body onload="resizePage();">
+  	<div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			if (document.images) {
+				img1 = new Image();
+				img2 = new Image();
+				img1.src = "https://"+dominio+"/playBottonSelected.png";
+				img2.src = "https://"+dominio+"/playBotonSS.png";
+			}
+
+		//--><!]]>
+		</script>
+	</div>
+  		
+  
 		<div id="izquierda" style="position:absolute;width:25vw">
-		
-			<!--  
-		
-			<div style="width:25vw">
-				<div style="float:left;cursor:pointer">
-					<img src="appstoreBoton.png" style="cursor:pointer;width:12vw">
-				</div>
-				<div style="float:left;cursor:pointer">
-					<img src="googlePlayBoton.png" style="cursor:pointer;width:12vw">
-				</div>
-			</div>
-			-->
 			
 			<div style="position:absolute;top:1vw;width:25vw">
 			
@@ -175,7 +181,7 @@ gapi.analytics.ready(function() {
  					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
  					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
  				-->
-				<img id= "playBoton" src="playBoton.png" onclick="javascript:irPrincipal()" style="float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw">
+				<div id= "playBoton" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:16vw 11vw;float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'" onclick="javascript:irPrincipal(this)" ></div>
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">

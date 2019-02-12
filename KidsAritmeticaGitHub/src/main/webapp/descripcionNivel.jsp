@@ -15,14 +15,19 @@ String nombreImagen = "GoToLevel"+nivel+".png";
 	}
   </style>
   <script>
+//var dominio = "test.playaddition.com";
+  var dominio = "playaddition.com";
   var nivel = <%=nivel%>;
-  function irNivel(){
-	  if(nivel<=13)
-			location.href = "plantilla1.jsp";
-	  else if(nivel<=22)
-			location.href = "plantilla2.jsp";
-	  else
-			location.href = "plantilla3.jsp";
+  function irNivel(obj){
+	  obj.style.backgroundImage="url(playBotonSS.png)";
+	  setTimeout(function(){
+		  if(nivel<=13)
+				location.href = "plantilla1.jsp";
+		  else if(nivel<=22)
+				location.href = "plantilla2.jsp";
+		  else
+				location.href = "plantilla3.jsp";
+		  },500);
   }
   
   function irPrincipal(){
@@ -36,23 +41,54 @@ String nombreImagen = "GoToLevel"+nivel+".png";
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'UA-131500537-1');
+  gtag('config', 'UA-130256336-3');
 </script>
+
+<!-- Global site tag (gtag.js) - Google Analytics 
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-130256336-1');
+</script>
+-->
   
 </head>
 
   <body>
+  <div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			if (document.images) {
+				var img1 = new Image();
+				var img2 = new Image();
+				var img3 = new Image();
+				img1.src = "https://"+dominio+"/playBottonSelected.png";
+				img2.src = "https://"+dominio+"/playBotonSS.png";
+				img3.src = "https://"+dominio+"/aspaCerrarSelectYourLevelSelect.png";
+			}
+
+		//--><!]]>
+		</script>
+	</div>
  		<div style="position:absolute;left:10vw;width:40vw;height:46vw;background-size:40vw 45vw;background-image:url(<%=nombreImagen%>);background-repeat:no-repeat">	
 		</div>
 		
 		
 		<div style="position:absolute;width:30vw;left:68vw">
-			<div onclick="irPrincipal()" style="top:2vw;width:30vw;height:13vw;position:absolute;left:10vw;background-size:8vw 7vw;background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;cursor:pointer">
+			<div onclick="irPrincipal()" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'" style="top:2vw;width:30vw;height:13vw;position:absolute;left:10vw;background-size:8vw 7vw;
+			background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;cursor:pointer">
  			</div>	
 			<div style="top:9.5vw;width:20vw;height:30vw;position:absolute;background-size:18vw 28vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
- 			<div style="width:10vw;height:8vw;position:absolute;left:9vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat" onclick="javascript:irNivel()">
+ 			
+ 			<!--  
+ 			<div  id= "playSelectAllLevel" onclick="javascript:irNivel()" style="width:10vw;height:8vw;position:absolute;left:9vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat">
  			</div>
+ 			-->
+ 			<div id= "playSelectAllLevel" onclick="javascript:irNivel(this)" style="width:10vw;height:8vw;position:absolute;left:9vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playBoton.png);background-repeat:no-repeat" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
  		</div>
  		
   </body>

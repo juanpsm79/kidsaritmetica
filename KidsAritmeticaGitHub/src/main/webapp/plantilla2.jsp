@@ -44,7 +44,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   
   
   
- <!-- Global site tag (gtag.js) - Google Analytics 
+ <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -54,9 +54,9 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   gtag('config', 'UA-130256336-3');
 </script>
 
--->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- Global site tag (gtag.js) - Google Analytics
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -66,9 +66,11 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   gtag('config', 'UA-130256336-1');
 </script>
   
-  
+   -->
   
   <script>
+//var dominio = "test.playaddition.com";
+  var dominio = "playaddition.com";
   $( function() {
 	  	
   } );           
@@ -157,13 +159,15 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   
   
   function comprobarSuma(){
-	  if( 	
-	      document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null ||
+	  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
+	  if(document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null ||
 	      document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null ) {
+		  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBoton.png)';
 		  	return;
 	  } else {
 		  if (!bloquearInteracciones) {
 			  bloquearInteracciones = true;
+			  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
 			  var centenas = document.getElementById('sumaCentenasCifra').innerHTML;
 			  if(document.getElementById('sumaCentenasCifra').innerHTML=='' ||
 					  document.getElementById('sumaCentenasCifra').innerHTML==null)
@@ -425,6 +429,27 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 </head>
 
   <body onload="javascript:calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
+  
+  	<div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			if (document.images) {
+				var img1 = new Image();
+				var img2 = new Image();
+				var img3 = new Image();
+				var img4 = new Image();
+				var img5 = new Image();
+				img1.src = "https://"+dominio+"/cerrarAspaSelect.png";
+				img2.src = "https://"+dominio+"/startOverBoton.png";
+				img3.src = "https://"+dominio+"/correctBoton.png";
+				img4.src = "https://"+dominio+"/levelUpBoton.png";
+				img5.src = "https://"+dominio+"/checkBotonClick.png";
+			}
+
+		//--><!]]>
+		</script>
+	</div>
+  
 	<div id="contenedor" class="unselectable" style="position:absolute;width:99vw">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
@@ -484,7 +509,8 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 			
 			</div>
 				
-			<div onclick="javascript:location.href='seleccionNivel.jsp'" style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+			<div onclick="javascript:location.href='seleccionNivel.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
+			style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 			</div>
 				
 		   
@@ -522,7 +548,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">9</a>
 				</div>
 			</div>
-			<div id="capaBotonCheckSuma" onclick="javascript:comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+			<div id="capaBotonCheckSuma" onclick="comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 			</div>
 	</div>
   </body>

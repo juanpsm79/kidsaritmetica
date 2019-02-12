@@ -12,7 +12,7 @@
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/jquery.flip.min.js"></script>
   
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -21,9 +21,9 @@
 
   gtag('config', 'UA-130256336-3');
 </script>
--->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->  
+
+<!-- Global site tag (gtag.js) - Google Analytics   
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -32,10 +32,12 @@
 
   gtag('config', 'UA-130256336-1');
 </script>
-
+-->
   
   <script src="./js/current-device.min.js"></script>
   <script>
+//var dominio = "test.playaddition.com";
+  var dominio = "playaddition.com";
   var check = false;
   $( function() {
 	  $("#1").flip({axis: 'y',trigger: 'click', reverse: true});
@@ -91,19 +93,24 @@
   var nivelAnterior =null;
   
   function irPresentacion(){
+	  	 
 		 location.href = "presentacion.jsp"
   }
   
-  function irPrincipal(){
-	  $.ajax({
-		  url: "/hello",
-		  method: "post",
-		  data:{nivel: ''+nivelAnterior},
-		 // dataType: "json",
-		  success : function(responseText) {
-				location.href = "descripcionNivel.jsp";
-		  }
-		});
+  function irPrincipal(obj){
+	  obj.style.backgroundImage="url(playBotonSS.png)";
+	  setTimeout(function(){
+		  $.ajax({
+			  url: "/hello",
+			  method: "post",
+			  data:{nivel: ''+nivelAnterior},
+			 // dataType: "json",
+			  success : function(responseText) {
+					location.href = "descripcionNivel.jsp";
+			  }
+			})
+		  },500);
+	  
 		 
 }
   
@@ -149,6 +156,21 @@
 </head>
 
   <body onload="seleccionarNivel('1');resizePage()">
+  		<div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			if (document.images) {
+				var img1 = new Image();
+				var img2 = new Image();
+				var img3 = new Image();
+				img1.src = "https://"+dominio+"/playBottonSelected.png";
+				img2.src = "https://"+dominio+"/playBotonSS.png";
+				img3.src = "https://"+dominio+"/aspaCerrarSelectYourLevelSelect.png";
+			}
+
+		//--><!]]>
+		</script>
+	</div>
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
 			<img id="selectYourLevel" src="selectYourLevel.png" style="position:absolute;width:48vw">
@@ -622,8 +644,17 @@
  		</div>
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
- 			<img onclick="irPresentacion()" src="aspaCerrarSelectYourLevel.png" style="position:absolute;width:7vw;height:7vw;cursor:pointer;right:11vw">
+ 			<div onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'" style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:11vw"></div>
+ 			
+ 			
+ 			
+ 			
+ 			<!--  
  			<img id="playSelectAllLevel" onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:34.5vw">
+ 			-->
+ 			<div id= "playSelectAllLevel" onclick="javascript:irPrincipal(this)" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:12vw 9vw;position:absolute;right:10vw;top:34.5vw;cursor:pointer;width:12vw;height:9vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
+ 			
+ 			
  		</div>
   </body>
 </html>
