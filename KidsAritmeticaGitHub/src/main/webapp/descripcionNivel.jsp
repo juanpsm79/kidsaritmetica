@@ -9,6 +9,10 @@ String nombreImagen = "GoToLevel"+nivel+".png";
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PlayAddition</title>
   <style type="text/css">
+  	#preload-01 { background: url(http://test.playaddition.com/playBottonSelected.png) no-repeat -9999px -9999px; }
+	#preload-02 { background: url(http://test.playaddition.com/playBotonSS.png) no-repeat -9999px -9999px; }
+	#preload-03 { background: url(http://test.playaddition.com/aspaCerrarSelectYourLevel.png) no-repeat -9999px -9999px; }
+	#preload-04 { background: url(http://test.playaddition.com/aspaCerrarSelectYourLevelSelect.png) no-repeat -9999px -9999px; }
   	@font-face{
 	 	font-family:'BerlinDemi';
  		src: url('BerlinDemi.ttf');

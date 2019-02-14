@@ -105,9 +105,9 @@ var dominio = "test.playaddition.com";
 		 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;//unidades1;
 		 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
-		 document.getElementById('sumaDecenasCifra').innerHTML ="";
+		// document.getElementById('sumaDecenasCifra').innerHTML ="";
 		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
-		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
+		// document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -141,12 +141,11 @@ var dominio = "test.playaddition.com";
 	  } else {
 		  if (!bloquearInteracciones) {
 			  bloquearInteracciones = true;
-			  var decenas = document.getElementById('sumaDecenasCifra').innerHTML;
+			  /*var decenas = document.getElementById('sumaDecenasCifra').innerHTML;
 			  if(document.getElementById('sumaDecenasCifra').innerHTML=='' ||
 					  document.getElementById('sumaDecenasCifra').innerHTML==null)
-				  decenas="0";
-			  var sumaAlumno = (10*parseInt(decenas, 10) +
-				  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
+				  decenas="0";*/
+			  var sumaAlumno = (parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
 			  
 			  var operador1 = (parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
 			  
@@ -160,13 +159,13 @@ var dominio = "test.playaddition.com";
 				  setTimeout(asyncCall, 600);
 			  } else {
 				  if(sumas[indexSuma].resultado.length == 2) {
-					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
-						  document.getElementById('sumaDecenasCifra').style.color="red";
+					  /*if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
+						  document.getElementById('sumaDecenasCifra').style.color="red";*/
 					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 			  	  } else if(sumas[indexSuma].resultado.length == 1) {
-			  		  if(document.getElementById('sumaDecenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaDecenasCifra').style.color="red";
+			  		  /*if(document.getElementById('sumaDecenasCifra').innerHTML!="0")  
+			  			  document.getElementById('sumaDecenasCifra').style.color="red";*/
 					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 			  	  }
@@ -270,24 +269,26 @@ var dominio = "test.playaddition.com";
   	  if(!bloquearInteracciones) {
   		var digito = document.getElementById(idDigito).firstElementChild.firstChild.nodeValue;
   	 	document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-  	  	if(digitoSuma=='sumaUnidades'){
+  	  	/*if(digitoSuma=='sumaUnidades'){
   		  document.getElementById(''+digitoSuma).style.borderColor="black";
   		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
   		  divCifra.style.borderColor="red";
   		  digitoSuma=''+divCifra.id;
-  	  	}
+  	  	}*/
   	  }
     }
   	
   	function setSelected (id) {
   		digitoSuma = id;
-  		if (id=='sumaDecenas') {
+  		/*if (id=='sumaDecenas') {
   			document.getElementById("sumaDecenas").style.borderColor="red";
   			document.getElementById("sumaUnidades").style.borderColor="black";
   		} else if (id=='sumaUnidades') {
   			document.getElementById("sumaDecenas").style.borderColor="black";
   			document.getElementById("sumaUnidades").style.borderColor="red";
-  		}
+  		}*/
+  		
+  		document.getElementById("sumaUnidades").style.borderColor="red";
   	}
   	
   	function makeUnselectable() {
@@ -423,22 +424,22 @@ var dominio = "test.playaddition.com";
 			
 				<!--PRIMER OPERADOR  -->
 				<div style="width:62vw;left:16.85vw;position:absolute;bottom:30.3vw">
-					<label id="unidadesCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
+					<label id="unidadesCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 					
 				<!--SEGUNDO OPERADOR  -->
 				<div style="width:62vw;left:16.85vw;position:absolute;top:9.65vw">	 
-						<label id="unidadesCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">3</label>
+						<label id="unidadesCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 				<!--RESULTADO SUMA -->
 				<div style="width:62vw;position:absolute;top:20vw">
-					
+					<!--
 						<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 						  style="position:absolute;left:8.1vw;width:6.1vw;height:7.4vw;top:0.95vw;border:0.3vw solid black;">
 							<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
-					
+					-->
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
 							style="position:absolute;left:16.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid red">
 							<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>

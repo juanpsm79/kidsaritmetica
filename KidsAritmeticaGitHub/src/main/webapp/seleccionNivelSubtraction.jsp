@@ -52,10 +52,10 @@ var dominio = "test.playaddition.com";
 	  $("#10").flip({axis: 'y',trigger: 'click', reverse: true});
 	  
 	  $("#11").flip({axis: 'y',trigger: 'click', reverse: true});
-	 /* $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
+	  $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#13").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#14").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#15").flip({axis: 'y',trigger: 'click', reverse: true});
+	  /*$("#15").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#16").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#17").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#18").flip({axis: 'y',trigger: 'click', reverse: true});
@@ -84,7 +84,7 @@ var dominio = "test.playaddition.com";
 	  $("#39").flip({axis: 'y',trigger: 'click', reverse: true});
 	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});*/
 	  window.addEventListener("orientationchange", resizePageHandler);
-	  for (i = 1; i <= 11; i++)
+	  for (i = 1; i <= 14; i++)
 	   	document.getElementById(''+i).style.position="absolute";
   } );
   
@@ -106,7 +106,10 @@ var dominio = "test.playaddition.com";
 			  data:{nivel: ''+nivelAnterior},
 			 // dataType: "json",
 			  success : function(responseText) {
-					location.href = "plantilla1resta.jsp";
+				  if(nivelAnterior<=11)
+						location.href = "plantilla1resta.jsp";
+				  else
+						location.href = "plantilla2resta.jsp";
 			  }
 			})
 		  },500);
@@ -298,7 +301,6 @@ var dominio = "test.playaddition.com";
  			</div>
  			
  			<div style="position:absolute;top:7.6vw;width:75vw;height:7vw">
-			
 	  			<div id="11" onclick="seleccionarNivel('11')" style="position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;
 	  			 text-align:center">
 	  			 
@@ -311,6 +313,40 @@ var dominio = "test.playaddition.com";
   					
   					
 				</div>
+				
+				<div id="12" onclick="seleccionarNivel('12')"  style="position:absolute;left:7.6vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;
+				text-align:center">
+				
+				<div class="front" style="position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormal.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)">
+							<label onclick="seleccionarNivel('12')" style="position:absolute;left:0.9vw;top:0.8vw;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('12')" style="position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold">12</label>
+					</div>	
+					<div class="back" style="position:absolute;background:url(12c.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red">
+  					</div>
+				</div>
+				
+				<div id="13" onclick="seleccionarNivel('13')" style="position:absolute;left:15vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;
+				text-align:center">
+				
+				<div class="front" style="position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormal.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)">
+							<label onclick="seleccionarNivel('13')" style="position:absolute;left:0.9vw;top:0.8vw;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('13')" style="position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold">13</label>
+					</div>	
+					<div class="back" style="position:absolute;background:url(13c.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red">
+  					</div>
+				</div>
+
+				<div id="14" onclick="seleccionarNivel('14')" style="position:absolute;left:22.4vw;top:0vw;width:7vw;height:7vw;cursor:pointer;
+				text-align:center">
+				
+				<div class="front" style="position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormal.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)">
+							<label onclick="seleccionarNivel('14')" style="position:absolute;left:0.9vw;top:0.8vw;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold">LEVEL</label>
+							<label onclick="seleccionarNivel('14')" style="position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold">14</label>
+					</div>	
+					<div class="back" style="position:absolute;background:url(14c.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red">
+  					</div>
+				</div>
+				
 			</div>
  			
  			
