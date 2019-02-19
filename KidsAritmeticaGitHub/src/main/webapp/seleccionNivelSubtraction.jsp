@@ -118,9 +118,8 @@ var dominio = "test.playaddition.com";
 }
   
   function seleccionarNivel(idNivel){
-	  /*if(nivelAnterior!=null){
-		  $("#"+nivelAnterior).flip(false);
-	  }*/
+	  if(idNivel!="1")
+		  document.getElementById("1front").style.borderColor="rgb(32, 56, 100)";
 	  nivelAnterior = idNivel;
   }
   
