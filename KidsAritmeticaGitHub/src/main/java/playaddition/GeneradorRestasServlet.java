@@ -307,7 +307,8 @@ public class GeneradorRestasServlet extends HttpServlet {
 				response.getWriter().write(resultado.toString());
 			}
 
-		}
+		}else 
+			response.getWriter().write("{\"resultado\":\"1\"}");
 		request.getSession().setAttribute("restas", restaNiveles.get(request.getParameter("nivel")));
 	}
 
