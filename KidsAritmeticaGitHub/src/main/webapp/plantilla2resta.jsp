@@ -314,7 +314,7 @@ var dominio = "test.playaddition.com";
   	  	if(digitoSuma=='sumaUnidades'){
   		  document.getElementById(''+digitoSuma).style.borderColor="black";
 		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
-		  divCifra.style.borderColor="red";
+		  divCifra.style.borderColor="blue";
 		  digitoSuma=''+divCifra.id;
   	  	}
   	  }
@@ -322,21 +322,12 @@ var dominio = "test.playaddition.com";
   	
   	function setSelected (id) {
   		digitoSuma = id;
-  		/*if (id=='sumaCentenas') {
-  			
-  			document.getElementById("sumaCentenas").style.borderColor="red";
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  		} else*/ if (id=='sumaDecenas') {
-  			
-  			//document.getElementById("sumaCentenas").style.borderColor="black";
-  			document.getElementById("sumaDecenas").style.borderColor="red";
+  		if (id=='sumaDecenas') {
+  			document.getElementById("sumaDecenas").style.borderColor="blue";
   			document.getElementById("sumaUnidades").style.borderColor="black";
   		} else if (id=='sumaUnidades') {
-  			
-  			//document.getElementById("sumaCentenas").style.borderColor="black";
   			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="red";
+  			document.getElementById("sumaUnidades").style.borderColor="blue";
   		}
   	}
   	
@@ -470,7 +461,7 @@ var dominio = "test.playaddition.com";
 				</div>
 			</div>
 				
-			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
+			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta2.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:19vw;position:absolute;top:1vw">
 					<a id="llevadaCentenas" style="position:absolute">
@@ -508,7 +499,7 @@ var dominio = "test.playaddition.com";
 						</a>
 					
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:24.3vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid red">
+							style="position:absolute;left:24.3vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid blue">
 								<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
 						</a>
 				</div>

@@ -269,26 +269,12 @@ var dominio = "test.playaddition.com";
   	  if(!bloquearInteracciones) {
   		var digito = document.getElementById(idDigito).firstElementChild.firstChild.nodeValue;
   	 	document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
-  	  	/*if(digitoSuma=='sumaUnidades'){
-  		  document.getElementById(''+digitoSuma).style.borderColor="black";
-  		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
-  		  divCifra.style.borderColor="red";
-  		  digitoSuma=''+divCifra.id;
-  	  	}*/
   	  }
     }
   	
   	function setSelected (id) {
   		digitoSuma = id;
-  		/*if (id=='sumaDecenas') {
-  			document.getElementById("sumaDecenas").style.borderColor="red";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  		} else if (id=='sumaUnidades') {
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="red";
-  		}*/
-  		
-  		document.getElementById("sumaUnidades").style.borderColor="red";
+  		document.getElementById("sumaUnidades").style.borderColor="blue";
   	}
   	
   	function makeUnselectable() {
@@ -420,16 +406,17 @@ var dominio = "test.playaddition.com";
 				</div>
 			</div>	
 				
-			<div style="position:absolute;left:22.45vw;width:26vw;height:30vw;background-size:26vw 30vw;background-image:url(cuadroSuma1.png);background-repeat:no-repeat">
+			<div style="position:absolute;left:22.45vw;width:20vw;height:30vw;background-size:20vw 30vw;background-image:url(cuadroResta1.png);background-repeat:no-repeat">
+
 			
 				<!--PRIMER OPERADOR  -->
-				<div style="width:62vw;left:16.85vw;position:absolute;bottom:30.3vw">
+				<div style="width:62vw;left:11vw;position:absolute;bottom:30.3vw">
 					<label id="unidadesCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 					
 				<!--SEGUNDO OPERADOR  -->
-				<div style="width:62vw;left:16.85vw;position:absolute;top:9.65vw">	 
+				<div style="width:62vw;left:11vw;position:absolute;top:9.65vw">	 
 						<label id="unidadesCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
@@ -441,7 +428,7 @@ var dominio = "test.playaddition.com";
 							<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
 					-->
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:16.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid red">
+							style="position:absolute;left:10.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid blue">
 							<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
 				</div>
 			
@@ -489,7 +476,7 @@ var dominio = "test.playaddition.com";
 			
 			<div id="capaBotonCheckSuma" onclick="comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 				<img src="checkBoton.png" width="1px" height="1px" border="0">
-				<img src="checkBotonSelect.png" width="1px" height="1px" border="0">
+				<img src="checkBotonClick.png" width="1px" height="1px" border="0">
 				<img src="startOverBoton.png" width="1px" height="1px" border="0">
 				<img src="levelUpBoton.png" width="1px" height="1px" border="0">
 			</div>

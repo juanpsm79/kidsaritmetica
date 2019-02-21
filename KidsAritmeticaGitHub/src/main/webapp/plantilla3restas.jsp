@@ -343,7 +343,7 @@ List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
   		  var divCifra = document.getElementById(''+digitoSuma).previousElementSibling;
   		  if(divCifra.id=='coma')
   			  divCifra = divCifra.previousElementSibling;
-  		  divCifra.style.borderColor="red";
+  		  divCifra.style.borderColor="blue";
 		  digitoSuma=''+divCifra.id;
   	  }
     }
@@ -351,25 +351,25 @@ List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
   	function setSelected (id) {
   		digitoSuma = id;
   		if (id=='sumaMillares') {
-  			document.getElementById("sumaMillares").style.borderColor="red";
+  			document.getElementById("sumaMillares").style.borderColor="blue";
   			document.getElementById("sumaCentenas").style.borderColor="black";
   			document.getElementById("sumaDecenas").style.borderColor="black";
   			document.getElementById("sumaUnidades").style.borderColor="black";
   		} else if (id=='sumaCentenas') {
   			document.getElementById("sumaMillares").style.borderColor="black";
-  			document.getElementById("sumaCentenas").style.borderColor="red";
+  			document.getElementById("sumaCentenas").style.borderColor="blue";
   			document.getElementById("sumaDecenas").style.borderColor="black";
   			document.getElementById("sumaUnidades").style.borderColor="black";
   		} else if (id=='sumaDecenas') {
   			document.getElementById("sumaMillares").style.borderColor="black";
   			document.getElementById("sumaCentenas").style.borderColor="black";
-  			document.getElementById("sumaDecenas").style.borderColor="red";
+  			document.getElementById("sumaDecenas").style.borderColor="blue";
   			document.getElementById("sumaUnidades").style.borderColor="black";
   		} else if (id=='sumaUnidades') {
   			document.getElementById("sumaMillares").style.borderColor="black";
   			document.getElementById("sumaCentenas").style.borderColor="black";
   			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="red";
+  			document.getElementById("sumaUnidades").style.borderColor="blue";
   		}
   	}
   	
@@ -503,7 +503,7 @@ List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
 				</div>
 			</div>
 				
-			<div style="position:absolute;left:22.45vw;width:41.8vw;height:34.5vw;background-size:41.8vw 33.5vw;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
+			<div style="position:absolute;left:22.45vw;width:41.8vw;height:34.5vw;background-size:41.8vw 33.5vw;background-image:url(cuadroResta3.png);background-repeat:no-repeat">
 			<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:18.5vw;position:absolute;top:1vw">
 					<a id="llevadaCentenas" style="position:absolute">
@@ -549,7 +549,7 @@ List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
 						</a>
 					
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:32.3vw;width:6vw;height:7.4vw;border:0.3vw solid red">
+							style="position:absolute;left:32.3vw;width:6vw;height:7.4vw;border:0.3vw solid blue">
 								<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;position:absolute;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
 						</a>
 				</div>
