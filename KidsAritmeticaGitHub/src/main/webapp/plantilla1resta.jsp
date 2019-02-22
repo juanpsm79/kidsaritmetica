@@ -370,26 +370,6 @@ var dominio = "test.playaddition.com";
 </head>
 
   <body onload="javascript:calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
-  	<div class="hidden">
-	<script type="text/javascript">
-		<!--//--><![CDATA[//><!--
-			if (document.images) {
-				var img1 = new Image();
-				var img2 = new Image();
-				var img3 = new Image();
-				var img4 = new Image();
-				var img5 = new Image();
-				img1.src = "https://"+dominio+"/cerrarAspaSelect.png";
-				img2.src = "https://"+dominio+"/startOverBoton.png";
-				img3.src = "https://"+dominio+"/correctBoton.png";
-				img4.src = "https://"+dominio+"/levelUpBoton.png";
-				img5.src = "https://"+dominio+"/checkBotonClick.png";
-			}
-
-		//--><!]]>
-		</script>
-	</div>
-  	
 	<div id="contenedor" class="unselectable" style="position:absolute;width:99vw">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
@@ -422,11 +402,6 @@ var dominio = "test.playaddition.com";
 				
 				<!--RESULTADO SUMA -->
 				<div style="width:62vw;position:absolute;top:20vw">
-					<!--
-						<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
-						  style="position:absolute;left:8.1vw;width:6.1vw;height:7.4vw;top:0.95vw;border:0.3vw solid black;">
-							<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
-					-->
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
 							style="position:absolute;left:10.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid blue">
 							<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>

@@ -236,7 +236,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
 				response.getWriter().write(resultado.toString());
 			}
-		}else if (nivel==13) {
+		} else if (nivel==13) {
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 13: two digits/one digit. Subtrahend is bigger";
 			try {
@@ -307,7 +307,37 @@ public class GeneradorRestasServlet extends HttpServlet {
 				response.getWriter().write(resultado.toString());
 			}
 
-		}else 
+		} else if (nivel==24 || nivel==25) {
+			StringBuilder resultado = new StringBuilder("{\"restas\":[");
+			leyenda = "Level 24/25: two digits/two digits. Regrouping in tens";
+			try {
+				while (restaNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
+					nuevaResta = generador.getOperandosNivel2425(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+					resultado.append("{\"resultado\": \"" + nuevaResta.getResultadoResta() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+							+ nuevaResta.getOperando2() + "\"},");
+				}
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				nuevaResta = new Resta();
+				nuevaResta.setOperando1(-1);
+				nuevaResta.setOperando2(-1);
+				restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+				resultado.append("{\"resultado\": \"" + nuevaResta.getOperando1() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+						+ nuevaResta.getOperando2() + "\",\"nivel\": \""+nuevaResta.getOperando1() +"\"},");
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}
+			if(nivel==24)
+				request.getSession().setAttribute("wa", true);
+			else
+				request.getSession().setAttribute("wa", false);
+		} else 
 			response.getWriter().write("{\"resultado\":\"1\"}");
 		request.getSession().setAttribute("restas", restaNiveles.get(request.getParameter("nivel")));
 	}
