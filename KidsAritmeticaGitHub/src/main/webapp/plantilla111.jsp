@@ -2,8 +2,7 @@
 <%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
-List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
-boolean wa = (Boolean)session.getAttribute("wa");
+List<Resta>  sumas = (List<Resta>) session.getAttribute("restas");   
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -15,7 +14,7 @@ boolean wa = (Boolean)session.getAttribute("wa");
 	#preload-05 { background: url(http://test.playaddition.com/startOverBoton.png) no-repeat -9999px -9999px; }
 	#preload-06 { background: url(http://test.playaddition.com/levelUpBoton.png) no-repeat -9999px -9999px; }
 	#preload-07 { background: url(http://test.playaddition.com/correctBoton.png) no-repeat -9999px -9999px; }
-   @font-face{
+  @font-face{
 	 	font-family:'BerlinDemi';
  		src: url('BerlinDemi.ttf');
 	}
@@ -49,8 +48,7 @@ boolean wa = (Boolean)session.getAttribute("wa");
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   
   
-  
- <!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -59,10 +57,10 @@ boolean wa = (Boolean)session.getAttribute("wa");
 
   gtag('config', 'UA-130256336-3');
 </script>
--->
 
+--> 
 
-<!-- Global site tag (gtag.js) - Google Analytics-->
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -71,81 +69,50 @@ boolean wa = (Boolean)session.getAttribute("wa");
 
   gtag('config', 'UA-130256336-1');
 </script>
-  
-   
+
+
+
   
   <script>
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
   $( function() {
-	  	
-  } );           
-  var nivel = <%=nivel%>;
-  var assistanceMode = <%=wa%>;
-  var assistance = false;
-  var assistanceComplete = false;
+
+  } );
   var sumas = [];
   var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
- if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("14"))
+ if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
+		  nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("25") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
 	  			sumasNecesarias = 15;
-   Iterator<Resta> iter = restas.iterator();
+   Iterator<Resta> iter = sumas.iterator();
    int i = 0;
    while(iter.hasNext()){
-	   Resta suma = iter.next();%>
- 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>"};
+ 	  Resta suma = iter.next();%>
+ 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>"};
   <%i++;}%>
 	
-  function subirNivel() {
+	function subirNivel() {
 		nivel++;
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  location.href = "plantilla2resta.jsp";
-			  }  
+				  location.href = "descripcionNivel.jsp";
+			  } 
 			});
-	}
-  
+  		}
+	
 
 	function calcularSuma() {
-		indexSuma++
-		 if(sumas[indexSuma].operador1<10){
-			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
-			 document.getElementById('decenasCifra1').innerHTML = "";
-			// document.getElementById("unidadesCifra1").style.left = "84px";
-		 }else {
-			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
-			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
-		 }
-		
-		 if(sumas[indexSuma].operador2<10){
-			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
-			 document.getElementById('decenasCifra2').innerHTML = "";
-			 //document.getElementById("unidadesCifra2").style.left = "84px";
-		 }else {
-			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(1);
-			 document.getElementById('decenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(0);
-		 }
-		 
+		 indexSuma++;
+		 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;//unidades1;
+		 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
-		 document.getElementById('sumaDecenasCifra').innerHTML ="";
-		 //document.getElementById('sumaCentenasCifra').innerHTML ="";
-		 
 		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
-		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
-		// document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
-
-	     document.getElementById("casillaLlevada").style.borderStyle = "none";
-		 document.getElementById('cifraCasillaLlevada').innerHTML="";
-		 
-		 document.getElementById("tachada").style.visibility="hidden";
-	  	 document.getElementById("eluno").style.visibility="hidden";
-//		 document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
-	     
 	}
 	
 	function asyncCall() {
@@ -171,32 +138,15 @@ var dominio = "test.playaddition.com";
   
   
   function comprobarSuma(){
-	  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
-	  if(document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null ||
-	      document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null ) {
+	  if((document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null) ) {
 		  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBoton.png)';
-		  	return;
+		  return;
 	  } else {
 		  if (!bloquearInteracciones) {
 			  bloquearInteracciones = true;
-			  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
-			  /*var centenas = document.getElementById('sumaCentenasCifra').innerHTML;
-			  if(document.getElementById('sumaCentenasCifra').innerHTML=='' ||
-					  document.getElementById('sumaCentenasCifra').innerHTML==null)
-				  centenas="0";*/
-			  var sumaAlumno = (
-					  10*parseInt(document.getElementById('sumaDecenasCifra').innerHTML, 10) +
-				  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
-			  
-			  var operador1 = (10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
-				  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
-			  
-			  var decenas = document.getElementById('decenasCifra2').innerHTML;
-			  if(document.getElementById('decenasCifra2').innerHTML=='' ||
-					  document.getElementById('decenasCifra2').innerHTML==null)
-				  decenas="0";
-			  var operador2 = (10*parseInt(decenas, 10) +
-				  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
+			  var sumaAlumno = (parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
+			  var operador1 = (parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
+			  var operador2 = (parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
 			  
 			  if (sumaAlumno == operador1-operador2){
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(correctBoton.png)";
@@ -204,18 +154,10 @@ var dominio = "test.playaddition.com";
 				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/<%=sumasNecesarias%>";
 				  setTimeout(asyncCall, 600);
 			  } else {
-				 if(sumas[indexSuma].resultado.length == 2) {
-					 /* if(document.getElementById('sumaCentenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaCentenasCifra').style.color="red";*/
-					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
-						  document.getElementById('sumaDecenasCifra').style.color="red";
+				  if(sumas[indexSuma].resultado.length == 2) {
 					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
-				  }else if(sumas[indexSuma].resultado.length == 1) {
-					  /*if(document.getElementById('sumaCentenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaCentenasCifra').style.color="red";*/
-			  		  if(document.getElementById('sumaDecenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaDecenasCifra').style.color="red";
+			  	  } else if(sumas[indexSuma].resultado.length == 1) {
 					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 			  	  }
@@ -226,7 +168,7 @@ var dominio = "test.playaddition.com";
 					  	calcularSuma();
 			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 			  			bloquearInteracciones = false;
-			  			document.getElementById('capaBotonCheckSuma').onclick=function(){this.style.backgroundImage="url(checkBotonClick.png)";setTimeout(comprobarSuma, 400)}
+			  			document.getElementById('capaBotonCheckSuma').onclick=function(){this.style.backgroundImage="url(checkBotonClick.png)";setTimeout(comprobarSuma, 500)}
 			  			document.body.onkeydown = function(evObject){
 				  			if(window.event)
 				  		  	      var keyCode = window.event.keyCode;       // IE
@@ -235,7 +177,7 @@ var dominio = "test.playaddition.com";
 				  	  		if(!bloquearInteracciones) {
 				  		  		makeUnselectable();
 				  		  		if(keyCode==8 || keyCode==46)
-				  		  			document.getElementById(""+casillaSeleccionada).firstElementChild.innerHTML ="";
+				  		  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
 				  		  		else if (keyCode==13)
 				  		  			comprobarSuma();
 				  	  		}
@@ -259,7 +201,7 @@ var dominio = "test.playaddition.com";
 				  	  		if(!bloquearInteracciones) {
 				  		  		makeUnselectable();
 				  		  		if(keyCode==8 || keyCode==46)
-				  		  			document.getElementById(""+casillaSeleccionada).firstElementChild.innerHTML ="";
+				  		  			document.getElementById(""+digitoSuma).firstElementChild.innerHTML ="";
 				  		  		else if (keyCode==13)
 				  		  			comprobarSuma();
 				  	  		}
@@ -318,35 +260,14 @@ var dominio = "test.playaddition.com";
   	function ponerDigito (idDigito) {
   	  if(!bloquearInteracciones) {
   		var digito = document.getElementById(idDigito).firstElementChild.firstChild.nodeValue;
-  	 	document.getElementById(''+casillaSeleccionada).firstElementChild.innerHTML = ""+digito;
-  	  	if(casillaSeleccionada=='sumaUnidades'){
-  		  document.getElementById(''+casillaSeleccionada).style.borderColor="black";
-		  var divCifra = document.getElementById(''+casillaSeleccionada).previousElementSibling;
-		  divCifra.style.borderColor="blue";
-		  casillaSeleccionada=''+divCifra.id;
-  	  	} else if(casillaSeleccionada=="casillaLlevada"){
-  	  		document.getElementById("cifraCasillaLlevada").innerHTML = ""+digito;
-  	  		if(document.getElementById("eluno").style.visibility=="hidden")
-  	  			document.getElementById("unidadesCifra1").style.cursor="pointer";
-  		}
+  	 	document.getElementById(''+digitoSuma).firstElementChild.innerHTML = ""+digito;
   	  }
     }
   	
   	function setSelected (id) {
-  		casillaSeleccionada = id;
-  		if (id=='sumaDecenas') {
-  			document.getElementById("sumaDecenas").style.borderColor="blue";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  			document.getElementById("casillaLlevada").style.border = "";
-  		} else if (id=='sumaUnidades') {
-  			document.getElementById("sumaDecenas").style.borderColor="black";
+  		digitoSuma = id;
+  		if (id=='sumaUnidades') {
   			document.getElementById("sumaUnidades").style.borderColor="blue";
-  			document.getElementById("casillaLlevada").style.border = "";
-  		} else if (id=='casillaLlevada'){
-  			document.getElementById("sumaDecenas").style.borderColor="black";
-  			document.getElementById("sumaUnidades").style.borderColor="black";
-  			document.getElementById("casillaLlevada").style.border = "0.2vw solid blue";
-	  		document.getElementById("casillaLlevada").style.borderRadius="0.1vw";
   		}
   	}
   	
@@ -356,11 +277,12 @@ var dominio = "test.playaddition.com";
  	}
   	
   	var emp;
-  	var casillaSeleccionada='sumaUnidades';
+  	var digitoSuma='sumaUnidades';
   	var nivelIniciado = true;
   	var sumasActuales = 0;
+  	var nivel = <%=nivel%>;
   	var bloquearInteracciones = false;
-  	var navegador;  
+  	var navegador;
   	
   	function borrarNumero(evObject) {
   		if(window.event)
@@ -437,36 +359,31 @@ var dominio = "test.playaddition.com";
   			setTimeout(function(){obj.style.backgroundColor=""},500);
   		}
   	}
-  	
-  	function initAssistance() {
-	  		assistance = true;
-	  		document.getElementById("tachada").style.visibility="visible";
-	  		document.getElementById("tachada").style.backgroundSize="6vw 6vw";
-	  		if(assistanceMode){
-	  			var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10) - 1;
-	  			document.getElementById("cifraCasillaLlevada").innerHTML = ""+numero;
-	  			document.getElementById("eluno").style.visibility="visible";
-	  			document.getElementById("decenasCifra1").style.cursor="default";
-	  			assistance = false;
-	  		}else{
-	  			if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden")
-	  				document.getElementById("unidadesCifra1").style.cursor="pointer";
-	  			setSelected("casillaLlevada");
-	  		}
-  	}
-  	
-  	function setOneAssistance(){
-  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
-  			document.getElementById("eluno").style.visibility="visible";
-  			document.getElementById("unidadesCifra1").style.cursor="default";
-  		}
-  	}
 	  
   </script>
 </head>
 
   <body onload="javascript:calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
+  	<div class="hidden">
+	<script type="text/javascript">
+		<!--//--><![CDATA[//><!--
+			if (document.images) {
+				var img1 = new Image();
+				var img2 = new Image();
+				var img3 = new Image();
+				var img4 = new Image();
+				var img5 = new Image();
+				img1.src = "https://"+dominio+"/cerrarAspaSelect.png";
+				img2.src = "https://"+dominio+"/startOverBoton.png";
+				img3.src = "https://"+dominio+"/correctBoton.png";
+				img4.src = "https://"+dominio+"/levelUpBoton.png";
+				img5.src = "https://"+dominio+"/checkBotonClick.png";
+			}
 
+		//--><!]]>
+		</script>
+	</div>
+  	
 	<div id="contenedor" class="unselectable" style="position:absolute;width:99vw">
 			
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
@@ -481,64 +398,37 @@ var dominio = "test.playaddition.com";
 				<div style="width:16.15vw;position:absolute;top:13.5vw">
 						<label id="minutero" style="color:black;font-size:4.4vw;font-family:digital7mono">00:00</label>
 				</div>
-			</div>
+			</div>	
 				
-			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta2.png);background-repeat:no-repeat">
-				<!--CASILLAS LLEVADA -->
-				<div style="width:62vw;left:19vw;position:absolute;top:1vw">
-					<div id="casillaLlevada" style="position:absolute;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
-							<label id="cifraCasillaLlevada" style="position:absolute;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
-					</div>
-					<!--  
-						<a id="llevadaDecenas" style="position:absolute;left:8.1vw">
-							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
-						</a>
-					-->
-				</div>
-					
+			<div style="position:absolute;left:22.45vw;width:24vw;height:30vw;background-size:24vw 30vw;background-image:url(cuadroSuma111.png);background-repeat:no-repeat">
+			
 				<!--PRIMER OPERADOR  -->
-				<div style="width:62vw;left:17.5vw;position:absolute;bottom:31.5vw">
-							<label id="decenasCifra1" style="position:absolute;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
-							<div id="tachada" onclick="javascript:initAssistance()" style="width:6vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;left:-0.5vw;position:absolute;top:3.5vw;font-family:Calibri"></div>
-							<label id="eluno" style="position:absolute;left:5.9vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
-							<label id="unidadesCifra1" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:setOneAssistance()">&nbsp;</label>
-				</div>	
+				<div style="width:62vw;left:14.85vw;position:absolute;bottom:30.3vw">
+					<label id="unidadesCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
+				</div>
+				
 					
 				<!--SEGUNDO OPERADOR  -->
-				<div style="width:62vw;left:17.5vw;position:absolute;top:13vw">	 
-						<label id="decenasCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
-						<label id="unidadesCifra2" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
+				<div style="width:62vw;left:14.85vw;position:absolute;top:9.65vw">	 
+						<label id="unidadesCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 				<!--RESULTADO SUMA -->
-				<div style="width:62vw;position:absolute;top:24vw;left:0.6vw">
-						<!--		
-						<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:8.1vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black;">
-								<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
-						</a>
-						-->
-					
-						<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
-							style="position:absolute;left:16.2vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black">
-								<label id="sumaDecenasCifra" onMouseOver="this.style.cursor='pointer'" style="position:absolute;bottom:-1.5vw;left:0.8vw;position:absolute;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
-						</a>
-					
+				<div style="width:62vw;position:absolute;top:20vw">
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:24.3vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid blue">
-								<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
-						</a>
+							style="position:absolute;left:14.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid blue">
+							<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
 				</div>
 			
 			</div>
-				
-			<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
-			style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+			<div onclick="javascript:location.href='seleccionNivel.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'" 
+				style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+				<img src="cerrarAspaSelect.png" width="1px" height="1px" border="0">
 			</div>
 				
-		   
+
 			
-			<!-- CAPAS DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
+			<!-- CAPA DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
 			<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
 				<div id="cero" onclick="onClickCifra(this)" style="position:absolute;top:0.468vw;left:0.46vw;width:6.105vw;height:9.175vw">
 					<a style="position:absolute;bottom:-0.6vw;left:0.6vw;color:black;font-family:Calibri;font-size:9vw">0</a>
@@ -571,8 +461,9 @@ var dominio = "test.playaddition.com";
 					<a style="position:absolute;bottom:-0.6vw;left:0.8vw;color:black;font-family:Calibri;font-size:9vw">9</a>
 				</div>
 			</div>
+			
 			<div id="capaBotonCheckSuma" onclick="javascript:this.style.backgroundImage='url(checkBotonClick.png)';setTimeout(comprobarSuma, 320)" 
-				style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+					style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 			</div>
 	</div>
   </body>

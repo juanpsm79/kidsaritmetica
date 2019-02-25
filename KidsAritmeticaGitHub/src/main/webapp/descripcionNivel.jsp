@@ -25,12 +25,12 @@ var dominio = "test.playaddition.com";
   function irNivel(obj){
 	  obj.style.backgroundImage="url(playBotonSS.png)";
 	  setTimeout(function(){
-		  if(nivel<=13)
-				location.href = "plantilla1.jsp";
-		  else if(nivel<=22)
-				location.href = "plantilla2.jsp";
+		  if(nivel<=11)
+				location.href = "plantilla1resta.jsp";
+		  else if(nivel<=26)
+				location.href = "plantilla2resta.jsp";
 		  else
-				location.href = "plantilla3.jsp";
+				location.href = "plantilla3resta.jsp";
 		  },500);
   }
   
