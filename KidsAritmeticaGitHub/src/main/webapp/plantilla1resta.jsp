@@ -94,7 +94,7 @@ var dominio = "test.playaddition.com";
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  location.href = "plantilla1resta.jsp";
+				  location.href = "descripcionSubtraction.jsp";
 			  } 
 			});
   		}

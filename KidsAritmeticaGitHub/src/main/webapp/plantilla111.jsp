@@ -100,7 +100,7 @@ var dominio = "test.playaddition.com";
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  location.href = "descripcionNivel.jsp";
+				  location.href = "descripcionNivelSubtraction.jsp";
 			  } 
 			});
   		}
@@ -421,7 +421,7 @@ var dominio = "test.playaddition.com";
 				</div>
 			
 			</div>
-			<div onclick="javascript:location.href='seleccionNivel.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'" 
+			<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'" 
 				style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				<img src="cerrarAspaSelect.png" width="1px" height="1px" border="0">
 			</div>

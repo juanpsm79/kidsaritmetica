@@ -1,4 +1,3 @@
-<%@page import="playaddition.model.Suma"%>
 <%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
