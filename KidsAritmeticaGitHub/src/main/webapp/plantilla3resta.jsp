@@ -508,6 +508,7 @@ var dominio = "test.playaddition.com";
 	  			if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!=""){
 	  				document.getElementById("elunoCentenas").style.visibility=="visible";
 	  				document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+9;
+	  				document.getElementById("unidadesCifra1").style.cursor="pointer";
 	  			}	
 	  		}
 	  		if(assistanceMode){
@@ -515,10 +516,13 @@ var dominio = "test.playaddition.com";
 		  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
 		  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoCentenas").style.visibility="visible";
+		  			document.getElementById('decenasCifra1').style.cursor="pointer";
 		  			if(document.getElementById("elunoDecenas").style.visibility=="visible")
 		  				assistance = false;
 		  			
 	  			} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  				if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
+	  					return;
 	  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
 	  				if (numero==0) 
 	  					numero=9; 
@@ -585,11 +589,11 @@ var dominio = "test.playaddition.com";
 							
 							<label id="centenasCifra1" onclick="javascript:initAssistance(this)" style="cursor:pointer;position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 							
-							<div id="tachadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;left:0.2vw;top:3.5vw;width:5vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
+							<div id="tachadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;left:0.2vw;top:3.5vw;width:5vw;height:7vw;cursor:pointer;background-image:url(tacha.png);background-size:6vw 7.5vw;background-repeat:no-repeat;font-family:Calibri"></div>
 							<label id="elunoCentenas" style="position:absolute;left:5vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							
 							<label id="decenasCifra1" onclick="javascript:initAssistance(this)" style="position:absolute;width:6vw;height:6.5vw;left:7.1vw;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
-							<div id="tachadaDecenas" onclick="javascript:initAssistance(this)" style="left:7.3vw;position:absolute;top:3.5vw;width:5vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
+							<div id="tachadaDecenas" onclick="javascript:initAssistance(this)" style="left:7.3vw;position:absolute;top:3.5vw;width:5vw;height:7vw;cursor:pointer;background-image:url(tacha.png);background-size:6vw 7.5vw;background-repeat:no-repeat;font-family:Calibri"></div>
 							<label id="elunoDecenas" style="position:absolute;left:12.1vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							
 							<label id="unidadesCifra1" style="position:absolute;width:6vw;height:6.5vw;left:14.2vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:setOneUnidades(this)">&nbsp;</label>

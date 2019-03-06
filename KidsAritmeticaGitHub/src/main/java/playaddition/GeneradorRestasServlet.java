@@ -224,6 +224,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 				resultado.deleteCharAt(resultado.lastIndexOf(","));
 				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
 				response.getWriter().write(resultado.toString());
+				request.getSession().setAttribute("wa", false);
 			}catch(Exception ex) {
 				ex.printStackTrace();
 				nuevaResta = new Resta();
