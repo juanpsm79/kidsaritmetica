@@ -26,6 +26,8 @@ var dominio = "test.playaddition.com";
 	  obj.style.backgroundImage="url(playBotonSS.png)";
 	  setTimeout(function(){
 		  if(nivel<=11)
+				location.href = "plantilla111.jsp";
+		  else if(nivel==12 || nivel==13)
 				location.href = "plantilla1.jsp";
 		  else if(nivel<=26)
 				location.href = "plantilla2.jsp";

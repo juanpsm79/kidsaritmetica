@@ -1,8 +1,8 @@
-<%@page import="playaddition.model.Resta"%>
+<%@page import="playaddition.model.Suma"%>
 <%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
-List<Resta>  sumas = (List<Resta>) session.getAttribute("restas");   
+List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");   
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -86,11 +86,11 @@ var dominio = "test.playaddition.com";
  if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("17") || 
 		  nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("25") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
 	  			sumasNecesarias = 15;
-   Iterator<Resta> iter = sumas.iterator();
+   Iterator<Suma> iter = sumas.iterator();
    int i = 0;
    while(iter.hasNext()){
- 	  Resta suma = iter.next();%>
- 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>"};
+ 	  Suma suma = iter.next();%>
+ 	  sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoSuma()%>"};
   <%i++;}%>
 	
 	function subirNivel() {
@@ -100,7 +100,7 @@ var dominio = "test.playaddition.com";
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
-				  location.href = "descripcionNivelSubtraction.jsp";
+				  location.href = "descripcionNivel.jsp";
 			  } 
 			});
   		}
@@ -148,7 +148,7 @@ var dominio = "test.playaddition.com";
 			  var operador1 = (parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
 			  var operador2 = (parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
 			  
-			  if (sumaAlumno == operador1-operador2){
+			  if (sumaAlumno == operador1+operador2){
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(correctBoton.png)";
 				  sumasActuales++;
 				  document.getElementById('indicadorSumas').innerHTML = ""+sumasActuales+"/<%=sumasNecesarias%>";
@@ -267,7 +267,7 @@ var dominio = "test.playaddition.com";
   	function setSelected (id) {
   		digitoSuma = id;
   		if (id=='sumaUnidades') {
-  			document.getElementById("sumaUnidades").style.borderColor="blue";
+  			document.getElementById("sumaUnidades").style.borderColor="red";
   		}
   	}
   	
@@ -403,25 +403,25 @@ var dominio = "test.playaddition.com";
 			<div style="position:absolute;left:22.45vw;width:24vw;height:30vw;background-size:24vw 30vw;background-image:url(cuadroSuma111.png);background-repeat:no-repeat">
 			
 				<!--PRIMER OPERADOR  -->
-				<div style="width:62vw;left:14.85vw;position:absolute;bottom:30.3vw">
+				<div style="width:62vw;left:14.55vw;position:absolute;bottom:30.3vw">
 					<label id="unidadesCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 					
 				<!--SEGUNDO OPERADOR  -->
-				<div style="width:62vw;left:14.85vw;position:absolute;top:9.65vw">	 
+				<div style="width:62vw;left:14.55vw;position:absolute;top:9.65vw">	 
 						<label id="unidadesCifra2" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 				</div>
 				
 				<!--RESULTADO SUMA -->
 				<div style="width:62vw;position:absolute;top:20vw">
 						<a id="sumaUnidades" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:14.2vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid blue">
+							style="position:absolute;left:13.8vw;width:6vw;height:7.4vw;top:0.95vw;border:0.3vw solid red">
 							<label id="sumaUnidadesCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label></a>
 				</div>
 			
 			</div>
-			<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'" 
+			<div onclick="javascript:location.href='seleccionNivel.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'" 
 				style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				<img src="cerrarAspaSelect.png" width="1px" height="1px" border="0">
 			</div>

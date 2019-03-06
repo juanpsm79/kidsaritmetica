@@ -126,6 +126,16 @@ var dominio = "test.playaddition.com";
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(2);
 			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
 			 document.getElementById('centenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
+			 var decenas = parseInt(sumas[indexSuma].operador1.charAt(1), 10)
+			 if(decenas==0)
+				 document.getElementById('decenasCifra1').style.cursor="default";
+				 
+		 }
+		 
+		 if(document.getElementById('decenasCifra1').innerHTML == "0"){
+			 document.getElementById('decenasCifra1').style.cursor="default";
+			 document.getElementById("casillaLlevadaDecenas").style.cursor="default";
+			 document.getElementById('cifraCasillaLlevadaDecenas').style.cursor="default";
 		 }
 		 
 		 if (parseInt(sumas[indexSuma].operador2, 10)<10){
@@ -344,12 +354,16 @@ var dominio = "test.playaddition.com";
     		  casillaSeleccionada=''+divCifra.id;
       	} else if(casillaSeleccionada=="casillaLlevadaCentenas"){
   	  		document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+digito;
-  	  		if(document.getElementById("elunoCentenas").style.visibility=="hidden")
+  	  		document.getElementById("elunoCentenas").style.visibility="visible";
+  	  		if(document.getElementById("decenasCifra1").innerHTML!="0" || 
+					(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="") 
+			  )
   	  			document.getElementById("decenasCifra1").style.cursor="pointer";
   		}else if(casillaSeleccionada=="casillaLlevadaDecenas"){
   	  		document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+digito;
   	  		if(document.getElementById("elunoDecenas").style.visibility=="hidden")
   	  			document.getElementById("unidadesCifra1").style.cursor="pointer";
+  	  			//document.getElementById("elunoDecenas").style.visibility=="visible"
   		}
   	  }
     }
@@ -481,45 +495,57 @@ var dominio = "test.playaddition.com";
   	
   	function initAssistance(obj) {
 	  		assistance = true;
-	  		if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas"){
+	  		if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
 	  			document.getElementById("tachadaCentenas").style.visibility="visible";
 	  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
-	  		} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas"){
-	  			document.getElementById("tachadaDecenas").style.visibility="visible";
-	  			document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
+	  		} else if( obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  			if(document.getElementById("decenasCifra1").innerHTML!="0" || 
+	  					(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="") 
+	  			  ) {
+		  				document.getElementById("tachadaDecenas").style.visibility="visible";
+		  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
+	  				}
+	  			if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!=""){
+	  				document.getElementById("elunoCentenas").style.visibility=="visible";
+	  				document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+9;
+	  			}	
 	  		}
 	  		if(assistanceMode){
-	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas"){
+	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
 		  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
 		  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoCentenas").style.visibility="visible";
 		  			if(document.getElementById("elunoDecenas").style.visibility=="visible")
 		  				assistance = false;
 		  			
-	  			} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas"){
-	  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10) - 1;
+	  			} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
+	  				if (numero==0) 
+	  					numero=9; 
+	  				else 
+	  					numero = numero-1;
 		  			document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoDecenas").style.visibility="visible";
 		  			if(document.getElementById("elunoCentenas").style.visibility=="visible")
 		  				assistance = false;
 	  			}
 	  		} else{
-	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas"){
-		  			if(document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="" && document.getElementById("elunoCentenas").style.visibility=="hidden")
-		  				document.getElementById("decenasCifra1").style.cursor="pointer";
+	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
+		  			/*if(document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="" && document.getElementById("elunoCentenas").style.visibility=="hidden")
+		  				document.getElementById("decenasCifra1").style.cursor="pointer";*/
 		  			setSelected("casillaLlevadaCentenas");
-	  			}else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas"){
-	  				if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML!="" && document.getElementById("elunoDecenas").style.visibility=="hidden")
-		  				document.getElementById("unidadesCifra1").style.cursor="pointer";
-	  				document.getElementById("elunoCentenas").style.visibility="visible";
-		  			setSelected("casillaLlevadaDecenas");
+	  			}else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  				if(document.getElementById("decenasCifra1").innerHTML!="0")
+		  				setSelected("casillaLlevadaDecenas");
 	  			}
 	  		}
   	}
   	
-  	function setOneAssistance(){
-		document.getElementById("elunoDecenas").style.visibility="visible";
-		document.getElementById("unidadesCifra1").style.cursor="default";
+  	function setOneUnidades(){
+  		if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML != ""){
+			document.getElementById("elunoDecenas").style.visibility="visible";
+			document.getElementById("unidadesCifra1").style.cursor="default";
+  		}
   	}
 	  
   </script>
@@ -546,25 +572,27 @@ var dominio = "test.playaddition.com";
 			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta3.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:11.5vw;position:absolute;top:1vw">
-					<div id="casillaLlevadaCentenas" style="position:absolute;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
-							<label id="cifraCasillaLlevadaCentenas" style="position:absolute;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
+					<div id="casillaLlevadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
+							<label id="cifraCasillaLlevadaCentenas" style="position:absolute;cursor:pointer;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
 					</div>
-					<div id="casillaLlevadaDecenas" style="position:absolute;left:7.1vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
-							<label id="cifraCasillaLlevadaDecenas" style="position:absolute;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
+					<div id="casillaLlevadaDecenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;left:7.1vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
+							<label id="cifraCasillaLlevadaDecenas" style="position:absolute;left:0.15vw;top:-0.6vw;cursor:pointer;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
 					</div>
 				</div>
 					
 				<!--PRIMER OPERADOR  -->
 				<div style="width:62vw;left:10vw;position:absolute;bottom:31.5vw">
+							
 							<label id="centenasCifra1" onclick="javascript:initAssistance(this)" style="cursor:pointer;position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
-							<div id="tachadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;left:0.2vw;top:3.5vw;width:6vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
-							<label id="elunoCentenas" style="position:absolute;left:5.4vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							
-							<label id="decenasCifra1" onclick="javascript:initAssistance(this)" style="position:absolute;left:7.1vw;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
-							<div id="tachadaDecenas" onclick="javascript:initAssistance(this)" style="left:7.3vw;position:absolute;top:3.5vw;width:6vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
-							<label id="elunoDecenas" style="position:absolute;left:12.5vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
+							<div id="tachadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;left:0.2vw;top:3.5vw;width:5vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
+							<label id="elunoCentenas" style="position:absolute;left:5vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							
-							<label id="unidadesCifra1" style="position:absolute;cursor:pointer;left:14.2vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:setOneAssistance(this)">&nbsp;</label>
+							<label id="decenasCifra1" onclick="javascript:initAssistance(this)" style="position:absolute;width:6vw;height:6.5vw;left:7.1vw;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
+							<div id="tachadaDecenas" onclick="javascript:initAssistance(this)" style="left:7.3vw;position:absolute;top:3.5vw;width:5vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;font-family:Calibri"></div>
+							<label id="elunoDecenas" style="position:absolute;left:12.1vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
+							
+							<label id="unidadesCifra1" style="position:absolute;width:6vw;height:6.5vw;left:14.2vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:setOneUnidades(this)">&nbsp;</label>
 				</div>	
 					
 				<!--SEGUNDO OPERADOR  -->

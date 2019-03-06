@@ -337,7 +337,37 @@ public class GeneradorRestasServlet extends HttpServlet {
 				request.getSession().setAttribute("wa", true);
 			else
 				request.getSession().setAttribute("wa", false);
-		} else if (nivel==38 || nivel==39) {
+		} else if (nivel==30 || nivel==31) {
+			StringBuilder resultado = new StringBuilder("{\"restas\":[");
+			leyenda = "Level 30/31: three digits/one digits. Regrouping in hundred and tens";
+			try {
+				while (restaNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
+					nuevaResta = generador.getOperandosNivel3031(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+					resultado.append("{\"resultado\": \"" + nuevaResta.getResultadoResta() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+							+ nuevaResta.getOperando2() + "\"},");
+				}
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				nuevaResta = new Resta();
+				nuevaResta.setOperando1(-1);
+				nuevaResta.setOperando2(-1);
+				restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+				resultado.append("{\"resultado\": \"" + nuevaResta.getOperando1() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+						+ nuevaResta.getOperando2() + "\",\"nivel\": \""+nuevaResta.getOperando1() +"\"},");
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}
+			if(nivel==30)
+				request.getSession().setAttribute("wa", true);
+			else
+				request.getSession().setAttribute("wa", false);
+		}else if (nivel==38 || nivel==39) {
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 38/39: three digits/two digits. Regrouping in hundred and tens";
 			try {
