@@ -218,9 +218,15 @@ var dominio = "test.playaddition.com";
 					  10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
 				  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
 			  
-			  var operador2 = (10*parseInt(document.getElementById('decenasCifra2').innerHTML, 10) +
+			  
+			  
+			  var decenas = document.getElementById('decenasCifra2').innerHTML;
+			  if(document.getElementById('decenasCifra2').innerHTML=='' ||
+					  document.getElementById('decenasCifra2').innerHTML==null)
+				  decenas="0";
+			  var operador2 = (10*parseInt(decenas, 10) +
 				  parseInt(document.getElementById('unidadesCifra2').innerHTML, 10));
-
+			  
 			  if (sumaAlumno == operador1-operador2){
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(correctBoton.png)";
 				  sumasActuales++;

@@ -308,6 +308,62 @@ public class GeneradorRestasServlet extends HttpServlet {
 				response.getWriter().write(resultado.toString());
 			}
 
+		} else if (nivel==15) {
+			StringBuilder resultado = new StringBuilder("{\"restas\":[");
+			leyenda = "Level 15: TWO-DIGIT/ONE DIGIT 20 - 49. Subtraction Without Regrouping";
+			try {
+				while (restaNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
+					nuevaResta = generador.getOperandosNivel15(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+					resultado.append("{\"resultado\": \"" + nuevaResta.getResultadoResta() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+							+ nuevaResta.getOperando2() + "\"},");
+				}
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				nuevaResta = new Resta();
+				nuevaResta.setOperando1(-1);
+				nuevaResta.setOperando2(-1);
+				restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+				resultado.append("{\"resultado\": \"" + nuevaResta.getOperando1() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+						+ nuevaResta.getOperando2() + "\",\"nivel\": \""+nuevaResta.getOperando1() +"\"},");
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}
+		} else if (nivel==16 || nivel==17) {
+			StringBuilder resultado = new StringBuilder("{\"restas\":[");
+			leyenda = "Level 16/17: TWO-DIGIT/ONE DIGIT 20 - 49. Subtraction With Regrouping in Tens";
+			try {
+				while (restaNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {
+					nuevaResta = generador.getOperandosNivel1617(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+					resultado.append("{\"resultado\": \"" + nuevaResta.getResultadoResta() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+							+ nuevaResta.getOperando2() + "\"},");
+				}
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				nuevaResta = new Resta();
+				nuevaResta.setOperando1(-1);
+				nuevaResta.setOperando2(-1);
+				restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+				resultado.append("{\"resultado\": \"" + nuevaResta.getOperando1() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+						+ nuevaResta.getOperando2() + "\",\"nivel\": \""+nuevaResta.getOperando1() +"\"},");
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}
+			if(nivel==16)
+				request.getSession().setAttribute("wa", true);
+			else
+				request.getSession().setAttribute("wa", false);
 		} else if (nivel==24 || nivel==25) {
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 24/25: two digits/two digits. Regrouping in tens";
