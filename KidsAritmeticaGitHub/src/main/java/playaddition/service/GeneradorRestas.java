@@ -191,7 +191,7 @@ public class GeneradorRestas {
 		if (restasNivel.contains(resta)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
-				resta = getOperandosNivel13(restasNivel,colisiones, maxColisiones);
+				resta = getOperandosNivel15(restasNivel,colisiones, maxColisiones);
 				return resta;
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
@@ -204,7 +204,7 @@ public class GeneradorRestas {
 	
 	public Resta getOperandosNivel1617(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
 		Resta resta =  new Resta();
-		resta.setNivel(15);
+		resta.setNivel(17);
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
@@ -231,7 +231,7 @@ public class GeneradorRestas {
 		if (restasNivel.contains(resta)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
-				resta = getOperandosNivel13(restasNivel,colisiones, maxColisiones);
+				resta = getOperandosNivel1617(restasNivel,colisiones, maxColisiones);
 				return resta;
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
@@ -244,7 +244,7 @@ public class GeneradorRestas {
 	
 	public Resta getOperandosNivel2425(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
 		Resta resta =  new Resta();
-		resta.setNivel(13);
+		resta.setNivel(25);
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
@@ -273,7 +273,7 @@ public class GeneradorRestas {
 		if (restasNivel.contains(resta)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
-				resta = getOperandosNivel13(restasNivel,colisiones, maxColisiones);
+				resta = getOperandosNivel2425(restasNivel,colisiones, maxColisiones);
 				return resta;
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);

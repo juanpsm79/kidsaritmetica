@@ -3,6 +3,7 @@
 <%
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
+boolean assistance = (Boolean)session.getAttribute("assistance");
 boolean wa = (Boolean)session.getAttribute("wa");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -82,13 +83,13 @@ var dominio = "test.playaddition.com";
   } );           
   var nivel = <%=nivel%>;
   var assistanceMode = <%=wa%>;
-  var assistance = false;
-  var assistanceComplete = false;
+  var assistance = <%=assistance%>;	
+  
   var sumas = [];
   var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
- if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("14"))
+ if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("18"))
 	  			sumasNecesarias = 15;
    Iterator<Resta> iter = restas.iterator();
    int i = 0;
@@ -439,7 +440,7 @@ var dominio = "test.playaddition.com";
   	}
   	
   	function initAssistance() {
-	  		assistance = true;
+	  	if(assistance){
 	  		document.getElementById("tachada").style.visibility="visible";
 	  		document.getElementById("tachada").style.backgroundSize="6vw 6vw";
 	  		if(assistanceMode){
@@ -453,12 +454,15 @@ var dominio = "test.playaddition.com";
 	  				document.getElementById("unidadesCifra1").style.cursor="pointer";
 	  			setSelected("casillaLlevada");
 	  		}
+	  	}
   	}
   	
   	function setOneAssistance(){
-  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
-  			document.getElementById("eluno").style.visibility="visible";
-  			document.getElementById("unidadesCifra1").style.cursor="default";
+  		if(assistance){
+	  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
+	  			document.getElementById("eluno").style.visibility="visible";
+	  			document.getElementById("unidadesCifra1").style.cursor="default";
+	  		}
   		}
   	}
 	  

@@ -51,6 +51,9 @@ public class GeneradorRestasServlet extends HttpServlet {
 		Map<String, List<Resta>> restaNiveles = (Map<String, List<Resta>>) request.getSession().getAttribute("restasNiveles");
 		if (restaNiveles.get(request.getParameter("nivel")) != null)
 			restaNiveles.remove(request.getParameter("nivel"));
+		
+		request.getSession().setAttribute("assistance", false);
+		request.getSession().setAttribute("wa", false);
 		restaNiveles.put(request.getParameter("nivel"), new ArrayList<>());
 		Resta nuevaResta = null;
 		int nivel = new Integer((String) request.getSession().getAttribute("nivel"));
@@ -335,6 +338,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 				response.getWriter().write(resultado.toString());
 			}
 		} else if (nivel==16 || nivel==17) {
+			request.getSession().setAttribute("assistance", true);
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 16/17: TWO-DIGIT/ONE DIGIT 20 - 49. Subtraction With Regrouping in Tens";
 			try {
@@ -364,7 +368,54 @@ public class GeneradorRestasServlet extends HttpServlet {
 				request.getSession().setAttribute("wa", true);
 			else
 				request.getSession().setAttribute("wa", false);
+		} else if (nivel==18) {
+			StringBuilder resultado = new StringBuilder("{\"restas\":[");
+			try {
+				//% ---> 12:(30) 13:(70)
+	            //en 18      (4),   (11)
+				List<Resta> restas15 = new ArrayList<Resta>();
+				List<Resta> restas17 = new ArrayList<Resta>();
+				
+				for (int i=0;i<12;i++) {
+					nuevaResta = generador.getOperandosNivel15(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restas15.add(nuevaResta);
+				}
+				for (int i=0;i<33;i++) {
+					nuevaResta = generador.getOperandosNivel1617(restaNiveles.get(request.getParameter("nivel")), colisiones,
+							MAX_COLISIONES);
+					restas17.add(nuevaResta);
+				}
+				
+				ordenarRestasNivel18(restas15, restas17, restaNiveles.get(request.getParameter("nivel")));
+				List<Resta> restas = restaNiveles.get(request.getParameter("nivel"));
+				Iterator<Resta> iter = restas.iterator();
+				while (iter.hasNext()) {
+					Resta resta = iter.next();
+					if (resta!=null)
+						resultado.append("{\"resultado\": \"" + resta.getResultadoResta() + "\",\"operador1\": \"" + resta.getOperando1() + "\",\"operador2\": \""
+							+ resta.getOperando2() + "\",\"nivel\": \""+resta.getNivel() +"\"},");
+					
+				}
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"Level 15: 4, Level 17: 11\"}");
+				response.getWriter().write(resultado.toString());
+				request.getSession().setAttribute("assistance", false);
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				nuevaResta = new Resta();
+				nuevaResta.setOperando1(-1);
+				nuevaResta.setOperando2(-1);
+				restaNiveles.get(request.getParameter("nivel")).add(nuevaResta);
+				resultado.append("{\"resultado\": \"" + nuevaResta.getOperando1() + "\",\"operador1\": \"" + nuevaResta.getOperando1() + "\",\"operador2\": \""
+						+ nuevaResta.getOperando2() + "\",\"nivel\": \""+nuevaResta.getOperando1() +"\"},");
+				resultado.deleteCharAt(resultado.lastIndexOf(","));
+				resultado.append("], \"leyenda\": \"" + leyenda + "\"}");
+				response.getWriter().write(resultado.toString());
+			}
+
 		} else if (nivel==24 || nivel==25) {
+			request.getSession().setAttribute("assistance", true);
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 24/25: two digits/two digits. Regrouping in tens";
 			try {
@@ -395,6 +446,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 			else
 				request.getSession().setAttribute("wa", false);
 		} else if (nivel==30 || nivel==31) {
+			request.getSession().setAttribute("assistance", true);
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 30/31: three digits/one digits. Regrouping in hundred and tens";
 			try {
@@ -425,6 +477,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 			else
 				request.getSession().setAttribute("wa", false);
 		}else if (nivel==38 || nivel==39) {
+			request.getSession().setAttribute("assistance", true);
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			leyenda = "Level 38/39: three digits/two digits. Regrouping in hundred and tens";
 			try {
@@ -582,6 +635,140 @@ public class GeneradorRestasServlet extends HttpServlet {
 				restas.add(posicionLibre, restas13.get(25));
 				posicionLibre = calcularPosicionLibreRango(restas,45);
 				restas.add(posicionLibre, restas13.get(26));
+			}
+		
+	}
+	
+	
+	private void ordenarRestasNivel18(List<Resta> restas15, List<Resta> restas17, List<Resta> restas) {
+		//% ---> 15:(40) 17:(60)
+        //en 15      (4),    (11)
+		for (int i=0;i<45;i++)
+			restas.add(null);
+		int posicionLibre = 0;
+		
+			while (restas.get(0)== null || restas.get(1)==null || restas.get(2)==null || restas.get(3)==null || restas.get(4)==null ||
+					restas.get(5)== null || restas.get(6)==null || restas.get(7)==null || restas.get(8)==null || restas.get(9)==null ||
+					restas.get(10)== null || restas.get(11)==null || restas.get(12)==null || restas.get(13)==null || restas.get(14)==null) {
+				
+				//15
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas15.get(0));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas15.get(1));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas15.get(2));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas15.get(3));
+				
+				
+				
+				//17
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(0));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(1));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(2));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(3));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(4));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(5));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(6));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(7));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(8));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(9));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas17.get(10));
+				
+				
+			}
+			
+			while(restas.get(15)== null || restas.get(16)==null || restas.get(17)==null || restas.get(18)==null || restas.get(19)==null ||
+					restas.get(20)== null || restas.get(21)==null || restas.get(22)==null || restas.get(23)==null || restas.get(24)==null ||
+					restas.get(25)== null || restas.get(26)==null || restas.get(27)==null || restas.get(28)==null || restas.get(29)==null) {
+				
+				//15
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas15.get(4));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas15.get(5));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas15.get(6));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas15.get(7));
+				
+				
+				
+				//17
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(11));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(12));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(13));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(14));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(15));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(16));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(17));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(18));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(19));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(20));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas17.get(21));
+			}
+			while(restas.get(30)== null || restas.get(31)==null || restas.get(32)==null || restas.get(33)==null || restas.get(34)==null ||
+					restas.get(35)== null || restas.get(36)==null || restas.get(37)==null || restas.get(38)==null || restas.get(39)==null ||
+					restas.get(40)== null || restas.get(41)==null || restas.get(42)==null || restas.get(43)==null || restas.get(44)==null) {
+				
+				//15
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas15.get(8));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas15.get(9));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas15.get(10));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas15.get(11));
+				
+				
+				
+				//17
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(22));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(23));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(24));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(25));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(26));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(27));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(28));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(29));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(30));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(31));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas17.get(32));
 			}
 		
 	}

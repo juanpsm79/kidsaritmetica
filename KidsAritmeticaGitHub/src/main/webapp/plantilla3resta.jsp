@@ -3,6 +3,7 @@
 <%
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
+boolean assistance = (Boolean)session.getAttribute("assistance");
 boolean wa = (Boolean)session.getAttribute("wa");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -68,7 +69,6 @@ boolean wa = (Boolean)session.getAttribute("wa");
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-130256336-1');
 </script>
   
@@ -82,13 +82,12 @@ var dominio = "test.playaddition.com";
   } );           
   var nivel = <%=nivel%>;
   var assistanceMode = <%=wa%>;
-  var assistance = false;
-  var assistanceComplete = false;
+  var assistance = <%=assistance%>;	
   var sumas = [];
   var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
- if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("14"))
+ if(nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("26") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
 	  			sumasNecesarias = 15;
    Iterator<Resta> iter = restas.iterator();
    int i = 0;
@@ -500,7 +499,7 @@ var dominio = "test.playaddition.com";
   	}
   	
   	function initAssistance(obj) {
-	  		assistance = true;
+	  	if(assistance)	{
 	  		if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
 	  			document.getElementById("tachadaCentenas").style.visibility="visible";
 	  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
@@ -523,8 +522,7 @@ var dominio = "test.playaddition.com";
 		  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoCentenas").style.visibility="visible";
 		  			document.getElementById('decenasCifra1').style.cursor="pointer";
-		  			if(document.getElementById("elunoDecenas").style.visibility=="visible")
-		  				assistance = false;
+		  			
 		  			
 	  			} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
 	  				if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
@@ -536,25 +534,25 @@ var dominio = "test.playaddition.com";
 	  					numero = numero-1;
 		  			document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoDecenas").style.visibility="visible";
-		  			if(document.getElementById("elunoCentenas").style.visibility=="visible")
-		  				assistance = false;
+		  			
 	  			}
 	  		} else{
 	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
-		  			/*if(document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="" && document.getElementById("elunoCentenas").style.visibility=="hidden")
-		  				document.getElementById("decenasCifra1").style.cursor="pointer";*/
 		  			setSelected("casillaLlevadaCentenas");
 	  			}else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
 	  				if(document.getElementById("decenasCifra1").innerHTML!="0")
 		  				setSelected("casillaLlevadaDecenas");
 	  			}
 	  		}
+	  	}
   	}
   	
   	function setOneUnidades(){
-  		if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML != ""){
-			document.getElementById("elunoDecenas").style.visibility="visible";
-			document.getElementById("unidadesCifra1").style.cursor="default";
+  		if(assistance){
+  			if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML != ""){
+				document.getElementById("elunoDecenas").style.visibility="visible";
+				document.getElementById("unidadesCifra1").style.cursor="default";
+  			}
   		}
   	}
 	  
