@@ -2,6 +2,10 @@
   <head>
   <title>PlayAddition</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./css/inputRange.css">
+  <link rel="stylesheet" href="./css/rSlider.min.css">
+  
+  
   <style>
    
   a {
@@ -16,8 +20,19 @@
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
+  <script src="./js/rSlider.min.js"></script>
   <script>
   $( function() {
+	  
+	  var mySlider = new rSlider({
+	        target: '#sampleSlider',
+	        values: [0, 1, 2, 3, 4, 5, 6, 7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+	        range: false,
+	        tooltip: false,
+	        scale: true,
+	        labels: true
+	    });
+
   	
   } );
   
@@ -50,10 +65,6 @@
 </head>
 
   <body style="background-image:url(fondoKitsAritmetica.png);background-repeat:no-repeat;background-size:cover;width:100%;height:100%">
-
-	
-	
-	
 			<div>
 				  <h1>PlaySubstractions Generator</h1>
 				  <fieldset>
@@ -101,12 +112,12 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel13" value="13"/>
-				      <label for="nivel13">Level 13 (Levels 10-12)</label>
+				      <label for="nivel13">Level 13</label>
 				      
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel14" value="14"/>
-				      <label for="nivel14">Level 14</label>
+				      <label for="nivel14">Level 14 (Levels 12-13)</label>
 				      
 				       
 				      
@@ -124,9 +135,9 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel18" value="18"/>
-				      <label for="nivel18">Level 18</label>
+				      <label for="nivel18">Level 18 (Levels 15-17)</label>
 				      
-				      <!--
+				      
 				      <input type="radio" name="nivel" id="nivel19" value="19">
 				      <label for="nivel19">Level 19</label>
 				      
@@ -140,24 +151,26 @@
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel22" value="22"/>
-				      <label for="nivel22">Level 22 (Levels 18-21)</label>
+				      <label for="nivel22">Level 22 (Levels 19-21)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel23" value="23"/>
 				      <label for="nivel23">Level 23</label>
 				      
-				      -->
+				      
 				      <input type="radio" name="nivel" id="nivel24" value="24"/>
 				      <label for="nivel24">Level 24</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel25" value="25"/>
-				      <label for="nivel25">Level 25 (Levels 23-24)</label>
+				      <label for="nivel25">Level 25</label>
 				      
-				      <!-- 
+				     
 				      
 				      <input type="radio" name="nivel" id="nivel26" value="26"/>
-				      <label for="nivel26">Level 26</label>
+				      <label for="nivel26">Level 26 (Levels 23-25)</label>
+				      
+				        
 				      
 				      <input type="radio" name="nivel" id="nivel26" value="27"/>
 				      <label for="nivel27">Level 27</label>
@@ -170,11 +183,17 @@
 				      <label for="nivel29">Level 29</label>
 				      
 				      
-				     
+				      <input type="radio" name="nivel" id="nivel29" value="30"/>
+				      <label for="nivel30">Level 30</label>
+				      
+				      
+				      
+				      <input type="radio" name="nivel" id="nivel31" value="31"/>
+				      <label for="nivel31">Level 31</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel32" value="32"/>
-				      <label for="nivel32">Level 32 (Levels 26-31)</label>
+				      <label for="nivel32">Level 32 (Levels 27-31)</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel33" value="33"/>
@@ -194,14 +213,6 @@
 				      
 				      <input type="radio" name="nivel" id="nivel37" value="37"/>
 				      <label for="nivel37">Level 37</label>
-				      -->
-				       <input type="radio" name="nivel" id="nivel29" value="30"/>
-				      <label for="nivel30">Level 30</label>
-				      
-				      
-				      
-				      <input type="radio" name="nivel" id="nivel31" value="31"/>
-				      <label for="nivel31">Level 31</label>
 				      
 				      
 				      <input type="radio" name="nivel" id="nivel38" value="38"/>
@@ -210,10 +221,10 @@
 				      <input type="radio" name="nivel" id="nivel39" value="39"/>
 				      <label for="nivel39">Level 39</label>
 				      
-				      <!-- 
+				     
 				      <input type="radio" name="nivel" id="nivel40" value="40"/>
 				      <label for="nivel40">Level 40 (Levels 33-39)</label>
-				       -->
+				     
 				    
 				      <input type="button" id="calcularSuma" onclick="javascript:enviarSuma();" value="Generar Restas"/>
 				    </div>
@@ -224,6 +235,10 @@
 				    </div>
 				    
 				  </fieldset>
+		</div>
+		<div class="inputDiv">
+			<input type="text" id="sampleSlider" />
+
 		</div>
   </body>
 </html>

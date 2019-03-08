@@ -144,7 +144,14 @@ var dominio = "test.playaddition.com";
 		 
 		 document.getElementById("tachada").style.visibility="hidden";
 	  	 document.getElementById("eluno").style.visibility="hidden";
-//		 document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+		
+	  	 if(!assistance){
+			document.getElementById("casillaLlevada").style.cursor="default";
+			document.getElementById("cifraCasillaLlevada").style.cursor="default";
+			document.getElementById("decenasCifra1").style.cursor="default";
+			document.getElementById("unidadesCifra1").style.cursor="default";
+		 }
+	  	 
 	     setSelected ("sumaUnidades");
 	     
 	}
@@ -447,8 +454,6 @@ var dominio = "test.playaddition.com";
 	  			var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10) - 1;
 	  			document.getElementById("cifraCasillaLlevada").innerHTML = ""+numero;
 	  			document.getElementById("eluno").style.visibility="visible";
-	  			document.getElementById("decenasCifra1").style.cursor="default";
-	  			assistance = false;
 	  		}else{
 	  			if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden")
 	  				document.getElementById("unidadesCifra1").style.cursor="pointer";

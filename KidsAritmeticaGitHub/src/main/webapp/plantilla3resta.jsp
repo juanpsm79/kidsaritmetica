@@ -4,6 +4,8 @@
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
 boolean assistance = (Boolean)session.getAttribute("assistance");
+boolean tensRegrouping = (Boolean)session.getAttribute("tensRegrouping");
+boolean hundredsRegrouping = (Boolean)session.getAttribute("hundredsRegrouping");
 boolean wa = (Boolean)session.getAttribute("wa");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -82,7 +84,9 @@ var dominio = "test.playaddition.com";
   } );           
   var nivel = <%=nivel%>;
   var assistanceMode = <%=wa%>;
-  var assistance = <%=assistance%>;	
+  var assistance = <%=assistance%>;
+  var tensRegrouping = <%=tensRegrouping%>; 
+  var hundredsRegrouping = <%=hundredsRegrouping%>;
   var sumas = [];
   var indexSuma = -1;
  <%
@@ -167,9 +171,36 @@ var dominio = "test.playaddition.com";
 	  	 document.getElementById("elunoCentenas").style.visibility="hidden";
 	  	 document.getElementById("tachadaDecenas").style.visibility="hidden";
 	  	 document.getElementById("elunoDecenas").style.visibility="hidden";
-
+	  	 if(!assistance){
+		  	document.getElementById("casillaLlevadaCentenas").style.cursor="default";
+		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
+		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("centenasCifra1").style.cursor="default";
+			document.getElementById("decenasCifra1").style.cursor="default";			
+	  	 } else if (tensRegrouping && !hundredsRegrouping){
+	  		document.getElementById("casillaLlevadaCentenas").style.cursor="default";
+		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
+		  	document.getElementById("casillaLlevadaDecenas").style.cursor="pointer";
+		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="pointer";
+		  	document.getElementById("centenasCifra1").style.cursor="default";
+			document.getElementById("decenasCifra1").style.cursor="pointer";
+	  	 } else if (hundredsRegrouping && !tensRegrouping){
+	  		document.getElementById("casillaLlevadaCentenas").style.cursor="pointer";
+		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="pointer";
+		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("centenasCifra1").style.cursor="pointer";
+			document.getElementById("decenasCifra1").style.cursor="default";
+	  	 } else if (hundredsRegrouping && tensRegrouping){
+	  		document.getElementById("casillaLlevadaCentenas").style.cursor="pointer";
+		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="pointer";
+		  	document.getElementById("casillaLlevadaDecenas").style.cursor="pointer";
+		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="pointer";
+		  	document.getElementById("centenasCifra1").style.cursor="pointer";
+			document.getElementById("decenasCifra1").style.cursor="pointer";
+		 }
 	     setSelected ("sumaUnidades");
-	     
 	}
 	
 	function asyncCall() {
@@ -500,10 +531,10 @@ var dominio = "test.playaddition.com";
   	
   	function initAssistance(obj) {
 	  	if(assistance)	{
-	  		if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
+	  		if (hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas")){
 	  			document.getElementById("tachadaCentenas").style.visibility="visible";
 	  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
-	  		} else if( obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  		} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas")){
 	  			if(document.getElementById("decenasCifra1").innerHTML!="0" || 
 	  					(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="") 
 	  			  ) {
@@ -517,14 +548,14 @@ var dominio = "test.playaddition.com";
 	  			}	
 	  		}
 	  		if(assistanceMode){
-	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
+	  			if(hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas")){
 		  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
 		  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
 		  			document.getElementById("elunoCentenas").style.visibility="visible";
 		  			document.getElementById('decenasCifra1').style.cursor="pointer";
 		  			
 		  			
-	  			} else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  			} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas")){
 	  				if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
 	  					return;
 	  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
@@ -537,9 +568,9 @@ var dominio = "test.playaddition.com";
 		  			
 	  			}
 	  		} else{
-	  			if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas"){
+	  			if(hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas" || obj.id=="casillaLlevadaCentenas")){
 		  			setSelected("casillaLlevadaCentenas");
-	  			}else if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas"){
+	  			}else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas" || obj.id=="casillaLlevadaDecenas")){
 	  				if(document.getElementById("decenasCifra1").innerHTML!="0")
 		  				setSelected("casillaLlevadaDecenas");
 	  			}
