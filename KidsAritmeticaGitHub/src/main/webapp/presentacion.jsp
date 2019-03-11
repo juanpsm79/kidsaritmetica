@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+  <meta http-equiv="Cache-control" content="public">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>PlayAddition</title>
   <style type="text/css">
@@ -53,11 +54,7 @@
 
 
   <script>
-  var token;
-  var dominio = "test.playaddition.com";
-  //var dominio = "playaddition.com";
   $( function() {
-		
   } );
   
   function irPrincipal(obj){
@@ -91,12 +88,31 @@
 					document.getElementById('instagram').style.top="4.5vw";
 		   	 }
 		 }
-	  }
+  }
+  
+  function loadImages(){
+	  	var dominio = "test.playaddition.com";
+	  	//var dominio = "playaddition.com";
+	 	var img1 = new Image();
+		var img2 = new Image();
+		var img3 = new Image();
+		var img4 = new Image();
+		var img5 = new Image();
+		var img6 = new Image();
+		var img7 = new Image();
+		img1.src = "https://"+dominio+"/playBottonSelected.png";
+		img2.src = "https://"+dominio+"/playBotonSS.png";
+		img3.src = "https://"+dominio+"/checkBoton.png";
+		img4.src = "https://"+dominio+"/checkBotonClick.png";
+		img5.src = "https://"+dominio+"/startOverBoton.png";
+		img6.src = "https://"+dominio+"/levelUpBoton.png";
+		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
+  }
 
   </script>
   
 <script>
-
+var token;
 gapi.analytics.ready(function() {
 	$.ajax({
 		  url: "/getToken",
@@ -135,30 +151,7 @@ gapi.analytics.ready(function() {
   
 </head>
 
-  <body onload="resizePage();">
-  	<div class="hidden">
-	<script type="text/javascript">
-		<!--//--><![CDATA[//><!--
-			if (document.images) {
-				var img1 = new Image();
-				var img2 = new Image();
-				var img3 = new Image();
-				var img4 = new Image();
-				var img5 = new Image();
-				var img6 = new Image();
-				img1.src = "https://"+dominio+"/playBottonSelected.png";
-				img2.src = "https://"+dominio+"/playBotonSS.png";
-				img3.src = "https://"+dominio+"/checkBoton.png";
-				img4.src = "https://"+dominio+"/checkBotonClick.png";
-				img5.src = "https://"+dominio+"/startOverBoton.png";
-				img6.src = "https://"+dominio+"/levelUpBoton.png";
-			}
-
-		//--><!]]>
-		</script>
-	</div>
-  		
-  
+  <body onload="resizePage();loadImages()">
 		<div id="izquierda" style="position:absolute;width:25vw">
 			
 			<div style="position:absolute;top:1vw;width:25vw">

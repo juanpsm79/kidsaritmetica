@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Cache-control" content="public">
   <title>PlayAddition</title>
   <style type="text/css">
   	@font-face{

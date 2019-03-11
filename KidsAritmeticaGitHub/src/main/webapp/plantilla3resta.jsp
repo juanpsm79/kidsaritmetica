@@ -10,6 +10,7 @@ boolean wa = (Boolean)session.getAttribute("wa");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
+  <meta http-equiv="Cache-control" content="public">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>PlayAddition</title>
   <style>
