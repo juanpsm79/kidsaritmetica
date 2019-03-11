@@ -172,14 +172,14 @@ var dominio = "test.playaddition.com";
 	  	 document.getElementById("tachadaDecenas").style.visibility="hidden";
 	  	 document.getElementById("elunoDecenas").style.visibility="hidden";
 	  	 if(!assistance){
-		  	document.getElementById("casillaLlevadaCentenas").style.cursor="default";
+		  	document.getElementById("casillaLlevadaCentenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
-		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("casillaLlevadaDecenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("centenasCifra1").style.cursor="default";
 			document.getElementById("decenasCifra1").style.cursor="default";			
 	  	 } else if (tensRegrouping && !hundredsRegrouping){
-	  		document.getElementById("casillaLlevadaCentenas").style.cursor="default";
+	  		document.getElementById("casillaLlevadaCentenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("casillaLlevadaDecenas").style.cursor="pointer";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="pointer";
@@ -188,7 +188,7 @@ var dominio = "test.playaddition.com";
 	  	 } else if (hundredsRegrouping && !tensRegrouping){
 	  		document.getElementById("casillaLlevadaCentenas").style.cursor="pointer";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="pointer";
-		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
+		  	document.getElementById("casillaLlevadaDecenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("centenasCifra1").style.cursor="pointer";
 			document.getElementById("decenasCifra1").style.cursor="default";
@@ -395,6 +395,9 @@ var dominio = "test.playaddition.com";
 					(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML!="") 
 			  )
   	  			document.getElementById("decenasCifra1").style.cursor="pointer";
+  	  		if(hundredsRegrouping && !tensRegrouping)
+  	  			setSelected ("sumaUnidades");
+  	  			
   		}else if(casillaSeleccionada=="casillaLlevadaDecenas"){
   	  		document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+digito;
   	  		if(document.getElementById("elunoDecenas").style.visibility=="hidden")
@@ -581,6 +584,8 @@ var dominio = "test.playaddition.com";
   	function setOneUnidades(){
   		if(assistance){
   			if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML != ""){
+  				if(document.getElementById("elunoDecenas").style.visibility="hidden")
+  					setSelected ("sumaUnidades");
 				document.getElementById("elunoDecenas").style.visibility="visible";
 				document.getElementById("unidadesCifra1").style.cursor="default";
   			}
