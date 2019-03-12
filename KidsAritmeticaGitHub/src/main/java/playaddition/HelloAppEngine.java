@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
@@ -38,7 +39,8 @@ public class HelloAppEngine extends HttpServlet {
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json");
-
+		Locale currentLocale = request.getLocale();
+		System.out.println("### Language: "+currentLocale.getLanguage());
 		request.getSession().setAttribute("nivel", request.getParameter("nivel"));
 
 		GeneradorSumas generador = new GeneradorSumas();

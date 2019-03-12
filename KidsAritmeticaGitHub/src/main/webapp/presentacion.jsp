@@ -17,7 +17,8 @@
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/current-device.min.js"></script>
-<!-- Global site tag (gtag.js) - Google Analytics 
+  
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -27,9 +28,9 @@
   gtag('config', 'UA-130256336-3');
 </script>
 
--->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -38,6 +39,7 @@
 
   gtag('config', 'UA-130256336-1');
 </script>
+-->  
 
 
 <script>
@@ -91,8 +93,8 @@
   }
   
   function loadImages(){
-	  	var dominio = "test.playaddition.com";
-	  	//var dominio = "playaddition.com";
+	  	//var dominio = "test.playaddition.com";
+	  	var dominio = "playaddition.com";
 	 	var img1 = new Image();
 		var img2 = new Image();
 		var img3 = new Image();
@@ -107,6 +109,7 @@
 		img5.src = "https://"+dominio+"/startOverBoton.png";
 		img6.src = "https://"+dominio+"/levelUpBoton.png";
 		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
+		//alert (navigator.language);
   }
 
   </script>
@@ -127,8 +130,8 @@ gapi.analytics.ready(function() {
 				  });
 				  var report = new gapi.analytics.report.Data({
 					  query: {
-						 // 'ids': 'ga:189296074', // <-- playAddition.
-						  'ids': 'ga:185994770',   // <-- testPlayAddition.
+						  'ids': 'ga:189296074', // <-- playAddition.
+						  //'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
 					      'metrics': 'ga:users'

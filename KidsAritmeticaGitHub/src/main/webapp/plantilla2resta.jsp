@@ -52,7 +52,7 @@ boolean wa = (Boolean)session.getAttribute("wa");
   
   
   
- <!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -61,10 +61,10 @@ boolean wa = (Boolean)session.getAttribute("wa");
 
   gtag('config', 'UA-130256336-3');
 </script>
--->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics-->
+
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -73,6 +73,7 @@ boolean wa = (Boolean)session.getAttribute("wa");
 
   gtag('config', 'UA-130256336-1');
 </script>
+-->  
   
    
   

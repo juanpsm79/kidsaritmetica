@@ -37,8 +37,8 @@ var dominio = "test.playaddition.com";
 		 location.href = "seleccionNivelSubtraction.jsp"
   }
   </script>
-  <!-- Global site tag (gtag.js) - Google Analytics 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-131500537-1"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -46,8 +46,10 @@ var dominio = "test.playaddition.com";
 
   gtag('config', 'UA-130256336-3');
 </script>
--->
-<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -56,6 +58,7 @@ var dominio = "test.playaddition.com";
 
   gtag('config', 'UA-130256336-1');
 </script>
+-->  
 
   
 </head>

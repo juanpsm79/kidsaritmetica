@@ -50,7 +50,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   
   
   
-<!-- Global site tag (gtag.js) - Google Analytics
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -60,9 +60,9 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   gtag('config', 'UA-130256336-3');
 </script>
 
- -->
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
+
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -71,6 +71,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
   gtag('config', 'UA-130256336-1');
 </script>
+-->  
 
 
   

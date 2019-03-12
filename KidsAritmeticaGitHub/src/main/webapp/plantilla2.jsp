@@ -50,7 +50,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   
   
   
- <!-- Global site tag (gtag.js) - Google Analytics 
+ <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -59,10 +59,10 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
   gtag('config', 'UA-130256336-3');
 </script>
--->
 
 
-<!-- Global site tag (gtag.js) - Google Analytics-->
+
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -71,7 +71,7 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
   gtag('config', 'UA-130256336-1');
 </script>
-  
+-->  
    
   
   <script>
@@ -137,7 +137,7 @@ var dominio = "test.playaddition.com";
 		 document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
 
 	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
-		 document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+		 //document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
 	     setSelected ("sumaUnidades");
 	     
 	}
@@ -478,9 +478,11 @@ var dominio = "test.playaddition.com";
 					<a id="llevadaCentenas" style="position:absolute">
 							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">
 						</a>
+						<!--
 						<a id="llevadaDecenas" style="position:absolute;left:8.1vw">
 							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
 						</a>
+						 -->
 				</div>
 					
 				<!--PRIMER OPERADOR  -->
