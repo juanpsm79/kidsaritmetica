@@ -93,8 +93,8 @@
   }
   
   function loadImages(){
-	  	//var dominio = "test.playaddition.com";
-	  	var dominio = "playaddition.com";
+	  	var dominio = "test.playaddition.com";
+	  	//var dominio = "playaddition.com";
 	 	var img1 = new Image();
 		var img2 = new Image();
 		var img3 = new Image();
@@ -130,8 +130,8 @@ gapi.analytics.ready(function() {
 				  });
 				  var report = new gapi.analytics.report.Data({
 					  query: {
-						  'ids': 'ga:189296074', // <-- playAddition.
-						  //'ids': 'ga:185994770',   // <-- testPlayAddition.
+						  //'ids': 'ga:189296074', // <-- playAddition.
+						  'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
 					      'metrics': 'ga:users'
