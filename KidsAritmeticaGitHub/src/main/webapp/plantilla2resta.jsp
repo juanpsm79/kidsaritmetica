@@ -140,6 +140,13 @@ var dominio = "test.playaddition.com";
 		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
 		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
 		// document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
+		
+		
+		 <%
+		    sumasNecesarias = 10;
+		 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")){%>
+		 		document.getElementById("casillaLlevada").style.visibility="hidden";
+		  <%}%>
 
 	     document.getElementById("casillaLlevada").style.borderStyle = "none";
 		 document.getElementById('cifraCasillaLlevada').innerHTML="";
@@ -215,24 +222,20 @@ var dominio = "test.playaddition.com";
 				  setTimeout(asyncCall, 600);
 			  } else {
 				 if(sumas[indexSuma].resultado.length == 2) {
-					 /* if(document.getElementById('sumaCentenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaCentenasCifra').style.color="red";*/
 					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaDecenasCifra').innerHTML)
 						  document.getElementById('sumaDecenasCifra').style.color="red";
 					  if(sumas[indexSuma].resultado.charAt(1)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 				  }else if(sumas[indexSuma].resultado.length == 1) {
-					  /*if(document.getElementById('sumaCentenasCifra').innerHTML!="0")  
-			  			  document.getElementById('sumaCentenasCifra').style.color="red";*/
 			  		  if(document.getElementById('sumaDecenasCifra').innerHTML!="0")  
 			  			  document.getElementById('sumaDecenasCifra').style.color="red";
 					  if(sumas[indexSuma].resultado.charAt(0)!=document.getElementById('sumaUnidadesCifra').innerHTML)
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 			  	  }
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
+				  sumasActuales = 0;
+				  document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 				  document.getElementById('capaBotonCheckSuma').onclick = function(){
-					  	sumasActuales = 0;
-					  	document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 					  	calcularSuma();
 			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 			  			bloquearInteracciones = false;

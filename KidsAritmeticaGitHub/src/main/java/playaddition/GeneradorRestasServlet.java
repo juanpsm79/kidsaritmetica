@@ -106,31 +106,34 @@ public class GeneradorRestasServlet extends HttpServlet {
 			try {
 				//% ---> 1:(10) 2:(10), 3(30), 4(50)
 	            //en 15     (1),   (2)    (4)    (8)   
-				List<Resta> restas1 = new ArrayList<Resta>();
-				List<Resta> restas2 = new ArrayList<Resta>();
-				List<Resta> restas3 = new ArrayList<Resta>();
+				
 				List<Resta> restas4 = new ArrayList<Resta>();
-				for (int i=0;i<3;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 1,
-							colisiones, MAX_COLISIONES);
-					restas1.add(nuevaResta);
-				}
+				List<Resta> restas5 = new ArrayList<Resta>();
+				
 				for (int i=0;i<6;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 2,
-							colisiones, MAX_COLISIONES);
-					restas2.add(nuevaResta);
-				}
-				for (int i=0;i<12;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 3,
-							colisiones, MAX_COLISIONES);
-					restas3.add(nuevaResta);
-				}
-				for (int i=0;i<24;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 4,
+					nuevaResta = generador.obtenerRestaNivel(restas4, 4,
 							colisiones, MAX_COLISIONES);
 					restas4.add(nuevaResta);
-				}	
-				ordenarRestasNivel5(restas1, restas2, restas3, restas4, restaNiveles.get(request.getParameter("nivel")));
+					restas5.add(nuevaResta);
+				}
+				for (int i=0;i<2;i++) {
+					nuevaResta = generador.obtenerRestaNivel(restas4, 2,
+							colisiones, MAX_COLISIONES);
+					restas4.add(nuevaResta);
+					restas5.add(nuevaResta);
+				}
+				
+				Random rand = new Random();
+				List<Resta> restasNivel = restaNiveles.get(request.getParameter("nivel"));
+				for (int i = 0; i<8; i++) {
+			        int randomIndex = rand.nextInt(restas4.size());
+			        Resta randomElement = restas4.get(randomIndex);
+			        restasNivel.add(randomElement);
+			        restas4.remove(randomIndex);
+			    }
+				restasNivel.addAll(restas5);
+				
+				
 				List<Resta> restas = restaNiveles.get(request.getParameter("nivel"));
 				Iterator<Resta> iter = restas.iterator();
 				while (iter.hasNext()) {
@@ -161,37 +164,47 @@ public class GeneradorRestasServlet extends HttpServlet {
 			try {
 				//% ---> 6:(10) 7:(10)  8:(10)   9(30)  10(40)
 	            //en 15     (1),   (2)     (2)     (4)     (6)
-				List<Resta> restas6 = new ArrayList<Resta>();
-				List<Resta> restas7 = new ArrayList<Resta>();
-				List<Resta> restas8 = new ArrayList<Resta>();
-				List<Resta> restas9 = new ArrayList<Resta>();
+				
 				List<Resta> restas10 = new ArrayList<Resta>();
-				for (int i=0;i<3;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 6,
-							colisiones, MAX_COLISIONES);
-					restas6.add(nuevaResta);
-				}
 				for (int i=0;i<6;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 7,
+					nuevaResta = generador.obtenerRestaNivel(restas10, 10,
 							colisiones, MAX_COLISIONES);
-					restas7.add(nuevaResta);
+					restas10.add(nuevaResta);	
 				}
-				for (int i=0;i<6;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 8,
-							colisiones, MAX_COLISIONES);
-					restas8.add(nuevaResta);
-				}
-				for (int i=0;i<12;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 9,
-							colisiones, MAX_COLISIONES);
-					restas9.add(nuevaResta);
-				}
-				for (int i=0;i<18;i++) {
-					nuevaResta = generador.obtenerRestaNivel(restaNiveles.get(request.getParameter("nivel")), 10,
+				
+				for (int i=0;i<4;i++) {
+					nuevaResta = generador.obtenerRestaNivel(restas10, 9,
 							colisiones, MAX_COLISIONES);
 					restas10.add(nuevaResta);
 				}
-				ordenarRestasNivel11(restas6, restas7, restas8, restas9, restas10, restaNiveles.get(request.getParameter("nivel")));
+				
+				for (int i=0;i<2;i++) {
+					nuevaResta = generador.obtenerRestaNivel(restas10, 8,
+							colisiones, MAX_COLISIONES);
+					restas10.add(nuevaResta);
+				}
+				
+				for (int i=0;i<2;i++) {
+					nuevaResta = generador.obtenerRestaNivel(restas10, 7,
+							colisiones, MAX_COLISIONES);
+					restas10.add(nuevaResta);
+				}
+				
+				for (int i=0;i<1;i++) {
+					nuevaResta = generador.obtenerRestaNivel(restas10, 6,
+							colisiones, MAX_COLISIONES);
+					restas10.add(nuevaResta);
+				}
+				Random rand = new Random();
+				List<Resta> restasNivel = restaNiveles.get(request.getParameter("nivel"));
+				for (int i = 0; i<15; i++) {
+			        int randomIndex = rand.nextInt(restas10.size());
+			        Resta randomElement = restas10.get(randomIndex);
+			        restasNivel.add(randomElement);
+			        restas10.remove(randomIndex);
+			    }
+				
+				
 				List<Resta> restas = restaNiveles.get(request.getParameter("nivel"));
 				Iterator<Resta> iter = restas.iterator();
 				while (iter.hasNext()) {

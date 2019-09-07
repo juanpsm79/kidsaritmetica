@@ -178,9 +178,9 @@ var dominio = "test.playaddition.com";
 						  document.getElementById('sumaUnidadesCifra').style.color="red";
 			  	  }
 				  document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(startOverBoton.png)";
+				  sumasActuales = 0;
+				  document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 				  document.getElementById('capaBotonCheckSuma').onclick = function(){
-					  	sumasActuales = 0;
-					  	document.getElementById('indicadorSumas').innerHTML = "0/<%=sumasNecesarias%>";
 					  	calcularSuma();
 			  			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(checkBoton.png)";
 			  			bloquearInteracciones = false;

@@ -59,7 +59,7 @@ public class GeneradorRestas {
 		resta.setOperando2(operador2);
 		resta.setResultadoResta(operador1-operador2);
 		
-		if (nivelContainsResta(restasNivel, resta) || (operador1==operador2)){
+		if (nivelContainsResta(restasNivel, resta) || (operador1==operador2 && nivel>1)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
 				System.out.println("colisiones: "+colisiones+" Nivel: "+nivel+" Suma "+resta);
@@ -166,12 +166,12 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
+		int unidades1 =  new Random().ints(1, 2, 10).sum();
 		int decenas1 =  new Random().ints(1, 2, 5).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-		   unidades2 = new Random().ints(1, 1, unidades1+1).sum();
+		   unidades2 = new Random().ints(1, 2, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
