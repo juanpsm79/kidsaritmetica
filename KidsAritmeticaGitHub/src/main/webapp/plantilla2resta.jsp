@@ -103,7 +103,7 @@ var dominio = "test.playaddition.com";
   function subirNivel() {
 		nivel++;
 		$.ajax({
-			  url: "/hello",
+			  url: "/restas",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
@@ -144,7 +144,8 @@ var dominio = "test.playaddition.com";
 		
 		 <%
 		    sumasNecesarias = 10;
-		 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")){%>
+		 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")
+				 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
 		 		document.getElementById("casillaLlevada").style.visibility="hidden";
 		  <%}%>
 
@@ -189,8 +190,7 @@ var dominio = "test.playaddition.com";
   
   function comprobarSuma(){
 	  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
-	  if(document.getElementById('sumaDecenasCifra').innerHTML==''  || document.getElementById('sumaDecenasCifra').innerHTML==null ||
-	      document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null ) {
+	  if(document.getElementById('sumaUnidadesCifra').innerHTML=='' || document.getElementById('sumaUnidadesCifra').innerHTML==null ) {
 		  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBoton.png)';
 		  	return;
 	  } else {
@@ -472,6 +472,7 @@ var dominio = "test.playaddition.com";
 	  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
 	  			document.getElementById("eluno").style.visibility="visible";
 	  			document.getElementById("unidadesCifra1").style.cursor="default";
+	  			setSelected ("sumaUnidades");
 	  		}
   		}
   	}

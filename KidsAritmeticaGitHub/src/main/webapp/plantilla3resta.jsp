@@ -106,7 +106,7 @@ var dominio = "test.playaddition.com";
   function subirNivel() {
 		nivel++;
 		$.ajax({
-			  url: "/hello",
+			  url: "/restas",
 			  method: "post",
 			  data:{nivel: ''+nivel, accion:'subirNivel'},
 			  success : function(responseText) {
