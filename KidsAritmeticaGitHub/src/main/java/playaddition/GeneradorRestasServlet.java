@@ -847,6 +847,8 @@ public class GeneradorRestasServlet extends HttpServlet {
 				request.getSession().setAttribute("wa", false);
 		} else if (nivel==36 || nivel==37) {
 			request.getSession().setAttribute("assistance", true);
+			if (nivel==37)
+				request.getSession().setAttribute("wa", false);
 			request.getSession().setAttribute("tensRegrouping", false);
 			request.getSession().setAttribute("hundredsRegrouping", true);
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
