@@ -151,8 +151,8 @@ var dominio = "test.playaddition.com";
 		 document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
 		 document.getElementById('sumaMillaresCifra').style.color="rgb(0,110,188)";
 	     document.getElementById('coma').style.visibility='hidden';
-	     document.getElementById('llevadaCentenas').innerHTML="<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
-		 document.getElementById('llevadaDecenas').innerHTML= "<img src='casillaLlevada.png' style=\"position:absolute;cursor:pointer;width:2vw;height:3vw\" onclick=\"javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}\"/>";
+	     document.getElementById('llevadaCentenas').style.backgroundImage="url(casillaLlevada.png)";
+		 document.getElementById('llevadaDecenas').style.backgroundImage="url(casillaLlevada.png)";
 	     setSelected ("sumaUnidades");
 	     
 	     
@@ -513,12 +513,13 @@ var dominio = "test.playaddition.com";
 			<div style="position:absolute;left:22.45vw;width:41.8vw;height:34.5vw;background-size:41.8vw 33.5vw;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
 			<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:18.5vw;position:absolute;top:1vw">
-					<a id="llevadaCentenas" style="position:absolute">
-							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">
-						</a>
-						<a id="llevadaDecenas" style="position:absolute;left:7.9vw">
-							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
-						</a>
+				
+					   <div id="llevadaCentenas" style="position:absolute; z-index:2; cursor:pointer; width:3vw;height:4vw; background-size:3vw 4vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
+					onclick="javascript:{if(this.style.backgroundImage.indexOf('casillaLlevada.png')<0){this.style.backgroundImage='url(casillaLlevada.png)'}else{this.style.backgroundImage='url(casillaLlevada1.png)'}}">
+						</div>
+						<div id="llevadaDecenas" style="position:absolute;left:7.9vw;z-index:2; cursor:pointer; width:3vw;height:4vw; background-size:2vw 3vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
+					onclick="javascript:{if(this.style.backgroundImage.indexOf('casillaLlevada.png')<0){this.style.backgroundImage='url(casillaLlevada.png)'}else{this.style.backgroundImage='url(casillaLlevada1.png)'}}">
+						</div>
 				</div>
 				
 				<!--PRIMER OPERADOR  -->

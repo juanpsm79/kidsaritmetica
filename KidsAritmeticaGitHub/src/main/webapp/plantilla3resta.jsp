@@ -685,11 +685,11 @@ var dominio = "test.playaddition.com";
 			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta3.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:11.5vw;position:absolute;top:1vw">
-					<div id="casillaLlevadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
-							<label id="cifraCasillaLlevadaCentenas" style="position:absolute;cursor:pointer;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
+					<div id="casillaLlevadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:3.1vw 4.1vw;width:3.1vw;height:4.1vw">
+							<label id="cifraCasillaLlevadaCentenas" style="position:absolute;cursor:pointer;left:0.15vw;top:-0.6vw;font-family:Calibri;font-size:4.5vw;font-weight:bold;font-color:black"></label>
 					</div>
-					<div id="casillaLlevadaDecenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;left:7.1vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.1vw 3.1vw;width:2.1vw;height:3.1vw">
-							<label id="cifraCasillaLlevadaDecenas" style="position:absolute;left:0.15vw;top:-0.6vw;cursor:pointer;font-family:Calibri;font-size:3.5vw;font-weight:bold;font-color:black"></label>
+					<div id="casillaLlevadaDecenas" onclick="javascript:initAssistance(this)" style="position:absolute;cursor:pointer;left:7.1vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:3.1vw 4.1vw;width:3.1vw;height:4.1vw">
+							<label id="cifraCasillaLlevadaDecenas" style="position:absolute;left:0.15vw;top:-0.6vw;cursor:pointer;font-family:Calibri;font-size:4.5vw;font-weight:bold;font-color:black"></label>
 					</div>
 				</div>
 					
