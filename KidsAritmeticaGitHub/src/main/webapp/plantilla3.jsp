@@ -512,12 +512,12 @@ var dominio = "test.playaddition.com";
 				
 			<div style="position:absolute;left:22.45vw;width:41.8vw;height:34.5vw;background-size:41.8vw 33.5vw;background-image:url(cuadroSuma3.png);background-repeat:no-repeat">
 			<!--CASILLAS LLEVADA -->
-				<div style="width:62vw;left:18.5vw;position:absolute;top:1vw">
+				<div style="width:62vw;left:18.4vw;position:absolute;top:1vw">
 				
-					   <div id="llevadaCentenas" style="position:absolute; z-index:2; cursor:pointer; width:3vw;height:4vw; background-size:3vw 4vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
+					   <div id="llevadaCentenas" style="position:absolute; z-index:2; cursor:pointer; width:2.5vw;height:3.5vw; background-size:2.5vw 3.5vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
 					onclick="javascript:{if(this.style.backgroundImage.indexOf('casillaLlevada.png')<0){this.style.backgroundImage='url(casillaLlevada.png)'}else{this.style.backgroundImage='url(casillaLlevada1.png)'}}">
 						</div>
-						<div id="llevadaDecenas" style="position:absolute;left:7.9vw;z-index:2; cursor:pointer; width:3vw;height:4vw; background-size:2vw 3vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
+						<div id="llevadaDecenas" style="position:absolute;left:8vw;z-index:2; cursor:pointer; width:2.5vw;height:3.5vw; background-size:2.5vw 3.5vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
 					onclick="javascript:{if(this.style.backgroundImage.indexOf('casillaLlevada.png')<0){this.style.backgroundImage='url(casillaLlevada.png)'}else{this.style.backgroundImage='url(casillaLlevada1.png)'}}">
 						</div>
 				</div>

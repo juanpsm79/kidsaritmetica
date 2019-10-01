@@ -473,8 +473,8 @@ var dominio = "test.playaddition.com";
 				
 			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroSuma2.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
-				<div style="width:62vw;left:19vw;position:absolute;top:1vw">
-					<div id="llevadaCentenas" style="position:absolute; z-index:2; cursor:pointer; width:3vw;height:4vw; background-size:3vw 4vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
+				<div style="width:62vw;left:18.85vw;position:absolute;top:1vw">
+					<div id="llevadaCentenas" style="position:absolute; z-index:2; cursor:pointer; width:2.5vw;height:3.5vw; background-size:2.5vw 3.5vw;background-image:url(casillaLlevada.png);background-repeat:no-repeat"
 					onclick="javascript:{if(this.style.backgroundImage.indexOf('casillaLlevada.png')<0){this.style.backgroundImage='url(casillaLlevada.png)'}else{this.style.backgroundImage='url(casillaLlevada1.png)'}}">
 						</div>
 				</div>
