@@ -154,14 +154,6 @@ var dominio = "test.playaddition.com";
 		 
 		 document.getElementById("tachada").style.visibility="hidden";
 	  	 document.getElementById("eluno").style.visibility="hidden";
-		
-	  	 if(!assistance){
-			document.getElementById("casillaLlevada").style.cursor="default";
-			document.getElementById("cifraCasillaLlevada").style.cursor="default";
-			document.getElementById("decenasCifra1").style.cursor="default";
-			document.getElementById("unidadesCifra1").style.cursor="default";
-		 }
-	  	 
 	     setSelected ("sumaUnidades");
 	     
 	}
@@ -197,18 +189,18 @@ var dominio = "test.playaddition.com";
 		  if (!bloquearInteracciones) {
 			  bloquearInteracciones = true;
 			  document.getElementById('capaBotonCheckSuma').style.backgroundImage='url(checkBotonClick.png)';
-			  /*var centenas = document.getElementById('sumaCentenasCifra').innerHTML;
-			  if(document.getElementById('sumaCentenasCifra').innerHTML=='' ||
-					  document.getElementById('sumaCentenasCifra').innerHTML==null)
-				  centenas="0";*/
+			  var decenas = document.getElementById('sumaDecenasCifra').innerHTML;
+			  if(document.getElementById('sumaDecenasCifra').innerHTML=='' ||
+					  document.getElementById('sumaDecenasCifra').innerHTML==null)
+				  decenas="0";
 			  var sumaAlumno = (
-					  10*parseInt(document.getElementById('sumaDecenasCifra').innerHTML, 10) +
+					  10*parseInt(decenas, 10) +
 				  parseInt(document.getElementById('sumaUnidadesCifra').innerHTML, 10));
 			  
 			  var operador1 = (10*parseInt(document.getElementById('decenasCifra1').innerHTML, 10) +
 				  parseInt(document.getElementById('unidadesCifra1').innerHTML, 10));
 			  
-			  var decenas = document.getElementById('decenasCifra2').innerHTML;
+			  decenas = document.getElementById('decenasCifra2').innerHTML;
 			  if(document.getElementById('decenasCifra2').innerHTML=='' ||
 					  document.getElementById('decenasCifra2').innerHTML==null)
 				  decenas="0";
@@ -452,7 +444,7 @@ var dominio = "test.playaddition.com";
   	}
   	
   	function initAssistance() {
-	  	if(assistance){
+	  	
 	  		document.getElementById("tachada").style.visibility="visible";
 	  		document.getElementById("tachada").style.backgroundSize="6vw 6vw";
 	  		if(assistanceMode){
@@ -464,16 +456,14 @@ var dominio = "test.playaddition.com";
 	  				document.getElementById("unidadesCifra1").style.cursor="pointer";
 	  			setSelected("casillaLlevada");
 	  		}
-	  	}
+	  	
   	}
   	
   	function setOneAssistance(){
-  		if(assistance){
-	  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
-	  			document.getElementById("eluno").style.visibility="visible";
-	  			document.getElementById("unidadesCifra1").style.cursor="default";
-	  			setSelected ("sumaUnidades");
-	  		}
+  		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
+  			document.getElementById("eluno").style.visibility="visible";
+  			document.getElementById("unidadesCifra1").style.cursor="default";
+  			setSelected ("sumaUnidades");
   		}
   	}
 	  
@@ -501,7 +491,7 @@ var dominio = "test.playaddition.com";
 			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta2.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:18.82vw;position:absolute;top:1vw">
-					<div id="casillaLlevada" style="position:absolute;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.5vw 3.5vw;width:2.5vw;height:3.5vw">
+					<div id="casillaLlevada" onclick="javascript:if(document.getElementById('tachada').style.visibility=='visible')setSelected('casillaLlevada')" style="position:absolute;z-index:2;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.5vw 3.5vw;width:2.5vw;height:3.5vw">
 							<label id="cifraCasillaLlevada" style="position:absolute;left:0.15vw;top:-1.15vw;font-family:Calibri;font-size:4.5vw;font-weight:bold;font-color:black"></label>
 					</div>
 					<!--  
