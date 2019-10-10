@@ -59,8 +59,8 @@
   $( function() {
   } );
   
-  function irPrincipal(obj){
-	  	 obj.style.backgroundImage="url(playBotonSS.png)";
+  function irPlayAddition(){
+	  	 //obj.style.backgroundImage="url(playBotonSS.png)";
 	  	 setTimeout(function(){location.href = "seleccionNivel.jsp"},500);
   }
   
@@ -183,23 +183,25 @@ gapi.analytics.ready(function() {
  			
 	 	</div>
 
-		<div id="derecha" style="position:absolute;left:25vw;width:65vw">	
-				<img src="logoPlayAddition.png" style="width:57vw">
+		<div id="derecha" style="position:absolute;left:20vw;width:65vw;top:13vw">	
+				<div style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
+				<div style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
  		
  		  
  		<div style="position:absolute;right:5vw">
- 				<div id="contador" style="position:absolute;top:1vw;width:9vw;height:6vw;right:7vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
+ 				<div id="contador" style="position:absolute;top:1vw;width:11vw;height:6vw;right:4vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
  					<img src="loading.gif" style="width:2.5vw">
  				</div>
  				<!--  
  					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
  					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
- 				-->
+ 				
 				<div id= "playBoton" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:16vw 11vw;float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'" onclick="javascript:irPrincipal(this)"></div>
+				-->
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
-				<img src="contactSupport.png" style="cursor:pointer;width:20vw"><a onclick="irPlaySubtraction()" style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)"  title="v1.10">Ir a PlaySubtraction</a>
+				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
 		
  		
