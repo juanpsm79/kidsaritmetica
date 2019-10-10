@@ -12,6 +12,7 @@ import playaddition.model.Suma;
 public class GeneradorSumas {
 	
 	Random random = new Random();
+	//
 	
 	public Suma obtenerSumaNivel(List<Suma> sumasNivel, int nivel, int colisiones, int maxColisiones) {
 		Suma suma =  new Suma();
