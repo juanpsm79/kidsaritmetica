@@ -108,7 +108,8 @@
   }
   
   function irPrincipal(obj){
-	  obj.style.backgroundImage="url(playBotonSS.png)";
+	  if(obj!=null)
+	  	obj.style.backgroundImage="url(playBotonSS.png)";
 	  setTimeout(function(){
 		  $.ajax({
 			  url: "/hello",
@@ -140,6 +141,7 @@
   }
   
   function callback(nivel){
+	  
 	  nivelAnterior = nivel;
 	  docLevelsWindow.close();
 	  irPrincipal();
@@ -186,9 +188,9 @@
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
 			<img id="selectYourLevel" src="selectLevel.png" style="position:absolute;width:68vw;height:12vw">
-			<!--  
-			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:9.75vw;left:0.5vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
-			-->
+			  
+			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:11.35vw;left:1vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:2.3vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
+			
 		</div>
 		
 		<div style="position:absolute;width:76vw;top:6vw">
