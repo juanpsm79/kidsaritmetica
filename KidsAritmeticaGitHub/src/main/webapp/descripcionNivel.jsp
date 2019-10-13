@@ -95,11 +95,12 @@ var dominio = "test.playaddition.com";
 			<div style="top:9.5vw;width:20vw;height:30vw;position:absolute;background-size:18vw 28vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
  			
- 			<!--  
- 			<div  id= "playSelectAllLevel" onclick="javascript:irNivel()" style="width:10vw;height:8vw;position:absolute;left:9vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playSelectAllLevel.png);background-repeat:no-repeat">
- 			</div>
- 			-->
- 			<div id= "playSelectAllLevel" onclick="javascript:irNivel(this)" style="width:10vw;height:8vw;position:absolute;left:9vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playBoton.png);background-repeat:no-repeat" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
+ 			<% if(nivel.equalsIgnoreCase("1") || nivel.equalsIgnoreCase("2") || nivel.equalsIgnoreCase("3") || nivel.equalsIgnoreCase("4") ||
+ 					nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("6") || nivel.equalsIgnoreCase("7") || nivel.equalsIgnoreCase("8") ||
+ 					nivel.equalsIgnoreCase("9") || nivel.equalsIgnoreCase("10") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("12")){%>
+ 				<div onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/play_<%=nivel%>.mp4', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=150,left=300,width=600,height=400');" style="width:8.5vw;height:6.5vw;position:absolute;left:0.5vw;cursor:pointer;background-size:8.5vw 6.5vw;top:38.25vw;background-image:url(howToplay.png);background-repeat:no-repeat"></div>
+ 			<%}%>
+ 			<div id= "playSelectAllLevel" onclick="javascript:irNivel(this)" style="width:10vw;height:8vw;position:absolute;left:10vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playBoton.png);background-repeat:no-repeat" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
  		</div>
  		
   </body>
