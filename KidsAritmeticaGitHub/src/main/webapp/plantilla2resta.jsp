@@ -97,7 +97,7 @@ var dominio = "test.playaddition.com";
    int i = 0;
    while(iter.hasNext()){
 	   Resta suma = iter.next();%>
- 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>"};
+ 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>", nivel:"<%=suma.getNivel()%>"};
   <%i++;}%>
 	
   function subirNivel() {
@@ -142,13 +142,24 @@ var dominio = "test.playaddition.com";
 		// document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
 		
 		
-		 <%
-		    sumasNecesarias = 10;
-		 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")
-				 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
-		 		document.getElementById("casillaLlevada").style.visibility="hidden";
-		  <%}%>
-
+		 if(nivel == 14 || nivel == 18 || nivel == 22 || nivel == 26){
+		  		assistanceMode = false;
+		  		if(sumas[indexSuma].nivel=="12" || sumas[indexSuma].nivel=="13" || sumas[indexSuma].nivel=="15" ||
+		  				sumas[indexSuma].nivel=="19" || sumas[indexSuma].nivel=="23"){
+		  			assistance = false;
+		  			document.getElementById("casillaLlevada").style.visibility="hidden";
+		  		} else {
+		  			assistance = true;
+		  			document.getElementById("casillaLlevada").style.visibility="visible";
+		  		}
+	     }else{
+			 <%
+			    sumasNecesarias = 10;
+			 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")
+					 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
+			 		document.getElementById("casillaLlevada").style.visibility="hidden";
+			  <%}%>
+	     }
 	     document.getElementById("casillaLlevada").style.borderStyle = "none";
 		 document.getElementById('cifraCasillaLlevada').innerHTML="";
 		 
@@ -333,6 +344,7 @@ var dominio = "test.playaddition.com";
   	  		document.getElementById("cifraCasillaLlevada").innerHTML = ""+digito;
   	  		if(document.getElementById("eluno").style.visibility=="hidden")
   	  			document.getElementById("unidadesCifra1").style.cursor="pointer";
+  	  		setSelected ("sumaUnidades");
   		}
   	  }
     }
@@ -463,7 +475,7 @@ var dominio = "test.playaddition.com";
   		if(document.getElementById("cifraCasillaLlevada").innerHTML!="" && document.getElementById("eluno").style.visibility=="hidden"){
   			document.getElementById("eluno").style.visibility="visible";
   			document.getElementById("unidadesCifra1").style.cursor="default";
-  			setSelected ("sumaUnidades");
+  			
   		}
   	}
 	  

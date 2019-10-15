@@ -100,7 +100,7 @@ var dominio = "test.playaddition.com";
    int i = 0;
    while(iter.hasNext()){
 	   Resta suma = iter.next();%>
- 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>"};
+ 	 sumas[<%=i%>] = {operador1:"<%=suma.getOperando1()%>", operador2:"<%=suma.getOperando2()%>", resultado:"<%=suma.getResultadoResta()%>", nivel:"<%=suma.getNivel()%>"};
   <%i++;}%>
 	
   function subirNivel() {
@@ -174,6 +174,36 @@ var dominio = "test.playaddition.com";
 	  	 document.getElementById("elunoCentenas").style.visibility="hidden";
 	  	 document.getElementById("tachadaDecenas").style.visibility="hidden";
 	  	 document.getElementById("elunoDecenas").style.visibility="hidden";
+	  	if(nivel == 40 || nivel == 32){
+	  		assistanceMode = false;
+	  		if(sumas[indexSuma].nivel=="27"){
+	  			assistance = false;
+	  		} else if(sumas[indexSuma].nivel=="28" || sumas[indexSuma].nivel=="29"){
+	  			assistance = true;
+	  			tensRegrouping=true;
+	  			hundredsRegrouping=false;
+	  		} else if(sumas[indexSuma].nivel=="30" || sumas[indexSuma].nivel=="31"){
+	  			assistance = true;
+	  			tensRegrouping=true;
+	  			hundredsRegrouping=true;
+	  		} else if(sumas[indexSuma].nivel=="33"){
+	  			assistance = false;
+	  		} else if(sumas[indexSuma].nivel=="34" || sumas[indexSuma].nivel=="35"){
+	  			assistance = true;
+	  			tensRegrouping=true;
+	  			hundredsRegrouping=false;
+	  		} else if(sumas[indexSuma].nivel=="36" || sumas[indexSuma].nivel=="37"){
+	  			assistance = true;
+	  			tensRegrouping=false;
+	  			hundredsRegrouping=true;
+	  		} else if(sumas[indexSuma].nivel=="38" || sumas[indexSuma].nivel=="39"){
+	  			assistance = true;
+	  			tensRegrouping=true;
+	  			hundredsRegrouping=true;
+	  		}
+			 
+		 }
+	  	 
 	  	 if(!assistance){
 		  	document.getElementById("casillaLlevadaCentenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
@@ -183,19 +213,23 @@ var dominio = "test.playaddition.com";
 			document.getElementById("decenasCifra1").style.cursor="default";			
 	  	 } else if (tensRegrouping && !hundredsRegrouping){
 	  		document.getElementById("casillaLlevadaCentenas").style.visibility="hidden";
+	  		document.getElementById("casillaLlevadaDecenas").style.visibility="visible";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("centenasCifra1").style.cursor="default";
 			document.getElementById("decenasCifra1").style.cursor="pointer";
 	  	 } else if (hundredsRegrouping && !tensRegrouping){
+	  		document.getElementById("casillaLlevadaCentenas").style.visibility="visible";
+	  		document.getElementById("casillaLlevadaDecenas").style.visibility="hidden";
 	  		document.getElementById("casillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
-		  	document.getElementById("casillaLlevadaDecenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("centenasCifra1").style.cursor="pointer";
 			document.getElementById("decenasCifra1").style.cursor="default";
 	  	 } else if (hundredsRegrouping && tensRegrouping){
+	  		document.getElementById("casillaLlevadaCentenas").style.visibility="visible";
+	  		document.getElementById("casillaLlevadaDecenas").style.visibility="visible";
 	  		document.getElementById("casillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
@@ -206,18 +240,7 @@ var dominio = "test.playaddition.com";
   			document.getElementById("elunoCentenas").style.top="-3vw";
 		 } 
 	  	 
-	  	if(nivel == 40){
-			 document.getElementById("casillaLlevadaCentenas").style.visibility="visible";
-			 document.getElementById("casillaLlevadaDecenas").style.visibility="visible";
-			 document.getElementById("casillaLlevadaCentenas").style.cursor="default";
-			 document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
-			 document.getElementById("casillaLlevadaDecenas").style.cursor="default";
-			 document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
-			 document.getElementById("centenasCifra1").style.cursor="pointer";
-		     document.getElementById("decenasCifra1").style.cursor="pointer";
-	  		 document.getElementById("elunoCentenas").style.left="6vw";
-	  		 document.getElementById("elunoCentenas").style.top="-3vw";
-		 }
+	  	
 	     setSelected ("sumaUnidades");
 	}
 	
