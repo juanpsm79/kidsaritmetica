@@ -91,7 +91,8 @@ var dominio = "test.playaddition.com";
   var indexSuma = -1;
  <%
    int sumasNecesarias = 10;
- if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("18"))
+ if(nivel.equalsIgnoreCase("5") || nivel.equalsIgnoreCase("11") || nivel.equalsIgnoreCase("18")
+		 ||nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("18") || nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("26"))
 	  			sumasNecesarias = 15;
    Iterator<Resta> iter = restas.iterator();
    int i = 0;
@@ -140,26 +141,16 @@ var dominio = "test.playaddition.com";
 		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
 		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
 		// document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
+		assistance = true;
 		
-		
-		 if(nivel == 14 || nivel == 18 || nivel == 22 || nivel == 26){
-		  		assistanceMode = false;
-		  		if(sumas[indexSuma].nivel=="12" || sumas[indexSuma].nivel=="13" || sumas[indexSuma].nivel=="15" ||
-		  				sumas[indexSuma].nivel=="19" || sumas[indexSuma].nivel=="23"){
-		  			assistance = false;
-		  			document.getElementById("casillaLlevada").style.visibility="hidden";
-		  		} else {
-		  			assistance = true;
-		  			document.getElementById("casillaLlevada").style.visibility="visible";
-		  		}
-	     }else{
-			 <%
-			    sumasNecesarias = 10;
-			 if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14") || nivel.equalsIgnoreCase("15")
-					 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
-			 		document.getElementById("casillaLlevada").style.visibility="hidden";
-			  <%}%>
-	     }
+		 
+		 <%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("15") 
+				 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
+		 		document.getElementById("casillaLlevada").style.visibility="hidden";
+		 		document.getElementById("decenasCifra1").style.cursor="default";
+		 		assistance = false;
+		  <%}%>
+	     
 	     document.getElementById("casillaLlevada").style.borderStyle = "none";
 		 document.getElementById('cifraCasillaLlevada').innerHTML="";
 		 
@@ -456,7 +447,7 @@ var dominio = "test.playaddition.com";
   	}
   	
   	function initAssistance() {
-	  	
+	  	if(assistance){
 	  		document.getElementById("tachada").style.visibility="visible";
 	  		document.getElementById("tachada").style.backgroundSize="6vw 6vw";
 	  		if(assistanceMode){
@@ -468,7 +459,7 @@ var dominio = "test.playaddition.com";
 	  				document.getElementById("unidadesCifra1").style.cursor="pointer";
 	  			setSelected("casillaLlevada");
 	  		}
-	  	
+	  	}
   	}
   	
   	function setOneAssistance(){
@@ -570,95 +561,99 @@ var dominio = "test.playaddition.com";
 				
 				
 	<%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14")){%>	
-		   <div style="position:absolute;width:66vw;height:2vw;background-size:65.5vw 2vw;top:34.25vw;background-image:url(flecha.png);background-repeat:no-repeat">
+		   <div style="position:absolute;width:72vw;height:2vw;background-size:71vw 2vw;top:33.25vw;background-image:url(flecha.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image0" onclick="cambiaImagen(this.id)" style="position:absolute;z-index:2;left:0.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image1" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:3.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image2" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:6.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image3" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:9.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image4" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:12.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image5" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:15.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image6" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:18.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image7" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:21.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image8" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:24.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image9" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:27.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image10" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:30.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image11" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:33.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image12" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:36.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <!-- 39 -->
-		   <div id="image13" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:39.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image14" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:42.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image15" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:45.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image16" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:48.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image17" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:51.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image18" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:54.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image19" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:57.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
-		   </div>
-		   <div id="image20" onclick="cambiaImagen(this.id)" style="position:absolute;z-index:2;left:60.5vw;cursor:pointer;width:1vw;height:2vw;background-size:1vw 2vw;top:34.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
+		   <div style="position:absolute;width:1vw;height:2vw;left:69.6vw;background-size:1vw 2vw;top:33.25vw;background-image:url(flechacabeza.png);background-repeat:no-repeat">
 		   </div>
 		   
 		   
-		   <div id="image0label" onclick="cambiaImagen('image0')" style="position:absolute;z-index:2;left:0.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">0
+		   <div id="image0" onclick="cambiaImagen(this.id)" style="position:absolute;z-index:2;left:0.5vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image1label" onclick="cambiaImagen('image1')" style="position:absolute;z-index:2;left:3.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">1
+		   <div id="image1" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:3.9vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image2label" onclick="cambiaImagen('image2')" style="position:absolute;z-index:2;left:6.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">2
+		   <div id="image2" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:7.3vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image3label" onclick="cambiaImagen('image3')" style="position:absolute;z-index:2;left:9.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">3
+		   <div id="image3" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:10.7vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image4label" onclick="cambiaImagen('image4')" style="position:absolute;z-index:2;left:12.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">4
+		   <div id="image4" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:14.1vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image5label" onclick="cambiaImagen('image5')" style="position:absolute;z-index:2;left:15.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">5
+		   <div id="image5" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:17.5vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image6label" onclick="cambiaImagen('image6')" style="position:absolute;z-index:2;left:18.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">6
+		   <div id="image6" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:20.9vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image7label" onclick="cambiaImagen('image7')" style="position:absolute;z-index:2;left:21.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">7
+		   <div id="image7" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:24.4vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image8label" onclick="cambiaImagen('image8')" style="position:absolute;z-index:2;left:24.5vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">8
+		   <div id="image8" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:27.8vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id=image9label onclick="cambiaImagen('image9')" style="position:absolute;z-index:2;left:27.65vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">9
+		   <div id="image9" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:31.2vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image10label" onclick="cambiaImagen('image10')" style="position:absolute;z-index:2;left:30.25vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">10
+		   <div id="image10" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:34.6vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image11label" onclick="cambiaImagen('image11')" style="position:absolute;z-index:2;left:33.25vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">11
+		   <div id="image11" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:38vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id=image12label onclick="cambiaImagen('image12')" style="position:absolute;z-index:2;left:36.25vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">12
+		   <div id="image12" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:41.4vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
 		   <!-- 39 -->
-		   <div id="image13label" onclick="cambiaImagen('image13')" style="position:absolute;z-index:2;left:39.25vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">13
+		   <div id="image13" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:44.8vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image14label"  onclick="cambiaImagen('image14')" style="position:absolute;z-index:2;left:42.25vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">14
+		   <div id="image14" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:48.2vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image15label" onclick="cambiaImagen('image15')" style="position:absolute;z-index:2;left:45.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">15
+		   <div id="image15" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:51.6vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image16label" onclick="cambiaImagen('image16')" style="position:absolute;z-index:2;left:48.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">16
+		   <div id="image16" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:55vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image17label" onclick="cambiaImagen('image17')" style="position:absolute;z-index:2;left:51.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">17
+		   <div id="image17" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:58.4vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image18label" onclick="cambiaImagen('image18')" style="position:absolute;z-index:2;left:54.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">18
+		   <div id="image18" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:61.8vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image19label" onclick="cambiaImagen('image19')" style="position:absolute;z-index:2;left:57.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">19
+		   <div id="image19" onclick="cambiaImagen(this.id)"style="position:absolute;z-index:2;left:65.2vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
 		   </div>
-		   <div id="image20label" onclick="cambiaImagen('image20')" style="position:absolute;z-index:2;left:60.35vw;cursor:pointer;width:1vw;height:2vw;top:35.75vw;font-family:BerlinDemi;font-size:1.5vw;font-weight: bold;color:rgb(102, 145, 49)">20
+		   <div id="image20" onclick="cambiaImagen(this.id)" style="position:absolute;z-index:2;left:68.6vw;cursor:pointer;width:1.5vw;height:2vw;background-size:1vw 2vw;top:33.25vw;background-image:url(cruz.png);background-repeat:no-repeat">
+		   </div>
+		   
+		   
+		   <div id="image0label" onclick="cambiaImagen('image0')" style="position:absolute;z-index:2;left:0.5vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">0
+		   </div>
+		   <div id="image1label" onclick="cambiaImagen('image1')" style="position:absolute;z-index:2;left:3.9vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">1
+		   </div>
+		   <div id="image2label" onclick="cambiaImagen('image2')" style="position:absolute;z-index:2;left:7.3vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">2
+		   </div>
+		   <div id="image3label" onclick="cambiaImagen('image3')" style="position:absolute;z-index:2;left:10.7vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">3
+		   </div>
+		   <div id="image4label" onclick="cambiaImagen('image4')" style="position:absolute;z-index:2;left:14.1vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">4
+		   </div>
+		   <div id="image5label" onclick="cambiaImagen('image5')" style="position:absolute;z-index:2;left:17.5vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">5
+		   </div>
+		   <div id="image6label" onclick="cambiaImagen('image6')" style="position:absolute;z-index:2;left:20.9vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">6
+		   </div>
+		   <div id="image7label" onclick="cambiaImagen('image7')" style="position:absolute;z-index:2;left:24.4vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">7
+		   </div>
+		   <div id="image8label" onclick="cambiaImagen('image8')" style="position:absolute;z-index:2;left:27.8vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">8
+		   </div>
+		   <div id=image9label onclick="cambiaImagen('image9')" style="position:absolute;z-index:2;left:31.2vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">9
+		   </div>
+		   <div id="image10label" onclick="cambiaImagen('image10')" style="position:absolute;z-index:2;left:34.2vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">10
+		   </div>
+		   <div id="image11label" onclick="cambiaImagen('image11')" style="position:absolute;z-index:2;left:37.8vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">11
+		   </div>
+		   <div id=image12label onclick="cambiaImagen('image12')" style="position:absolute;z-index:2;left:41.2vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">12
+		   </div>
+		   <!-- 39 -->
+		   <div id="image13label" onclick="cambiaImagen('image13')" style="position:absolute;z-index:2;left:44.6vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">13
+		   </div>
+		   <div id="image14label"  onclick="cambiaImagen('image14')" style="position:absolute;z-index:2;left:48vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">14
+		   </div>
+		   <div id="image15label" onclick="cambiaImagen('image15')" style="position:absolute;z-index:2;left:51.4vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">15
+		   </div>
+		   <div id="image16label" onclick="cambiaImagen('image16')" style="position:absolute;z-index:2;left:54.8vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">16
+		   </div>
+		   <div id="image17label" onclick="cambiaImagen('image17')" style="position:absolute;z-index:2;left:58.2vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">17
+		   </div>
+		   <div id="image18label" onclick="cambiaImagen('image18')" style="position:absolute;z-index:2;left:61.6vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">18
+		   </div>
+		   <div id="image19label" onclick="cambiaImagen('image19')" style="position:absolute;z-index:2;left:64.9vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">19
+		   </div>
+		   <div id="image20label" onclick="cambiaImagen('image20')" style="position:absolute;z-index:2;left:68.2vw;cursor:pointer;width:1vw;height:2vw;top:34.5vw;font-family:BerlinDemi;font-size:2vw;font-weight: bold;color:rgb(102, 145, 49)">20
 		   </div>
 		<%}%>
 		   
@@ -669,7 +664,7 @@ var dominio = "test.playaddition.com";
 			
 			<!-- CAPAS DE ABAJO: TABLA DE CIFRAS Y BOTON DE CHECK -->
 			<%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14")){%>
-				<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:38.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
+				<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:37.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">
 			<%} else{ %>
 				<div style="position:absolute;width:66vw;height:10vw;background-size:65.5vw 10vw;top:34.25vw;background-image:url(tablaNumeros.png);background-repeat:no-repeat">	
 			<%}%>	
