@@ -144,7 +144,7 @@ var dominio = "test.playaddition.com";
 		assistance = true;
 		
 		 
-		 <%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("15") 
+		 <%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("15") || nivel.equalsIgnoreCase("13")|| nivel.equalsIgnoreCase("14")
 				 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
 		 		document.getElementById("casillaLlevada").style.visibility="hidden";
 		 		document.getElementById("decenasCifra1").style.cursor="default";
