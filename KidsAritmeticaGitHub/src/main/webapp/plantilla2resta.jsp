@@ -293,13 +293,8 @@ var dominio = "test.playaddition.com";
 	       cro=actual-emp;
 	       cr=new Date();
 	       cr.setTime(cro); 
-	       cs=cr.getMilliseconds();
-	       cs=cs/10;
-	       cs=Math.round(cs);
 	       sg=cr.getSeconds();
 	       mn=cr.getMinutes();
-	       ho=cr.getHours()-1;	 
-	       if (cs<10) {cs="0"+cs;} 
 	       if (sg<10) {sg="0"+sg;} 
 	       if (mn<10) {mn="0"+mn;} 
 	       document.getElementById('minutero').innerHTML =""+mn+":"+sg;
