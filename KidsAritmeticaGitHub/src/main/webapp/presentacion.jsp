@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="playaddition.model.*"%>
+<%
+Usuario usuario =  (Usuario) session.getAttribute("usuario");
+%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta http-equiv="Cache-control" content="public">
@@ -113,7 +117,7 @@
   }
 
   </script>
-  
+<%if(usuario==null){%>  
 <script>
 var token;
 gapi.analytics.ready(function() {
@@ -145,11 +149,27 @@ gapi.analytics.ready(function() {
 	});	
 	
   
-	function handleReportingResults(response){
-		document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
-	}
+	
 	
 });
+
+function handleReportingResults(response){
+	document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
+}
+
+function login(){
+	location.href='login.jsp';
+}
+<%}%>  
+
+function logout(){
+	
+	firebase.auth().signOut().then(function() {
+		  // Sign-out successful.
+		}).catch(function(error) {
+		  // An error happened.
+		});
+}
 </script>
   
 </head>
@@ -191,19 +211,17 @@ gapi.analytics.ready(function() {
  		  
  		<div style="position:absolute;right:5vw">
  				<div id="contador" style="position:absolute;top:1vw;width:11vw;height:6vw;right:4vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
- 					<img src="loading.gif" style="width:2.5vw">
+ 					<%if(usuario==null){%>
+ 						<img src="loading.gif" style="width:2.5vw">
+ 					<%} else {%>
+ 						<div style="cursor:pointer" onclick="javascript:logout()">Log out</div>
+ 					<%}%>
  				</div>
- 				<!--  
- 					<img src="loginBoton.png" style="position:absolute;width:9vw;height:6vw;right:6vw">
- 					<img src="espaniol.png" style="position:absolute;width:9vw;height:6vw;right:15vw">
- 				
-				<div id= "playBoton" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:16vw 11vw;float:right;position:absolute;right:1vw;top:34vw;cursor:pointer;width:16vw;height:11vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'" onclick="javascript:irPrincipal(this)"></div>
-				-->
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
-		
- 		
+		 <%if(usuario==null)%>
+ 			<div id="loginboton" style="position:absolute;float:right;top:41.5vw;right:9vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
   </body>
 </html>

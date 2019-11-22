@@ -5,6 +5,8 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Login</title>
+<script src="./js/jquery/jquery-ui.js"></script>
+<script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
 
   <!-- Add Firebase products that you want to use -->
@@ -15,6 +17,7 @@
 function handleSignUp() {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
+    var repassword = document.getElementById('repasswordd').value;
     if (email.length < 4) {
       alert('Please enter an email address.');
       return;
@@ -22,6 +25,11 @@ function handleSignUp() {
     if (password.length < 4) {
       alert('Please enter a password.');
       return;
+    }
+    
+    if(repassword!=password){
+    	alert("Password provided don\'t match");
+        return;
     }
     // Sign in with email and pass.
     // [START createwithemail]
@@ -72,7 +80,7 @@ function initApp() {
       // [START_EXCLUDE silent]
       //document.getElementById('quickstart-verify-email').disabled = true;
       // [END_EXCLUDE]
-      if (user) {
+      if (user!=null) {
         // User is signed in.
         var displayName = user.displayName;
         var email = user.email;
@@ -84,8 +92,7 @@ function initApp() {
         location.href='presentacion.jsp'
         // [END_EXCLUDE]
       } else {
-    	  if(user!=null)
-    	  	alert(user.emailVerified)
+    	  
         // User is signed out.
         // [START_EXCLUDE]
         //document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
@@ -126,7 +133,7 @@ function initApp() {
 		document.getElementById("terms").style.display="none";
 		document.getElementById("loginaction").style.display="inline";
 		document.getElementById("createAccountAction").style.display="none";
-		document.getElementById("login").style.height="22vw";
+		//document.getElementById("login").style.height="22vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
 		document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
 		document.getElementById("loginlogo").style.width="10vw";
@@ -139,7 +146,15 @@ function initApp() {
 		firebase.auth().signInWithEmailAndPassword(email, password)
 		   .then(function(firebaseUser) {
 			  // alert(firebaseUser);
-		       location.href="presentacion.jsp";
+			   $.ajax({
+					  url: "/loginUser",
+					  method: "post",
+					  data:{loginuser: ''+firebaseUser.user.displayName, loginId:''+firebaseUser.user.uid}
+					  /*success : function(responseText) {
+						  location.href = "descripcionNivel.jsp";
+					  }*/ 
+					});
+		  		}
 		   })
 		  .catch(function(error) {
 			  var errorCode = error.code;
@@ -168,37 +183,37 @@ function initApp() {
 
 </head>
 <body>
-	<div style="position:absolute;top:5vw;left:40vw" align="center">
+	<div style="position:absolute;top:5vw;left:38vw;width:29vw;height:45vw;" align="center">
 		<div id="loginlogo" style="width:10vw;height:5vw;background-size:10vw 5vw;background-image:url(login.png);background-repeat:no-repeat"></div>
 		<br>
 		<div id="login" style="border:0.1vw solid blue" align="center">
-			<div id="logininfo" style="width:27vw;padding:1vw" align="left">
+			<div id="logininfo" style="width:29vw;height:15vw;padding:1vw" align="left">
 				<br>
 				<br>
 				<br>
 				<div>
 					<label style ="font-family:Calibri;font-size:1.5vw;font-color:black">Email address:</label>
-					<input type="text" id="email" style="position:relative;left:5.4vw"></input>
+					<input type="text" id="email" style="position:relative;left:2.38vw;width:13vw"></input>
 					<div id="available" style="display:none;font-family:Calibri;font-size:0.8vw;position:relative;left:12.6vw">Available</div>
 				</div>
 				
 				<div id="emailid" style="display:none">
 					<br>
 					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Email address:</label>
-					<input type="text" id="email" style="position:relative;left:3.3vw"></input>
+					<input type="text" id="email" style="position:relative;left:5.29vw"></input>
 					<div title="We will send you and email with your user name and password. We can also send you an email if you forget it or you want to change it." style="float:right;position:relative;top:0.4vw;width:1.5vw;height:1.5vw;background-size:1.5vw 1.5vw;background-image:url(info.png);background-repeat:no-repeat"></div>
 					<br>
 				</div>
 				<div id ="separador"><br></div>
 				<div>
 					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Password:&nbsp;</label>
-					<input type="text" id="password" style="position:relative;left:5.6vw"></input>
+					<input type="password" id="password" style="position:relative;left:4.65vw;width:13vw"></input>
 				</div>
 				
 				<div id="repassword" style="display:none">
 					<br>
-					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Re-enter password:&nbsp;</label>
-					<input type="text"></input>
+					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Repeat password:&nbsp;</label>
+					<input type="password" id="repasswordd" style="position:relative;left:0vw;width:13vw"></input>
 				</div>
 				<br>
 				<br>
@@ -216,15 +231,14 @@ function initApp() {
 				<div id="loginaccount" style="font-family:Calibri;font-size:1.5vw;font-color:blue"> or <br><a style="color:blue;cursor:pointer" onclick="javascript:createAccount()"><u>Create an account</u></a></div>
 			</div>
 			<br>
+			<br>
 			<div id="createAccountAction" style="display:none">
-				<div style="float:left;position:relative;left:7vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(createaccount.png);background-repeat:no-repeat" onclick="javascript:handleSignUp()"></div>
-				<div style="float:right;position:relative;right:7vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:gotologin()"></div>
+				<div style="float:left;position:relative;left:6.75vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(createaccount.png);background-repeat:no-repeat" onclick="javascript:handleSignUp()"></div>
+				<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:gotologin()"></div>
 			</div>	
 		</div>
 		
 		<div id="html_element"></div>
-     <br>
-     <input type="submit" value="Submit">
 	</div>
 	
 	
