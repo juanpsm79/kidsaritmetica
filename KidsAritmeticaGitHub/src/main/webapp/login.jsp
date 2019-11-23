@@ -19,7 +19,7 @@ function handleSignUp() {
     var password = document.getElementById('password').value;
     var repassword = document.getElementById('repasswordd').value;
     if (email.length < 4) {
-      alert('Please enter an email address.');
+      alert('User name too short.');
       return;
     }
     if (password.length < 4) {
@@ -33,7 +33,7 @@ function handleSignUp() {
     }
     // Sign in with email and pass.
     // [START createwithemail]
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email+"@playaddition.com", password).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -117,10 +117,21 @@ function initApp() {
 	function createAccount(){
 		//document.getElementById("emailid").style.display="inline";
 		document.getElementById("repassword").style.display="inline";
+		document.getElementById("repassword").style.position="relative";
+		document.getElementById("terms").style.top="2vw";
 		document.getElementById("terms").style.display="inline";
+		document.getElementById("terms").style.top="4vw";
+		document.getElementById("terms").style.left="2vw";
+		document.getElementById("terms").style.width="29vw";
+		document.getElementById("terms").style.height="5vw";
+		document.getElementById("terms").style.position="relative";
 		document.getElementById("loginaction").style.display="none";
 		document.getElementById("createAccountAction").style.display="inline";
-		document.getElementById("login").style.height="28vw";
+		document.getElementById("createAccountAction").style.top="6vw";
+		document.getElementById("createAccountAction").style.width="29vw";
+		document.getElementById("createAccountAction").style.height="4vw";
+		document.getElementById("createAccountAction").style.position="relative";
+		//document.getElementById("login").style.height="28vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
 		document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
 		document.getElementById("loginlogo").style.width="12.5vw";
@@ -132,6 +143,8 @@ function initApp() {
 		document.getElementById("repassword").style.display="none";
 		document.getElementById("terms").style.display="none";
 		document.getElementById("loginaction").style.display="inline";
+		document.getElementById("loginaction").align="center";
+		document.getElementById("login").align="center";
 		document.getElementById("createAccountAction").style.display="none";
 		//document.getElementById("login").style.height="22vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
@@ -154,7 +167,6 @@ function initApp() {
 						  location.href = "descripcionNivel.jsp";
 					  }*/ 
 					});
-		  		}
 		   })
 		  .catch(function(error) {
 			  var errorCode = error.code;
@@ -169,8 +181,7 @@ function initApp() {
 		 }
 </script>
 
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 
 <script type="text/javascript">
@@ -183,62 +194,52 @@ function initApp() {
 
 </head>
 <body>
-	<div style="position:absolute;top:5vw;left:38vw;width:29vw;height:45vw;" align="center">
-		<div id="loginlogo" style="width:10vw;height:5vw;background-size:10vw 5vw;background-image:url(login.png);background-repeat:no-repeat"></div>
-		<br>
-		<div id="login" style="border:0.1vw solid blue" align="center">
-			<div id="logininfo" style="width:29vw;height:15vw;padding:1vw" align="left">
-				<br>
-				<br>
-				<br>
+	<div style="position:absolute;top:4vw;left:38vw;width:29vw;height:45vw;" align="center">
+		<div id="loginlogo" style="position:relative;width:10vw;height:5vw;background-size:10vw 5vw;background-image:url(login.png);background-repeat:no-repeat"></div>
+
+		<div id="login" style="position:relative;top:3vw;width:29vw;height:25vw;border:0.1vw solid blue" align="center">
+			<div id="logininfo" style="position:relative;top:1vw;width:29vw;height:15vw;padding:1vw" align="left">
+				
 				<div>
-					<label style ="font-family:Calibri;font-size:1.5vw;font-color:black">Email address:</label>
-					<input type="text" id="email" style="position:relative;left:2.38vw;width:13vw"></input>
+					<label style ="font-family:Calibri;font-size:1.5vw;font-color:black">User:</label>
+					<input type="text" id="email" style="position:relative;left:7.95vw;width:14.5vw;height:1.5vw"></input>
 					<div id="available" style="display:none;font-family:Calibri;font-size:0.8vw;position:relative;left:12.6vw">Available</div>
 				</div>
-				
-				<div id="emailid" style="display:none">
-					<br>
-					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Email address:</label>
-					<input type="text" id="email" style="position:relative;left:5.29vw"></input>
-					<div title="We will send you and email with your user name and password. We can also send you an email if you forget it or you want to change it." style="float:right;position:relative;top:0.4vw;width:1.5vw;height:1.5vw;background-size:1.5vw 1.5vw;background-image:url(info.png);background-repeat:no-repeat"></div>
-					<br>
-				</div>
-				<div id ="separador"><br></div>
-				<div>
+				<div style="position:relative;top:1vw">
 					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Password:&nbsp;</label>
-					<input type="password" id="password" style="position:relative;left:4.65vw;width:13vw"></input>
+					<input type="password" id="password" style="position:relative;left:4.65vw;width:14.5vw;height:1.5vw"></input>
 				</div>
 				
-				<div id="repassword" style="display:none">
-					<br>
+				<div id="repassword" style="position:relative;top:2vw;display:none">
 					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Repeat password:&nbsp;</label>
-					<input type="password" id="repasswordd" style="position:relative;left:0vw;width:13vw"></input>
+					<input type="password" id="repasswordd" style="position:relative;width:14.5vw;height:1.5vw"></input>
 				</div>
-				<br>
-				<br>
-				<div id="terms" style="display:none">
-					<div>
-						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input type="checkbox" value="">I agree to Arithmetics terms of service</label>
+				
+				<div id="terms" style="position:relative;display:none;top:4vw;left:2vw;width:29vw;height:5vw">
+					<div style="position:relative;width:29vw;height:2.5vw">
+						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value="">I agree to Arithmetics terms of service</label>
 					</div>
-					<div>
-						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input type="checkbox" value="">Send me information...(it's optional)</label>
+					<div style="position:relative;width:29vw;height:2.5vw">
+						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value="">Send me information...(it's optional)</label>
 					</div>
 				</div>
+				
+				<div id="loginaction" style="position:relative;width:29vw;height:12vw;top:5vw" align="center">
+					<div id="loginboton" style="cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
+					<div id="loginaccount" style="position:relative;top:5vw;font-family:Calibri;font-size:1.5vw;font-color:blue">
+						<a style="color:blue;cursor:pointer" onclick="javascript:createAccount()"><u>Create an account</u></a>
+					</div>
+				</div>
+				
+				<div id="createAccountAction" style="position:relative;display:none;top:4vw;width:29vw;height:4vw;">
+					<div style="float:left;position:relative;left:6.75vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(createaccount.png);background-repeat:no-repeat" onclick="javascript:handleSignUp()"></div>
+					<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:gotologin()"></div>
+				</div>	
 			</div>
-			<div id="loginaction">
-				<div id="loginboton" style="cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
-				<div id="loginaccount" style="font-family:Calibri;font-size:1.5vw;font-color:blue"> or <br><a style="color:blue;cursor:pointer" onclick="javascript:createAccount()"><u>Create an account</u></a></div>
-			</div>
-			<br>
-			<br>
-			<div id="createAccountAction" style="display:none">
-				<div style="float:left;position:relative;left:6.75vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(createaccount.png);background-repeat:no-repeat" onclick="javascript:handleSignUp()"></div>
-				<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:gotologin()"></div>
-			</div>	
+			
 		</div>
 		
-		<div id="html_element"></div>
+		<div id="html_element" style="position:relative;top:5vw"></div>
 	</div>
 	
 	
