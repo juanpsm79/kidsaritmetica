@@ -9,9 +9,9 @@
 <script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
 
-  <!-- Add Firebase products that you want to use -->
-  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-firestore.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
 <script type="text/javascript">
 
 function handleSignUp() {
@@ -76,39 +76,20 @@ function initApp() {
 	
     // Listening for auth state changes.
     // [START authstatelistener]
-    firebase.auth().onAuthStateChanged(function(user) {
-      // [START_EXCLUDE silent]
-      //document.getElementById('quickstart-verify-email').disabled = true;
-      // [END_EXCLUDE]
-      if (user!=null) {
-        // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        location.href='presentacion.jsp'
-        // [END_EXCLUDE]
-      } else {
-    	  
-        // User is signed out.
-        // [START_EXCLUDE]
-        //document.getElementById('quickstart-sign-in-status').textContent = 'Signed out';
-        //document.getElementById('quickstart-sign-in').textContent = 'Sign in';
-        //document.getElementById('quickstart-account-details').textContent = 'null';
-        // [END_EXCLUDE]
-      }
-      // [START_EXCLUDE silent]
-      //document.getElementById('quickstart-sign-in').disabled = false;
-      // [END_EXCLUDE]
-    });
-    // [END authstatelistener]
-    //document.getElementById('quickstart-sign-in').addEventListener('click', toggleSignIn, false);
-    //document.getElementById('quickstart-sign-up').addEventListener('click', handleSignUp, false);
-    //document.getElementById('quickstart-verify-email').addEventListener('click', sendEmailVerification, false);
-    //document.getElementById('quickstart-password-reset').addEventListener('click', sendPasswordReset, false);
+		    firebase.auth().onAuthStateChanged(function(user) {
+		      if (user!=null) {
+		        var displayName = user.displayName;
+		        var email = user.email;
+		        var emailVerified = user.emailVerified;
+		        var photoURL = user.photoURL;
+		        var isAnonymous = user.isAnonymous;
+		        var uid = user.uid;
+		        var providerData = user.providerData;
+		        location.href='presentacion.jsp'
+		      } else {
+		      }
+		   });
+    
   }
   window.onload = function() {
     initApp();
@@ -158,15 +139,7 @@ function initApp() {
 		var password = document.getElementById("password").value;
 		firebase.auth().signInWithEmailAndPassword(email, password)
 		   .then(function(firebaseUser) {
-			  // alert(firebaseUser);
-			   $.ajax({
-					  url: "/loginUser",
-					  method: "post",
-					  data:{loginuser: ''+firebaseUser.user.displayName, loginId:''+firebaseUser.user.uid}
-					  /*success : function(responseText) {
-						  location.href = "descripcionNivel.jsp";
-					  }*/ 
-					});
+
 		   })
 		  .catch(function(error) {
 			  var errorCode = error.code;

@@ -21,6 +21,10 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
   <script src="./js/current-device.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
@@ -55,13 +59,43 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
 }(window,document,'script'));
 </script>
 
-
-
-
-
   <script>
   $( function() {
-  } );
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+		};
+		// Initialize Firebase
+		firebase.initializeApp(firebaseConfig);
+		firebase.auth().onAuthStateChanged(function(user) {
+			if (user!=null) {
+			  var displayName = user.displayName;
+			  var email = user.email;
+			  var emailVerified = user.emailVerified;
+			  var photoURL = user.photoURL;
+			  var isAnonymous = user.isAnonymous;
+			  var uid = user.uid;
+			  var providerData = user.providerData;
+			  return firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
+		          alert(snapshot.val().nivelActual);
+		          document.getElementById("contador").style.display="none";
+		          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
+		          document.getElementById("loginboton").innerHtml="J";
+		          document.getElementById("loginboton").onclick=function(){logout()}
+				})
+			}else {
+				document.getElementById("contador").style.display="inline";
+		        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
+			}
+		});
+		
+  });
   
   function irPlayAddition(){
 	  	 //obj.style.backgroundImage="url(playBotonSS.png)";
@@ -113,7 +147,8 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
 		img5.src = "https://"+dominio+"/startOverBoton.png";
 		img6.src = "https://"+dominio+"/levelUpBoton.png";
 		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
-		//alert (navigator.language);
+		
+		
   }
 
   </script>
@@ -164,10 +199,11 @@ function login(){
 
 function logout(){
 	
+	
 	firebase.auth().signOut().then(function() {
-		  // Sign-out successful.
+		  alert("Deslogado")
 		}).catch(function(error) {
-		  // An error happened.
+			alert("Error deslogue")
 		});
 }
 </script>
@@ -209,19 +245,22 @@ function logout(){
  		</div>
  		
  		  
- 		<div style="position:absolute;right:5vw">
- 				<div id="contador" style="position:absolute;top:1vw;width:11vw;height:6vw;right:4vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
+ 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"">
+ 				
+		</div>
+		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
+				<img src="contactSupport.png" style="cursor:pointer;width:20vw" onclick="javascript:logout()">
+		</div>
+		 <%if(usuario==null)%>
+ 		<div style="position:absolute;float:right;top:41.5vw;right:3vw;cursor:pointer">
+ 			<div id="contador" style="position:absolute;top:1vw;width:11vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
  					<%if(usuario==null){%>
  						<img src="loading.gif" style="width:2.5vw">
  					<%} else {%>
  						<div style="cursor:pointer" onclick="javascript:logout()">Log out</div>
  					<%}%>
  				</div>
-		</div>
-		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
-				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
-		</div>
-		 <%if(usuario==null)%>
- 			<div id="loginboton" style="position:absolute;float:right;top:41.5vw;right:9vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
+ 		
+ 		</div>
   </body>
 </html>
