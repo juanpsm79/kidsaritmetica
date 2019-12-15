@@ -1,8 +1,4 @@
 <!DOCTYPE html>
-<%@page import="playaddition.model.*"%>
-<%
-Usuario usuario =  (Usuario) session.getAttribute("usuario");
-%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta http-equiv="Cache-control" content="public">
@@ -32,7 +28,6 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-130256336-3');
 </script>
 
@@ -75,23 +70,37 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
 		firebase.initializeApp(firebaseConfig);
 		firebase.auth().onAuthStateChanged(function(user) {
 			if (user!=null) {
-			  var displayName = user.displayName;
-			  var email = user.email;
-			  var emailVerified = user.emailVerified;
-			  var photoURL = user.photoURL;
-			  var isAnonymous = user.isAnonymous;
-			  var uid = user.uid;
-			  var providerData = user.providerData;
-			  return firebase.database().ref('/users/' + user.uid).once('value').then(function(snapshot) {
-		          alert(snapshot.val().nivelActual);
+			  firebase.database().ref('/users/' + user.uid).once('value').then (
+				function(snapshot) {
+				  if(snapshot==null || snapshot.val()==null || snapshot.val().nivelActual==null)
+						 firebase.database().ref('users/' + user.uid).set({"nivelActual": 1,"puntos": 0});
 		          document.getElementById("contador").style.display="none";
 		          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
-		          document.getElementById("loginboton").innerHtml="J";
-		          document.getElementById("loginboton").onclick=function(){logout()}
+		          document.getElementById("loginboton").style.width="3vw";
+		          document.getElementById("loginboton").style.height="3vw"
+		          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+		          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
+		          document.getElementById("logoutDiv").style.display="inline";
+		          //document.getElementById("inicial").onmouseover=function(){
+		        	//  $("#logoutDiv").slideDown("slow");
+		          //}
+		          //document.getElementById("logoutDiv").onmouseout=function(){
+		        //	  $("#logoutDiv").slideUp("slow");
+		         // }	
+		         //// document.getElementById("logoutDivPadre").onmouseover=function(){
+		        	  	//$("#logoutDiv").slideUp("slow");
+		//}	
+		          //document.getElementById("logoutDiv").onmouseout=function(){$("#logoutDiv").slideUp("slow");}	  
+		          
 				})
 			}else {
+				document.getElementById("inicial").innerHTML ="";
 				document.getElementById("contador").style.display="inline";
 		        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
+		        document.getElementById("loginboton").style.width="8vw";
+		        document.getElementById("loginboton").style.height="4vw"
+		        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
+		        document.getElementById("loginboton").onclick=function(){login()}
 			}
 		});
 		
@@ -152,7 +161,7 @@ Usuario usuario =  (Usuario) session.getAttribute("usuario");
   }
 
   </script>
-<%if(usuario==null){%>  
+ 
 <script>
 var token;
 gapi.analytics.ready(function() {
@@ -194,13 +203,10 @@ function handleReportingResults(response){
 
 function login(){
 	location.href='login.jsp';
-}
-<%}%>  
-
+}  
 function logout(){
-	
-	
 	firebase.auth().signOut().then(function() {
+			
 		  alert("Deslogado")
 		}).catch(function(error) {
 			alert("Error deslogue")
@@ -243,24 +249,24 @@ function logout(){
 				<div style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
 				<div style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
- 		
- 		  
- 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"">
- 				
+ 		<div id="logoutDivPadre" style="width:13vw;height:5vw;position:absolute;right:8.2vw;">
+ 			
+ 			
+ 			<div id="logoutDiv" style="width:4vw;height:2vw;display:none;position:absolute;top:1.75vw;right:8.2vw;font-family:Arial;font-size:1,5vw;color:orange" 
+ 		  onmouseouver="javascript:this.style.fontWeight='bold'" onmouseout="javascript:this.style.fontWeight='normal'" onclick="logout()">Log Out</div>  
+	 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()">
+	 				<label id="inicial" style="cursor:pointer;position:absolute;right:0.78vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
+			</div>
+			
+			
 		</div>
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
-				<img src="contactSupport.png" style="cursor:pointer;width:20vw" onclick="javascript:logout()">
+				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
-		 <%if(usuario==null)%>
  		<div style="position:absolute;float:right;top:41.5vw;right:3vw;cursor:pointer">
  			<div id="contador" style="position:absolute;top:1vw;width:11vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
- 					<%if(usuario==null){%>
- 						<img src="loading.gif" style="width:2.5vw">
- 					<%} else {%>
- 						<div style="cursor:pointer" onclick="javascript:logout()">Log out</div>
- 					<%}%>
- 				</div>
- 		
+ 					<img src="loading.gif" style="width:2.5vw">
+ 			</div>
  		</div>
   </body>
 </html>

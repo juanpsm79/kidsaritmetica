@@ -13,89 +13,72 @@
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
 <script type="text/javascript">
-
+$( function() {
+		 var firebaseConfig = {
+		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+		    authDomain: "fbplayaddition.firebaseapp.com",
+		    databaseURL: "https://fbplayaddition.firebaseio.com",
+		    projectId: "fbplayaddition",
+		    storageBucket: "fbplayaddition.appspot.com",
+		    messagingSenderId: "945530212708",
+		    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+		    measurementId: "G-LLPNBP9S9B"
+		};
+		firebase.initializeApp(firebaseConfig);
+	    firebase.auth().onAuthStateChanged(function(user) {if (user!=null)location.href='presentacion.jsp'});
+});
+  
+function login(){
+	var user = document.getElementById("email").value;
+	var password = document.getElementById("password").value;
+	firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", password)
+	   .then(function(firebaseUser) {
+	   })
+	  .catch(function(error) {
+		  var errorCode = error.code;
+		  var errorMessage = error.message;
+	  		if (errorCode === 'auth/wrong-password') {
+	    	alert('Wrong password.');
+	  	} else {
+	    	alert(errorMessage);
+	  	}
+	  	console.log(error);
+		});
+}
+ 
 function handleSignUp() {
-    var email = document.getElementById('email').value;
+    var user = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var repassword = document.getElementById('repasswordd').value;
     if (email.length < 4) {
       alert('User name too short.');
       return;
     }
-    if (password.length < 4) {
-      alert('Please enter a password.');
-      return;
-    }
-    
     if(repassword!=password){
     	alert("Password provided don\'t match");
         return;
     }
-    // Sign in with email and pass.
-    // [START createwithemail]
-    firebase.auth().createUserWithEmailAndPassword(email+"@playaddition.com", password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // [START_EXCLUDE]
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-      } else {
-        alert(errorMessage);
-      }
-      console.log(error);
-      // [END_EXCLUDE]
-    });
+    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
+   	.catch(function(error) {
+			      var errorCode = error.code;
+			      var errorMessage = error.message;
+			      if (errorCode == 'auth/weak-password') {
+			        alert('The password is too weak.');
+			      } else {
+			        alert(errorMessage);
+			      }
+			      console.log(error);
+   	});
+    
     /*firebase.auth().currentUser.sendEmailVerification().then(function() {
         // Email Verification sent!
         // [START_EXCLUDE]
         alert('Email Verification Sent!');
         // [END_EXCLUDE]
       });*/
-    
-    // [END createwithemail]
   }
-
-
-
-function initApp() {
 	
-	// Your web app's Firebase configuration
-	  var firebaseConfig = {
-	    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-	    authDomain: "fbplayaddition.firebaseapp.com",
-	    databaseURL: "https://fbplayaddition.firebaseio.com",
-	    projectId: "fbplayaddition",
-	    storageBucket: "fbplayaddition.appspot.com",
-	    messagingSenderId: "945530212708",
-	    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-	    measurementId: "G-LLPNBP9S9B"
-	  };
-	  // Initialize Firebase
-	  firebase.initializeApp(firebaseConfig);
-	
-    // Listening for auth state changes.
-    // [START authstatelistener]
-		    firebase.auth().onAuthStateChanged(function(user) {
-		      if (user!=null) {
-		        var displayName = user.displayName;
-		        var email = user.email;
-		        var emailVerified = user.emailVerified;
-		        var photoURL = user.photoURL;
-		        var isAnonymous = user.isAnonymous;
-		        var uid = user.uid;
-		        var providerData = user.providerData;
-		        location.href='presentacion.jsp'
-		      } else {
-		      }
-		   });
-    
-  }
-  window.onload = function() {
-    initApp();
-  };
-	
-	function createAccount(){
+	function displaycreateAccount(){
 		//document.getElementById("emailid").style.display="inline";
 		document.getElementById("repassword").style.display="inline";
 		document.getElementById("repassword").style.position="relative";
@@ -107,11 +90,11 @@ function initApp() {
 		document.getElementById("terms").style.height="5vw";
 		document.getElementById("terms").style.position="relative";
 		document.getElementById("loginaction").style.display="none";
-		document.getElementById("createAccountAction").style.display="inline";
-		document.getElementById("createAccountAction").style.top="6vw";
-		document.getElementById("createAccountAction").style.width="29vw";
-		document.getElementById("createAccountAction").style.height="4vw";
-		document.getElementById("createAccountAction").style.position="relative";
+		document.getElementById("displaycreateAccountAction").style.display="inline";
+		document.getElementById("displaycreateAccountAction").style.top="6vw";
+		document.getElementById("displaycreateAccountAction").style.width="29vw";
+		document.getElementById("displaycreateAccountAction").style.height="4vw";
+		document.getElementById("displaycreateAccountAction").style.position="relative";
 		//document.getElementById("login").style.height="28vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
 		document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
@@ -119,51 +102,31 @@ function initApp() {
 		document.getElementById("loginlogo").style.height="5vw";
 	}
 	
-	function gotologin(){
+	function displaygotologin(){
 		//document.getElementById("emailid").style.display="none";
 		document.getElementById("repassword").style.display="none";
 		document.getElementById("terms").style.display="none";
 		document.getElementById("loginaction").style.display="inline";
 		document.getElementById("loginaction").align="center";
 		document.getElementById("login").align="center";
-		document.getElementById("createAccountAction").style.display="none";
+		document.getElementById("displaycreateAccountAction").style.display="none";
 		//document.getElementById("login").style.height="22vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
 		document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
 		document.getElementById("loginlogo").style.width="10vw";
 		document.getElementById("loginlogo").style.height="5vw";
 	}
-	
-	function login(){
-		var email = document.getElementById("email").value;
-		var password = document.getElementById("password").value;
-		firebase.auth().signInWithEmailAndPassword(email, password)
-		   .then(function(firebaseUser) {
-
-		   })
-		  .catch(function(error) {
-			  var errorCode = error.code;
-			  var errorMessage = error.message;
-		  		if (errorCode === 'auth/wrong-password') {
-		    	alert('Wrong password.');
-		  	} else {
-		    	alert(errorMessage);
-		  	}
-		  	console.log(error);
-			});
-		 }
 </script>
 
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
-
 <script type="text/javascript">
       var onloadCallback = function() {
         grecaptcha.render('html_element', {
           'sitekey' : '6LdtBsMUAAAAALnCsHUaDL6jAdyyi5YVwRvXCXrP'
         });
       };
-    </script>
+</script>
 
 </head>
 <body>
@@ -200,13 +163,13 @@ function initApp() {
 				<div id="loginaction" style="position:relative;width:29vw;height:12vw;top:5vw" align="center">
 					<div id="loginboton" style="cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
 					<div id="loginaccount" style="position:relative;top:5vw;font-family:Calibri;font-size:1.5vw;font-color:blue">
-						<a style="color:blue;cursor:pointer" onclick="javascript:createAccount()"><u>Create an account</u></a>
+						<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u>Create an account</u></a>
 					</div>
 				</div>
 				
-				<div id="createAccountAction" style="position:relative;display:none;top:4vw;width:29vw;height:4vw;">
+				<div id="displaycreateAccountAction" style="position:relative;display:none;top:4vw;width:29vw;height:4vw;">
 					<div style="float:left;position:relative;left:6.75vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(createaccount.png);background-repeat:no-repeat" onclick="javascript:handleSignUp()"></div>
-					<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:gotologin()"></div>
+					<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:displaygotologin()"></div>
 				</div>	
 			</div>
 			
