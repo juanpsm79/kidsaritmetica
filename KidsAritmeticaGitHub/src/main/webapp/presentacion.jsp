@@ -54,8 +54,9 @@
 }(window,document,'script'));
 </script>
 
-  <script>
+<script>
   $( function() {
+	// Initialize Firebase
 	  var firebaseConfig = {
 			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 			    authDomain: "fbplayaddition.firebaseapp.com",
@@ -65,50 +66,47 @@
 			    messagingSenderId: "945530212708",
 			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
 			    measurementId: "G-LLPNBP9S9B"
-		};
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-		firebase.auth().onAuthStateChanged(function(user) {
-			if (user!=null) {
-			  firebase.database().ref('/users/' + user.uid).once('value').then (
-				function(snapshot) {
-				  if(snapshot==null || snapshot.val()==null || snapshot.val().nivelActual==null)
-						 firebase.database().ref('users/' + user.uid).set({"nivelActual": 1,"puntos": 0});
-		          document.getElementById("contador").style.display="none";
-		          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
-		          document.getElementById("loginboton").style.width="3vw";
-		          document.getElementById("loginboton").style.height="3vw"
-		          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
-		          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
-		          document.getElementById("logoutDiv").style.display="inline";
-		          //document.getElementById("inicial").onmouseover=function(){
-		        	//  $("#logoutDiv").slideDown("slow");
-		          //}
-		          //document.getElementById("logoutDiv").onmouseout=function(){
-		        //	  $("#logoutDiv").slideUp("slow");
-		         // }	
-		         //// document.getElementById("logoutDivPadre").onmouseover=function(){
-		        	  	//$("#logoutDiv").slideUp("slow");
-		//}	
-		          //document.getElementById("logoutDiv").onmouseout=function(){$("#logoutDiv").slideUp("slow");}	  
-		          
-				})
-			}else {
-				document.getElementById("inicial").innerHTML ="";
-				document.getElementById("contador").style.display="inline";
-		        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
-		        document.getElementById("loginboton").style.width="8vw";
-		        document.getElementById("loginboton").style.height="4vw"
-		        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
-		        document.getElementById("loginboton").onclick=function(){login()}
-			}
-		});
-		
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) {
+		if (user!=null) {
+		  firebase.database().ref('/users/' + user.uid).once('value').then (
+			function(snapshot) {
+			  if(snapshot==null || snapshot.val()==null || snapshot.val().nivelActual==null)
+					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
+	          document.getElementById("contador").style.display="none";
+	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
+	          document.getElementById("loginboton").style.width="3vw";
+	          document.getElementById("loginboton").style.height="3vw"
+	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
+	          document.getElementById("logoutDiv").style.display="inline";
+			})
+		}else {
+			document.getElementById("inicial").innerHTML ="";
+			document.getElementById("contador").style.display="inline";
+	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
+	        document.getElementById("loginboton").style.width="8vw";
+	        document.getElementById("loginboton").style.height="4vw"
+	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
+	        document.getElementById("loginboton").onclick=function(){login()}
+		}
+	});
   });
   
+  function login(){
+		location.href='login.jsp';
+  }
+  
+  function logout(){
+		firebase.auth().signOut().then(function() {
+		}).catch(function(error) {
+			alert("Error deslogue")
+		});
+  }
+  
   function irPlayAddition(){
-	  	 //obj.style.backgroundImage="url(playBotonSS.png)";
-	  	 setTimeout(function(){location.href = "seleccionNivel.jsp"},500);
+	  setTimeout(function(){location.href = "seleccionNivel.jsp"},500);
   }
   
   function irPlaySubtraction(){
@@ -156,11 +154,8 @@
 		img5.src = "https://"+dominio+"/startOverBoton.png";
 		img6.src = "https://"+dominio+"/levelUpBoton.png";
 		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
-		
-		
   }
-
-  </script>
+</script>
  
 <script>
 var token;
@@ -191,26 +186,10 @@ gapi.analytics.ready(function() {
 					report.execute();
 		  } 
 	});	
-	
-  
-	
-	
 });
 
 function handleReportingResults(response){
 	document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
-}
-
-function login(){
-	location.href='login.jsp';
-}  
-function logout(){
-	firebase.auth().signOut().then(function() {
-			
-		  alert("Deslogado")
-		}).catch(function(error) {
-			alert("Error deslogue")
-		});
 }
 </script>
   
@@ -249,17 +228,18 @@ function logout(){
 				<div style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
 				<div style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
- 		<div id="logoutDivPadre" style="width:13vw;height:5vw;position:absolute;right:8.2vw;">
+ 		
  			
  			
- 			<div id="logoutDiv" style="width:4vw;height:2vw;display:none;position:absolute;top:1.75vw;right:8.2vw;font-family:Arial;font-size:1,5vw;color:orange" 
- 		  onmouseouver="javascript:this.style.fontWeight='bold'" onmouseout="javascript:this.style.fontWeight='normal'" onclick="logout()">Log Out</div>  
-	 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()">
-	 				<label id="inicial" style="cursor:pointer;position:absolute;right:0.78vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
-			</div>
-			
-			
+		<div id="logoutDiv" style="cursor:pointer;width:5vw;height:2vw;display:none;position:absolute;top:1.75vw;right:7.5vw;font-family:Arial;font-size:1,5vw;color:orange" 
+	  	onmouseover="this.style.textDecoration ='underline';this.style.fontWeight='bold'" onmouseout="this.style.textDecoration ='none';this.style.fontWeight='normal'" onclick="logout()">Log Out</div>  
+		
+ 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()">
+ 				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
 		</div>
+			
+			
+		
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
