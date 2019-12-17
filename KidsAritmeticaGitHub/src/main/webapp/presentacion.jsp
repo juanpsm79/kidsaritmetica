@@ -14,9 +14,9 @@
  		src: url('BerlinDemi.ttf') format('truetype')
 	}
   </style>
-  <script src="./js/jquery/jquery-ui.js"></script>
-  <script src="./js/jquery/jquery-3.3.1.js"></script>
-  <script src="./js/current-device.min.js"></script>
+<script src="./js/jquery/jquery-ui.js"></script>
+<script src="./js/jquery/jquery-3.3.1.js"></script>
+<script src="./js/current-device.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
