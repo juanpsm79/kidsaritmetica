@@ -55,6 +55,7 @@
 </script>
 
 <script>
+var usuario;
   $( function() {
 	// Initialize Firebase
 	  var firebaseConfig = {
@@ -72,7 +73,7 @@
 		if (user!=null) {
 		  firebase.database().ref('/users/' + user.uid).once('value').then (
 			function(snapshot) {
-			  if(snapshot==null || snapshot.val()==null || snapshot.val().nivelActual==null)
+			  if(snapshot==null || snapshot.val()==null)
 					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
 	          document.getElementById("contador").style.display="none";
 	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
@@ -81,6 +82,7 @@
 	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
 	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
 	          document.getElementById("logoutDiv").style.display="inline";
+	          usuario = user;
 			})
 		}else {
 			document.getElementById("inicial").innerHTML ="";
@@ -231,7 +233,7 @@ function handleReportingResults(response){
  		
  			
  			
-		<div id="logoutDiv" style="cursor:pointer;width:5vw;height:2vw;display:none;position:absolute;top:1.75vw;right:7.5vw;font-family:Arial;font-size:1,5vw;color:orange" 
+		<div id="logoutDiv" style="cursor:pointer;width:5vw;height:2vw;display:none;position:absolute;top:1.75vw;right:7.5vw;font-family:Arial;font-size:1,25vw;color:orange" 
 	  	onmouseover="this.style.textDecoration ='underline';this.style.fontWeight='bold'" onmouseout="this.style.textDecoration ='none';this.style.fontWeight='normal'" onclick="logout()">Log Out</div>  
 		
  		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()">

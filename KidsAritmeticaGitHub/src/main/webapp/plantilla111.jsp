@@ -47,7 +47,10 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
-  
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
@@ -78,9 +81,21 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
   <script>
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
-  $( function() {
-
-  } );
+var usuario;
+ $(function(){
+  var firebaseConfig = {
+		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+		    authDomain: "fbplayaddition.firebaseapp.com",
+		    databaseURL: "https://fbplayaddition.firebaseio.com",
+		    projectId: "fbplayaddition",
+		    storageBucket: "fbplayaddition.appspot.com",
+		    messagingSenderId: "945530212708",
+		    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+		    measurementId: "G-LLPNBP9S9B"
+  };
+  firebase.initializeApp(firebaseConfig);
+  firebase.auth().onAuthStateChanged(function(user) {if (user!=null)usuario = user}); 
+ });
   var sumas = [];
   var indexSuma = -1;
  <%
@@ -96,7 +111,6 @@ var dominio = "test.playaddition.com";
   <%i++;}%>
 	
 	function subirNivel() {
-		nivel++;
 		$.ajax({
 			  url: "/hello",
 			  method: "post",
@@ -125,6 +139,9 @@ var dominio = "test.playaddition.com";
 		}else {
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
+	  		nivel++;
+	  		if(usuario!=null && usuario.uid!=null)
+	  			firebase.database().ref('users/' + usuario.uid).update({"nivelActualSuma":nivel});
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
 	  		document.body.onkeydown = function(evObject){
 	  			if(window.event)

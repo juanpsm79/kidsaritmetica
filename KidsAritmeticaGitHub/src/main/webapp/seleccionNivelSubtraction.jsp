@@ -11,8 +11,12 @@
 	}
   </style>
   <script src="./js/jquery/jquery-3.3.1.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
   <script src="./js/jquery.flip.min.js"></script>
-  
+  <script src="./js/current-device.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
@@ -37,67 +41,200 @@
 -->  
 
   
-  <script src="./js/current-device.min.js"></script>
-  <script>
+<script>
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
   var check = false;
   $( function() {
-	  $("#1").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#2").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#3").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#4").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#5").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#6").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#7").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#8").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#9").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#10").flip({axis: 'y',trigger: 'click', reverse: true});
-	  
-	  $("#11").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#12").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#13").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#14").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#15").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#16").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#17").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#18").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#19").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#20").flip({axis: 'y',trigger: 'click', reverse: true});
-	  
-	  $("#21").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#22").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#23").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#24").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#25").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#26").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#27").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#28").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#29").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#30").flip({axis: 'y',trigger: 'click', reverse: true});
-	  
-	  $("#31").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#32").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#33").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#34").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#35").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#36").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#37").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#38").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#39").flip({axis: 'y',trigger: 'click', reverse: true});
-	  $("#40").flip({axis: 'y',trigger: 'click', reverse: true});
+	  var nivelSumaUsuario;
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) {
+		if (user!=null) {
+		  firebase.database().ref('/users/' + user.uid+'/nivelActualResta').once('value').then (
+			function(snapshot) {
+				pintarTodosNivelesUsuario(snapshot.val())
+		  })
+		}
+  	  }); 
+  });
+  
+  function pintarTodosNivelesUsuario (nivelSumaUsuario){
+	  var html;
+	  if(nivelSumaUsuario<=10){
+		  html=pintaNiveles("0vw",1, nivelSumaUsuario)
+		  document.getElementById("capaNiveles").innerHTML = html; 
+	  }else if (nivelSumaUsuario<=20){
+		  html= pintaNiveles("0vw",1, nivelSumaUsuario)
+		  html+=pintaNiveles("7.4vw",11, nivelSumaUsuario)
+		  document.getElementById("capaNiveles").innerHTML = html; 
+	  }else if (nivelSumaUsuario<=30){
+		  html=pintaNiveles("0vw",1, nivelSumaUsuario)
+		  html+=pintaNiveles("7.4vw",11, nivelSumaUsuario)
+		  html+=pintaNiveles("14.8vw",21, nivelSumaUsuario)
+		  document.getElementById("capaNiveles").innerHTML = html; 
+	  }else if (nivelSumaUsuario<=40){
+		  html=pintaNiveles("0vw",1, nivelSumaUsuario)
+		  html+=pintaNiveles("7.4vw",11, nivelSumaUsuario)
+		  html+=pintaNiveles("14.8vw",21, nivelSumaUsuario)
+		  html+=pintaNiveles("22.1vw",31, nivelSumaUsuario)
+		  document.getElementById("capaNiveles").innerHTML = html; 
+	  }
+	  for (i = 1; i <= nivelSumaUsuario; i++)
+		    $("#"+i).flip({axis: 'y',trigger: 'click', reverse: true});
+	  for (i = 1; i <= nivelSumaUsuario; i++)
+	     document.getElementById(''+i).style.position="absolute";  
 	  window.addEventListener("orientationchange", resizePageHandler);
-	  for (i = 1; i <= 40; i++)
-	   	document.getElementById(''+i).style.position="absolute";
-  } );
+  }
   
-  
+  function pintaNiveles(top, nivel, nivelSumaUsuario){
+	  var html ="<div style=\"position:absolute;top:"+top+";width:75vw;height:7vw\">";
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;text-align:center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:rgb(32, 56, 100)\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="</div>";
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;left:7.6vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;text-align:center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="</div>";	
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:15vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;text-align:center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="</div>";	
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:22.4vw;top:0vw;width:7vw;height:7vw;cursor:pointer;text-align:center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="</div>";	
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;cursor:pointer;width:7vw;height:7vw;left:29.8vw;text-align: center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="</div>";	
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;cursor:pointer;width:7vw;height:7vw;left:37.2vw;text-align: center\">";
+	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100);\">";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="</div>";	
+	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
+	  html+="</div>";
+	  html+="</div>";
+	  nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+		
+      html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;left:44.6vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
+      html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="</div>";	
+      html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
+      html+="</div>";
+      html+="</div>";
+      nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+		
+      html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:52vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
+      html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="</div>";	
+      html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;background-size:7vw 7vw;width:7vw;height:7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
+      html+="</div>";
+      html+="</div>";
+      nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+      html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:59.4vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
+      html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="</div>";	
+      html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
+      html+="</div>";
+      html+="</div>";
+      nivel++;
+	  if(nivel>nivelSumaUsuario){
+		  html+="</div>";
+		  return html;
+	  }
+      html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:66.8vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
+      html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.4vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="</div>";	
+      html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.4vw 0.2vw 0.2vw;border-color:red\">";
+      html+="</div>";
+    html+="</div>";
+
+    html+="</div>";
+    
+    return html;
+  }
 
   var nivelAnterior =null;
   
   function irPresentacion(){
-	  	 
-		 location.href = "presentacion.jsp"
+	location.href = "presentacion.jsp"
   }
   
   function irPrincipal(obj){
@@ -192,7 +329,7 @@ var dominio = "test.playaddition.com";
 		</div>
 
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
-			
+			<!--  
 			<div style="position:absolute;top:0vw;width:75vw;height:7vw">
 			
 	  			<div id="1" onclick="seleccionarNivel('1')" style="position:absolute;cursor:pointer;top:0vw;width:7vw;height:7vw;cursor:pointer;
@@ -650,6 +787,7 @@ var dominio = "test.playaddition.com";
 				</div>
 
  			</div>
+ 			-->
  			
  		</div>
  		

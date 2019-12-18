@@ -81,28 +81,21 @@ boolean wa = (Boolean)session.getAttribute("wa");
   
   <script>
 var dominio = "test.playaddition.com";
-var usuario = "playaddition.com";
-  $( function() {
-	  var firebaseConfig = {
-			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-			    authDomain: "fbplayaddition.firebaseapp.com",
-			    databaseURL: "https://fbplayaddition.firebaseio.com",
-			    projectId: "fbplayaddition",
-			    storageBucket: "fbplayaddition.appspot.com",
-			    messagingSenderId: "945530212708",
-			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-			    measurementId: "G-LLPNBP9S9B"
-		};
-		// Initialize Firebase
-		firebase.initializeApp(firebaseConfig);
-		firebase.auth().onAuthStateChanged(function(user) {
-			if (user!=null) {
-				usuario = user;
-			} else {
-				alert("NO se encuentra el usuario");
-			}
-		});  	
-  });           
+var usuario;
+$(function(){
+ var firebaseConfig = {
+		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+		    authDomain: "fbplayaddition.firebaseapp.com",
+		    databaseURL: "https://fbplayaddition.firebaseio.com",
+		    projectId: "fbplayaddition",
+		    storageBucket: "fbplayaddition.appspot.com",
+		    messagingSenderId: "945530212708",
+		    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+		    measurementId: "G-LLPNBP9S9B"
+ };
+ firebase.initializeApp(firebaseConfig);
+ firebase.auth().onAuthStateChanged(function(user) {if (user!=null)usuario = user}); 
+});
   var nivel = <%=nivel%>;
   var assistanceMode = <%=wa%>;
   var assistance = <%=assistance%>;	
@@ -122,10 +115,6 @@ var usuario = "playaddition.com";
   <%i++;}%>
 	
   function subirNivel() {
-		nivel++;
-		firebase.database().ref('users/' + usuario.uid).set({
-		    "nivel": ""+nivel;
-		});
 		$.ajax({
 			  url: "/restas",
 			  method: "post",
@@ -191,6 +180,9 @@ var usuario = "playaddition.com";
 		}else {
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
+	  		nivel++;
+	  		if(usuario!=null && usuario.uid!=null)
+  		    	firebase.database().ref('users/' + usuario.uid).update({"nivelActualResta":nivel});
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
 	  		document.body.onkeydown = function(evObject){
 	  			if(window.event)
