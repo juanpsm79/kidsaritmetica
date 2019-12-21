@@ -1,3 +1,7 @@
+<%@ page import="java.io.*,
+                 java.net.*,
+                 java.util.*" %>
+
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <title>PlayAddition</title>
@@ -222,5 +226,31 @@
 				    
 				  </fieldset>
 		</div>
+		<p><%= getGreeting(request) %></p>
   </body>
 </html>
+<%!
+   // ===========================================
+   //    Helper method to get the language specific greeting
+   // ===========================================
+
+   /**
+   * Gets the greeting message appropriate for
+   * this locale
+   */
+   private String getGreeting
+      (HttpServletRequest request)
+   {
+      Locale locale = null;
+      String lang = request.getParameter("lang");
+      
+      if (lang != null) {
+        locale = new Locale(lang);
+      } else {
+        locale = request.getLocale();
+      }
+      ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
+      String greeting = RB.getString("greeting");
+      return greeting;
+   }
+%>
