@@ -79,22 +79,32 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
   
   <script>
+var nivelUsuario = null;
+var nivel = <%=nivel%>;
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
 var usuario;
  $(function(){
-  var firebaseConfig = {
-		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-		    authDomain: "fbplayaddition.firebaseapp.com",
-		    databaseURL: "https://fbplayaddition.firebaseio.com",
-		    projectId: "fbplayaddition",
-		    storageBucket: "fbplayaddition.appspot.com",
-		    messagingSenderId: "945530212708",
-		    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-		    measurementId: "G-LLPNBP9S9B"
-  };
-  firebase.initializeApp(firebaseConfig);
-  firebase.auth().onAuthStateChanged(function(user) {if (user!=null)usuario = user}); 
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) {
+			 if (user!=null) {
+				 usuario = user
+				 firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
+					function(snapshot) {
+						nivelUsuario = snapshot.val();
+			     })
+			 }
+	  }); 
  });
   var sumas = [];
   var indexSuma = -1;
@@ -140,7 +150,7 @@ var usuario;
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
 	  		nivel++;
-	  		if(usuario!=null && usuario.uid!=null)
+	  		if(usuario!=null && usuario.uid!=null && nivel>nivelUsuario)
 	  			firebase.database().ref('users/' + usuario.uid).update({"nivelActualSuma":nivel});
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
 	  		document.body.onkeydown = function(evObject){
@@ -299,7 +309,6 @@ var usuario;
   	var digitoSuma='sumaUnidades';
   	var nivelIniciado = true;
   	var sumasActuales = 0;
-  	var nivel = <%=nivel%>;
   	var bloquearInteracciones = false;
   	var navegador;
   	

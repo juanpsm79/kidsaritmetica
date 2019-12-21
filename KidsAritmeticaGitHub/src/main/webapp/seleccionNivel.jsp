@@ -70,10 +70,13 @@
 		if (user!=null) {
 		  firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
 			function(snapshot) {
-				pintarTodosNivelesUsuario(snapshot.val())
+				pintarTodosNivelesUsuario(snapshot.val());
 		  })
+		}else{
+			pintarTodosNivelesUsuario(40);
 		}
-  	  }); 
+		window.addEventListener("orientationchange", resizePageHandler);
+  	  });
   });
   
   function pintarTodosNivelesUsuario (nivelSumaUsuario){
@@ -101,7 +104,7 @@
 		    $("#"+i).flip({axis: 'y',trigger: 'click', reverse: true});
 	  for (i = 1; i <= nivelSumaUsuario; i++)
 	     document.getElementById(''+i).style.position="absolute";  
-	  window.addEventListener("orientationchange", resizePageHandler);
+	  
   }
   function pintaNiveles(top, nivel, nivelSumaUsuario){
 	  var html ="<div style='position:absolute;top:"+top+";width:75vw;height:7vw'>";
@@ -333,7 +336,7 @@
 		</div>
 
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
-			<!-- 
+			 <!--  
 			<div style="position:absolute;top:0vw;width:75vw;height:7vw">
 			
 	  			<div id="1" onclick="seleccionarNivel('1')" style="position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;
@@ -796,7 +799,7 @@
 				</div>
 
  			</div>
- 			 -->
+ 			-->
  		</div>
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">

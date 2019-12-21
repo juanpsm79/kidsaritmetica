@@ -64,8 +64,11 @@ var dominio = "test.playaddition.com";
 			function(snapshot) {
 				pintarTodosNivelesUsuario(snapshot.val())
 		  })
+		} else{
+			pintarTodosNivelesUsuario(40);
 		}
-  	  }); 
+		window.addEventListener("orientationchange", resizePageHandler);
+  	  });
   });
   
   function pintarTodosNivelesUsuario (nivelSumaUsuario){
@@ -93,7 +96,6 @@ var dominio = "test.playaddition.com";
 		    $("#"+i).flip({axis: 'y',trigger: 'click', reverse: true});
 	  for (i = 1; i <= nivelSumaUsuario; i++)
 	     document.getElementById(''+i).style.position="absolute";  
-	  window.addEventListener("orientationchange", resizePageHandler);
   }
   
   function pintaNiveles(top, nivel, nivelSumaUsuario){
@@ -319,17 +321,14 @@ var dominio = "test.playaddition.com";
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
 			<img id="selectYourLevel" src="selectLevel.png" style="position:absolute;width:68vw;height:12vw">
-			<!-- 
-			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:9.75vw;left:0.5vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:3.5vw;color:rgb(46, 117, 182);cursor:pointer">See all levels</label></a>
-			 -->
 		</div>
 		
 		<div style="position:absolute;width:76vw;top:9vw">
 			<img src="logoPlaySubtractionMini.png" style="position:absolute;width:18vw;left:71vw">
 		</div>
 
-		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
-			<!--  
+		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw"> 
+		<!--
 			<div style="position:absolute;top:0vw;width:75vw;height:7vw">
 			
 	  			<div id="1" onclick="seleccionarNivel('1')" style="position:absolute;cursor:pointer;top:0vw;width:7vw;height:7vw;cursor:pointer;
@@ -788,17 +787,11 @@ var dominio = "test.playaddition.com";
 
  			</div>
  			-->
- 			
  		</div>
  		
  		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<div onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'" style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
- 			<!--  
- 			<img id="playSelectAllLevel" onclick="irPrincipal()" src="playSelectAllLevel.png"  style="position:absolute;width:12vw;height:9vw;right:10vw;cursor:pointer;top:34.5vw">
- 			-->
  			<div id= "playSelectAllLevel" onclick="javascript:irPrincipal(this)" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:12vw 9vw;position:absolute;right:3vw;top:34.5vw;cursor:pointer;width:12vw;height:9vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
- 			
- 			
  		</div>
   </body>
 </html>

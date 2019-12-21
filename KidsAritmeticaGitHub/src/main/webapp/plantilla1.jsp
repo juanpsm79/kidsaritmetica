@@ -79,6 +79,8 @@ List<Suma>  sumas = (List<Suma>) session.getAttribute("sumas");
 
   
   <script>
+var nivelUsuario = null;
+var nivel = <%=nivel%>;
 var dominio = "test.playaddition.com";
 var usuario;
 //  var dominio = "playaddition.com";
@@ -94,7 +96,15 @@ var usuario;
 			    measurementId: "G-LLPNBP9S9B"
 	  };
 	  firebase.initializeApp(firebaseConfig);
-	  firebase.auth().onAuthStateChanged(function(user) {if (user!=null)usuario = user}); 
+	  firebase.auth().onAuthStateChanged(function(user) {
+			 if (user!=null) {
+				 usuario = user
+				 firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
+					function(snapshot) {
+						nivelUsuario = snapshot.val();
+			     })
+			 }
+	  }); 
   });
   var sumas = [];
   var indexSuma = -1;
@@ -143,7 +153,7 @@ var usuario;
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
 	  		nivel++;
-	  		if(usuario!=null && usuario.uid!=null)
+	  		if(usuario!=null && usuario.uid!=null && nivel>nivelUsuario)
   		    	firebase.database().ref('users/' + usuario.uid).update({"nivelActualSuma":nivel});
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){
 	  			subirNivel();
@@ -326,7 +336,7 @@ var usuario;
   	var digitoSuma='sumaUnidades';
   	var nivelIniciado = true;
   	var sumasActuales = 0;
-  	var nivel = <%=nivel%>;
+
   	var bloquearInteracciones = false;
   	var navegador;
   	

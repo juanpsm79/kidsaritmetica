@@ -83,6 +83,14 @@ boolean wa = (Boolean)session.getAttribute("wa");
    
   
   <script>
+var nivelUsuario = null;
+var nivel = <%=nivel%>;
+var assistanceMode = <%=wa%>;
+var assistance = <%=assistance%>;
+var tensRegrouping = <%=tensRegrouping%>; 
+var hundredsRegrouping = <%=hundredsRegrouping%>;
+var sumas = [];
+var indexSuma = -1;
 var dominio = "test.playaddition.com";
 var usuario;
 $(function(){
@@ -97,15 +105,17 @@ $(function(){
 		    measurementId: "G-LLPNBP9S9B"
  };
  firebase.initializeApp(firebaseConfig);
- firebase.auth().onAuthStateChanged(function(user) {if (user!=null)usuario = user}); 
+ firebase.auth().onAuthStateChanged(function(user) {
+		 if (user!=null) {
+			 usuario = user
+			 firebase.database().ref('/users/' + user.uid+'/nivelActualResta').once('value').then (
+				function(snapshot) {
+					nivelUsuario = snapshot.val();
+		     })
+		 }
+  }); 
 });   
-  var nivel = <%=nivel%>;
-  var assistanceMode = <%=wa%>;
-  var assistance = <%=assistance%>;
-  var tensRegrouping = <%=tensRegrouping%>; 
-  var hundredsRegrouping = <%=hundredsRegrouping%>;
-  var sumas = [];
-  var indexSuma = -1;
+  
  <%
    int sumasNecesarias = 10;
  if(nivel.equalsIgnoreCase("22") || nivel.equalsIgnoreCase("26") || nivel.equalsIgnoreCase("32") || nivel.equalsIgnoreCase("40"))
@@ -266,7 +276,7 @@ $(function(){
 			document.getElementById('capaBotonCheckSuma').style.backgroundImage="url(levelUpBoton.png)";
 	  		nivelIniciado = false;
 	  		nivel++;
-	  		if(usuario!=null && usuario.uid!=null)
+	  		if(usuario!=null && usuario.uid!=null && nivel>nivelUsuario)
 	  			firebase.database().ref('users/' + usuario.uid).update({"nivelActualResta":nivel});
 	  		document.getElementById('capaBotonCheckSuma').onclick=function(){subirNivel()}
 	  		document.body.onkeydown = function(evObject){

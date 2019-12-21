@@ -86,6 +86,7 @@ var usuario;
 			})
 		}else {
 			document.getElementById("inicial").innerHTML ="";
+			document.getElementById("logoutDiv").innerHTML ="";
 			document.getElementById("contador").style.display="inline";
 	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
 	        document.getElementById("loginboton").style.width="8vw";
@@ -230,23 +231,19 @@ function handleReportingResults(response){
 				<div style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
 				<div style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
- 		
  			
- 			
-		<div id="logoutDiv" style="cursor:pointer;width:5vw;height:2vw;display:none;position:absolute;top:1.75vw;right:7.5vw;font-family:Arial;font-size:1,25vw;color:orange" 
-	  	onmouseover="this.style.textDecoration ='underline';this.style.fontWeight='bold'" onmouseout="this.style.textDecoration ='none';this.style.fontWeight='normal'" onclick="logout()">Log Out</div>  
+		<div id="logoutDiv" style="cursor:pointer;width:6vw;height:2vw;display:none;position:absolute;top:1.35vw;right:7.5vw;font-family:Arial;font-size:1.3vw;color:orange" 
+	  	onmouseover="this.style.textDecoration ='underline';this.style.fontWeight='bold'" onmouseout="this.style.textDecoration ='none';this.style.fontWeight='normal'" onclick="logout()">Log&nbsp;Out</div>  
 		
- 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()">
+ 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
 		</div>
 			
-			
-		
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
  		<div style="position:absolute;float:right;top:41.5vw;right:3vw;cursor:pointer">
- 			<div id="contador" style="position:absolute;top:1vw;width:11vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
+ 			<div id="contador" style="display:none;position:absolute;top:1vw;width:11vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
  					<img src="loading.gif" style="width:2.5vw">
  			</div>
  		</div>
