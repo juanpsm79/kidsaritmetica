@@ -1,6 +1,12 @@
 <%@page import="playaddition.model.Resta"%>
-<%@page import="java.util.*"%>
+<%@ page import="java.io.*,
+                 java.net.*,
+                 java.util.*" %>
 <%
+Locale locale = request.getLocale();
+ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
+String sNivel = RB.getString("nivel").toUpperCase();
+String verTodosNiveles = RB.getString("verTodosNiveles");
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
 boolean assistance = (Boolean)session.getAttribute("assistance");
@@ -514,7 +520,7 @@ $(function(){
 			<!-- CAPA DE ARRIBA: MARCADOR, RECUADRO DE SUMA, BOTÓN DE CERRAR Y VOLVER AL MENU PRINCIPAL-->
 			<div style="position:absolute;width:16.17vw;height:20vw;background-image:url(marcador.png);background-repeat:no-repeat;background-size:16.15vw 19.15vw;text-align:center">
 				<div style="width:16.15vw;position:absolute">
-						<label style="color:white;font-family:BerlinDemi;font-size:3.2vw;">LEVEL&nbsp;</label><label id="nivel" style="color:white;font-family:BerlinDemi;font-size:4.5vw;"><%=nivel%></label>
+						<label style="color:white;font-family:BerlinDemi;font-size:3.2vw;"><%= sNivel %>&nbsp;</label><label id="nivel" style="color:white;font-family:BerlinDemi;font-size:4.5vw;"><%=nivel%></label>
 				</div>
 				
 				<div style="width:16.15vw;position:absolute;top:4vw">

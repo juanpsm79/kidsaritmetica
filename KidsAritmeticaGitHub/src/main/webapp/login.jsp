@@ -1,6 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
+<%@ page import="java.io.*,
+                 java.net.*,
+                 java.util.*" %>
+<%
+Locale locale = request.getLocale();
+ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
+String crearCuenta=RB.getString("crearCuenta");
+String usuario=RB.getString("usuario");
+String password=RB.getString("password");
+String rpassword=RB.getString("rpassword");
+String terminosServicio=RB.getString("terminosServicio");
+String enviarInfo=RB.getString("enviarInfo");
+%>
 <html>
 <head>
 <meta charset="ISO-8859-1">
@@ -79,7 +91,6 @@ function handleSignUp() {
   }
 	
 	function displaycreateAccount(){
-		//document.getElementById("emailid").style.display="inline";
 		document.getElementById("repassword").style.display="inline";
 		document.getElementById("repassword").style.position="relative";
 		document.getElementById("terms").style.top="2vw";
@@ -95,7 +106,6 @@ function handleSignUp() {
 		document.getElementById("displaycreateAccountAction").style.width="29vw";
 		document.getElementById("displaycreateAccountAction").style.height="4vw";
 		document.getElementById("displaycreateAccountAction").style.position="relative";
-		//document.getElementById("login").style.height="28vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
 		document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
 		document.getElementById("loginlogo").style.width="12.5vw";
@@ -103,14 +113,12 @@ function handleSignUp() {
 	}
 	
 	function displaygotologin(){
-		//document.getElementById("emailid").style.display="none";
 		document.getElementById("repassword").style.display="none";
 		document.getElementById("terms").style.display="none";
 		document.getElementById("loginaction").style.display="inline";
 		document.getElementById("loginaction").align="center";
 		document.getElementById("login").align="center";
 		document.getElementById("displaycreateAccountAction").style.display="none";
-		//document.getElementById("login").style.height="22vw";
 		document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
 		document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
 		document.getElementById("loginlogo").style.width="10vw";
@@ -137,33 +145,33 @@ function handleSignUp() {
 			<div id="logininfo" style="position:relative;top:1vw;width:29vw;height:15vw;padding:1vw" align="left">
 				
 				<div>
-					<label style ="font-family:Calibri;font-size:1.5vw;font-color:black">User:</label>
+					<label style ="font-family:Calibri;font-size:1.5vw;font-color:black"><%= usuario %>:</label>
 					<input type="text" id="email" style="position:relative;left:7.95vw;width:14.5vw;height:1.5vw"></input>
 					<div id="available" style="display:none;font-family:Calibri;font-size:0.8vw;position:relative;left:12.6vw">Available</div>
 				</div>
 				<div style="position:relative;top:1vw">
-					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Password:&nbsp;</label>
+					<label style="font-family:Calibri;font-size:1.5vw;font-color:black"><%= password %>:&nbsp;</label>
 					<input type="password" id="password" style="position:relative;left:4.65vw;width:14.5vw;height:1.5vw"></input>
 				</div>
 				
 				<div id="repassword" style="position:relative;top:2vw;display:none">
-					<label style="font-family:Calibri;font-size:1.5vw;font-color:black">Repeat password:&nbsp;</label>
+					<label style="font-family:Calibri;font-size:1.5vw;font-color:black"><%= rpassword %>:&nbsp;</label>
 					<input type="password" id="repasswordd" style="position:relative;width:14.5vw;height:1.5vw"></input>
 				</div>
 				
 				<div id="terms" style="position:relative;display:none;top:4vw;left:2vw;width:29vw;height:5vw">
 					<div style="position:relative;width:29vw;height:2.5vw">
-						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value="">I agree to Arithmetics terms of service</label>
+						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value=""><%= terminosServicio %></label>
 					</div>
 					<div style="position:relative;width:29vw;height:2.5vw">
-						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value="">Send me information...(it's optional)</label>
+						<label style="font-family:Calibri;font-size:1.25vw;font-color:black"><input style="width:1vw;height:1vw" type="checkbox" value=""><%= enviarInfo %></label>
 					</div>
 				</div>
 				
 				<div id="loginaction" style="position:relative;width:29vw;height:12vw;top:5vw" align="center">
 					<div id="loginboton" style="cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat" onclick="javascript:login()"></div>
 					<div id="loginaccount" style="position:relative;top:5vw;font-family:Calibri;font-size:1.5vw;font-color:blue">
-						<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u>Create an account</u></a>
+						<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
 					</div>
 				</div>
 				
@@ -177,8 +185,5 @@ function handleSignUp() {
 		
 		<div id="html_element" style="position:relative;top:5vw"></div>
 	</div>
-	
-	
-	
 </body>
 </html>

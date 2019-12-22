@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<%@ page import="java.io.*,
+                 java.net.*,
+                 java.util.*" %>
+<%
+Locale locale = request.getLocale();
+ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
+String visitantes = RB.getString("visitantes");  
+%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta http-equiv="Cache-control" content="public">
@@ -192,7 +199,7 @@ gapi.analytics.ready(function() {
 });
 
 function handleReportingResults(response){
-	document.getElementById('contador').innerHTML ="Visitors: "+response.rows[0][0];
+	document.getElementById('contador').innerHTML ="<%= visitantes %> "+response.rows[0][0];
 }
 </script>
   
@@ -243,7 +250,7 @@ function handleReportingResults(response){
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
 		</div>
  		<div style="position:absolute;float:right;top:41.5vw;right:3vw;cursor:pointer">
- 			<div id="contador" style="display:none;position:absolute;top:1vw;width:11vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
+ 			<div id="contador" style="display:none;position:absolute;top:1vw;width:13vw;right:0.1vw;height:6vw;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)">
  					<img src="loading.gif" style="width:2.5vw">
  			</div>
  		</div>

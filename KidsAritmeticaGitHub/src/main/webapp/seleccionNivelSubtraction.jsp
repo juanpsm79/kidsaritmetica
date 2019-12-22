@@ -1,4 +1,12 @@
-<!DOCTYPE html>
+<%@ page import="java.io.*,
+                 java.net.*,
+                 java.util.*" %>
+<%
+Locale locale = request.getLocale();
+ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
+String sNivel = RB.getString("nivel").toUpperCase();
+String verTodosNiveles = RB.getString("verTodosNiveles");
+%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -102,8 +110,11 @@ var dominio = "test.playaddition.com";
 	  var html ="<div style=\"position:absolute;top:"+top+";width:75vw;height:7vw\">";
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;top:0vw;width:7vw;height:7vw;cursor:pointer;text-align:center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:rgb(32, 56, 100)\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+	  if(nivel<10)
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
 	  html+="</div>";
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.4vw;border-color:red\">";
 	  html+="</div>";
@@ -115,8 +126,11 @@ var dominio = "test.playaddition.com";
 	  }
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;left:7.6vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;text-align:center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+      if(nivel<10)
+	  	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
 	  html+="</div>";	
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
 	  html+="</div>";
@@ -128,8 +142,11 @@ var dominio = "test.playaddition.com";
 	  }
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:15vw;top:0vw;width:7vw;height:7vw;cursor:pointer;cursor:pointer;text-align:center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+	  if(nivel<10)
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
 	  html+="</div>";	
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
 	  html+="</div>";
@@ -141,8 +158,11 @@ var dominio = "test.playaddition.com";
 	  }
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:22.4vw;top:0vw;width:7vw;height:7vw;cursor:pointer;text-align:center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+	  if(nivel<10)
+	  	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
 	  html+="</div>";	
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
 	  html+="</div>";
@@ -154,8 +174,11 @@ var dominio = "test.playaddition.com";
 	  }
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;cursor:pointer;width:7vw;height:7vw;left:29.8vw;text-align: center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+	  if(nivel<10)
+	  	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
 	  html+="</div>";	
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
 	  html+="</div>";
@@ -167,8 +190,11 @@ var dominio = "test.playaddition.com";
 	  }
 	  html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;cursor:pointer;width:7vw;height:7vw;left:37.2vw;text-align: center\">";
 	  html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100);\">";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+	  if(nivel<10)
+	  	html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+	  else
+		  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
       html+="</div>";	
 	  html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
 	  html+="</div>";
@@ -181,8 +207,11 @@ var dominio = "test.playaddition.com";
 		
       html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\"  style=\"position:absolute;left:44.6vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
       html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+      if(nivel<10)
+      	html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      else
+    	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
       html+="</div>";	
       html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
       html+="</div>";
@@ -195,8 +224,11 @@ var dominio = "test.playaddition.com";
 		
       html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:52vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
       html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+      if(nivel<10)
+      	html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      else
+    	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
       html+="</div>";	
       html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;background-size:7vw 7vw;width:7vw;height:7vw;border:solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:red\">";
       html+="</div>";
@@ -208,8 +240,11 @@ var dominio = "test.playaddition.com";
 	  }
       html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:59.4vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
       html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.2vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
+      if(nivel<10)
+      	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:2vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
+      else
+    	  html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
       html+="</div>";	
       html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.3vw 0.2vw 0.2vw;border-color:red\">";
       html+="</div>";
@@ -221,7 +256,7 @@ var dominio = "test.playaddition.com";
 	  }
       html+="<div id=\""+nivel+"\" onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:66.8vw;cursor:pointer;width:7vw;height:7vw;text-align: center\">";
       html+="<div class=\"front\" style=\"position:absolute;width:7vw;height:7vw;background-image:url(fondoNivelNormalSubtraction.png);border: solid;border-width: 0.2vw 0.4vw 0.2vw 0.2vw;border-color:rgb(32, 56, 100)\">";
-      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\">LEVEL</label>";
+      html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1vw;top:0.8vw;cursor:pointer;color:white;font-family:Calibri;font-size:1.7vw;font-weight:bold\"><%= sNivel %></label>";
       html+="<label onclick=\"seleccionarNivel('"+nivel+"')\" style=\"position:absolute;left:1.25vw;top:2.3vw;cursor:pointer;color:white;font-family:Calibri;font-size:4vw;font-weight:bold\">"+nivel+"</label>";
       html+="</div>";	
       html+="<div class=\"back\" style=\"position:absolute;background:url("+nivel+"cs.png);background-repeat:no-repeat;width:7vw;height:7vw;background-size:7vw 7vw;border:solid;border-width: 0.2vw 0.4vw 0.2vw 0.2vw;border-color:red\">";
@@ -321,6 +356,7 @@ var dominio = "test.playaddition.com";
   
 		<div style="position:absolute;width:50vw;min-height:35vh">
 			<img id="selectYourLevel" src="selectLevel.png" style="position:absolute;width:68vw;height:12vw">
+			<a id="seeAllLevels" onclick="openDoc()" style="position:absolute;top:11.35vw;left:1vw"><label style="text-decoration: underline;font-family:BerlinDvwi;font-size:2.3vw;color:rgb(46, 117, 182);cursor:pointer"><%= verTodosNiveles %></label></a>
 		</div>
 		
 		<div style="position:absolute;width:76vw;top:9vw">
