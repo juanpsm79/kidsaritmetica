@@ -27,7 +27,6 @@ String enviarInfo=RB.getString("enviarInfo");
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
 <script type="text/javascript">
-var displayValidations
 var comprobandoLogin = false;
 var userNameDisponible = false;
 var action="login";
@@ -104,60 +103,67 @@ function handleSignUp() {
 			      }
 			      console.log(error);
    	});
-    
-    /*firebase.auth().currentUser.sendEmailVerification().then(function() {
-        // Email Verification sent!
-        // [START_EXCLUDE]
-        alert('Email Verification Sent!');
-        // [END_EXCLUDE]
-      });*/
-  }
+}
+function displayLogin(){
+	displayNormalPassword();
+	displayNormalRePassword();
+	displayNormalUsername();
+	document.getElementById("username1").value="";
+	document.getElementById("password1").value="";
+	document.getElementById("confirm_password1").value="";
+	document.getElementById("repassword").style.display="none";
+	document.getElementById("terms").style.display="none";
+	document.getElementById("info").style.display="none";
+	document.getElementById("crearBotonones").style.display="none";
 	
-	function displaycreateAccount(){
-		document.getElementById("repassword").style.display="block";
-		//document.getElementById("repassword").style.position="relative";
-		
-		//document.getElementById("terms").style.top="2vw";
-		document.getElementById("terms").style.display="inline";
-		//document.getElementById("terms").style.top="4vw";
-		//document.getElementById("terms").style.left="2vw";
-		document.getElementById("terms1").style.width="44.66666667%";
-		//document.getElementById("terms").style.height="5vw";
-		//document.getElementById("terms").style.position="relative";
-		document.getElementById("info").style.display="block";
-		document.getElementById("crearBotonones").style.display="block";
-		document.getElementById("crearCuenta").style.display="none";
-		document.getElementById("loginBoton").style.display="none";
-		//document.getElementById("displaycreateAccountAction").style.display="inline";
-		//document.getElementById("displaycreateAccountAction").style.top="6vw";
-		////document.getElementById("displaycreateAccountAction").style.width="29vw";
-		//document.getElementById("displaycreateAccountAction").style.height="4vw";
-		//document.getElementById("displaycreateAccountAction").style.position="relative";
-		document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
-		document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
-		document.getElementById("loginlogo").style.width="12.5vw";
-		document.getElementById("loginlogo").style.height="5vw";
-		action="crearCuenta";
-		
-		//$("<span class='glyphicon glyphicon-ok form-control-feedback' style='right:15px'></span>").insertAfter($("input#username1.form-control"));
-		
-		//$("input#username1.form-control").next("span").addClass("glyphicon-ok").removeClass("glyphicon-remove");
-		//$("<span class='glyphicon form-control-feedback' style='background: url(lock.png) 4px no-repeat;right:15px'></span>").insertAfter($("input#username1.form-control"));
-		//$("<span class='glyphicon' style='background: url(lock.png) 4px no-repeat'></span>").insertBefore($("input#username1.form-control"));
-		
-		//element= input#confirm_password1.form-control
-		//$("em#username1-error.error.help-block").insertAfter($("input#username1.form-control"));
-		//$("input#username1.form-control").parents(".col-sm-5").addClass("has-feedback");
-
-	}
+	document.getElementById("crearCuenta").style.display="block";
+	document.getElementById("loginBoton").style.display="block";
+	
+	document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
+	document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
+	document.getElementById("loginlogo").style.width="10vw";
+	document.getElementById("loginlogo").style.height="5vw";
+	action="login";
+}
+	
+function displaycreateAccount(){
+	displayNormalPassword();
+	displayNormalRePassword();
+	displayNormalUsername();
+	document.getElementById("username1").value="";
+	document.getElementById("password1").value="";
+	document.getElementById("confirm_password1").value="";
+	document.getElementById("repassword").style.display="block";
+	document.getElementById("terms").style.display="inline";
+	document.getElementById("terms1").style.width="44.66666667%";
+	document.getElementById("info").style.display="block";
+	document.getElementById("crearBotonones").style.display="block";
+	document.getElementById("crearCuenta").style.display="none";
+	document.getElementById("loginBoton").style.display="none";
+	document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
+	document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
+	document.getElementById("loginlogo").style.width="12.5vw";
+	document.getElementById("loginlogo").style.height="5vw";
+	action="crearCuenta";
+}
 	//Username
 	function checkUserName(){
 		if (document.getElementById("username1").value.length<1){
 			displayerrorUsername(usernameObligatorio);
-			return;
+			return false;
 		}
-		if (document.getElementById("username1").value.length<5)
+		if (document.getElementById("username1").value.length<5){
 			displayerrorUsername(usernameCortoError);
+			return false;
+		}
+		else{
+			if(action=="login") {
+				displayOkeyUserName();
+				return true;
+			} else if(action=="crearCuenta"){
+				return userNameDisponible;
+			}
+		}
 	}
 	function displayerrorUsername(error){
 		$("#username1-glyphicon").remove();
@@ -182,12 +188,16 @@ function handleSignUp() {
 	function checkPassword(){
 		if (document.getElementById("password1").value.length<1){
 			displayerrorPassword(usernameObligatorio);
-			return;
+			return false;
 		}
-		if (document.getElementById("password1").value.length<5)
+		if (document.getElementById("password1").value.length<5){
 			displayerrorPassword(usernameCortoError);
-		else
-			displayOkeyPassword();	
+			return false;
+		}
+		else {
+			displayOkeyPassword();
+			return true;
+		}
 	}
 	function displayerrorPassword(error){
 		$("#password1-glyphicon").remove();
@@ -213,15 +223,21 @@ function handleSignUp() {
 	function checkRePassword(){
 		if (document.getElementById("confirm_password1").value.length<1){
 			displayerrorRePassword(usernameObligatorio);
-			return;
+			return false;
 		}
-		if (document.getElementById("confirm_password1").value.length<5)
+		if (document.getElementById("confirm_password1").value.length<5){
 			displayerrorRePassword(usernameCortoError);
+			return false;
+		}
 		else {
-			if(document.getElementById("confirm_password1").value==document.getElementById("password1").value)
+			if(document.getElementById("confirm_password1").value==document.getElementById("password1").value){
 				displayOkeyRePassword();
-			else
+				return true;
+			}
+			else {
 				displayerrorRePassword("Passwords don't match")
+				return false;
+			}
 		}
 	}
 	function displayerrorRePassword(error){
@@ -244,27 +260,19 @@ function handleSignUp() {
 	}
 	
 	function validarDatos(){
-		checkUserName();
-		checkPassword();
-		checkRePassword();
+		var bUsername = checkUserName();
+		var bPassword = checkPassword();
+		var bRePassword = checkRePassword();
+		return bUsername && bPassword && bRePassword;
 	}
 	
-	function displayLogin(){
-		displayValidations = false;
-		document.getElementById("repassword").style.display="none";
-		document.getElementById("terms").style.display="none";
-		document.getElementById("info").style.display="none";
-		document.getElementById("crearBotonones").style.display="none";
-		
-		document.getElementById("crearCuenta").style.display="block";
-		document.getElementById("loginBoton").style.display="block";
-		
-		document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
-		document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
-		document.getElementById("loginlogo").style.width="10vw";
-		document.getElementById("loginlogo").style.height="5vw";
-		action="login";
+	function validarLogin(){
+		var bUsername = checkUserName();
+		var bPassword = checkPassword();
+		return bUsername && bPassword;
 	}
+	
+	
 </script>
 </head>
 <body>
@@ -276,50 +284,27 @@ function handleSignUp() {
 						<div id="loginlogo" style="position:relative;width:10vw;height:5vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat"></div>
 					</div>
 					<div class="panel-body">
-						<form id="signupForm1" class="form-horizontal" novalidate="novalidate" action="" method="post">
-							<!--div class="form-group">
-								<label class="col-sm-4 control-label" for="firstname1">First
-									name</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="firstname1"
-										name="firstname1" placeholder="First name">
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-sm-4 control-label" for="lastname1">Last
-									name</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="lastname1"
-										name="lastname1" placeholder="Last name">
-								</div>
-							</div-->
+						<form id="signupForm1" class="form-horizontal" action="" method="post">
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="username1"><%= usuario %>:</label>
 								<div class="col-sm-5">
 									<input type="text" class="form-control" id="username1" 
-										name="username1" placeholder="Username" onfocusout="checkUserName()" onkeypress="checkUserName()">
+										name="username1" placeholder="Username">
 								</div>
 							</div>
-							<!--  div class="form-group">
-								<label class="col-sm-4 control-label" for="email1">Email</label>
-								<div class="col-sm-5">
-									<input type="text" class="form-control" id="email1"
-										name="email1" placeholder="Email">
-								</div>
-							</div-->
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="password1"><%= password %>:</label>
 								<div class="col-sm-5">
 									<input type="password" class="form-control" id="password1"
-										name="password1" placeholder=" Password" onfocusout="checkPassword()" onkeypress="checkPassword()">
+										name="password1" placeholder="Password">
 								</div>
 							</div>
-							<div id="repassword" class="form-group" style="display:none;background: url(lock.png) 4px no-repeat;">
+							<div id="repassword" class="form-group" style="display:none">
 								<label class="col-sm-4 control-label" for="confirm_password1"><%= rpassword %>:</label>
 								<div class="col-sm-5">
 									<input type="password" class="form-control"
 										id="confirm_password1" name="confirm_password1"
-										placeholder="Confirm password" onfocusout="checkRePassword()" onkeypress="checkRePassword()">
+										placeholder="Confirm password">
 								</div>
 							</div>
 							<div id="terms" class="form-group"  style="display:none">
@@ -355,9 +340,9 @@ function handleSignUp() {
 							<div id="crearBotonones" class="form-group" style="display:none">
 								<div class="col-sm-9 col-sm-offset-2">
 									<button class="btn btn-primary" name="crear"
-										value="crear" onclick="javascript:validarDatos()">Crear cuenta</button>
-									<button class="btn btn-primary" name="cancel"
-										value="cancel" onclick="javascript:displayNormal()">Cancelar</button>
+										value="crear">Crear cuenta</button>
+									<div class="btn btn-primary" style="cursor:pointer" name="cancel"
+										value="cancel" onclick="javascript:displayLogin()">Cancelar</div>
 								</div>
 							</div>
 						</form>
@@ -367,78 +352,141 @@ function handleSignUp() {
 		</div>
 	</div>
 	<script type="text/javascript">
-		$.validator.setDefaults({
-			onfocusin: function( element ) {
-			},
-			onfocusout: function( element ) {
-			},
-			onkeyup: function( element, event ) {
-			},
-			onclick: function( element ) {
-			},
-			highlight: function( element, errorClass, validClass ) {
-			},
-			unhighlight: function( element, errorClass, validClass ) {
-			},
-			submitHandler : function() {
-				validarDatos();
+	$('#confirm_password1').on({
+        "keyup": function(e) {
+            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+            	checkRePassword();
+            }
+        }
+    });
+	$('#password1').on({
+        "keyup": function(e) {
+            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+            	checkPassword();
+            }
+        }
+    });
+	$('#username1').on({
+        "keyup": function(e) {
+            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+            	checkUserName();
+            }
+        }
+    });	
+	/*$.validator.setDefaults({
+		onfocusin: function( element ) {
+		},
+		onfocusout: function( element ) {
+		},
+		onkeyup: function( element, event ) {
+			return;
+		},
+		onclick: function( element ) {
+		},
+		highlight: function( element, errorClass, validClass ) {
+		},
+		unhighlight: function( element, errorClass, validClass ) {
+		},
+		submitHandler : function(element) {
+			if(action=="crearCuenta" && validarDatos()){
+				alert("crearCuenta")
 			}
-		});
-		$( "#username1" ).autocomplete({
-		    source: function (request, response) {
-		    	if(action=="crearCuenta"){
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username1").value;
-		    		var encontrado = false;
-		    		alert(unAvailableUserNames);
-					if(fLen>0){
-			    		for (i = 0; i < fLen; i++) {
-			  				if(user==unAvailableUserNames[i]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName();
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
+			else if (action=="login" && validarLogin()){
+				alert("login")
+			}
+		}
+	});*/
+	
+	$( "#username1" ).autocomplete({
+	    source: function (request, response) {
+	    	if(action=="crearCuenta"){
+	    		userNameDisponible = false;
+	    		var fLen = unAvailableUserNames.length;
+	    		var user = document.getElementById("username1").value;
+	    		var encontrado = false;
+	    		alert(unAvailableUserNames);
+				if(fLen>0){
+		    		for (i = 0; i < fLen; i++) {
+		  				if(user==unAvailableUserNames[i]){
+		  					encontrado=true;
+		  					break;
+		  				}
+					}
+		    		if(encontrado) {
+		    			displayerrorUsername(unAvailableUserNameError);
+		    			return
+		    		} else {
+		    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
 		    		      .then(function(firebaseUser) {
 		    		    }).catch(function(error) {
 		    				var errorCode = error.code;
 		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user)
+		    			  		unAvailableUserNames.push(user);
 		    			  		displayerrorUsername(unAvailableUserNameError)
 		    			  	} else if (errorCode=='auth/user-not-found'){
 		    			  		displayOkeyUserName();
+		    			  		userNameDisponible = true;
 		    			  	}
 		    			  	console.log(error);
 		    			});
-		    	}
-		    }
-		    },
-		    minLength: 5
-		});
-
-		$(document)
-				.ready(
-						function() {
-							$("#signupForm1").validate();
-						});
+		    		}
+		    	} else {
+	    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
+	    		      .then(function(firebaseUser) {
+	    		    }).catch(function(error) {
+	    				var errorCode = error.code;
+	    			  	if (errorCode == 'auth/wrong-password') {
+	    			  		unAvailableUserNames.push(user)
+	    			  		displayerrorUsername(unAvailableUserNameError)
+	    			  	} else if (errorCode=='auth/user-not-found'){
+	    			  		displayOkeyUserName();
+	    			  		userNameDisponible = true;
+	    			  	}
+	    			  	console.log(error);
+	    			});
+	    		}
+	   		 }
+	    },
+	    minLength: 5
+	});
+		$(document).ready(function(){
+			$("#signupForm1").validate({ 
+				  submitHandler: function(form) {
+					  if(action=="crearCuenta" && validarDatos()){
+							alert("crearCuenta")
+						}
+						else if (action=="login" && validarLogin()){
+							alert("login")
+						}
+				  }
+			});
+			
+			
+			/*$("#signupForm1").validate(
+					onfocusin: function( element ) {
+					},
+					onfocusout: function( element ) {
+					},
+					onkeyup: function( element, event ) {
+						return;
+					},
+					onclick: function( element ) {
+					},
+					highlight: function( element, errorClass, validClass ) {
+					},
+					unhighlight: function( element, errorClass, validClass ) {
+					},
+					submitHandler : function(element) {
+						if(action=="crearCuenta" && validarDatos()){
+							alert("crearCuenta")
+						}
+						else if (action=="login" && validarLogin()){
+							alert("login")
+						}
+					}		
+			
+			);*/
+	  });
 	</script>
 
 
