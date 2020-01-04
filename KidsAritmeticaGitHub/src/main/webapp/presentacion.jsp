@@ -24,10 +24,10 @@ String visitantes = RB.getString("visitantes");
 
 <script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="./js/current-device.min.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.2.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
@@ -65,43 +65,7 @@ String visitantes = RB.getString("visitantes");
 var usuario;
   $( function() {
 	// Initialize Firebase
-	  var firebaseConfig = {
-			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-			    authDomain: "fbplayaddition.firebaseapp.com",
-			    databaseURL: "https://fbplayaddition.firebaseio.com",
-			    projectId: "fbplayaddition",
-			    storageBucket: "fbplayaddition.appspot.com",
-			    messagingSenderId: "945530212708",
-			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-			    measurementId: "G-LLPNBP9S9B"
-	  };
-	  firebase.initializeApp(firebaseConfig);
-	  firebase.auth().onAuthStateChanged(function(user) {
-		if (user!=null) {
-		  firebase.database().ref('/users/' + user.uid).once('value').then (
-			function(snapshot) {
-			  if(snapshot==null || snapshot.val()==null)
-					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
-	          document.getElementById("contador").style.display="none";
-	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
-	          document.getElementById("loginboton").style.width="3vw";
-	          document.getElementById("loginboton").style.height="3vw"
-	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
-	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
-	          document.getElementById("logoutDiv").style.display="inline";
-	          usuario = user;
-			})
-		}else {
-			document.getElementById("inicial").innerHTML ="";
-			document.getElementById("logoutDiv").innerHTML ="";
-			document.getElementById("contador").style.display="inline";
-	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
-	        document.getElementById("loginboton").style.width="8vw";
-	        document.getElementById("loginboton").style.height="4vw"
-	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
-	        document.getElementById("loginboton").onclick=function(){login()}
-		}
-	});
+
   });
   
   function login(){
@@ -148,6 +112,45 @@ var usuario;
   }
   
   function loadImages(){
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  
+	  firebase.auth().onAuthStateChanged(function(user) {
+		  
+		if (user!=null) {
+		  firebase.database().ref('/users/' + user.uid).once('value').then (
+			function(snapshot) {
+			  if(snapshot==null || snapshot.val()==null)
+					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
+	          document.getElementById("contador").style.display="none";
+	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
+	          document.getElementById("loginboton").style.width="3vw";
+	          document.getElementById("loginboton").style.height="3vw"
+	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
+	          document.getElementById("logoutDiv").style.display="inline";
+	          usuario = user;
+			})
+		}else {
+			document.getElementById("inicial").innerHTML ="";
+			document.getElementById("logoutDiv").innerHTML ="";
+			document.getElementById("contador").style.display="inline";
+	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
+	        document.getElementById("loginboton").style.width="8vw";
+	        document.getElementById("loginboton").style.height="4vw"
+	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
+	        document.getElementById("loginboton").onclick=function(){login()}
+		}
+	});
 	  	var dominio = "test.playaddition.com";
 	  	//var dominio = "playaddition.com";
 	 	var img1 = new Image();

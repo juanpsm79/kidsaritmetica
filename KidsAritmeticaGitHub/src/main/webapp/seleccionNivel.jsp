@@ -26,10 +26,10 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 	}
   </style>
 <script src="./js/jquery/jquery-3.3.1.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
-<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-auth.js"></script>
-<script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
   
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
@@ -62,29 +62,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   //var dominio = "playaddition.com";
   var check = false;
   $( function() {
-	  var nivelSumaUsuario;
-	  var firebaseConfig = {
-			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-			    authDomain: "fbplayaddition.firebaseapp.com",
-			    databaseURL: "https://fbplayaddition.firebaseio.com",
-			    projectId: "fbplayaddition",
-			    storageBucket: "fbplayaddition.appspot.com",
-			    messagingSenderId: "945530212708",
-			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-			    measurementId: "G-LLPNBP9S9B"
-	  };
-	  firebase.initializeApp(firebaseConfig);
-	  firebase.auth().onAuthStateChanged(function(user) {
-		if (user!=null) {
-		  firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
-			function(snapshot) {
-				pintarTodosNivelesUsuario(snapshot.val());
-		  })
-		}else{
-			pintarTodosNivelesUsuario(40);
-		}
-		window.addEventListener("orientationchange", resizePageHandler);
-  	  });
+	  
   });
   
   function pintarTodosNivelesUsuario (nivelSumaUsuario){
@@ -325,6 +303,32 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   }
   
   function resizePage(){
+	  var nivelSumaUsuario;
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) { 
+		if (user!=null) {
+			//var v = firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value');
+			//alert(v);
+		  firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
+			function(snapshot) {
+				pintarTodosNivelesUsuario(snapshot.val());
+		  })
+		}else{
+			pintarTodosNivelesUsuario(40);
+		}
+		window.addEventListener("orientationchange", resizePageHandler);
+  	  }); 
+	  
 	 if(device.type=='tablet' || device.type=='mobile'){
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";
@@ -342,7 +346,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   </script>
 </head>
 
-  <body onload="seleccionarNivel('1');resizePage()">
+  <body onload="resizePage();seleccionarNivel('1')">
   		<div class="hidden">
 	<script type="text/javascript">
 		<!--//--><![CDATA[//><!--
