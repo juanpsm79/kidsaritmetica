@@ -180,10 +180,10 @@ function handleSignUp() {
 					<div style="float:right;position:relative;right:6.75vw;top:1vw;cursor:pointer;width:6vw;height:3vw;background-size:6vw 3vw;background-image:url(cancelaccount.png);background-repeat:no-repeat" onclick="javascript:displaygotologin()"></div>
 				</div>	
 			</div>
-			
+			<div id="html_element" style="position:relative;top:5vw"></div>
 		</div>
 		
-		<div id="html_element" style="position:relative;top:5vw"></div>
+		
 	</div>
 </body>
 </html>

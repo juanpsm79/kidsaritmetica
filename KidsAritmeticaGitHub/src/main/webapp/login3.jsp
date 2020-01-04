@@ -48,33 +48,20 @@ $( function() {
 		firebase.initializeApp(firebaseConfig);
 	    firebase.auth().onAuthStateChanged(function(user) {if (user!=null)location.href='presentacion.jsp'});
 });
+
+
   
-function login(defaultpassword){
+function fBLogin(){
 	var user = document.getElementById("username1").value;
 	var password = document.getElementById("password1").value;
-	if(defaultpassword!=null)
-		password = defaultpassword
+
 	firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", password)
 	   .then(function(firebaseUser) {
 	   })
 	  .catch(function(error) {
 			var errorCode = error.code;
 			var errorMessage = error.message;
-		  	if (errorCode == 'auth/wrong-password') {
-		  		if(defaultpassword==null)
-		    		alert('Wrong password.');
-		  		else {
-		  			userNameDisponible = false
-		  			comprobandoLogin = false;
-		  		}
-		  	} else if (errorCode=='auth/user-not-found'){
-		  		if(defaultpassword==null)
-		    		alert(errorMessage);
-		  		else {
-		  			userNameDisponible = true
-		  			comprobandoLogin = false;
-		  		}
-		  	}
+		  	alert(errorCode+" "+errorMessage);
 		  	console.log(error);
 		});
 }
@@ -140,6 +127,7 @@ function displaycreateAccount(){
 	document.getElementById("crearBotonones").style.display="block";
 	document.getElementById("crearCuenta").style.display="none";
 	document.getElementById("loginBoton").style.display="none";
+
 	document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
 	document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
 	document.getElementById("loginlogo").style.width="12.5vw";
@@ -168,7 +156,7 @@ function displaycreateAccount(){
 	function displayerrorUsername(error){
 		$("#username1-glyphicon").remove();
 		$("#username1-error").remove();
-		$("<span id='username1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:15px'></span>").insertAfter($("input#username1.form-control"));
+		$("<span id='username1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#username1.form-control"));
 		$("<em id='username1-error' class='error help-block'>"+error+".</em>").insertAfter($("#username1-glyphicon"));
 		$("input#username1.form-control").parents(".col-sm-5").addClass("has-error").removeClass("has-success");
 	}
@@ -181,7 +169,7 @@ function displaycreateAccount(){
 		$("input#username1.form-control").parents(".col-sm-5").addClass("has-success").removeClass("has-error");
 		$("#username1-glyphicon").remove();
 		$("#username1-error").remove();
-		$("<span id='username1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:15px'></span>").insertAfter($("input#username1.form-control"));
+		$("<span id='username1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#username1.form-control"));
 	}
 	
 	//Password
@@ -202,7 +190,7 @@ function displaycreateAccount(){
 	function displayerrorPassword(error){
 		$("#password1-glyphicon").remove();
 		$("#password1-error").remove();
-		$("<span id='password1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:15px'></span>").insertAfter($("input#password1.form-control"));
+		$("<span id='password1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#password1.form-control"));
 		$("<em id='password1-error' class='error help-block'>"+error+".</em>").insertAfter($("#password1-glyphicon"));
 		$("input#password1.form-control").parents(".col-sm-5").addClass("has-error").removeClass("has-success");
 	}
@@ -215,7 +203,7 @@ function displaycreateAccount(){
 		$("input#password1.form-control").parents(".col-sm-5").addClass("has-success").removeClass("has-error");
 		$("#password1-glyphicon").remove();
 		$("#password1-error").remove();
-		$("<span id='password1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:15px'></span>").insertAfter($("input#password1.form-control"));
+		$("<span id='password1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#password1.form-control"));
 	}
 	
 	
@@ -243,7 +231,7 @@ function displaycreateAccount(){
 	function displayerrorRePassword(error){
 		$("#confirm_password1-glyphicon").remove();
 		$("#confirm_password1-error").remove();
-		$("<span id='confirm_password1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:15px'></span>").insertAfter($("input#confirm_password1.form-control"));
+		$("<span id='confirm_password1-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#confirm_password1.form-control"));
 		$("<em id='confirm_password1-error' class='error help-block'>"+error+".</em>").insertAfter($("#confirm_password1-glyphicon"));
 		$("input#confirm_password1.form-control").parents(".col-sm-5").addClass("has-error").removeClass("has-success");
 	}
@@ -256,7 +244,7 @@ function displaycreateAccount(){
 		$("input#confirm_password1.form-control").parents(".col-sm-5").addClass("has-success").removeClass("has-error");
 		$("#confirm_password1-glyphicon").remove();
 		$("#confirm_password1-error").remove();
-		$("<span id='confirm_password1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:15px'></span>").insertAfter($("input#confirm_password1.form-control"));
+		$("<span id='confirm_password1-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#confirm_password1.form-control"));
 	}
 	
 	function validarDatos(){
@@ -272,7 +260,27 @@ function displaycreateAccount(){
 		return bUsername && bPassword;
 	}
 	
+	function crearCuenta(){
+		var formularioCorrecto = validarDatos();
+		alert(formularioCorrecto)
+	}
 	
+	function login(){
+		var vlogin = validarLogin();
+		if(vlogin)
+			fBLogin();
+	}
+	
+	var widgetId1
+</script>
+<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
+</script>
+<script type="text/javascript">
+      var onloadCallback = function() {
+    	  widgetId1 = grecaptcha.render('html_element', {
+          'sitekey' : '6LdtBsMUAAAAALnCsHUaDL6jAdyyi5YVwRvXCXrP'
+        });
+      };
 </script>
 </head>
 <body>
@@ -286,24 +294,24 @@ function displaycreateAccount(){
 					<div class="panel-body">
 						<form id="signupForm1" class="form-horizontal" action="" method="post">
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="username1"><%= usuario %>:</label>
-								<div class="col-sm-5">
+								<label class="col-sm-4 control-label" for="username1" style="padding-left: 0px"><%= usuario %>:</label>
+								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="text" class="form-control" id="username1" 
-										name="username1" placeholder="Username">
+										name="username1" placeholder="Username" style="width:90%">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4 control-label" for="password1"><%= password %>:</label>
-								<div class="col-sm-5">
+								<label class="col-sm-4 control-label" for="password1" style="padding-left: 0px"><%= password %>:</label>
+								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control" id="password1"
-										name="password1" placeholder="Password">
+										name="password1" placeholder="Password" style="width:90%">
 								</div>
 							</div>
 							<div id="repassword" class="form-group" style="display:none">
-								<label class="col-sm-4 control-label" for="confirm_password1"><%= rpassword %>:</label>
-								<div class="col-sm-5">
+								<label class="col-sm-4 control-label" for="confirm_password1" style="padding-left: 0px"><%= rpassword %>:</label>
+								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control"
-										id="confirm_password1" name="confirm_password1"
+										id="confirm_password1" name="confirm_password1" style="width:90%"
 										placeholder="Confirm password">
 								</div>
 							</div>
@@ -325,118 +333,84 @@ function displaycreateAccount(){
 									</div>
 								</div>
 							</div>
-							<div id="loginBoton" class="form-group">
-								<div class="col-sm-9 col-sm-offset-2">
-									<button type="submit" class="btn btn-primary" name="signup1"
-										value="Sign up">Login</button>
+							<div id="loginBoton" class="form-group" style="cursor:default">
+								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
+									<div style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
+										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
 								</div>
 							</div>
 							<div id="crearCuenta" class="form-group">
-								<div class="col-sm-5 col-sm-offset-4">
+								<div class="col-sm-5 col-sm-offset-4" style="padding-left: 0px">
 									<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
 								</div>
 							</div>
 							
 							<div id="crearBotonones" class="form-group" style="display:none">
-								<div class="col-sm-9 col-sm-offset-2">
-									<button class="btn btn-primary" name="crear"
-										value="crear">Crear cuenta</button>
-									<div class="btn btn-primary" style="cursor:pointer" name="cancel"
-										value="cancel" onclick="javascript:displayLogin()">Cancelar</div>
+								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
+									<div style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
+										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Crear cuenta</label></div>
+										
+									<div style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Cancelar</label></div>
 								</div>
 							</div>
 						</form>
+						<div id="html_element" style="position:relative;top:5vw"></div>
 					</div>
+					
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-	$('#confirm_password1').on({
-        "keyup": function(e) {
-            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-            	checkRePassword();
-            }
-        }
-    });
-	$('#password1').on({
-        "keyup": function(e) {
-            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-            	checkPassword();
-            }
-        }
-    });
-	$('#username1').on({
-        "keyup": function(e) {
-            if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-            	checkUserName();
-            }
-        }
-    });	
-	/*$.validator.setDefaults({
-		onfocusin: function( element ) {
-		},
-		onfocusout: function( element ) {
-		},
-		onkeyup: function( element, event ) {
-			return;
-		},
-		onclick: function( element ) {
-		},
-		highlight: function( element, errorClass, validClass ) {
-		},
-		unhighlight: function( element, errorClass, validClass ) {
-		},
-		submitHandler : function(element) {
-			if(action=="crearCuenta" && validarDatos()){
-				alert("crearCuenta")
-			}
-			else if (action=="login" && validarLogin()){
-				alert("login")
-			}
-		}
-	});*/
 	
-	$( "#username1" ).autocomplete({
-	    source: function (request, response) {
-	    	if(action=="crearCuenta"){
-	    		userNameDisponible = false;
-	    		var fLen = unAvailableUserNames.length;
-	    		var user = document.getElementById("username1").value;
-	    		var encontrado = false;
-	    		alert(unAvailableUserNames);
-				if(fLen>0){
-		    		for (i = 0; i < fLen; i++) {
-		  				if(user==unAvailableUserNames[i]){
-		  					encontrado=true;
-		  					break;
-		  				}
-					}
-		    		if(encontrado) {
-		    			displayerrorUsername(unAvailableUserNameError);
-		    			return
-		    		} else {
-		    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName();
-		    			  		userNameDisponible = true;
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    	} else {
-	    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
+</body>
+<script type="text/javascript">
+$('#confirm_password1').on({
+    "keyup": function(e) {
+        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+        	checkRePassword();
+        }
+    }
+});
+$('#password1').on({
+    "keyup": function(e) {
+        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+        	checkPassword();
+        }
+    }
+});
+$('#username1').on({
+    "keyup": function(e) {
+        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+        	checkUserName();
+        }
+    }
+});	
+$( "#username1" ).autocomplete({
+    source: function (request, response) {
+    	if(action=="crearCuenta"){
+    		userNameDisponible = false;
+    		var fLen = unAvailableUserNames.length;
+    		var user = document.getElementById("username1").value;
+    		var encontrado = false;
+    		alert(unAvailableUserNames);
+			if(fLen>0){
+	    		for (i = 0; i < fLen; i++) {
+	  				if(user==unAvailableUserNames[i]){
+	  					encontrado=true;
+	  					break;
+	  				}
+				}
+	    		if(encontrado) {
+	    			displayerrorUsername(unAvailableUserNameError);
+	    			return
+	    		} else {
+	    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
 	    		      .then(function(firebaseUser) {
 	    		    }).catch(function(error) {
 	    				var errorCode = error.code;
 	    			  	if (errorCode == 'auth/wrong-password') {
-	    			  		unAvailableUserNames.push(user)
+	    			  		unAvailableUserNames.push(user);
 	    			  		displayerrorUsername(unAvailableUserNameError)
 	    			  	} else if (errorCode=='auth/user-not-found'){
 	    			  		displayOkeyUserName();
@@ -445,50 +419,32 @@ function displaycreateAccount(){
 	    			  	console.log(error);
 	    			});
 	    		}
-	   		 }
-	    },
-	    minLength: 5
-	});
-		$(document).ready(function(){
-			$("#signupForm1").validate({ 
-				  submitHandler: function(form) {
-					  if(action=="crearCuenta" && validarDatos()){
-							alert("crearCuenta")
-						}
-						else if (action=="login" && validarLogin()){
-							alert("login")
-						}
-				  }
-			});
-			
-			
-			/*$("#signupForm1").validate(
-					onfocusin: function( element ) {
-					},
-					onfocusout: function( element ) {
-					},
-					onkeyup: function( element, event ) {
-						return;
-					},
-					onclick: function( element ) {
-					},
-					highlight: function( element, errorClass, validClass ) {
-					},
-					unhighlight: function( element, errorClass, validClass ) {
-					},
-					submitHandler : function(element) {
-						if(action=="crearCuenta" && validarDatos()){
-							alert("crearCuenta")
-						}
-						else if (action=="login" && validarLogin()){
-							alert("login")
-						}
-					}		
-			
-			);*/
-	  });
-	</script>
-
-
-</body>
+	    	} else {
+    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
+    		      .then(function(firebaseUser) {
+    		    }).catch(function(error) {
+    				var errorCode = error.code;
+    			  	if (errorCode == 'auth/wrong-password') {
+    			  		unAvailableUserNames.push(user)
+    			  		displayerrorUsername(unAvailableUserNameError)
+    			  	} else if (errorCode=='auth/user-not-found'){
+    			  		displayOkeyUserName();
+    			  		userNameDisponible = true;
+    			  	}
+    			  	console.log(error);
+    			});
+    		}
+   		 }
+    },
+    minLength: 5
+});
+	$(document).ready(function(){
+		$("#signupForm1").validate({
+			  debug:true,
+			  submitHandler: function(form) {
+				  return;
+			  }
+		});
+  });
+</script>
 </html>
