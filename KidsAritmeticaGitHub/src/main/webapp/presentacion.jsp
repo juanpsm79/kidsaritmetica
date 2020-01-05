@@ -64,7 +64,57 @@ String visitantes = RB.getString("visitantes");
 <script>
 var usuario;
   $( function() {
-	// Initialize Firebase
+	  window.addEventListener("orientationchange", resizePage);
+	  document.getElementById("inicial").innerHTML ="";
+	  document.getElementById("contador").style.display="none";
+      document.getElementById("loginboton").style.backgroundImage="url(loading.gif)";
+      document.getElementById("loginboton").style.width="3vw";
+      document.getElementById("loginboton").style.height="3vw"
+      document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+      document.getElementById("playAdditionDiv").onclick=function(){};
+      document.getElementById("playSubtractionDiv").onclick=function(){};
+      
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) {
+		if (user!=null) {
+		  firebase.database().ref('/users/' + user.uid).once('value').then (
+			function(snapshot) {
+			  if(snapshot==null || snapshot.val()==null)
+					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
+	          document.getElementById("contador").style.display="none";
+	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
+	          document.getElementById("loginboton").style.width="3vw";
+	          document.getElementById("loginboton").style.height="3vw"
+	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
+	          document.getElementById("logoutDiv").style.display="inline";
+	          usuario = user;
+	          document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
+		      document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
+			})
+		}else {
+			document.getElementById("inicial").innerHTML ="";
+			document.getElementById("logoutDiv").innerHTML ="";
+			document.getElementById("contador").style.display="inline";
+	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
+	        document.getElementById("loginboton").style.width="8vw";
+	        document.getElementById("loginboton").style.height="4vw"
+	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
+	        document.getElementById("loginboton").onclick=function(){login()}
+	        document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
+	        document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
+		}
+	});
 
   });
   
@@ -100,61 +150,18 @@ var usuario;
   }
   
   function resizePage(){
-		 if(device.type=='tablet' || device.type=='mobile'){
-		     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
-		      	  	
-		     }else { //0 ->Portrait Mode
-		    	  	document.getElementById('twitter').style.top="4.5vw";
-					document.getElementById('facebook').style.top="4.5vw";
-					document.getElementById('instagram').style.top="4.5vw";
-		   	 }
-		 }
+	 if(device.type=='tablet' || device.type=='mobile'){
+	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
+	      	  	
+	     }else { //0 ->Portrait Mode
+	    	  	document.getElementById('twitter').style.top="4.5vw";
+				document.getElementById('facebook').style.top="4.5vw";
+				document.getElementById('instagram').style.top="4.5vw";
+	   	 }
+	 }
   }
   
   function loadImages(){
-	  document.getElementById("inicial").innerHTML ="";
-	  document.getElementById("contador").style.display="none";
-      document.getElementById("loginboton").style.backgroundImage="url(loading.gif)";
-      document.getElementById("loginboton").style.width="3vw";
-      document.getElementById("loginboton").style.height="3vw"
-      document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
-	  var firebaseConfig = {
-			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-			    authDomain: "fbplayaddition.firebaseapp.com",
-			    databaseURL: "https://fbplayaddition.firebaseio.com",
-			    projectId: "fbplayaddition",
-			    storageBucket: "fbplayaddition.appspot.com",
-			    messagingSenderId: "945530212708",
-			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-			    measurementId: "G-LLPNBP9S9B"
-	  };
-	  firebase.initializeApp(firebaseConfig);
-	  firebase.auth().onAuthStateChanged(function(user) {
-		if (user!=null) {
-		  firebase.database().ref('/users/' + user.uid).once('value').then (
-			function(snapshot) {
-			  if(snapshot==null || snapshot.val()==null)
-					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
-	          document.getElementById("contador").style.display="none";
-	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
-	          document.getElementById("loginboton").style.width="3vw";
-	          document.getElementById("loginboton").style.height="3vw"
-	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
-	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
-	          document.getElementById("logoutDiv").style.display="inline";
-	          usuario = user;
-			})
-		}else {
-			document.getElementById("inicial").innerHTML ="";
-			document.getElementById("logoutDiv").innerHTML ="";
-			document.getElementById("contador").style.display="inline";
-	        document.getElementById("loginboton").style.backgroundImage="url(login.png)";
-	        document.getElementById("loginboton").style.width="8vw";
-	        document.getElementById("loginboton").style.height="4vw"
-	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
-	        document.getElementById("loginboton").onclick=function(){login()}
-		}
-	});
 	  	var dominio = "test.playaddition.com";
 	  	//var dominio = "playaddition.com";
 	 	var img1 = new Image();
@@ -242,8 +249,8 @@ function handleReportingResults(response){
 	 	</div>
 
 		<div id="derecha" style="position:absolute;left:20vw;width:65vw;top:13vw">	
-				<div style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
-				<div style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
+				<div id="playAdditionDiv" style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
+				<div id="playSubtractionDiv" style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
  			
 		<div id="logoutDiv" style="cursor:pointer;width:6vw;height:2vw;display:none;position:absolute;top:1.35vw;right:7.5vw;font-family:Arial;font-size:1.3vw;color:orange" 

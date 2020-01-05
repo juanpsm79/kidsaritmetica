@@ -19,6 +19,8 @@ String passordsInvalidas=RB.getString("passordsInvalidas");
 String usernameObligatorio=RB.getString("usernameObligatorio");
 String loginIncorrecto=RB.getString("loginIncorrecto");
 String verificarRecaptcha=RB.getString("verificarRecaptcha");
+String crearCuentaBoton=RB.getString("crearCuentaBoton");
+String cancelarBoton=RB.getString("cancelarBoton");
 %>
 <html>
 <head>
@@ -75,17 +77,13 @@ function fBLogin(){
 	   .then(function(firebaseUser) {
 	   })
 	  .catch(function(error) {
-		  	document.getElementById("loginLabel").style.backgroundImage="url(BotonA.png)";
-		  	document.getElementById("loginLabel").style.width="7vw";
-		    document.getElementById("loginLabel").style.height="2.5vw"
-		    document.getElementById("loginLabel").style.backgroundSize="7vw 2.5vw";
+		  document.getElementById("loginAjax").style.visibility="hidden";
 		  var errorCode = error.code;
 	      var errorMessage = error.message;
 	      if (errorCode == 'auth/user-not-found' || errorCode =='auth/wrong-password') {
 	        alert(loginIncorrecto);
 	      } 
-	      console.log(error);
-		});
+	});
 }
  
 function handleSignUp() {
@@ -93,10 +91,12 @@ function handleSignUp() {
     var password = document.getElementById('password1').value;
     firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
    	.catch(function(error) {
-	      var errorCode = error.code;
-	      var errorMessage = error.message;
-	      alert(errorCode+" "+errorMessage);
-	      console.log(error);
+   		document.getElementById("loginAjax1").style.visibility="visible";
+   		document.getElementById("createAccountLabel").onclick=function(){crearCuenta()}
+	    var errorCode = error.code;
+	    var errorMessage = error.message;
+	    alert(errorCode+" "+errorMessage);
+	    console.log(error);
    	});
 }
 function displayLogin(){
@@ -290,10 +290,8 @@ function displaycreateAccount(){
 	function crearCuenta(){
 		var vformularioCorrecto = validarDatos();
 		if(vformularioCorrecto && vRecaptcha){
-			document.getElementById("createAccountLabel").style.backgroundImage="url(loading.gif)";
-		    document.getElementById("createAccountLabel").style.width="2vw";
-		    document.getElementById("createAccountLabel").style.height="2vw"
-		    document.getElementById("createAccountLabel").style.backgroundSize="2vw 2vw";
+			document.getElementById("loginAjax1").style.visibility="visible";
+			document.getElementById("createAccountLabel").onclick=function(){;}
 			handleSignUp();
 		}
 		if(vformularioCorrecto && !vRecaptcha)
@@ -303,10 +301,7 @@ function displaycreateAccount(){
 	function login(){
 		var vlogin = validarLogin();
 		if(vlogin && vRecaptcha){
-			document.getElementById("loginLabel").style.backgroundImage="url(loading.gif)";
-			document.getElementById("loginLabel").style.width="2vw";
-		    document.getElementById("loginLabel").style.height="2vw"
-		    document.getElementById("loginLabel").style.backgroundSize="2vw 2vw";
+			document.getElementById("loginAjax").style.visibility="visible";
 			fBLogin();
 		}
 		if(vlogin && !vRecaptcha)
@@ -407,6 +402,8 @@ function displaycreateAccount(){
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="loginLabel" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
 										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
+										
+									  <div id="loginAjax" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>	
 								</div>
 							</div>
 							<div id="crearCuenta" class="form-group">
@@ -414,14 +411,18 @@ function displaycreateAccount(){
 									<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
 								</div>
 							</div>
-							
 							<div id="crearBotonones" class="form-group" style="display:none">
 								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
-									<div style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
-										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createAccountLabel"style="cursor:pointer;margin-top:0.3vw">Crear cuenta</label></div>
+									<div id="createAccountLabel" style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
+										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
 										
 									<div style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
-										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Cancelar</label></div>
+										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
+									<div id="loginAjax1" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
 								</div>
 							</div>
 						</form>
