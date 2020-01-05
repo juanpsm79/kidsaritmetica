@@ -12,6 +12,13 @@ String password=RB.getString("password");
 String rpassword=RB.getString("rpassword");
 String terminosServicio=RB.getString("terminosServicio");
 String enviarInfo=RB.getString("enviarInfo");
+
+String unAvailableUserNameError=RB.getString("unAvailableUserNameError");
+String usernameCortoError=RB.getString("usernameCortoError");
+String passordsInvalidas=RB.getString("passordsInvalidas");
+String usernameObligatorio=RB.getString("usernameObligatorio");
+String loginIncorrecto=RB.getString("loginIncorrecto");
+String verificarRecaptcha=RB.getString("verificarRecaptcha");
 %>
 <html>
 <head>
@@ -30,11 +37,16 @@ String enviarInfo=RB.getString("enviarInfo");
 var comprobandoLogin = false;
 var userNameDisponible = false;
 var action="login";
-var unAvailableUserNameError="Nombre usuario no disponible";
-var usernameCortoError="Rellenar con mínimo de 5 caracteres"
-var usernameObligatorio ="Obligatorio"
+var vRecaptcha=false
+var unAvailableUserNameError="<%= unAvailableUserNameError %>"
+var usernameCortoError="<%= usernameCortoError %>"
+var passordsInvalidas="<%= passordsInvalidas %>"
+var usernameObligatorio="<%= usernameObligatorio %>"
+var loginIncorrecto="<%= loginIncorrecto %>"
+var verificarRecaptcha="<%= verificarRecaptcha %>"
 var unAvailableUserNames = [];
 $( function() {
+	     window.addEventListener("orientationchange", resizePageHandler);
 		 var firebaseConfig = {
 		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 		    authDomain: "fbplayaddition.firebaseapp.com",
@@ -63,10 +75,16 @@ function fBLogin(){
 	   .then(function(firebaseUser) {
 	   })
 	  .catch(function(error) {
-			var errorCode = error.code;
-			var errorMessage = error.message;
-		  	alert(errorCode+" "+errorMessage);
-		  	console.log(error);
+		  	document.getElementById("loginLabel").style.backgroundImage="url(BotonA.png)";
+		  	document.getElementById("loginLabel").style.width="7vw";
+		    document.getElementById("loginLabel").style.height="2.5vw"
+		    document.getElementById("loginLabel").style.backgroundSize="7vw 2.5vw";
+		  var errorCode = error.code;
+	      var errorMessage = error.message;
+	      if (errorCode == 'auth/user-not-found' || errorCode =='auth/wrong-password') {
+	        alert(loginIncorrecto);
+	      } 
+	      console.log(error);
 		});
 }
  
@@ -75,15 +93,10 @@ function handleSignUp() {
     var password = document.getElementById('password1').value;
     firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
    	.catch(function(error) {
-			      var errorCode = error.code;
-			      var errorMessage = error.message;
-			      
-			      if (errorCode == 'auth/weak-password') {
-			        alert('The password is too weak.');
-			      } else {
-			        alert(errorMessage);
-			      }
-			      console.log(error);
+	      var errorCode = error.code;
+	      var errorMessage = error.message;
+	      alert(errorCode+" "+errorMessage);
+	      console.log(error);
    	});
 }
 function displayLogin(){
@@ -135,7 +148,7 @@ function displaycreateAccount(){
 			displayerrorUsername(usernameObligatorio);
 			return false;
 		}
-		if (document.getElementById("username1").value.length<5){
+		if (document.getElementById("username1").value.length<6){
 			displayerrorUsername(usernameCortoError);
 			return false;
 		}
@@ -173,13 +186,28 @@ function displaycreateAccount(){
 			displayerrorPassword(usernameObligatorio);
 			return false;
 		}
-		if (document.getElementById("password1").value.length<5){
+		if (document.getElementById("password1").value.length<6){
 			displayerrorPassword(usernameCortoError);
 			return false;
 		}
 		else {
-			displayOkeyPassword();
-			return true;
+			if(action=="crearCuenta"){
+					if(document.getElementById("confirm_password1").value==document.getElementById("password1").value){
+						displayOkeyRePassword();
+						displayOkeyPassword();
+						return true;
+					}
+					else {
+						if(document.getElementById("confirm_password1").value.length>0)
+							displayerrorPassword(passordsInvalidas)
+						else
+							displayOkeyPassword();	
+						return false;
+					}
+			} else if (action=="login") {
+				displayOkeyPassword();
+				return true;
+			}
 		}
 	}
 	function displayerrorPassword(error){
@@ -208,17 +236,21 @@ function displaycreateAccount(){
 			displayerrorRePassword(usernameObligatorio);
 			return false;
 		}
-		if (document.getElementById("confirm_password1").value.length<5){
+		if (document.getElementById("confirm_password1").value.length<6){
 			displayerrorRePassword(usernameCortoError);
 			return false;
 		}
 		else {
 			if(document.getElementById("confirm_password1").value==document.getElementById("password1").value){
 				displayOkeyRePassword();
+				displayOkeyPassword();
 				return true;
 			}
 			else {
-				displayerrorRePassword("Passwords don't match")
+				if(document.getElementById("password1").value.length>0)
+					displayerrorRePassword(passordsInvalidas)
+				else
+					displayOkeyPassword();
 				return false;
 			}
 		}
@@ -256,25 +288,67 @@ function displaycreateAccount(){
 	}
 	
 	function crearCuenta(){
-		var formularioCorrecto = validarDatos();
-		if(formularioCorrecto)
-			handleSignUp()
+		var vformularioCorrecto = validarDatos();
+		if(vformularioCorrecto && vRecaptcha){
+			document.getElementById("createAccountLabel").style.backgroundImage="url(loading.gif)";
+		    document.getElementById("createAccountLabel").style.width="2vw";
+		    document.getElementById("createAccountLabel").style.height="2vw"
+		    document.getElementById("createAccountLabel").style.backgroundSize="2vw 2vw";
+			handleSignUp();
+		}
+		if(vformularioCorrecto && !vRecaptcha)
+			alert (verificarRecaptcha)
 	}
 	
 	function login(){
 		var vlogin = validarLogin();
-		if(vlogin)
+		if(vlogin && vRecaptcha){
+			document.getElementById("loginLabel").style.backgroundImage="url(loading.gif)";
+			document.getElementById("loginLabel").style.width="2vw";
+		    document.getElementById("loginLabel").style.height="2vw"
+		    document.getElementById("loginLabel").style.backgroundSize="2vw 2vw";
 			fBLogin();
+		}
+		if(vlogin && !vRecaptcha)
+			alert (verificarRecaptcha)
 	}
+	function verifyCallback() {
+		vRecaptcha = true;
+    }
 	
-	var widgetId1
+	function expiredCallback() {
+		vRecaptcha = false;
+    }
+	
+	function resizePageHandler(){
+		  resizePage();
+	}
+	  
+	  function resizePage(){
+		 if(device.type=='tablet' || device.type=='mobile'){
+		     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
+		      	  	document.getElementById('seeAllLevels').style.top="11vw";
+		   			document.getElementById('capaNiveles').style.top="18vw";
+					document.getElementById('playSelectAllLevel').style.top="38vw";
+					document.getElementById('selectYourLevel').style.width="50vw";
+		     }else { //0 ->Portrait Mode
+		    	  	document.getElementById('seeAllLevels').style.top="11vw";
+					document.getElementById('capaNiveles').style.top="20vw";
+					document.getElementById('playSelectAllLevel').style.top="40vw";
+		   	 }
+		 }
+	  }
+	
 </script>
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 <script type="text/javascript">
       var onloadCallback = function() {
-    	  widgetId1 = grecaptcha.render('html_element', {
-          'sitekey' : '6LdtBsMUAAAAALnCsHUaDL6jAdyyi5YVwRvXCXrP'
+    	  grecaptcha.render('html_element', {
+          'sitekey' : '6LdtBsMUAAAAALnCsHUaDL6jAdyyi5YVwRvXCXrP',
+          'callback' : verifyCallback,
+          'expired-callback':expiredCallback,
+          'error-callback':expiredCallback
         });
       };
 </script>
@@ -293,14 +367,14 @@ function displaycreateAccount(){
 								<label class="col-sm-4 control-label" for="username1" style="padding-left: 0px"><%= usuario %>:</label>
 								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="text" class="form-control" id="username1" 
-										name="username1" placeholder="Username" style="width:90%">
+										name="username1" placeholder="<%= usuario %>" style="width:90%">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4 control-label" for="password1" style="padding-left: 0px"><%= password %>:</label>
 								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control" id="password1"
-										name="password1" placeholder="Password" style="width:90%">
+										name="password1" placeholder="<%= password %>" style="width:90%">
 								</div>
 							</div>
 							<div id="repassword" class="form-group" style="display:none">
@@ -308,7 +382,7 @@ function displaycreateAccount(){
 								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control"
 										id="confirm_password1" name="confirm_password1" style="width:90%"
-										placeholder="Confirm password">
+										placeholder="<%= rpassword %>">
 								</div>
 							</div>
 							<div id="terms" class="form-group"  style="display:none">
@@ -331,7 +405,7 @@ function displaycreateAccount(){
 							</div>
 							<div id="loginBoton" class="form-group" style="cursor:default">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
-									<div style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
+									<div id="loginLabel" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
 										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
 								</div>
 							</div>
@@ -344,7 +418,7 @@ function displaycreateAccount(){
 							<div id="crearBotonones" class="form-group" style="display:none">
 								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
 									<div style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
-										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Crear cuenta</label></div>
+										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createAccountLabel"style="cursor:pointer;margin-top:0.3vw">Crear cuenta</label></div>
 										
 									<div style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Cancelar</label></div>
@@ -431,7 +505,7 @@ $( "#username1" ).autocomplete({
     		}
    		 }
     },
-    minLength: 5
+    minLength: 6
 });
 	$(document).ready(function(){
 		$("#signupForm1").validate({

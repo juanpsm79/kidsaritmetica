@@ -61,8 +61,34 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   var dominio = "test.playaddition.com";
   //var dominio = "playaddition.com";
   var check = false;
+  var nivelSumaUsuario;
   $( function() {
-	  
+	  window.addEventListener("orientationchange", resizePageHandler);
+	  document.getElementById("capaNiveles").style.backgroundImage="url(loading.gif)";
+      document.getElementById("capaNiveles").style.width="3vw";
+      document.getElementById("capaNiveles").style.height="3vw"
+      document.getElementById("capaNiveles").style.backgroundSize="3vw 3vw";
+	  var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+	  };
+	  firebase.initializeApp(firebaseConfig);
+	  firebase.auth().onAuthStateChanged(function(user) { 
+		if (user!=null) {
+		  firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
+			function(snapshot) {
+				pintarTodosNivelesUsuario(snapshot.val());
+		  })
+		}else{
+			pintarTodosNivelesUsuario(40);
+		}
+  	  }); 
   });
   
   function pintarTodosNivelesUsuario (nivelSumaUsuario){
@@ -303,32 +329,6 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   }
   
   function resizePage(){
-	  var nivelSumaUsuario;
-	  var firebaseConfig = {
-			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-			    authDomain: "fbplayaddition.firebaseapp.com",
-			    databaseURL: "https://fbplayaddition.firebaseio.com",
-			    projectId: "fbplayaddition",
-			    storageBucket: "fbplayaddition.appspot.com",
-			    messagingSenderId: "945530212708",
-			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-			    measurementId: "G-LLPNBP9S9B"
-	  };
-	  firebase.initializeApp(firebaseConfig);
-	  firebase.auth().onAuthStateChanged(function(user) { 
-		if (user!=null) {
-			//var v = firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value');
-			//alert(v);
-		  firebase.database().ref('/users/' + user.uid+'/nivelActualSuma').once('value').then (
-			function(snapshot) {
-				pintarTodosNivelesUsuario(snapshot.val());
-		  })
-		}else{
-			pintarTodosNivelesUsuario(40);
-		}
-		window.addEventListener("orientationchange", resizePageHandler);
-  	  }); 
-	  
 	 if(device.type=='tablet' || device.type=='mobile'){
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";

@@ -112,6 +112,12 @@ var usuario;
   }
   
   function loadImages(){
+	  document.getElementById("inicial").innerHTML ="";
+	  document.getElementById("contador").style.display="none";
+      document.getElementById("loginboton").style.backgroundImage="url(loading.gif)";
+      document.getElementById("loginboton").style.width="3vw";
+      document.getElementById("loginboton").style.height="3vw"
+      document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
 	  var firebaseConfig = {
 			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 			    authDomain: "fbplayaddition.firebaseapp.com",
@@ -123,9 +129,7 @@ var usuario;
 			    measurementId: "G-LLPNBP9S9B"
 	  };
 	  firebase.initializeApp(firebaseConfig);
-	  
 	  firebase.auth().onAuthStateChanged(function(user) {
-		  
 		if (user!=null) {
 		  firebase.database().ref('/users/' + user.uid).once('value').then (
 			function(snapshot) {

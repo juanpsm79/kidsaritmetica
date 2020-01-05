@@ -53,8 +53,13 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
   var check = false;
+  var nivelSumaUsuario;
   $( function() {
-	  var nivelSumaUsuario;
+	  window.addEventListener("orientationchange", resizePageHandler);
+	  document.getElementById("capaNiveles").style.backgroundImage="url(loading.gif)";
+      document.getElementById("capaNiveles").style.width="3vw";
+      document.getElementById("capaNiveles").style.height="3vw"
+      document.getElementById("capaNiveles").style.backgroundSize="3vw 3vw";
 	  var firebaseConfig = {
 			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 			    authDomain: "fbplayaddition.firebaseapp.com",
@@ -75,7 +80,6 @@ var dominio = "test.playaddition.com";
 		} else{
 			pintarTodosNivelesUsuario(40);
 		}
-		window.addEventListener("orientationchange", resizePageHandler);
   	  });
   });
   
