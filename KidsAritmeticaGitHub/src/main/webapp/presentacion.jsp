@@ -24,6 +24,7 @@ String visitantes = RB.getString("visitantes");
 
 <script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="./js/current-device.min.js"></script>
+<script src="./js/screenfull.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
@@ -65,6 +66,8 @@ String visitantes = RB.getString("visitantes");
 var usuario;
   $( function() {
 	  window.addEventListener("orientationchange", resizePage);
+	  
+	  
 	  document.getElementById("inicial").innerHTML ="";
 	  document.getElementById("contador").style.display="none";
       document.getElementById("loginboton").style.backgroundImage="url(loading.gif)";
@@ -150,7 +153,9 @@ var usuario;
   }
   
   function resizePage(){
+	  
 	 if(device.type=='tablet' || device.type=='mobile'){
+		 screenfull.request();
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	
 	     }else { //0 ->Portrait Mode
@@ -162,6 +167,7 @@ var usuario;
   }
   
   function loadImages(){
+	  
 	  	var dominio = "test.playaddition.com";
 	  	//var dominio = "playaddition.com";
 	 	var img1 = new Image();
@@ -178,6 +184,8 @@ var usuario;
 		img5.src = "https://"+dominio+"/startOverBoton.png";
 		img6.src = "https://"+dominio+"/levelUpBoton.png";
 		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
+		
+		
   }
 </script>
  
@@ -219,7 +227,7 @@ function handleReportingResults(response){
   
 </head>
 
-  <body onload="resizePage();loadImages()">
+  <body id="body" onload="loadImages();resizePage()">
 		<div id="izquierda" style="position:absolute;width:25vw">
 			
 			<div style="position:absolute;top:1vw;width:25vw">
@@ -268,5 +276,6 @@ function handleReportingResults(response){
  					<img src="loading.gif" style="width:2.5vw">
  			</div>
  		</div>
+ 		
   </body>
 </html>

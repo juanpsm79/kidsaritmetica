@@ -27,10 +27,11 @@ String cancelarBoton=RB.getString("cancelarBoton");
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PlayAddition | Login</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-<!--  script type="text/javascript" src="./js/jquery-1.11.1.js"></script-->
+
 <script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="./js/jquery/jquery-ui.min.js"></script>
-<script type="text/javascript" src="./js/jquery.validate.js"></script>
+<script src="./js/current-device.min.js"></script>
+<script src="./js/screenfull.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
@@ -39,7 +40,7 @@ String cancelarBoton=RB.getString("cancelarBoton");
 var comprobandoLogin = false;
 var userNameDisponible = false;
 var action="login";
-var vRecaptcha=false
+var vRecaptcha=true
 var unAvailableUserNameError="<%= unAvailableUserNameError %>"
 var usernameCortoError="<%= usernameCortoError %>"
 var passordsInvalidas="<%= passordsInvalidas %>"
@@ -47,6 +48,7 @@ var usernameObligatorio="<%= usernameObligatorio %>"
 var loginIncorrecto="<%= loginIncorrecto %>"
 var verificarRecaptcha="<%= verificarRecaptcha %>"
 var unAvailableUserNames = [];
+var md
 $( function() {
 	     window.addEventListener("orientationchange", resizePageHandler);
 		 var firebaseConfig = {
@@ -65,6 +67,7 @@ $( function() {
 	    		location.href='presentacion.jsp'
 	    	}
 	    });
+	   
 });
 
 
@@ -108,7 +111,7 @@ function displayLogin(){
 	document.getElementById("confirm_password1").value="";
 	document.getElementById("repassword").style.display="none";
 	document.getElementById("terms").style.display="none";
-	document.getElementById("info").style.display="none";
+	
 	document.getElementById("crearBotonones").style.display="none";
 	
 	document.getElementById("crearCuenta").style.display="block";
@@ -118,6 +121,12 @@ function displayLogin(){
 	document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
 	document.getElementById("loginlogo").style.width="10vw";
 	document.getElementById("loginlogo").style.height="5vw";
+	if(device.type=='mobile'){
+		 document.getElementById('loginlogo').style.width="27vw";
+		 document.getElementById('loginlogo').style.height="9vw";
+	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
+	     //document.getElementById('capabotonescreacion').style.marginTop="4vw"
+	}
 	action="login";
 }
 	
@@ -130,8 +139,7 @@ function displaycreateAccount(){
 	document.getElementById("confirm_password1").value="";
 	document.getElementById("repassword").style.display="block";
 	document.getElementById("terms").style.display="inline";
-	document.getElementById("terms1").style.width="44.66666667%";
-	document.getElementById("info").style.display="block";
+
 	document.getElementById("crearBotonones").style.display="block";
 	document.getElementById("crearCuenta").style.display="none";
 	document.getElementById("loginBoton").style.display="none";
@@ -140,6 +148,12 @@ function displaycreateAccount(){
 	document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
 	document.getElementById("loginlogo").style.width="12.5vw";
 	document.getElementById("loginlogo").style.height="5vw";
+	if(device.type=='mobile'){
+		 document.getElementById('loginlogo').style.width="27vw";
+		 document.getElementById('loginlogo').style.height="9vw";
+	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
+	     document.getElementById('capabotonescreacion').style.marginTop="4vw"
+	}
 	action="crearCuenta";
 }
 	//Username
@@ -319,22 +333,41 @@ function displaycreateAccount(){
 		  resizePage();
 	}
 	  
-	  function resizePage(){
-		 if(device.type=='tablet' || device.type=='mobile'){
-		     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
-		      	  	document.getElementById('seeAllLevels').style.top="11vw";
-		   			document.getElementById('capaNiveles').style.top="18vw";
-					document.getElementById('playSelectAllLevel').style.top="38vw";
-					document.getElementById('selectYourLevel').style.width="50vw";
-		     }else { //0 ->Portrait Mode
-		    	  	document.getElementById('seeAllLevels').style.top="11vw";
-					document.getElementById('capaNiveles').style.top="20vw";
-					document.getElementById('playSelectAllLevel').style.top="40vw";
-		   	 }
-		 }
-	  }
+  function resizePage(){
+	  
+	 if(device.type=='mobile'){
+		 document.getElementById('createAccountLabel').style.width="30vw";
+		 document.getElementById('createAccountLabel').style.height="6vw";
+		 document.getElementById('createAccountLabel').style.fontSize="3.75vw";
+		 document.getElementById('createAccountLabel').style.left="14vw"
+	     document.getElementById('createAccountLabel').style.backgroundSize="30vw 6vw";
+		 
+		 document.getElementById('cancelAccountLabel').style.width="20vw";
+		 document.getElementById('cancelAccountLabel').style.height="6vw";
+		 document.getElementById('cancelAccountLabel').style.fontSize="3.75vw";
+		 document.getElementById('cancelAccountLabel').style.right="14vw"
+	     document.getElementById('cancelAccountLabel').style.backgroundSize="20vw 6vw";
+		 
+		 document.getElementById('capabotonescreacion').style.marginTop="4vw"
+		 
+		 document.getElementById("loginLabel").style.width="20vw";
+		 document.getElementById("loginLabel").style.height="6vw";
+		 document.getElementById('loginLabel').style.backgroundSize="20vw 6vw";
+		 document.getElementById("loginLabel").style.fontSize="3.75vw";
+		 
+		 document.getElementById('loginlogo').style.width="27vw";
+		 document.getElementById('loginlogo').style.height="9vw";
+	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
+	     screenfull.request();
+	 }
+	 else if(device.type=='tablet'){
+		 document.getElementById('cancelAccountLabel').style.right="7.5vw"
+			 document.getElementById('createAccountLabel').style.left="7.5vw"
+	 }
+  }
 	
 </script>
+<!-- 
 <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer>
 </script>
 <script type="text/javascript">
@@ -347,8 +380,9 @@ function displaycreateAccount(){
         });
       };
 </script>
+ -->
 </head>
-<body>
+<body onload="resizePage()">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -377,7 +411,7 @@ function displaycreateAccount(){
 								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control"
 										id="confirm_password1" name="confirm_password1" style="width:90%"
-										placeholder="<%= rpassword %>">
+										placeholder="<%= password %>">
 								</div>
 							</div>
 							<div id="terms" class="form-group"  style="display:none">
@@ -389,15 +423,7 @@ function displaycreateAccount(){
 									</div>
 								</div>
 							</div>
-							<div id="info" class="form-group" style="display:none">
-								<div class="col-sm-5 col-sm-offset-4" style="margin-left:30%">
-									<div class="checkbox">
-										<label> <input type="checkbox" id="agree2"
-											name="agree2" value="agree2"><%= enviarInfo %>
-										</label>
-									</div>
-								</div>
-							</div>
+							
 							<div id="loginBoton" class="form-group" style="cursor:default">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="loginLabel" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
@@ -412,11 +438,11 @@ function displaycreateAccount(){
 								</div>
 							</div>
 							<div id="crearBotonones" class="form-group" style="display:none">
-								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
+								<div id="capabotonescreacion" class="col-sm-9 col-sm-offset-2" style="padding-left: 0px;margin-top:1.5vw">
 									<div id="createAccountLabel" style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
 										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
 										
-									<div style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="cancelAccountLabel" style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
@@ -426,7 +452,7 @@ function displaycreateAccount(){
 								</div>
 							</div>
 						</form>
-						<div id="html_element" style="position:relative;top:5vw"></div>
+						<!--  div id="html_element" style="position:relative;top:5vw"></div-->
 					</div>
 					
 				</div>
@@ -508,13 +534,13 @@ $( "#username1" ).autocomplete({
     },
     minLength: 6
 });
-	$(document).ready(function(){
+	/*$(document).ready(function(){
 		$("#signupForm1").validate({
 			  debug:true,
 			  submitHandler: function(form) {
 				  return;
 			  }
 		});
-  });
+  });*/
 </script>
 </html>

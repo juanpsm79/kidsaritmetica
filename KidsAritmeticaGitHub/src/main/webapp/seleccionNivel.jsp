@@ -26,6 +26,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 	}
   </style>
 <script src="./js/jquery/jquery-3.3.1.js"></script>
+<script src="./js/screenfull.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
@@ -330,6 +331,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   
   function resizePage(){
 	 if(device.type=='tablet' || device.type=='mobile'){
+		 screenfull.request();
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";
 	   			document.getElementById('capaNiveles').style.top="18vw";

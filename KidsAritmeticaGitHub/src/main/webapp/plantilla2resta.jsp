@@ -54,7 +54,9 @@ boolean wa = (Boolean)session.getAttribute("wa");
   
   </style>
   <script src="./js/jquery/jquery-ui.js"></script>
-  <script src="./js/jquery/jquery-3.3.1.js"></script>
+<script src="./js/jquery/jquery-3.3.1.js"></script>
+<script src="./js/screenfull.js"></script>
+<script src="./js/current-device.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
@@ -94,6 +96,7 @@ var assistance = <%=assistance%>;
 var dominio = "test.playaddition.com";
 var usuario;
 $(function(){
+	window.addEventListener("orientationchange", resizePage);
  var firebaseConfig = {
 		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 		    authDomain: "fbplayaddition.firebaseapp.com",
@@ -510,11 +513,25 @@ $(function(){
   			imagen = id;
   		}
   	}
-	  
+  	function resizePage(){
+		 if(device.type=='tablet' || device.type=='mobile'){
+			 screenfull.request();
+		     /*if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
+		      	  	document.getElementById('seeAllLevels').style.top="11vw";
+		   			document.getElementById('capaNiveles').style.top="18vw";
+					document.getElementById('playSelectAllLevel').style.top="38vw";
+					document.getElementById('selectYourLevel').style.width="50vw";
+		     }else { //0 ->Portrait Mode
+		    	  	document.getElementById('seeAllLevels').style.top="11vw";
+					document.getElementById('capaNiveles').style.top="20vw";
+					document.getElementById('playSelectAllLevel').style.top="40vw";
+		   	 }*/
+		 }
+	  }  
   </script>
 </head>
 
-  <body onload="javascript:calcularSuma();iniciarCrono()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
+  <body onload="javascript:calcularSuma();iniciarCrono();resizePage()" onkeypress="javascript:ponerNumero(event)" onkeydown="javascript:borrarNumero(event)">
 
 	<div id="contenedor" class="unselectable" style="position:absolute;width:99vw">
 			

@@ -18,10 +18,19 @@ String nombreImagen = "GoToLevel"+nivel+".png";
  		src: url('BerlinDemi.ttf');
 	}
   </style>
+  <script src="./js/jquery/jquery-3.3.1.js"></script>
+<script src="./js/jquery/jquery-ui.min.js"></script>
+  <script src="./js/screenfull.js"></script>
+  <script src="./js/current-device.min.js"></script>
   <script>
 var dominio = "test.playaddition.com";
 //  var dominio = "playaddition.com";
   var nivel = <%=nivel%>;
+  
+  $( function() {
+	     window.addEventListener("orientationchange", resizePage);
+	   
+});
   function irNivel(obj){
 	  obj.style.backgroundImage="url(playBotonSS.png)";
 	  setTimeout(function(){
@@ -39,6 +48,22 @@ var dominio = "test.playaddition.com";
   function irPrincipal(){
 		 location.href = "seleccionNivel.jsp"
   }
+  
+  function resizePage(){
+		 if(device.type=='tablet' || device.type=='mobile'){
+			 screenfull.request();
+		     /*if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
+		      	  	document.getElementById('seeAllLevels').style.top="11vw";
+		   			document.getElementById('capaNiveles').style.top="18vw";
+					document.getElementById('playSelectAllLevel').style.top="38vw";
+					document.getElementById('selectYourLevel').style.width="50vw";
+		     }else { //0 ->Portrait Mode
+		    	  	document.getElementById('seeAllLevels').style.top="11vw";
+					document.getElementById('capaNiveles').style.top="20vw";
+					document.getElementById('playSelectAllLevel').style.top="40vw";
+		   	 }*/
+		 }
+	  }
 </script>
 
 
@@ -68,7 +93,7 @@ var dominio = "test.playaddition.com";
   
 </head>
 
-  <body>
+  <body onload="resizePage()">
   <div class="hidden">
 	<script type="text/javascript">
 		<!--//--><![CDATA[//><!--
