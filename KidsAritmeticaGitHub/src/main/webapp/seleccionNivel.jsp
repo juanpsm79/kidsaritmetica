@@ -419,7 +419,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
  		
  		<div id="pantallaCompletaDiv" style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<div id="botonSalir" onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'"  style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
- 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:10vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat" ontouchstart="fullscreen(this)">
+ 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:11vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat" ontouchstart="fullscreen(this)">
  				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
 		    </div>
  			
