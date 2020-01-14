@@ -331,7 +331,9 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   
   function resizePage(){
 	 if(device.type=='tablet' || device.type=='mobile'){
-		 screenfull.request();
+		 document.getElementById("pantallaCompletaDiv").style.left="83vw";
+		 document.getElementById("pantallaCompleta").style.visibility="visible";
+		 document.getElementById("botonSalir").style.right="5vw";
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";
 	   			document.getElementById('capaNiveles').style.top="18vw";
@@ -343,6 +345,42 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 				document.getElementById('playSelectAllLevel').style.top="40vw";
 	   	 }
 	 }
+  }
+  
+  function fullscreen(obj){
+		if(obj.style.backgroundImage=="url(\"maximize-512.png\")"){
+			screenfull.request();
+			obj.style.backgroundImage="url(minimize-512.png)"
+		} else {
+			screenfull.exit();
+			obj.style.backgroundImage="url(maximize-512.png)"
+		}
+	}
+  
+  /* View in fullscreen */
+  function openFullscreen() {
+    if (document.body.requestFullscreen) {
+    	document.body.requestFullscreen();
+    } else if (document.body.mozRequestFullScreen) { /* Firefox */
+    	document.body.mozRequestFullScreen();
+    } else if (document.body.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+    	document.body.webkitRequestFullscreen();
+    } else if (document.body.msRequestFullscreen) { /* IE/Edge */
+    	document.body.msRequestFullscreen();
+    }
+  }
+
+  /* Close fullscreen */
+  function closeFullscreen() {
+    if (document.body.exitFullscreen) {
+    	document.body.exitFullscreen();
+    } else if (document.body.mozCancelFullScreen) { /* Firefox */
+    	document.body.mozCancelFullScreen();
+    } else if (document.body.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+    	document.body.webkitExitFullscreen();
+    } else if (document.body.msExitFullscreen) { /* IE/Edge */
+    	document.body.msExitFullscreen();
+    }
   }
   
   </script>
@@ -379,8 +417,12 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">
  		</div>
  		
- 		<div style="position:absolute;width:14vw;top:1vw;left:85vw">
- 			<div onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'" style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
+ 		<div id="pantallaCompletaDiv" style="position:absolute;width:14vw;top:1vw;left:85vw">
+ 			<div id="botonSalir" onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'"  style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
+ 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:10vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat" ontouchstart="fullscreen(this)">
+ 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
+		    </div>
+ 			
  			<div id= "playSelectAllLevel" onclick="javascript:irPrincipal(this)" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:12vw 9vw;position:absolute;right:3vw;top:34.5vw;cursor:pointer;width:12vw;height:9vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
  		</div>
   </body>

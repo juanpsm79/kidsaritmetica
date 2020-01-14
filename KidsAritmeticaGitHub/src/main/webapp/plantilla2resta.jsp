@@ -513,21 +513,21 @@ $(function(){
   			imagen = id;
   		}
   	}
-  	function resizePage(){
+  	function resizePage() {
 		 if(device.type=='tablet' || device.type=='mobile'){
-			 screenfull.request();
-		     /*if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
-		      	  	document.getElementById('seeAllLevels').style.top="11vw";
-		   			document.getElementById('capaNiveles').style.top="18vw";
-					document.getElementById('playSelectAllLevel').style.top="38vw";
-					document.getElementById('selectYourLevel').style.width="50vw";
-		     }else { //0 ->Portrait Mode
-		    	  	document.getElementById('seeAllLevels').style.top="11vw";
-					document.getElementById('capaNiveles').style.top="20vw";
-					document.getElementById('playSelectAllLevel').style.top="40vw";
-		   	 }*/
+			 document.getElementById("pantallaCompletaDiv").style.visibility="visible";
 		 }
-	  }  
+	}
+		  
+	function fullscreen(obj) {
+		if(obj.style.backgroundImage=="url(\"maximize-512.png\")"){
+			screenfull.request();
+			obj.style.backgroundImage="url(minimize-512.png)"
+		} else {
+			screenfull.exit();
+			obj.style.backgroundImage="url(maximize-512.png)"
+		}
+	}
   </script>
 </head>
 
@@ -598,8 +598,13 @@ $(function(){
 			
 			</div>
 				
-			<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
-			style="position:absolute;background-size:9.5vw 8.5vw;left:66vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+			<div style="position:absolute;left:66vw;cursor:pointer">
+				<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
+					 style="position:absolute;background-size:9.5vw 8.5vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
+				</div>
+				<div id="pantallaCompletaDiv" ontouchstart="fullscreen(this)" style="visibility:hidden;position:absolute;left:10vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
+ 					<button style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
+		    	</div>
 			</div>
 				
 				

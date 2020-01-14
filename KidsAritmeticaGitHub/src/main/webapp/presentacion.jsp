@@ -64,6 +64,7 @@ String visitantes = RB.getString("visitantes");
 
 <script>
 var usuario;
+var pantallaCompleta=false;
   $( function() {
 	  window.addEventListener("orientationchange", resizePage);
 	  
@@ -153,9 +154,9 @@ var usuario;
   }
   
   function resizePage(){
-	  
 	 if(device.type=='tablet' || device.type=='mobile'){
-		 screenfull.request();
+		 document.getElementById("loginboton").style.right="10vw";
+		 document.getElementById("pantallaCompleta").style.visibility="visible";
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	
 	     }else { //0 ->Portrait Mode
@@ -167,25 +168,22 @@ var usuario;
   }
   
   function loadImages(){
-	  
-	  	var dominio = "test.playaddition.com";
-	  	//var dominio = "playaddition.com";
-	 	var img1 = new Image();
-		var img2 = new Image();
-		var img3 = new Image();
-		var img4 = new Image();
-		var img5 = new Image();
-		var img6 = new Image();
-		var img7 = new Image();
-		img1.src = "https://"+dominio+"/playBottonSelected.png";
-		img2.src = "https://"+dominio+"/playBotonSS.png";
-		img3.src = "https://"+dominio+"/checkBoton.png";
-		img4.src = "https://"+dominio+"/checkBotonClick.png";
-		img5.src = "https://"+dominio+"/startOverBoton.png";
-		img6.src = "https://"+dominio+"/levelUpBoton.png";
-		img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
-		
-		
+  	var dominio = "test.playaddition.com";
+  	//var dominio = "playaddition.com";
+ 	var img1 = new Image();
+	var img2 = new Image();
+	var img3 = new Image();
+	var img4 = new Image();
+	var img5 = new Image();
+	var img6 = new Image();
+	var img7 = new Image();
+	img1.src = "https://"+dominio+"/playBottonSelected.png";
+	img2.src = "https://"+dominio+"/playBotonSS.png";
+	img3.src = "https://"+dominio+"/checkBoton.png";
+	img4.src = "https://"+dominio+"/checkBotonClick.png";
+	img5.src = "https://"+dominio+"/startOverBoton.png";
+	img6.src = "https://"+dominio+"/levelUpBoton.png";
+	img7.src = "https://"+dominio+"/cerrarAspaSelect.png";
   }
 </script>
  
@@ -222,6 +220,16 @@ gapi.analytics.ready(function() {
 
 function handleReportingResults(response){
 	document.getElementById('contador').innerHTML ="<%= visitantes %> "+response.rows[0][0];
+}
+
+function fullscreen(obj){
+	if(obj.style.backgroundImage=="url(\"maximize-512.png\")"){
+		screenfull.request();
+		obj.style.backgroundImage="url(minimize-512.png)"
+	} else {
+		screenfull.exit();
+		obj.style.backgroundImage="url(maximize-512.png)"
+	}
 }
 </script>
   
@@ -266,6 +274,10 @@ function handleReportingResults(response){
 		
  		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
+		</div>
+		
+		<div  id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
+ 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
 		</div>
 			
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
