@@ -20,6 +20,7 @@ String usernameObligatorio=RB.getString("usernameObligatorio");
 String loginIncorrecto=RB.getString("loginIncorrecto");
 String verificarRecaptcha=RB.getString("verificarRecaptcha");
 String crearCuentaBoton=RB.getString("crearCuentaBoton");
+String crearClase=RB.getString("crearClase");
 String cancelarBoton=RB.getString("cancelarBoton");
 %>
 <html>
@@ -67,7 +68,6 @@ $( function() {
 	    		location.href='presentacion.jsp'
 	    	}
 	    });
-	   
 });
 
 
@@ -435,6 +435,9 @@ function displaycreateAccount(){
 							<div id="crearCuenta" class="form-group">
 								<div class="col-sm-5 col-sm-offset-4" style="padding-left: 0px">
 									<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
+								</div>
+								<div class="col-sm-5 col-sm-offset-4" style="padding-left: 0px">
+									<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
 								</div>
 							</div>
 							<div id="crearBotonones" class="form-group" style="display:none">
