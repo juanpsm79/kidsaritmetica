@@ -25,6 +25,7 @@ String cancelarBoton=RB.getString("cancelarBoton");
 String crearClase=RB.getString("crearClase");
 String mismoUsuPass=RB.getString("mismoUsuPass");
 String alumno=RB.getString("alumno");
+String validacionesPendientesClase=RB.getString("validacionesPendientesClase");
 %>
 <html>
 <head>
@@ -42,7 +43,7 @@ String alumno=RB.getString("alumno");
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
 <script type="text/javascript">
 
-var igualUsuarioPassword = false;
+
 var unAvailableUserNameError="<%= unAvailableUserNameError %>"
 var usernameCortoError="<%= usernameCortoError %>"
 var passordsInvalidas="<%= passordsInvalidas %>"
@@ -50,51 +51,81 @@ var usernameObligatorio="<%= usernameObligatorio %>"
 var loginIncorrecto="<%= loginIncorrecto %>"
 var verificarRecaptcha="<%= verificarRecaptcha %>"
 var assignedUserNameError ="<%=assignedUserNameError%>"
+var validacionesPendientesClase ="<%=validacionesPendientesClase%>"
 var unAvailableUserNames = [];
 var assignedUserNames = [];
+var igualUsuarioPassword = false;
+var ultimoAlumnoCreado
 
-$( function() {
-	     window.addEventListener("orientationchange", resizePageHandler);
-		 var firebaseConfig = {
-		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
-		    authDomain: "fbplayaddition.firebaseapp.com",
-		    databaseURL: "https://fbplayaddition.firebaseio.com",
-		    projectId: "fbplayaddition",
-		    storageBucket: "fbplayaddition.appspot.com",
-		    messagingSenderId: "945530212708",
-		    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
-		    measurementId: "G-LLPNBP9S9B"
-		};
-		firebase.initializeApp(firebaseConfig);
-	    firebase.auth().onAuthStateChanged(function(user) {
-	    	if (user!=null){
-	    		alert(user);
-	    	}
-	    });
-	   
-});
+	$( function() {
+		     window.addEventListener("orientationchange", resizePage);
+			 var firebaseConfig = {
+			    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
+			    authDomain: "fbplayaddition.firebaseapp.com",
+			    databaseURL: "https://fbplayaddition.firebaseio.com",
+			    projectId: "fbplayaddition",
+			    storageBucket: "fbplayaddition.appspot.com",
+			    messagingSenderId: "945530212708",
+			    appId: "1:945530212708:web:38ba814515a7a3c0376a71",
+			    measurementId: "G-LLPNBP9S9B"
+			};
+			firebase.initializeApp(firebaseConfig);
+		    firebase.auth().onAuthStateChanged(function(user) {
+		    	if(user!=null) {
+		    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML="Creado"
+		    		if (ultimoAlumnoCreado<30)
+			    		handleSignUp();
+			    	else {
+			    		document.getElementById("loginAjax1").style.visibility="hidden"
+						document.getElementById("loginAjax2").style.visibility="hidden"
+						document.getElementById("loginAjax2").style.display="none";
+						document.getElementById("createClassLabel").innerHTML="Imprimir"
+						document.getElementById("createClassLabel1").innerHTML="Imprimir"
+			    	}
+		    	}
+		    });
+		   
+	});
  
-function handleSignUp() {
-    var user = document.getElementById('username1').value;
-    var password = document.getElementById('password1').value;
-    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
-   	.catch(function(error) {
-   		document.getElementById("loginAjax1").style.visibility="visible";
-   		document.getElementById("createAccountLabel").onclick=function(){crearCuenta()}
-	    var errorCode = error.code;
-	    var errorMessage = error.message;
-	    alert(errorCode+" "+errorMessage);
-	    console.log(error);
-   	});
-}
+	function handleSignUp() {
+		ultimoAlumnoCreado++;
+		if(document.getElementById("username"+ultimoAlumnoCreado).value.length>0) {
+		    var user = document.getElementById("username"+ultimoAlumnoCreado).value;
+		    var password;
+		    if(igualUsuarioPassword)
+		    	password = document.getElementById("username"+ultimoAlumnoCreado).value;
+		    else
+		    	password = document.getElementById("password"+ultimoAlumnoCreado).value;
+		    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
+		   	.catch(function(error) {
+		   		/*document.getElementById("loginAjax1").style.visibility="visible";
+		   		document.getElementById("createAccountLabel").onclick=function(){crearCuenta()}
+			    var errorCode = error.code;
+			    var errorMessage = error.message;*/
+			    alert(errorCode+" "+errorMessage);
+			    console.log(error);
+		   	});
+		} else {
+			if (ultimoAlumnoCreado<30)
+	    		handleSignUp();
+			else {
+				document.getElementById("loginAjax1").style.visibility="hidden";
+				document.getElementById("loginAjax2").style.visibility="hidden";
+				document.getElementById("loginAjax2").style.display="none";
+				document.getElementById("createClassLabel").innerHTML="Imprimir"
+				document.getElementById("createClassLabel1").innerHTML="Imprimir"
+			}
+		}
+	}
 
 	//Username
 	function checkUserName(i){
-		if (document.getElementById("username"+i).value.length<1){
-			displayerrorUsername(usernameObligatorio,i);
-		}
-		if (document.getElementById("username"+i).value.length<6){
+		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6)
 			displayerrorUsername(usernameCortoError,i);
+		if(document.getElementById("username"+i).value.length<1) {
+			displayNormalUsername(i)
+			if(document.getElementById("password"+i).value.length<1)
+				displayNormalPassword(i)
 		}
 	}
 	function displayerrorUsername(error,i){
@@ -105,6 +136,12 @@ function handleSignUp() {
 		$("input#username"+i+".form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 	}
 	
+	function displayNormalUsername(i){
+		$("input#username"+i+".form-control").parents(".col-md-3").removeClass("has-error").removeClass("has-success");
+		$("#username"+i+"-glyphicon").remove();
+		$("#username"+i+"-error").remove();
+	}
+	
 	function displayOkeyUserName(i){
 		$("input#username"+i+".form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
 		$("#username"+i+"-glyphicon").remove();
@@ -113,20 +150,23 @@ function handleSignUp() {
 	}
 	
 	//Password
-	function checkPassword(i){
-		if (document.getElementById("password"+i).value.length<1){
-			displayerrorPassword(usernameObligatorio,i);
-			return false;
-		}
-		if (document.getElementById("password"+i).value.length<6){
-			displayerrorPassword(usernameCortoError,i);
-			return false;
-		}
+	function checkPassword(i) {
+		if (igualUsuarioPassword)
+			return
 		else {
-			displayOkeyPassword(i);
-			return true;
+			if (document.getElementById("password"+i).value.length<1 && document.getElementById("username"+i).value.length>0) {
+				displayerrorPassword(usernameObligatorio,i);
+				return
+			}
+			if (document.getElementById("password"+i).value.length>0 && document.getElementById("password"+i).value.length<6) {
+				displayerrorPassword(usernameCortoError,i);
+				return
+			}
+			if(document.getElementById("password"+i).value.length>5)
+				displayOkeyPassword(i);
 		}
 	}
+	
 	function displayerrorPassword(error,i){
 		$("#password"+i+"-glyphicon").remove();
 		$("#password"+i+"-error").remove();
@@ -148,21 +188,6 @@ function handleSignUp() {
 		$("<span id='password"+i+"-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#password"+i+".form-control"));
 	}
 	
-	function crearCuenta(){
-		var vformularioCorrecto = validarDatos();
-		if(vformularioCorrecto && vRecaptcha){
-			document.getElementById("loginAjax1").style.visibility="visible";
-			document.getElementById("createAccountLabel").onclick=function(){;}
-			handleSignUp();
-		}
-		if(vformularioCorrecto && !vRecaptcha)
-			alert (verificarRecaptcha)
-	}
-	
-	function resizePageHandler(){
-		  resizePage();
-	}
-	
 	function usarMismaUsuarioPassword (checkbox){
 		if(checkbox.checked) {
 			igualUsuarioPassword=true;
@@ -175,14 +200,50 @@ function handleSignUp() {
 			igualUsuarioPassword=false;
 			for(i=1;i<=30;i++) {
 				document.getElementById("password"+i).disabled = false;
-				if(document.getElementById("username"+i).value!=null && document.getElementById("username"+i).value!="")
-					checkPassword(i);
+				checkPassword(i);
 			}
 		}
 	}
-	  
-  function resizePage(){
-	  
+  
+	
+  function verificarFormulario() {
+	  if (igualUsuarioPassword) {
+		  for(i=1;i<=30;i++)
+			  checkUserName(i)
+	  } else {
+		  for(i=1;i<=30;i++) {
+			  checkPassword(i)
+			  checkUserName(i)  
+		  }
+	  }
+	  for(i=1;i<=30;i++) 
+	   		if(document.getElementById("password"+i+"-error")!=null || document.getElementById("username"+i+"-error")!=null)
+				return false;
+	  return true;
+  }
+  
+  function crearClase() {
+	  if(verificarFormulario()) {
+		  document.getElementById("credit").disabled = true;
+		  document.getElementById('createClass').onclick=function(){;}
+		  document.getElementById('createClass1').onclick=function(){;}
+		  document.getElementById("loginAjax1").style.visibility="visible";
+		  document.getElementById("loginAjax2").style.visibility="visible";
+		  document.getElementById("loginAjax2").style.display="inline";
+		  document.getElementById("createClassLabel").innerHTML="Creando clase.."
+		  document.getElementById("createClassLabel1").innerHTML="Creando clase.."
+		  for(i=1;i<=30;i++) {
+				document.getElementById("username"+i).disabled = true;
+				document.getElementById("password"+i).disabled = true;
+		  }
+		  ultimoAlumnoCreado = 0;
+		  handleSignUp();
+	  } else {
+		  alert(validacionesPendientesClase);
+	  }
+  }
+  
+  function resizePage() {
 	 if(device.type=='mobile'){
 		 document.getElementById('createAccountLabel').style.width="30vw";
 		 document.getElementById('createAccountLabel').style.height="6vw";
@@ -213,17 +274,6 @@ function handleSignUp() {
 			 document.getElementById('createAccountLabel').style.left="7.5vw"
 	 }
   }
-  
-  function crearClase(){
-	  document.getElementById("credit").disabled = true;
-	  document.getElementById('createClass').onclick=function(){;}
-	  document.getElementById("loginAjax1").style.visibility="visible";
-	  document.getElementById("loginAjax2").style.visibility="visible";
-	  for(i=1;i<=30;i++) {
-			document.getElementById("username"+i).disabled = true;
-			document.getElementById("password"+i).disabled = true;
-	  }
-  }
 	
 </script>
 <!-- 
@@ -248,17 +298,27 @@ function handleSignUp() {
 				<div class="panel panel-default" align="center">
 					<div class="panel-heading">
 						<div id="loginlogo" style="position:relative;width:12.5vw;height:5vw;background-size:12.5vw 5vw;background-image:url(newaccount.png);background-repeat:no-repeat"></div>
-						<div id="loginAjax2" style="position:relative;visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
 					</div>
 					<div class="panel-body">
 						<form id="signupForm1" class="form-horizontal" action="" method="post">
+					        <div  class="form-group" style="cursor:default">
+								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
+									<div id="createClass1" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel1" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
+								</div>
+							</div>
+							<div id="loginAjax2" class="form-group" style="visibility:hidden;display:none">
+								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
+									<div  style="width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
+								</div>
+							</div>
+							
 							<div class="d-block my-3">
 						          <div class="custom-control custom-radio">
 						            <input id="credit" type="checkbox" class="custom-control-input" onclick="usarMismaUsuarioPassword(this)">
 						            <label class="custom-control-label" for="credit"><%=mismoUsuPass %></label>
 						          </div>
 					        </div>
-							
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
 						            <label><%=alumno %> 1:</label>
@@ -269,11 +329,11 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password1" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <!--  
-						          <div class="col-md-3 mb-3">
-						            <input type="text" class="form-control" id="repassword1" placeholder="repeat password" required="" style="width:85%">
+						           
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado1"></label>
 						          </div>
-						          -->
+						          
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -285,7 +345,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password2" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado2"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -297,7 +359,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password3" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado3"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -309,7 +373,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password4" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         
+						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado4"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -321,7 +387,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password5" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         
+						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado5"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -333,7 +401,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password6" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado6"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -345,7 +415,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password7" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado7"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -357,7 +429,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password8" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         
+						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado8"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -369,7 +443,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password9" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado9"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -381,7 +457,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password10" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado10"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -393,7 +471,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password11" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado11"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -405,7 +485,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password12" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado12"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -417,7 +499,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password13" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado13"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -429,7 +513,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password14" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado14"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -441,7 +527,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password15" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado15"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -453,7 +541,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password16" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado16"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -465,7 +555,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password17" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         
+						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado17"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -477,7 +569,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password18" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado18"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -489,7 +583,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password19" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado19"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -501,7 +597,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password20" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado20"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -513,7 +611,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password21" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado21"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -525,7 +625,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password22" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado22"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -537,7 +639,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password23" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado23"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -549,7 +653,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password24" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         
+						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado24"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -561,7 +667,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password25" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado25"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -573,7 +681,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password26" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado26"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -585,7 +695,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password27" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado25"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -597,7 +709,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password28" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado28"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -609,7 +723,9 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password29" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado29"></label>
+						          </div>
        						</div>
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -621,12 +737,14 @@ function handleSignUp() {
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password30" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						            <label id="resultado30"></label>
+						          </div>
        						</div>
        						<div  class="form-group" style="cursor:default">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createClass" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
-										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
+										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
 								</div>
 							</div>
 							<div class="form-group">
@@ -654,9 +772,23 @@ function initFormulario() {
 		        }
 		    }
 		});
+		$('#password1').on({
+		    "focusout": function(e) {
+		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		        	checkPassword(1);
+		        }
+		    }
+		});
 	
 		$('#username1').on({
 		    "keyup": function(e) {
+		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		        	checkUserName(1);
+		        }
+		    }
+		});
+		$('#username1').on({
+		    "focusout": function(e) {
 		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
 		        	checkUserName(1);
 		        }
@@ -700,6 +832,7 @@ function initFormulario() {
 	    			  		unAvailableUserNames.push(user)
 	    			  		displayerrorUsername(unAvailableUserNameError,1)
 	    			  	} else if (errorCode=='auth/user-not-found'){
+	    			  		alert(user)
 	    			  		assignedUserNames.push(user);
 	    			  		displayOkeyUserName(1);
 	    			  	}
@@ -721,6 +854,13 @@ function initFormulario() {
 		    "keyup": function(e) {
 		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
 		        	checkUserName(2);
+		        }
+		    }
+		});
+		$('#username2').on({
+		    "keydown": function(e) {
+		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		        	assignedUserNames.pop(document.getElementById("username2").value);
 		        }
 		    }
 		});	
@@ -762,6 +902,7 @@ function initFormulario() {
 	    			  		unAvailableUserNames.push(user)
 	    			  		displayerrorUsername(unAvailableUserNameError,2)
 	    			  	} else if (errorCode=='auth/user-not-found'){
+	    			  		alert(user)
 	    			  		assignedUserNames.push(user);
 	    			  		displayOkeyUserName(2);
 	    			  	}
@@ -783,6 +924,13 @@ function initFormulario() {
 		    "keyup": function(e) {
 		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
 		        	checkUserName(3);
+		        }
+		    }
+		});
+		$('#username3').on({
+		    "keydown": function(e) {
+		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		        	assignedUserNames.pop(document.getElementById("username3").value);
 		        }
 		    }
 		});	
@@ -824,6 +972,7 @@ function initFormulario() {
 	    			  		unAvailableUserNames.push(user)
 	    			  		displayerrorUsername(unAvailableUserNameError,3)
 	    			  	} else if (errorCode=='auth/user-not-found'){
+	    			  		alert(user)
 	    			  		assignedUserNames.push(user);
 	    			  		displayOkeyUserName(3);
 	    			  	}
