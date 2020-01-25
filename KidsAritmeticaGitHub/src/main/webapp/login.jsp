@@ -142,6 +142,8 @@ function displaycreateAccount(){
 
 	document.getElementById("crearBotonones").style.display="block";
 	document.getElementById("crearCuenta").style.display="none";
+	document.getElementById("cocoa").style.display="none";
+	document.getElementById("cocoa").style.visibility="hidden";
 	document.getElementById("loginBoton").style.display="none";
 
 	document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
@@ -426,18 +428,27 @@ function displaycreateAccount(){
 							
 							<div id="loginBoton" class="form-group" style="cursor:default">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
-									<div id="loginLabel" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
+									<div id="loginLabel" style="position:absolute;left:13vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
 										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
-										
+									<div  style="position:absolute;left:19vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>		
+								</div>
+							</div>
+							
+							<div id="cocoa" class="form-group">
+								<div class="col-sm-9 col-sm-offset-2" style="margin-top:2vw;cursor:default;padding-left: 0px"> 	
 									  <div id="loginAjax" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>	
 								</div>
 							</div>
+							
 							<div id="crearCuenta" class="form-group">
-								<div class="col-sm-5 col-sm-offset-4" style="padding-left: 0px">
-									<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
-								</div>
-								<div class="col-sm-5 col-sm-offset-4" style="padding-left: 0px">
-									<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
+								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
+									<div style="position:absolute;left:11vw">
+										<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
+									</div>
+									<div style="position:absolute;left:20vw">
+										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
+									</div>
 								</div>
 							</div>
 							<div id="crearBotonones" class="form-group" style="display:none">
@@ -445,8 +456,8 @@ function displaycreateAccount(){
 									<div id="createAccountLabel" style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
 										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
 										
-									<div id="cancelAccountLabel" style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
-										onclick="displayLogin()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
+									<div id="cancelAccountLabel1" style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
 							<div class="form-group">

@@ -26,6 +26,9 @@ String crearClase=RB.getString("crearClase");
 String mismoUsuPass=RB.getString("mismoUsuPass");
 String alumno=RB.getString("alumno");
 String validacionesPendientesClase=RB.getString("validacionesPendientesClase");
+String creandoClase=RB.getString("creandoClase");
+String imprimirPdf=RB.getString("imprimirPdf");
+String creado=RB.getString("creado");
 %>
 <html>
 <head>
@@ -52,6 +55,9 @@ var loginIncorrecto="<%= loginIncorrecto %>"
 var verificarRecaptcha="<%= verificarRecaptcha %>"
 var assignedUserNameError ="<%=assignedUserNameError%>"
 var validacionesPendientesClase ="<%=validacionesPendientesClase%>"
+var creandoClase ="<%=creandoClase%>"
+var imprimirPdf ="<%=imprimirPdf%>"
+var creado ="<%=creado%>"
 var unAvailableUserNames = [];
 var assignedUserNames = [];
 var igualUsuarioPassword = false;
@@ -72,15 +78,18 @@ var ultimoAlumnoCreado
 			firebase.initializeApp(firebaseConfig);
 		    firebase.auth().onAuthStateChanged(function(user) {
 		    	if(user!=null) {
-		    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML="Creado"
+		    		document.getElementById("cresultado"+ultimoAlumnoCreado).style.backgroundImage=null;
+		    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML=""+creado
 		    		if (ultimoAlumnoCreado<30)
 			    		handleSignUp();
 			    	else {
 			    		document.getElementById("loginAjax1").style.visibility="hidden"
-						document.getElementById("loginAjax2").style.visibility="hidden"
-						document.getElementById("loginAjax2").style.display="none";
-						document.getElementById("createClassLabel").innerHTML="Imprimir"
-						document.getElementById("createClassLabel1").innerHTML="Imprimir"
+						document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
+						document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
+						firebase.auth().signOut().then(function() {
+						}).catch(function(error) {
+							alert("Error deslogue")
+						});
 			    	}
 		    	}
 		    });
@@ -98,10 +107,6 @@ var ultimoAlumnoCreado
 		    	password = document.getElementById("password"+ultimoAlumnoCreado).value;
 		    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
 		   	.catch(function(error) {
-		   		/*document.getElementById("loginAjax1").style.visibility="visible";
-		   		document.getElementById("createAccountLabel").onclick=function(){crearCuenta()}
-			    var errorCode = error.code;
-			    var errorMessage = error.message;*/
 			    alert(errorCode+" "+errorMessage);
 			    console.log(error);
 		   	});
@@ -109,11 +114,13 @@ var ultimoAlumnoCreado
 			if (ultimoAlumnoCreado<30)
 	    		handleSignUp();
 			else {
+				firebase.auth().signOut().then(function() {
+				}).catch(function(error) {
+					alert("Error deslogue")
+				});
 				document.getElementById("loginAjax1").style.visibility="hidden";
-				document.getElementById("loginAjax2").style.visibility="hidden";
-				document.getElementById("loginAjax2").style.display="none";
-				document.getElementById("createClassLabel").innerHTML="Imprimir"
-				document.getElementById("createClassLabel1").innerHTML="Imprimir"
+				document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
+				document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
 			}
 		}
 	}
@@ -228,13 +235,13 @@ var ultimoAlumnoCreado
 		  document.getElementById('createClass').onclick=function(){;}
 		  document.getElementById('createClass1').onclick=function(){;}
 		  document.getElementById("loginAjax1").style.visibility="visible";
-		  document.getElementById("loginAjax2").style.visibility="visible";
-		  document.getElementById("loginAjax2").style.display="inline";
-		  document.getElementById("createClassLabel").innerHTML="Creando clase.."
-		  document.getElementById("createClassLabel1").innerHTML="Creando clase.."
+		  document.getElementById("createClassLabel").innerHTML=""+creandoClase
+		  document.getElementById("createClassLabel1").innerHTML=""+creandoClase
 		  for(i=1;i<=30;i++) {
 				document.getElementById("username"+i).disabled = true;
 				document.getElementById("password"+i).disabled = true;
+				if(document.getElementById("username"+i).value.length>0)
+					document.getElementById("cresultado"+i).style.visibility="visible";
 		  }
 		  ultimoAlumnoCreado = 0;
 		  handleSignUp();
@@ -379,20 +386,16 @@ var ultimoAlumnoCreado
 					</div>
 					<div class="panel-body">
 						<form id="signupForm1" class="form-horizontal" action="" method="post">
-					        <div  class="form-group" style="cursor:default">
+					        <div class="form-group" style="height:2vw">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
-									<div id="createClass1" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="createClass1" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel1" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
+									<div style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
-							<div id="loginAjax2" class="form-group" style="visibility:hidden;display:none">
-								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
-									<div  style="width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
-								</div>
-							</div>
-							
 							<div class="d-block my-3">
-						          <div class="custom-control custom-radio">
+						          <div class="custom-control custom-radio" style="height:2.5vw">
 						            <input id="credit" type="checkbox" class="custom-control-input" onclick="usarMismaUsuarioPassword(this)">
 						            <label class="custom-control-label" for="credit"><%=mismoUsuPass %></label>
 						          </div>
@@ -408,7 +411,7 @@ var ultimoAlumnoCreado
 						            <input type="text" class="form-control" id="password1" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
 						           
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado1" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado1"></label>
 						          </div>
 						          
@@ -423,7 +426,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password2" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado2" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado2"></label>
 						          </div>
        						</div>
@@ -437,7 +440,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password3" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado3" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado3"></label>
 						          </div>
        						</div>
@@ -451,7 +454,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password4" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						         <div id="cresultado4" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado4"></label>
 						          </div>
        						</div>
@@ -465,7 +468,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password5" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						         <div id="cresultado5" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado5"></label>
 						          </div>
        						</div>
@@ -479,7 +482,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password6" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado6" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado6"></label>
 						          </div>
        						</div>
@@ -493,7 +496,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password7" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado7" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado7"></label>
 						          </div>
        						</div>
@@ -507,7 +510,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password8" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						         <div id="cresultado8" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado8"></label>
 						          </div>
        						</div>
@@ -521,7 +524,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password9" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado9" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado9"></label>
 						          </div>
        						</div>
@@ -535,7 +538,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password10" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado10" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado10"></label>
 						          </div>
        						</div>
@@ -549,7 +552,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password11" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado11" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado11"></label>
 						          </div>
        						</div>
@@ -563,7 +566,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password12" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado12" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado12"></label>
 						          </div>
        						</div>
@@ -577,7 +580,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password13" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado13" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado13"></label>
 						          </div>
        						</div>
@@ -591,7 +594,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password14" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado14" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado14"></label>
 						          </div>
        						</div>
@@ -605,7 +608,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password15" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado15" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado15"></label>
 						          </div>
        						</div>
@@ -619,7 +622,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password16" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado16" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado16"></label>
 						          </div>
        						</div>
@@ -633,7 +636,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password17" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						         <div id="cresultado17" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado17"></label>
 						          </div>
        						</div>
@@ -647,7 +650,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password18" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado18" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado18"></label>
 						          </div>
        						</div>
@@ -661,7 +664,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password19" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado19" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado19"></label>
 						          </div>
        						</div>
@@ -675,7 +678,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password20" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado20" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado20"></label>
 						          </div>
        						</div>
@@ -689,7 +692,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password21" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado21" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado21"></label>
 						          </div>
        						</div>
@@ -703,7 +706,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password22" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado22" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado22"></label>
 						          </div>
        						</div>
@@ -717,7 +720,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password23" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado23" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado23"></label>
 						          </div>
        						</div>
@@ -731,7 +734,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password24" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						         <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						         <div id="cresultado24" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado24"></label>
 						          </div>
        						</div>
@@ -745,7 +748,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password25" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado25" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado25"></label>
 						          </div>
        						</div>
@@ -759,7 +762,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password26" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado26" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado26"></label>
 						          </div>
        						</div>
@@ -773,7 +776,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password27" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado27" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado27"></label>
 						          </div>
        						</div>
@@ -787,7 +790,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password28" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado28" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado28"></label>
 						          </div>
        						</div>
@@ -801,7 +804,7 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password29" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado29" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado29"></label>
 						          </div>
        						</div>
@@ -815,14 +818,16 @@ var ultimoAlumnoCreado
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password30" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
+						          <div id="cresultado30" class="col-md-3 mb-3" style="top:0.5vw;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado30"></label>
 						          </div>
        						</div>
-       						<div  class="form-group" style="cursor:default">
+       						<div class="form-group" style="height:2vw">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
-									<div id="createClass" style="font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="createClass" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
+									<div style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
 							<div class="form-group">
