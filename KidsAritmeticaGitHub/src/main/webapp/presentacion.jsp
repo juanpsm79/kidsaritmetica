@@ -30,7 +30,7 @@ String visitantes = RB.getString("visitantes");
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
   
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -39,9 +39,9 @@ String visitantes = RB.getString("visitantes");
   gtag('config', 'UA-130256336-3');
 </script>
 
+-->
 
-
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -50,7 +50,7 @@ String visitantes = RB.getString("visitantes");
 
   gtag('config', 'UA-130256336-1');
 </script>
--->  
+  
 
 
 <script>
@@ -277,7 +277,7 @@ function fullscreen(obj){
 		</div>
 		
 		<div  id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
- 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
+ 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></button>	
 		</div>
 			
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">

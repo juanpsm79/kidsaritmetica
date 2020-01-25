@@ -32,7 +32,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase-database.js"></script>
   
-<!-- Global site tag (gtag.js) - Google Analytics -->
+<!-- Global site tag (gtag.js) - Google Analytics
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -41,10 +41,10 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 
   gtag('config', 'UA-130256336-3');
 </script>
+ -->
 
 
-
-<!-- Global site tag (gtag.js) - Google Analytics 
+<!-- Global site tag (gtag.js) - Google Analytics --> 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-1"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -53,7 +53,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 
   gtag('config', 'UA-130256336-1');
 </script>
--->  
+ 
 
   <script src="./js/jquery.flip.min.js"></script>
 <script src="./js/current-device.min.js"></script>
@@ -419,8 +419,8 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
  		
  		<div id="pantallaCompletaDiv" style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<div id="botonSalir" onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'"  style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
- 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:11vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat" ontouchstart="fullscreen(this)">
- 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
+ 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:11vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat" onclick="fullscreen(this)">
+ 				<button  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></button>	
 		    </div>
  			
  			<div id= "playSelectAllLevel" onclick="javascript:irPrincipal(this)" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:12vw 9vw;position:absolute;right:3vw;top:34.5vw;cursor:pointer;width:12vw;height:9vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>

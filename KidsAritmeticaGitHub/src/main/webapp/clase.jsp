@@ -274,6 +274,84 @@ var ultimoAlumnoCreado
 			 document.getElementById('createAccountLabel').style.left="7.5vw"
 	 }
   }
+  function keyupPassword(e, index) {
+	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+	  	checkPassword(index);
+	  }
+  }
+  
+  function keyupUsername(e,index){
+	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18
+      		&& e.which != 37 && e.which != 38 && e.which != 39 && e.which != 40) {
+      	checkUserName(index);
+      }
+  }
+  
+  function keydownUsername(e, index){
+	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18
+      		&& e.which != 37 && e.which != 38 && e.which != 39 && e.which != 40) {
+      	for (i = 0; i < assignedUserNames.length; i++) {
+      		if(assignedUserNames[i][0]==index){
+      			  assignedUserNames[i].pop(0);
+      			  assignedUserNames[i].pop(1);
+					  break;
+				  }
+      	 }
+      }
+  }
+  
+  function validarUserName(index){
+	  var fLen = unAvailableUserNames.length;
+		var fAsg = assignedUserNames.length;
+		var user = document.getElementById("username"+index).value;
+		var encontrado = false;
+		if(fAsg>0){
+	  		for (j = 0; j < fAsg; j++) {
+					if(user==assignedUserNames[j][1] && assignedUserNames[j][0]!=index){
+						encontrado=true;
+						break;
+					}
+				}
+	  		if(encontrado) {
+	  			displayerrorUsername(assignedUserNameError,index);
+	  			return
+	  		}
+  		}
+		if(fLen>0){
+	  		for (j = 0; j < fLen; j++) {
+					if(user==unAvailableUserNames[j]){
+						encontrado=true;
+						break;
+					}
+				}
+	  		if(encontrado) {
+	  			displayerrorUsername(unAvailableUserNameError,index);
+	  			return
+	  		}
+  		} 
+	    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
+	      .then(function(firebaseUser) {
+	    }).catch(function(error) {
+			var errorCode = error.code;
+		  	if (errorCode == 'auth/wrong-password') {
+		  		unAvailableUserNames.push(user)
+		  		displayerrorUsername(unAvailableUserNameError,index)
+		  	} else if (errorCode=='auth/user-not-found'){
+		  		var existente = false
+		  		for (j = 0; j < fAsg; j++) {
+	  				if(assignedUserNames[j][0]==index){
+	  					assignedUserNames[j][1]=user
+	  					existente = true
+	  				}
+				}
+		  		if(!existente)
+		  			assignedUserNames.push([index, user]);
+		  		displayOkeyUserName(index);
+		  	}
+		  	console.log(error);
+		});
+	  
+  }
 	
 </script>
 <!-- 
@@ -696,7 +774,7 @@ var ultimoAlumnoCreado
 						            <input type="text" class="form-control" id="password27" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
 						          <div class="col-md-3 mb-3" style="top:0.5vw;width:1vw">
-						            <label id="resultado25"></label>
+						            <label id="resultado27"></label>
 						          </div>
        						</div>
        						<div class="form-group" align="center">
@@ -765,1930 +843,1117 @@ var ultimoAlumnoCreado
 <script type="text/javascript">
 function initFormulario() {
 
-		$('#password1').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(1);
-		        }
-		    }
-		});
-		$('#password1').on({
-		    "focusout": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(1);
-		        }
-		    }
-		});
-	
-		$('#username1').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(1);
-		        }
-		    }
-		});
-		$('#username1').on({
-		    "focusout": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(1);
-		        }
-		    }
-		});	
-		$('#username1').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var fAsg = assignedUserNames.length;
-		    		var user = document.getElementById("username1").value;
-		    		var encontrado = false;
-		    		if(fAsg>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==assignedUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(assignedUserNameError,1);
-			    			return
-			    		}
-			    	}
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,1);
-			    			return
-			    		}
-			    	} 
-	    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-	    		      .then(function(firebaseUser) {
-	    		    }).catch(function(error) {
-	    				var errorCode = error.code;
-	    			  	if (errorCode == 'auth/wrong-password') {
-	    			  		unAvailableUserNames.push(user)
-	    			  		displayerrorUsername(unAvailableUserNameError,1)
-	    			  	} else if (errorCode=='auth/user-not-found'){
-	    			  		alert(user)
-	    			  		assignedUserNames.push(user);
-	    			  		displayOkeyUserName(1);
-	    			  	}
-	    			  	console.log(error);
-	    			});
-		    },
-		    minLength: 6
-		});
-		
-		$('#password2').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(2);
-		        }
-		    }
-		});
-	
-		$('#username2').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(2);
-		        }
-		    }
-		});
-		$('#username2').on({
-		    "keydown": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	assignedUserNames.pop(document.getElementById("username2").value);
-		        }
-		    }
-		});	
-		$('#username2').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var fAsg = assignedUserNames.length;
-		    		var user = document.getElementById("username2").value;
-		    		var encontrado = false;
-		    		if(fAsg>0){
-			    		for (j = 0; j < fAsg; j++) {
-			  				if(user==assignedUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(assignedUserNameError,2);
-			    			return
-			    		}
-			    	}
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,2);
-			    			return
-			    		}
-			    	} 
-	    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-	    		      .then(function(firebaseUser) {
-	    		    }).catch(function(error) {
-	    				var errorCode = error.code;
-	    			  	if (errorCode == 'auth/wrong-password') {
-	    			  		unAvailableUserNames.push(user)
-	    			  		displayerrorUsername(unAvailableUserNameError,2)
-	    			  	} else if (errorCode=='auth/user-not-found'){
-	    			  		alert(user)
-	    			  		assignedUserNames.push(user);
-	    			  		displayOkeyUserName(2);
-	    			  	}
-	    			  	console.log(error);
-	    			});
-		    },
-		    minLength: 6
-		});
-		
-		$('#password3').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(3);
-		        }
-		    }
-		});
-	
-		$('#username3').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(3);
-		        }
-		    }
-		});
-		$('#username3').on({
-		    "keydown": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	assignedUserNames.pop(document.getElementById("username3").value);
-		        }
-		    }
-		});	
-		$('#username3').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var fAsg = assignedUserNames.length;
-		    		var user = document.getElementById("username3").value;
-		    		var encontrado = false;
-		    		if(fAsg>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==assignedUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(assignedUserNameError,3);
-			    			return
-			    		}
-			    	}
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,3);
-			    			return
-			    		}
-			    	} 
-	    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-	    		      .then(function(firebaseUser) {
-	    		    }).catch(function(error) {
-	    				var errorCode = error.code;
-	    			  	if (errorCode == 'auth/wrong-password') {
-	    			  		unAvailableUserNames.push(user)
-	    			  		displayerrorUsername(unAvailableUserNameError,3)
-	    			  	} else if (errorCode=='auth/user-not-found'){
-	    			  		alert(user)
-	    			  		assignedUserNames.push(user);
-	    			  		displayOkeyUserName(3);
-	    			  	}
-	    			  	console.log(error);
-	    			});
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password4').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(4);
-		        }
-		    }
-		});
-	
-		$('#username4').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(4);
-		        }
-		    }
-		});	
-		$('#username4').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username4").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,4);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,4)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(4);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user)
-		    			  		displayerrorUsername(unAvailableUserNameError,4)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(4);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		   		 
-		    },
-		    minLength: 6
-		});
-		
-		$('#password5').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(5);
-		        }
-		    }
-		});
-	
-		$('#username5').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(5);
-		        }
-		    }
-		});	
-		$('#username5').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username5").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,5);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,5)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(5);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user)
-		    			  		displayerrorUsername(unAvailableUserNameError,5)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(5);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		$('#password6').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(6);
-		        }
-		    }
-		});
-	
-		$('#username6').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(6);
-		        }
-		    }
-		});	
-		$('#username6').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username6").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,6);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,6)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(6);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user)
-		    			  		displayerrorUsername(unAvailableUserNameError,6)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(6);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		$('#password7').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(7);
-		        }
-		    }
-		});
-	
-		$('#username7').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(7);
-		        }
-		    }
-		});	
-		$('#username7').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username7").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,7);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,7)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(7);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user)
-		    			  		displayerrorUsername(unAvailableUserNameError,7)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(7);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password8').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(8);
-		        }
-		    }
-		});
-	
-		$('#username8').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(8);
-		        }
-		    }
-		});	
-		$('#username8').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username8").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,8);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,8)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(8);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,8)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(8);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		$('#password9').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(9);
-		        }
-		    }
-		});
-	
-		$('#username9').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(9);
-		        }
-		    }
-		});	
-		$('#username9').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username9").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,9);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,9)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(9);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,9)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(9);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		$('#password10').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(10);
-		        }
-		    }
-		});
-	
-		$('#username10').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(10);
-		        }
-		    }
-		});	
-		$('#username10').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username10").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,10);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,10)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(10);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,10)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(10);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password11').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(11);
-		        }
-		    }
-		});
-	
-		$('#username11').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(11);
-		        }
-		    }
-		});	
-		$('#username11').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username11").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,11);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,11)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(11);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,11)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(11);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password12').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(12);
-		        }
-		    }
-		});
-	
-		$('#username12').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(12);
-		        }
-		    }
-		});	
-		$('#username12').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username12").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,12);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,12)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(12);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,12)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(12);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password13').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(13);
-		        }
-		    }
-		});
-	
-		$('#username13').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(13);
-		        }
-		    }
-		});	
-		$('#username13').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username13").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,13);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,13)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(13);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,13)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(13);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password14').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(14);
-		        }
-		    }
-		});
-	
-		$('#username14').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(14);
-		        }
-		    }
-		});	
-		$('#username14').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username14").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,14);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,14)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(14);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,14)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(14);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password15').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(15);
-		        }
-		    }
-		});
-	
-		$('#username15').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(15);
-		        }
-		    }
-		});	
-		$('#username15').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username15").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,15);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,15)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(15);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,15)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(15);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password16').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(16);
-		        }
-		    }
-		});
-	
-		$('#username16').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(16);
-		        }
-		    }
-		});	
-		$('#username16').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username16").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,16);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,16)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(16);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,16)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(16);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password17').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(17);
-		        }
-		    }
-		});
-	
-		$('#username17').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(17);
-		        }
-		    }
-		});	
-		$('#username17').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username17").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,17);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,17)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(17);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,17)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(17);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		
-		$('#password18').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(18);
-		        }
-		    }
-		});
-	
-		$('#username18').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(18);
-		        }
-		    }
-		});	
-		$('#username18').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username18").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,18);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,18)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(18);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,18)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(18);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password19').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(19);
-		        }
-		    }
-		});
-	
-		$('#username19').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(19);
-		        }
-		    }
-		});	
-		$('#username19').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username19").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,19);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,19)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(19);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,19)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(19);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password20').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(20);
-		        }
-		    }
-		});
-	
-		$('#username20').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(20);
-		        }
-		    }
-		});	
-		$('#username20').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username20").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,20);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,20)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(20);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,20)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(20);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password21').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(21);
-		        }
-		    }
-		});
-	
-		$('#username21').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(21);
-		        }
-		    }
-		});	
-		$('#username21').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username21").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,21);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,21)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(21);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,21)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(21);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password22').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(22);
-		        }
-		    }
-		});
-	
-		$('#username22').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(22);
-		        }
-		    }
-		});	
-		$('#username22').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username22").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,22);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,22)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(22);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,22)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(22);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password23').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(23);
-		        }
-		    }
-		});
-	
-		$('#username23').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(23);
-		        }
-		    }
-		});	
-		$('#username23').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username23").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,23);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,23)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(23);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,23)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(23);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		$('#password24').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(24);
-		        }
-		    }
-		});
-	
-		$('#username24').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(24);
-		        }
-		    }
-		});	
-		$('#username24').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username24").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,24);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,24)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(24);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,24)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(24);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		
-		$('#password25').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(25);
-		        }
-		    }
-		});
-	
-		$('#username25').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(25);
-		        }
-		    }
-		});	
-		$('#username25').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username25").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,25);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,25)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(25);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,25)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(25);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password26').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(26);
-		        }
-		    }
-		});
-	
-		$('#username26').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(26);
-		        }
-		    }
-		});	
-		$('#username26').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username26").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,26);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,26)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(26);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,26)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(26);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password27').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(27);
-		        }
-		    }
-		});
-	
-		$('#username27').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(27);
-		        }
-		    }
-		});	
-		$('#username27').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username27").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,27);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,27)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(27);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,27)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(27);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password28').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(28);
-		        }
-		    }
-		});
-	
-		$('#username28').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(28);
-		        }
-		    }
-		});	
-		$('#username28').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username28").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,28);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,28)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(28);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,28)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(28);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		$('#password29').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(29);
-		        }
-		    }
-		});
-	
-		$('#username29').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(29);
-		        }
-		    }
-		});	
-		$('#username29').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username29").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,29);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,29)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(29);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,29)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(29);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-		
-		
-		
-		$('#password30').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkPassword(30);
-		        }
-		    }
-		});
-	
-		$('#username30').on({
-		    "keyup": function(e) {
-		        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-		        	checkUserName(30);
-		        }
-		    }
-		});	
-		$('#username30').autocomplete({
-		    source: function (request, response) {
-		    		var fLen = unAvailableUserNames.length;
-		    		var user = document.getElementById("username30").value;
-		    		var encontrado = false;
-					if(fLen>0){
-			    		for (j = 0; j < fLen; j++) {
-			  				if(user==unAvailableUserNames[j]){
-			  					encontrado=true;
-			  					break;
-			  				}
-						}
-			    		if(encontrado) {
-			    			displayerrorUsername(unAvailableUserNameError,30);
-			    			return
-			    		} else {
-			    			firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-			    		      .then(function(firebaseUser) {
-			    		    }).catch(function(error) {
-			    				var errorCode = error.code;
-			    			  	if (errorCode == 'auth/wrong-password') {
-			    			  		unAvailableUserNames.push(user);
-			    			  		displayerrorUsername(unAvailableUserNameError,30)
-			    			  	} else if (errorCode=='auth/user-not-found'){
-			    			  		displayOkeyUserName(30);
-			    			  	}
-			    			  	console.log(error);
-			    			});
-			    		}
-			    	} else {
-		    		    firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", "defaultpassword")
-		    		      .then(function(firebaseUser) {
-		    		    }).catch(function(error) {
-		    				var errorCode = error.code;
-		    			  	if (errorCode == 'auth/wrong-password') {
-		    			  		unAvailableUserNames.push(user);
-		    			  		displayerrorUsername(unAvailableUserNameError,30)
-		    			  	} else if (errorCode=='auth/user-not-found'){
-		    			  		displayOkeyUserName(30);
-		    			  	}
-		    			  	console.log(error);
-		    			});
-		    		}
-		    },
-		    minLength: 6
-		});
-}
-/*$('#repassword1').on({
-    "keyup": function(e) {
-        if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
-        	checkRePassword();
-        }
-    }
-});*/
+	$('#password1').on({
+		"keyup": function(e) {
+			keyupPassword(e, 1);
+		}
+	});
 
+	$('#password1').on({
+		"focusout": function(e) {
+			checkPassword(1);
+		}
+	});
+
+	$('#username1').on({
+		"keyup": function(e) {
+			keyupUsername(e,1)
+		}
+	});
+
+	$('#username1').on({
+		"keydown": function(e) {
+			keydownUsername(e, 1)
+		}
+	});
+
+	$('#username1').on({
+		"focusout": function(e) {
+			checkUserName(1);
+		}
+	});
+
+	$('#username1').autocomplete({
+		source: function (request, response) {
+			validarUserName(1)
+		},
+		minLength: 6
+	});
+
+	$('#password2').on({
+		"keyup": function(e) {
+			keyupPassword(e, 2);
+		}
+	});
+
+	$('#password2').on({
+		"focusout": function(e) {
+			checkPassword(2);
+		}
+	});
+
+	$('#username2').on({
+		"keyup": function(e) {
+			keyupUsername(e,2)
+		}
+	});
+
+	$('#username2').on({
+		"keydown": function(e) {
+			keydownUsername(e, 2)
+		}
+	});
+
+	$('#username2').on({
+		"focusout": function(e) {
+			checkUserName(2);
+		}
+	});
+
+	$('#username2').autocomplete({
+		source: function (request, response) {
+			validarUserName(2)
+		},
+		minLength: 6
+	});
+
+	$('#password3').on({
+		"keyup": function(e) {
+			keyupPassword(e, 3);
+		}
+	});
+
+	$('#password3').on({
+		"focusout": function(e) {
+			checkPassword(3);
+		}
+	});
+
+	$('#username3').on({
+		"keyup": function(e) {
+			keyupUsername(e,3)
+		}
+	});
+
+	$('#username3').on({
+		"keydown": function(e) {
+			keydownUsername(e, 3)
+		}
+	});
+
+	$('#username3').on({
+		"focusout": function(e) {
+			checkUserName(3);
+		}
+	});
+
+	$('#username3').autocomplete({
+		source: function (request, response) {
+			validarUserName(3)
+		},
+		minLength: 6
+	});
+
+	$('#password4').on({
+		"keyup": function(e) {
+			keyupPassword(e, 4);
+		}
+	});
+
+	$('#password4').on({
+		"focusout": function(e) {
+			checkPassword(4);
+		}
+	});
+
+	$('#username4').on({
+		"keyup": function(e) {
+			keyupUsername(e,4)
+		}
+	});
+
+	$('#username4').on({
+		"keydown": function(e) {
+			keydownUsername(e, 4)
+		}
+	});
+
+	$('#username4').on({
+		"focusout": function(e) {
+			checkUserName(4);
+		}
+	});
+
+	$('#username4').autocomplete({
+		source: function (request, response) {
+			validarUserName(4)
+		},
+		minLength: 6
+	});
+
+	$('#password5').on({
+		"keyup": function(e) {
+			keyupPassword(e, 5);
+		}
+	});
+
+	$('#password5').on({
+		"focusout": function(e) {
+			checkPassword(5);
+		}
+	});
+
+	$('#username5').on({
+		"keyup": function(e) {
+			keyupUsername(e,5)
+		}
+	});
+
+	$('#username5').on({
+		"keydown": function(e) {
+			keydownUsername(e, 5)
+		}
+	});
+
+	$('#username5').on({
+		"focusout": function(e) {
+			checkUserName(5);
+		}
+	});
+
+	$('#username5').autocomplete({
+		source: function (request, response) {
+			validarUserName(5)
+		},
+		minLength: 6
+	});
+
+	$('#password6').on({
+		"keyup": function(e) {
+			keyupPassword(e, 6);
+		}
+	});
+
+	$('#password6').on({
+		"focusout": function(e) {
+			checkPassword(6);
+		}
+	});
+
+	$('#username6').on({
+		"keyup": function(e) {
+			keyupUsername(e,6)
+		}
+	});
+
+	$('#username6').on({
+		"keydown": function(e) {
+			keydownUsername(e, 6)
+		}
+	});
+
+	$('#username6').on({
+		"focusout": function(e) {
+			checkUserName(6);
+		}
+	});
+
+	$('#username6').autocomplete({
+		source: function (request, response) {
+			validarUserName(6)
+		},
+		minLength: 6
+	});
+
+	$('#password7').on({
+		"keyup": function(e) {
+			keyupPassword(e, 7);
+		}
+	});
+
+	$('#password7').on({
+		"focusout": function(e) {
+			checkPassword(7);
+		}
+	});
+
+	$('#username7').on({
+		"keyup": function(e) {
+			keyupUsername(e,7)
+		}
+	});
+
+	$('#username7').on({
+		"keydown": function(e) {
+			keydownUsername(e, 7)
+		}
+	});
+
+	$('#username7').on({
+		"focusout": function(e) {
+			checkUserName(7);
+		}
+	});
+
+	$('#username7').autocomplete({
+		source: function (request, response) {
+			validarUserName(7)
+		},
+		minLength: 6
+	});
+
+	$('#password8').on({
+		"keyup": function(e) {
+			keyupPassword(e, 8);
+		}
+	});
+
+	$('#password8').on({
+		"focusout": function(e) {
+			checkPassword(8);
+		}
+	});
+
+	$('#username8').on({
+		"keyup": function(e) {
+			keyupUsername(e,8)
+		}
+	});
+
+	$('#username8').on({
+		"keydown": function(e) {
+			keydownUsername(e, 8)
+		}
+	});
+
+	$('#username8').on({
+		"focusout": function(e) {
+			checkUserName(8);
+		}
+	});
+
+	$('#username8').autocomplete({
+		source: function (request, response) {
+			validarUserName(8)
+		},
+		minLength: 6
+	});
+
+	$('#password9').on({
+		"keyup": function(e) {
+			keyupPassword(e, 9);
+		}
+	});
+
+	$('#password9').on({
+		"focusout": function(e) {
+			checkPassword(9);
+		}
+	});
+
+	$('#username9').on({
+		"keyup": function(e) {
+			keyupUsername(e,9)
+		}
+	});
+
+	$('#username9').on({
+		"keydown": function(e) {
+			keydownUsername(e, 9)
+		}
+	});
+
+	$('#username9').on({
+		"focusout": function(e) {
+			checkUserName(9);
+		}
+	});
+
+	$('#username9').autocomplete({
+		source: function (request, response) {
+			validarUserName(9)
+		},
+		minLength: 6
+	});
+
+	$('#password10').on({
+		"keyup": function(e) {
+			keyupPassword(e, 10);
+		}
+	});
+
+	$('#password10').on({
+		"focusout": function(e) {
+			checkPassword(10);
+		}
+	});
+
+	$('#username10').on({
+		"keyup": function(e) {
+			keyupUsername(e,10)
+		}
+	});
+
+	$('#username10').on({
+		"keydown": function(e) {
+			keydownUsername(e, 10)
+		}
+	});
+
+	$('#username10').on({
+		"focusout": function(e) {
+			checkUserName(10);
+		}
+	});
+
+	$('#username10').autocomplete({
+		source: function (request, response) {
+			validarUserName(10)
+		},
+		minLength: 6
+	});
+
+	$('#password11').on({
+		"keyup": function(e) {
+			keyupPassword(e, 11);
+		}
+	});
+
+	$('#password11').on({
+		"focusout": function(e) {
+			checkPassword(11);
+		}
+	});
+
+	$('#username11').on({
+		"keyup": function(e) {
+			keyupUsername(e,11)
+		}
+	});
+
+	$('#username11').on({
+		"keydown": function(e) {
+			keydownUsername(e, 11)
+		}
+	});
+
+	$('#username11').on({
+		"focusout": function(e) {
+			checkUserName(11);
+		}
+	});
+
+	$('#username11').autocomplete({
+		source: function (request, response) {
+			validarUserName(11)
+		},
+		minLength: 6
+	});
+
+	$('#password12').on({
+		"keyup": function(e) {
+			keyupPassword(e, 12);
+		}
+	});
+
+	$('#password12').on({
+		"focusout": function(e) {
+			checkPassword(12);
+		}
+	});
+
+	$('#username12').on({
+		"keyup": function(e) {
+			keyupUsername(e,12)
+		}
+	});
+
+	$('#username12').on({
+		"keydown": function(e) {
+			keydownUsername(e, 12)
+		}
+	});
+
+	$('#username12').on({
+		"focusout": function(e) {
+			checkUserName(12);
+		}
+	});
+
+	$('#username12').autocomplete({
+		source: function (request, response) {
+			validarUserName(12)
+		},
+		minLength: 6
+	});
+
+	$('#password13').on({
+		"keyup": function(e) {
+			keyupPassword(e, 13);
+		}
+	});
+
+	$('#password13').on({
+		"focusout": function(e) {
+			checkPassword(13);
+		}
+	});
+
+	$('#username13').on({
+		"keyup": function(e) {
+			keyupUsername(e,13)
+		}
+	});
+
+	$('#username13').on({
+		"keydown": function(e) {
+			keydownUsername(e, 13)
+		}
+	});
+
+	$('#username13').on({
+		"focusout": function(e) {
+			checkUserName(13);
+		}
+	});
+
+	$('#username13').autocomplete({
+		source: function (request, response) {
+			validarUserName(13)
+		},
+		minLength: 6
+	});
+
+	$('#password14').on({
+		"keyup": function(e) {
+			keyupPassword(e, 14);
+		}
+	});
+
+	$('#password14').on({
+		"focusout": function(e) {
+			checkPassword(14);
+		}
+	});
+
+	$('#username14').on({
+		"keyup": function(e) {
+			keyupUsername(e,14)
+		}
+	});
+
+	$('#username14').on({
+		"keydown": function(e) {
+			keydownUsername(e, 14)
+		}
+	});
+
+	$('#username14').on({
+		"focusout": function(e) {
+			checkUserName(14);
+		}
+	});
+
+	$('#username14').autocomplete({
+		source: function (request, response) {
+			validarUserName(14)
+		},
+		minLength: 6
+	});
+
+	$('#password15').on({
+		"keyup": function(e) {
+			keyupPassword(e, 15);
+		}
+	});
+
+	$('#password15').on({
+		"focusout": function(e) {
+			checkPassword(15);
+		}
+	});
+
+	$('#username15').on({
+		"keyup": function(e) {
+			keyupUsername(e,15)
+		}
+	});
+
+	$('#username15').on({
+		"keydown": function(e) {
+			keydownUsername(e, 15)
+		}
+	});
+
+	$('#username15').on({
+		"focusout": function(e) {
+			checkUserName(15);
+		}
+	});
+
+	$('#username15').autocomplete({
+		source: function (request, response) {
+			validarUserName(15)
+		},
+		minLength: 6
+	});
+
+	$('#password16').on({
+		"keyup": function(e) {
+			keyupPassword(e, 16);
+		}
+	});
+
+	$('#password16').on({
+		"focusout": function(e) {
+			checkPassword(16);
+		}
+	});
+
+	$('#username16').on({
+		"keyup": function(e) {
+			keyupUsername(e,16)
+		}
+	});
+
+	$('#username16').on({
+		"keydown": function(e) {
+			keydownUsername(e, 16)
+		}
+	});
+
+	$('#username16').on({
+		"focusout": function(e) {
+			checkUserName(16);
+		}
+	});
+
+	$('#username16').autocomplete({
+		source: function (request, response) {
+			validarUserName(16)
+		},
+		minLength: 6
+	});
+
+	$('#password17').on({
+		"keyup": function(e) {
+			keyupPassword(e, 17);
+		}
+	});
+
+	$('#password17').on({
+		"focusout": function(e) {
+			checkPassword(17);
+		}
+	});
+
+	$('#username17').on({
+		"keyup": function(e) {
+			keyupUsername(e,17)
+		}
+	});
+
+	$('#username17').on({
+		"keydown": function(e) {
+			keydownUsername(e, 17)
+		}
+	});
+
+	$('#username17').on({
+		"focusout": function(e) {
+			checkUserName(17);
+		}
+	});
+
+	$('#username17').autocomplete({
+		source: function (request, response) {
+			validarUserName(17)
+		},
+		minLength: 6
+	});
+
+	$('#password18').on({
+		"keyup": function(e) {
+			keyupPassword(e, 18);
+		}
+	});
+
+	$('#password18').on({
+		"focusout": function(e) {
+			checkPassword(18);
+		}
+	});
+
+	$('#username18').on({
+		"keyup": function(e) {
+			keyupUsername(e,18)
+		}
+	});
+
+	$('#username18').on({
+		"keydown": function(e) {
+			keydownUsername(e, 18)
+		}
+	});
+
+	$('#username18').on({
+		"focusout": function(e) {
+			checkUserName(18);
+		}
+	});
+
+	$('#username18').autocomplete({
+		source: function (request, response) {
+			validarUserName(18)
+		},
+		minLength: 6
+	});
+
+	$('#password19').on({
+		"keyup": function(e) {
+			keyupPassword(e, 19);
+		}
+	});
+
+	$('#password19').on({
+		"focusout": function(e) {
+			checkPassword(19);
+		}
+	});
+
+	$('#username19').on({
+		"keyup": function(e) {
+			keyupUsername(e,19)
+		}
+	});
+
+	$('#username19').on({
+		"keydown": function(e) {
+			keydownUsername(e, 19)
+		}
+	});
+
+	$('#username19').on({
+		"focusout": function(e) {
+			checkUserName(19);
+		}
+	});
+
+	$('#username19').autocomplete({
+		source: function (request, response) {
+			validarUserName(19)
+		},
+		minLength: 6
+	});
+
+	$('#password20').on({
+		"keyup": function(e) {
+			keyupPassword(e, 20);
+		}
+	});
+
+	$('#password20').on({
+		"focusout": function(e) {
+			checkPassword(20);
+		}
+	});
+
+	$('#username20').on({
+		"keyup": function(e) {
+			keyupUsername(e,20)
+		}
+	});
+
+	$('#username20').on({
+		"keydown": function(e) {
+			keydownUsername(e, 20)
+		}
+	});
+
+	$('#username20').on({
+		"focusout": function(e) {
+			checkUserName(20);
+		}
+	});
+
+	$('#username20').autocomplete({
+		source: function (request, response) {
+			validarUserName(20)
+		},
+		minLength: 6
+	});
+
+	$('#password21').on({
+		"keyup": function(e) {
+			keyupPassword(e, 21);
+		}
+	});
+
+	$('#password21').on({
+		"focusout": function(e) {
+			checkPassword(21);
+		}
+	});
+
+	$('#username21').on({
+		"keyup": function(e) {
+			keyupUsername(e,21)
+		}
+	});
+
+	$('#username21').on({
+		"keydown": function(e) {
+			keydownUsername(e, 21)
+		}
+	});
+
+	$('#username21').on({
+		"focusout": function(e) {
+			checkUserName(21);
+		}
+	});
+
+	$('#username21').autocomplete({
+		source: function (request, response) {
+			validarUserName(21)
+		},
+		minLength: 6
+	});
+
+	$('#password22').on({
+		"keyup": function(e) {
+			keyupPassword(e, 22);
+		}
+	});
+
+	$('#password22').on({
+		"focusout": function(e) {
+			checkPassword(22);
+		}
+	});
+
+	$('#username22').on({
+		"keyup": function(e) {
+			keyupUsername(e,22)
+		}
+	});
+
+	$('#username22').on({
+		"keydown": function(e) {
+			keydownUsername(e, 22)
+		}
+	});
+
+	$('#username22').on({
+		"focusout": function(e) {
+			checkUserName(22);
+		}
+	});
+
+	$('#username22').autocomplete({
+		source: function (request, response) {
+			validarUserName(22)
+		},
+		minLength: 6
+	});
+
+	$('#password23').on({
+		"keyup": function(e) {
+			keyupPassword(e, 23);
+		}
+	});
+
+	$('#password23').on({
+		"focusout": function(e) {
+			checkPassword(23);
+		}
+	});
+
+	$('#username23').on({
+		"keyup": function(e) {
+			keyupUsername(e,23)
+		}
+	});
+
+	$('#username23').on({
+		"keydown": function(e) {
+			keydownUsername(e, 23)
+		}
+	});
+
+	$('#username23').on({
+		"focusout": function(e) {
+			checkUserName(23);
+		}
+	});
+
+	$('#username23').autocomplete({
+		source: function (request, response) {
+			validarUserName(23)
+		},
+		minLength: 6
+	});
+
+	$('#password24').on({
+		"keyup": function(e) {
+			keyupPassword(e, 24);
+		}
+	});
+
+	$('#password24').on({
+		"focusout": function(e) {
+			checkPassword(24);
+		}
+	});
+
+	$('#username24').on({
+		"keyup": function(e) {
+			keyupUsername(e,24)
+		}
+	});
+
+	$('#username24').on({
+		"keydown": function(e) {
+			keydownUsername(e, 24)
+		}
+	});
+
+	$('#username24').on({
+		"focusout": function(e) {
+			checkUserName(24);
+		}
+	});
+
+	$('#username24').autocomplete({
+		source: function (request, response) {
+			validarUserName(24)
+		},
+		minLength: 6
+	});
+
+	$('#password25').on({
+		"keyup": function(e) {
+			keyupPassword(e, 25);
+		}
+	});
+
+	$('#password25').on({
+		"focusout": function(e) {
+			checkPassword(25);
+		}
+	});
+
+	$('#username25').on({
+		"keyup": function(e) {
+			keyupUsername(e,25)
+		}
+	});
+
+	$('#username25').on({
+		"keydown": function(e) {
+			keydownUsername(e, 25)
+		}
+	});
+
+	$('#username25').on({
+		"focusout": function(e) {
+			checkUserName(25);
+		}
+	});
+
+	$('#username25').autocomplete({
+		source: function (request, response) {
+			validarUserName(25)
+		},
+		minLength: 6
+	});
+
+	$('#password26').on({
+		"keyup": function(e) {
+			keyupPassword(e, 26);
+		}
+	});
+
+	$('#password26').on({
+		"focusout": function(e) {
+			checkPassword(26);
+		}
+	});
+
+	$('#username26').on({
+		"keyup": function(e) {
+			keyupUsername(e,26)
+		}
+	});
+
+	$('#username26').on({
+		"keydown": function(e) {
+			keydownUsername(e, 26)
+		}
+	});
+
+	$('#username26').on({
+		"focusout": function(e) {
+			checkUserName(26);
+		}
+	});
+
+	$('#username26').autocomplete({
+		source: function (request, response) {
+			validarUserName(26)
+		},
+		minLength: 6
+	});
+
+	$('#password27').on({
+		"keyup": function(e) {
+			keyupPassword(e, 27);
+		}
+	});
+
+	$('#password27').on({
+		"focusout": function(e) {
+			checkPassword(27);
+		}
+	});
+
+	$('#username27').on({
+		"keyup": function(e) {
+			keyupUsername(e,27)
+		}
+	});
+
+	$('#username27').on({
+		"keydown": function(e) {
+			keydownUsername(e, 27)
+		}
+	});
+
+	$('#username27').on({
+		"focusout": function(e) {
+			checkUserName(27);
+		}
+	});
+
+	$('#username27').autocomplete({
+		source: function (request, response) {
+			validarUserName(27)
+		},
+		minLength: 6
+	});
+
+	$('#password28').on({
+		"keyup": function(e) {
+			keyupPassword(e, 28);
+		}
+	});
+
+	$('#password28').on({
+		"focusout": function(e) {
+			checkPassword(28);
+		}
+	});
+
+	$('#username28').on({
+		"keyup": function(e) {
+			keyupUsername(e,28)
+		}
+	});
+
+	$('#username28').on({
+		"keydown": function(e) {
+			keydownUsername(e, 28)
+		}
+	});
+
+	$('#username28').on({
+		"focusout": function(e) {
+			checkUserName(28);
+		}
+	});
+
+	$('#username28').autocomplete({
+		source: function (request, response) {
+			validarUserName(28)
+		},
+		minLength: 6
+	});
+
+	$('#password29').on({
+		"keyup": function(e) {
+			keyupPassword(e, 29);
+		}
+	});
+
+	$('#password29').on({
+		"focusout": function(e) {
+			checkPassword(29);
+		}
+	});
+
+	$('#username29').on({
+		"keyup": function(e) {
+			keyupUsername(e,29)
+		}
+	});
+
+	$('#username29').on({
+		"keydown": function(e) {
+			keydownUsername(e, 29)
+		}
+	});
+
+	$('#username29').on({
+		"focusout": function(e) {
+			checkUserName(29);
+		}
+	});
+
+	$('#username29').autocomplete({
+		source: function (request, response) {
+			validarUserName(29)
+		},
+		minLength: 6
+	});
+
+	$('#password30').on({
+		"keyup": function(e) {
+			keyupPassword(e, 30);
+		}
+	});
+
+	$('#password30').on({
+		"focusout": function(e) {
+			checkPassword(30);
+		}
+	});
+
+	$('#username30').on({
+		"keyup": function(e) {
+			keyupUsername(e,30)
+		}
+	});
+
+	$('#username30').on({
+		"keydown": function(e) {
+			keydownUsername(e, 30)
+		}
+	});
+
+	$('#username30').on({
+		"focusout": function(e) {
+			checkUserName(30);
+		}
+	});
+
+	$('#username30').autocomplete({
+		source: function (request, response) {
+			validarUserName(30)
+		},
+		minLength: 6
+	});
+	
+}
 	
 </script>
 </html>
