@@ -338,24 +338,37 @@ function displaycreateAccount(){
   function resizePage(){
 	  
 	 if(device.type=='mobile'){
+		 
+		 document.getElementById('loginLabel').style.width="20vw";
+		 document.getElementById('loginLabel').style.height="6vw";
+		 document.getElementById('loginLabel').style.fontSize="3.75vw";
+		 document.getElementById('loginLabel').style.left="22vw"
+	     document.getElementById('loginLabel').style.backgroundSize="20vw 6vw";
+		 
+		 document.getElementById('cancelAccountLabel').style.width="20vw";
+		 document.getElementById('cancelAccountLabel').style.height="6vw";
+		 document.getElementById('cancelAccountLabel').style.fontSize="3.75vw";
+		 document.getElementById('cancelAccountLabel').style.left="49vw"
+	     document.getElementById('cancelAccountLabel').style.backgroundSize="20vw 6vw";
+		 
 		 document.getElementById('createAccountLabel').style.width="30vw";
 		 document.getElementById('createAccountLabel').style.height="6vw";
 		 document.getElementById('createAccountLabel').style.fontSize="3.75vw";
 		 document.getElementById('createAccountLabel').style.left="14vw"
 	     document.getElementById('createAccountLabel').style.backgroundSize="30vw 6vw";
 		 
-		 document.getElementById('cancelAccountLabel').style.width="20vw";
-		 document.getElementById('cancelAccountLabel').style.height="6vw";
-		 document.getElementById('cancelAccountLabel').style.fontSize="3.75vw";
-		 document.getElementById('cancelAccountLabel').style.right="14vw"
-	     document.getElementById('cancelAccountLabel').style.backgroundSize="20vw 6vw";
+		 document.getElementById('cancelAccountLabel1').style.width="20vw";
+		 document.getElementById('cancelAccountLabel1').style.height="6vw";
+		 document.getElementById('cancelAccountLabel1').style.fontSize="3.75vw";
+		 document.getElementById('cancelAccountLabel1').style.right="14vw"
+	     document.getElementById('cancelAccountLabel1').style.backgroundSize="20vw 6vw";
+		 
+		 document.getElementById('crearCuentaLink').style.left="15vw"
+	     document.getElementById('crearClaseLink').style.left="50vw"
 		 
 		 document.getElementById('capabotonescreacion').style.marginTop="4vw"
 		 
-		 document.getElementById("loginLabel").style.width="20vw";
-		 document.getElementById("loginLabel").style.height="6vw";
-		 document.getElementById('loginLabel').style.backgroundSize="20vw 6vw";
-		 document.getElementById("loginLabel").style.fontSize="3.75vw";
+		 
 		 
 		 document.getElementById('loginlogo').style.width="27vw";
 		 document.getElementById('loginlogo').style.height="9vw";
@@ -430,7 +443,7 @@ function displaycreateAccount(){
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="loginLabel" style="position:absolute;left:13vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
 										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
-									<div  style="position:absolute;left:19vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="cancelAccountLabel" style="position:absolute;left:19vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>		
 								</div>
 							</div>
@@ -443,10 +456,10 @@ function displaycreateAccount(){
 							
 							<div id="crearCuenta" class="form-group">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
-									<div style="position:absolute;left:11vw">
+									<div id="crearCuentaLink" style="position:absolute;left:11vw">
 										<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
 									</div>
-									<div style="position:absolute;left:20vw">
+									<div id="crearClaseLink" style="position:absolute;left:20vw">
 										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
 									</div>
 								</div>

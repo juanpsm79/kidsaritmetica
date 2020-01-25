@@ -86,6 +86,8 @@ var ultimoAlumnoCreado
 			    		document.getElementById("loginAjax1").style.visibility="hidden"
 						document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
 						document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
+						document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
+			    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
 						firebase.auth().signOut().then(function() {
 						}).catch(function(error) {
 							alert("Error deslogue")
@@ -121,6 +123,8 @@ var ultimoAlumnoCreado
 				document.getElementById("loginAjax1").style.visibility="hidden";
 				document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
 				document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
+				document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
+	    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
 			}
 		}
 	}
@@ -252,28 +256,35 @@ var ultimoAlumnoCreado
   
   function resizePage() {
 	 if(device.type=='mobile'){
-		 document.getElementById('createAccountLabel').style.width="30vw";
-		 document.getElementById('createAccountLabel').style.height="6vw";
-		 document.getElementById('createAccountLabel').style.fontSize="3.75vw";
-		 document.getElementById('createAccountLabel').style.left="14vw"
-	     document.getElementById('createAccountLabel').style.backgroundSize="30vw 6vw";
-		 
-		 document.getElementById('cancelAccountLabel').style.width="20vw";
-		 document.getElementById('cancelAccountLabel').style.height="6vw";
-		 document.getElementById('cancelAccountLabel').style.fontSize="3.75vw";
-		 document.getElementById('cancelAccountLabel').style.right="14vw"
-	     document.getElementById('cancelAccountLabel').style.backgroundSize="20vw 6vw";
-		 
-		 document.getElementById('capabotonescreacion').style.marginTop="4vw"
-		 
-		 document.getElementById("loginLabel").style.width="20vw";
-		 document.getElementById("loginLabel").style.height="6vw";
-		 document.getElementById('loginLabel').style.backgroundSize="20vw 6vw";
-		 document.getElementById("loginLabel").style.fontSize="3.75vw";
-		 
 		 document.getElementById('loginlogo').style.width="27vw";
 		 document.getElementById('loginlogo').style.height="9vw";
 	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
+	     
+	     document.getElementById('createClass1').style.width="30vw";
+		 document.getElementById('createClass1').style.height="6vw";
+		 document.getElementById('createClass1').style.fontSize="3.75vw";
+		 document.getElementById('createClass1').style.left="19vw"
+	     document.getElementById('createClass1').style.backgroundSize="30vw 6vw";
+	     
+	     document.getElementById('createClassCancel').style.width="20vw";
+		 document.getElementById('createClassCancel').style.height="6vw";
+		 document.getElementById('createClassCancel').style.fontSize="3.75vw";
+		 document.getElementById('createClassCancel').style.left="54vw"
+	     document.getElementById('createClassCancel').style.backgroundSize="20vw 6vw";
+		 
+		 document.getElementById('createClass').style.width="30vw";
+		 document.getElementById('createClass').style.height="6vw";
+		 document.getElementById('createClass').style.fontSize="3.75vw";
+		 document.getElementById('createClass').style.left="19vw"
+	     document.getElementById('createClass').style.backgroundSize="30vw 6vw";
+	     
+	     document.getElementById('createClassCancel1').style.width="20vw";
+		 document.getElementById('createClassCancel1').style.height="6vw";
+		 document.getElementById('createClassCancel1').style.fontSize="3.75vw";
+		 document.getElementById('createClassCancel1').style.left="54vw"
+	     document.getElementById('createClassCancel1').style.backgroundSize="20vw 6vw";
+		 
+		 document.getElementById('mismoUsuPassword').style.height="8vw";
 	     screenfull.request();
 	 }
 	 else if(device.type=='tablet'){
@@ -376,7 +387,7 @@ var ultimoAlumnoCreado
 </script>
  -->
 </head>
-<body onload="initFormulario()">
+<body onload="initFormulario();resizePage()">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -390,12 +401,12 @@ var ultimoAlumnoCreado
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createClass1" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel1" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
-									<div style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="createClassCancel" style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
 							<div class="d-block my-3">
-						          <div class="custom-control custom-radio" style="height:2.5vw">
+						          <div id="mismoUsuPassword" class="custom-control custom-radio" style="height:2.5vw">
 						            <input id="credit" type="checkbox" class="custom-control-input" onclick="usarMismaUsuarioPassword(this)">
 						            <label class="custom-control-label" for="credit"><%=mismoUsuPass %></label>
 						          </div>
@@ -826,7 +837,7 @@ var ultimoAlumnoCreado
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createClass" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="crearClase()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label id="createClassLabel" style="cursor:pointer;margin-top:0.3vw"><%= crearClase %></label></div>
-									<div style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="createClassCancel1" style="position:absolute;left:20vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>

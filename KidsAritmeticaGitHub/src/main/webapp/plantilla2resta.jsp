@@ -555,11 +555,6 @@ $(function(){
 					<div id="casillaLlevada" onclick="javascript:if(document.getElementById('tachada').style.visibility=='visible')setSelected('casillaLlevada')" style="position:absolute;z-index:2;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.5vw 3.5vw;width:2.5vw;height:3.5vw">
 							<label id="cifraCasillaLlevada" style="position:absolute;left:0.15vw;top:-1.15vw;font-family:Calibri;font-size:4.5vw;font-weight:bold;font-color:black"></label>
 					</div>
-					<!--  
-						<a id="llevadaDecenas" style="position:absolute;left:8.1vw">
-							<img src="casillaLlevada.png" style="position:absolute;cursor:pointer;width:2vw;height:3vw" onclick="javascript:{if(this.src.indexOf('casillaLlevada.png')<0){this.src='casillaLlevada.png'}else{this.src='casillaLlevada1.png'}}">	
-						</a>
-					-->
 				</div>
 					
 				<!--PRIMER OPERADOR  -->
@@ -578,12 +573,6 @@ $(function(){
 				
 				<!--RESULTADO SUMA -->
 				<div style="width:62vw;position:absolute;top:24vw;left:0.6vw">
-						<!--		
-						<a id="sumaCentenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)"
-							style="position:absolute;left:8.1vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black;">
-								<label id="sumaCentenasCifra" onMouseOver="this.style.cursor='pointer'"	style="position:absolute;bottom:-1.5vw;left:0.8vw;font-family:Calibri;font-size:9vw;font-weight:bold;font-color:black"></label>
-						</a>
-						-->
 					
 						<a id="sumaDecenas" onclick="clickCifraSuma(this)" ondblclick="dobleClickCifraSuma(this)" 
 							style="position:absolute;left:16.2vw;width:6vw;height:7.4vw;top:0.15vw;border:0.3vw solid black">
@@ -603,7 +592,7 @@ $(function(){
 					 style="position:absolute;background-size:9.5vw 8.5vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				</div>
 				<div id="pantallaCompletaDiv" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
- 					<button style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></button>	
+ 					<div style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" ontouchstart="fullscreen(this)"></div>	
 		    	</div>
 			</div>
 				
@@ -750,9 +739,9 @@ $(function(){
 			</div>
 			<div id="capaBotonCheckSuma" onclick="javascript:this.style.backgroundImage='url(checkBotonClick.png)';setTimeout(comprobarSuma, 320)" 
 				<%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("13") || nivel.equalsIgnoreCase("14")){%>
-					style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:35.7vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+					style="background-size:13vw 13vw;width:13vw;height:13vw;position:absolute;top:35.7vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 				<%} else{ %>
-				    style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:31.7vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+				    style="background-size:13vw 13vw;width:13vw;height:13vw;position:absolute;top:31.7vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 				<%}%>
 			</div>
 	</div>

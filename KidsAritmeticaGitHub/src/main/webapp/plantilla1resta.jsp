@@ -460,7 +460,7 @@ $(function(){
 					 style="position:absolute;background-size:9.5vw 8.5vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				</div>
 				<div id="pantallaCompletaDiv" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
- 					<button style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></button>	
+ 					<div style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></div>	
 		    	</div>
 			</div>
 				
@@ -500,7 +500,7 @@ $(function(){
 				</div>
 			</div>
 			
-			<div id="capaBotonCheckSuma" onclick="comprobarSuma()" style="background-size:13vw 13vw;width:20vw;height:15vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
+			<div id="capaBotonCheckSuma" onclick="comprobarSuma()" style="background-size:13vw 13vw;width:13vw;height:13vw;position:absolute;top:32.3vw;left:66.25vw;cursor:pointer;background-image:url(checkBoton.png);background-repeat:no-repeat">
 				<img src="checkBoton.png" width="1px" height="1px" border="0">
 				<img src="checkBotonClick.png" width="1px" height="1px" border="0">
 				<img src="startOverBoton.png" width="1px" height="1px" border="0">
