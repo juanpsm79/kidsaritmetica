@@ -465,8 +465,11 @@ $(function(){
   	
   	function resizePage() {
  		 if(device.type=='tablet' || device.type=='mobile'){
- 			 document.getElementById("pantallaCompletaDiv").style.visibility="visible";
+ 			 document.getElementById("pantallaCompleta").style.visibility="visible";
  			screenfull.request();
+ 		 }
+ 		if(device.iphone()){
+ 			 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
  		 }
  	}
  		  
@@ -564,8 +567,7 @@ $(function(){
 				<div onclick="javascript:location.href='seleccionNivel.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
 					 style="position:absolute;background-size:9.5vw 8.5vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				</div>
-				<div id="pantallaCompletaDiv" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
- 					<div style="border:0px;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></div>	
+				<div id="pantallaCompleta" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
 		    	</div>
 			</div>
 				

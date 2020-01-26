@@ -286,6 +286,11 @@ var ultimoAlumnoCreado
 		 
 		 document.getElementById('mismoUsuPassword').style.height="8vw";
 	     screenfull.request();
+	     for(i=1;i<=30;i++) {
+				document.getElementById("cresultado"+i).style.width="4.5vw";
+				document.getElementById("cresultado"+i).style.height="4.5vw";
+				document.getElementById("cresultado"+i).style.backgroundSize="4.5vw 4.5vw";
+	     }
 	 }
 	 else if(device.type=='tablet'){
 		 document.getElementById('cancelAccountLabel').style.right="7.5vw"

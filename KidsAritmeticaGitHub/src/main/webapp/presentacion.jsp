@@ -165,6 +165,9 @@ var pantallaCompleta=false;
 				document.getElementById('instagram').style.top="4.5vw";
 	   	 }
 	 }
+	 if(device.iphone()){
+		 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
+	 }
   }
   
   function loadImages(){
@@ -276,8 +279,7 @@ function fullscreen(obj){
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
 		</div>
 		
-		<div  id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat">
- 				<div  style="border:0px;right:0vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)"></div>	
+		<div id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
 		</div>
 			
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
