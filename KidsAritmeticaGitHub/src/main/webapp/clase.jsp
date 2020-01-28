@@ -78,7 +78,7 @@ var ultimoAlumnoCreado
 			firebase.initializeApp(firebaseConfig);
 		    firebase.auth().onAuthStateChanged(function(user) {
 		    	if(user!=null) {
-		    		document.getElementById("cresultado"+ultimoAlumnoCreado).style.backgroundImage=null;
+		    		document.getElementById("cresultado"+ultimoAlumnoCreado).style.backgroundImage="";
 		    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML=""+creado
 		    		if (ultimoAlumnoCreado<30)
 			    		handleSignUp();
@@ -88,6 +88,8 @@ var ultimoAlumnoCreado
 						document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
 						document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
 			    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
+			    		document.getElementById("createClass").onclick=function(){descargarFichero()};
+			    		document.getElementById("createClass1").onclick=function(){descargarFichero()};
 						firebase.auth().signOut().then(function() {
 						}).catch(function(error) {
 							alert("Error deslogue")
@@ -125,8 +127,25 @@ var ultimoAlumnoCreado
 				document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
 				document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
 	    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
+	    		document.getElementById("createClass").onclick=function(){descargarFichero()};
+	    		document.getElementById("createClass1").onclick=function(){descargarFichero()};
 			}
 		}
+	}
+	
+	function descargarFichero(){
+		//location.href="/DescargaFichero"
+		window.open("./DescargaFichero")
+		 /*$.ajax({
+			  url: "/DescargaFichero",
+			  method: "post",
+			  data:{nivel: '3'},
+			  dataType: "application/pdf",
+			  success : function(responseText) {
+					//location.href = "descripcionNivel.jsp";
+			  }
+			})*/
+				
 	}
 
 	//Username
@@ -248,10 +267,85 @@ var ultimoAlumnoCreado
 					document.getElementById("cresultado"+i).style.visibility="visible";
 		  }
 		  ultimoAlumnoCreado = 0;
-		  handleSignUp();
+		  actualizarDatosPDF();
+		  
 	  } else {
 		  alert(validacionesPendientesClase);
 	  }
+  }
+  
+  function actualizarDatosPDF(){
+	  $.ajax({
+		  url: "/DescargaFichero",
+		  method: "post",
+		  data:{
+			  igualUsuarioPass: ''+igualUsuarioPassword,
+			  accion:'datos',
+			  usu1:''+document.getElementById("username1").value,
+			  pass1:''+document.getElementById("password1").value,
+			  usu2:''+document.getElementById("username2").value,
+			  pass2:''+document.getElementById("password2").value,
+			  usu3:''+document.getElementById("username3").value,
+			  pass3:''+document.getElementById("password3").value,
+			  usu4:''+document.getElementById("username4").value,
+			  pass4:''+document.getElementById("password4").value,
+			  usu5:''+document.getElementById("username5").value,
+			  pass5:''+document.getElementById("password5").value,
+			  usu6:''+document.getElementById("username6").value,
+			  pass6:''+document.getElementById("password6").value,
+			  usu7:''+document.getElementById("username7").value,
+			  pass7:''+document.getElementById("password7").value,
+			  usu8:''+document.getElementById("username8").value,
+			  pass8:''+document.getElementById("password8").value,
+			  usu9:''+document.getElementById("username9").value,
+			  pass9:''+document.getElementById("password9").value,
+			  usu10:''+document.getElementById("username10").value,
+			  pass10:''+document.getElementById("password10").value,
+			  usu11:''+document.getElementById("username11").value,
+			  pass11:''+document.getElementById("password11").value,
+			  usu12:''+document.getElementById("username12").value,
+			  pass12:''+document.getElementById("password12").value,
+			  usu13:''+document.getElementById("username13").value,
+			  pass13:''+document.getElementById("password13").value,
+			  usu14:''+document.getElementById("username14").value,
+			  pass14:''+document.getElementById("password14").value,
+			  usu15:''+document.getElementById("username15").value,
+			  pass15:''+document.getElementById("password15").value,
+			  usu16:''+document.getElementById("username16").value,
+			  pass16:''+document.getElementById("password16").value,
+			  usu17:''+document.getElementById("username17").value,
+			  pass17:''+document.getElementById("password17").value,
+			  usu18:''+document.getElementById("username18").value,
+			  pass18:''+document.getElementById("password18").value,
+			  usu19:''+document.getElementById("username19").value,
+			  pass19:''+document.getElementById("password19").value,
+			  usu20:''+document.getElementById("username20").value,
+			  pass20:''+document.getElementById("password20").value,
+			  usu21:''+document.getElementById("username21").value,
+			  pass21:''+document.getElementById("password21").value,
+			  usu22:''+document.getElementById("username22").value,
+			  pass22:''+document.getElementById("password22").value,
+			  usu23:''+document.getElementById("username23").value,
+			  pass23:''+document.getElementById("password23").value,
+			  usu24:''+document.getElementById("username24").value,
+			  pass24:''+document.getElementById("password24").value,
+			  usu25:''+document.getElementById("username25").value,
+			  pass25:''+document.getElementById("password25").value,
+			  usu26:''+document.getElementById("username26").value,
+			  pass26:''+document.getElementById("password26").value,
+			  usu27:''+document.getElementById("username27").value,
+			  pass27:''+document.getElementById("password27").value,
+			  usu28:''+document.getElementById("username28").value,
+			  pass28:''+document.getElementById("password28").value,
+			  usu29:''+document.getElementById("username29").value,
+			  pass29:''+document.getElementById("password29").value,
+			  usu30:''+document.getElementById("username30").value,
+			  pass30:''+document.getElementById("password30").value
+			  },
+		  success : function(responseText) {
+			  handleSignUp();
+		  }
+	})
   }
   
   function resizePage() {
@@ -285,12 +379,13 @@ var ultimoAlumnoCreado
 	     document.getElementById('createClassCancel1').style.backgroundSize="20vw 6vw";
 		 
 		 document.getElementById('mismoUsuPassword').style.height="8vw";
-	     screenfull.request();
+	     
 	     for(i=1;i<=30;i++) {
 				document.getElementById("cresultado"+i).style.width="4.5vw";
 				document.getElementById("cresultado"+i).style.height="4.5vw";
 				document.getElementById("cresultado"+i).style.backgroundSize="4.5vw 4.5vw";
 	     }
+	     screenfull.request();
 	 }
 	 else if(device.type=='tablet'){
 		 document.getElementById('cancelAccountLabel').style.right="7.5vw"

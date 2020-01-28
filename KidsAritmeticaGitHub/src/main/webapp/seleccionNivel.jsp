@@ -352,11 +352,17 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   
   function fullscreen(obj){
 		if(obj.style.backgroundImage=="url(\"maximize-512.png\")"){
-			screenfull.request();
 			obj.style.backgroundImage="url(minimize-512.png)"
+			if(device.iphone())
+				document.body.webkitRequestFullscreen();
+			else
+				screenfull.request();
 		} else {
-			screenfull.exit();
 			obj.style.backgroundImage="url(maximize-512.png)"
+			if(device.iphone())
+				document.body.webkitExitFullscreen();
+			else
+				screenfull.exit();
 		}
 	}
   
@@ -367,7 +373,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
     } else if (document.body.mozRequestFullScreen) { /* Firefox */
     	document.body.mozRequestFullScreen();
     } else if (document.body.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-    	document.body.webkitRequestFullscreen();
+    	
     } else if (document.body.msRequestFullscreen) { /* IE/Edge */
     	document.body.msRequestFullscreen();
     }

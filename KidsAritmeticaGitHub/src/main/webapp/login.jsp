@@ -125,7 +125,6 @@ function displayLogin(){
 		 document.getElementById('loginlogo').style.width="27vw";
 		 document.getElementById('loginlogo').style.height="9vw";
 	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
-	     //document.getElementById('capabotonescreacion').style.marginTop="4vw"
 	}
 	action="login";
 }
@@ -373,12 +372,22 @@ function displaycreateAccount(){
 		 document.getElementById('loginlogo').style.width="27vw";
 		 document.getElementById('loginlogo').style.height="9vw";
 	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
+	     if(device.iphone()){
+	    	 if(device.portrait())
+	    		 document.getElementById('crearCuentaLink').style.left="18vw"
+	         else if(device.landscape()){
+	        	 
+	         } 
+	     }
+	    	 
+	     
+	     
 	     screenfull.request();
 	 }
-	 else if(device.type=='tablet'){
+	 /*else if(device.type=='tablet'){
 		 document.getElementById('cancelAccountLabel').style.right="7.5vw"
 			 document.getElementById('createAccountLabel').style.left="7.5vw"
-	 }
+	 }*/
   }
 	
 </script>
