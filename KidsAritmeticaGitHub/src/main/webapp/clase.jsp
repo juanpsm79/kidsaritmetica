@@ -387,10 +387,7 @@ var ultimoAlumnoCreado
 	     }
 	     screenfull.request();
 	 }
-	 else if(device.type=='tablet'){
-		 document.getElementById('cancelAccountLabel').style.right="7.5vw"
-			 document.getElementById('createAccountLabel').style.left="7.5vw"
-	 }
+	 
   }
   function keyupPassword(e, index) {
 	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {

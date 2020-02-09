@@ -51,7 +51,7 @@ var verificarRecaptcha="<%= verificarRecaptcha %>"
 var unAvailableUserNames = [];
 var md
 $( function() {
-	     window.addEventListener("orientationchange", resizePageHandler);
+	     window.addEventListener("orientationchange", screenfull.request());
 		 var firebaseConfig = {
 		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 		    authDomain: "fbplayaddition.firebaseapp.com",
@@ -359,7 +359,7 @@ function displaycreateAccount(){
 		 document.getElementById('cancelAccountLabel1').style.width="20vw";
 		 document.getElementById('cancelAccountLabel1').style.height="6vw";
 		 document.getElementById('cancelAccountLabel1').style.fontSize="3.75vw";
-		 document.getElementById('cancelAccountLabel1').style.right="14vw"
+		 document.getElementById('cancelAccountLabel1').style.left="50vw"
 	     document.getElementById('cancelAccountLabel1').style.backgroundSize="20vw 6vw";
 		 
 		 document.getElementById('crearCuentaLink').style.left="15vw"
@@ -375,14 +375,38 @@ function displaycreateAccount(){
 	     if(device.iphone()){
 	    	 if(device.portrait())
 	    		 document.getElementById('crearCuentaLink').style.left="18vw"
-	         else if(device.landscape()){
+	         else if(device.landscape()) {
+	        	 //BOTONES Y ENLACES DEL LOGIN
+	        	 document.getElementById('loginLabel').style.width="10vw";
+		 		 document.getElementById('loginLabel').style.height="3vw";
+		 		 document.getElementById('loginLabel').style.fontSize="1.9vw";
+		 		 document.getElementById('loginLabel').style.left="9vw"
+	     		 document.getElementById('loginLabel').style.backgroundSize="10vw 3vw";
+		 
+		 		 document.getElementById('cancelAccountLabel').style.width="10vw";
+		 		 document.getElementById('cancelAccountLabel').style.height="3vw";
+		 		 document.getElementById('cancelAccountLabel').style.fontSize="1.9vw";
+		 		 document.getElementById('cancelAccountLabel').style.left="22vw"
+	     		 document.getElementById('cancelAccountLabel').style.backgroundSize="10vw 3vw";
 	        	 
+	        	 document.getElementById('crearCuentaLink').style.left="7.5vw"
+	     		 document.getElementById('crearClaseLink').style.left="23.5vw"
+	        	 
+	        	 //BOTONES DEL CREATE ACCOUNT
+	        	 document.getElementById('createAccountLabel').style.width="15vw";
+	    		 document.getElementById('createAccountLabel').style.height="3vw";
+	    		 document.getElementById('createAccountLabel').style.fontSize="1.9vw";
+	    		 document.getElementById('createAccountLabel').style.left="7vw"
+	    	     document.getElementById('createAccountLabel').style.backgroundSize="15vw 3vw";
+	    		 
+	    		 document.getElementById('cancelAccountLabel1').style.width="10vw";
+	    		 document.getElementById('cancelAccountLabel1').style.height="3vw";
+	    		 document.getElementById('cancelAccountLabel1').style.fontSize="1.9vw";
+	    		 document.getElementById('cancelAccountLabel1').style.left="24vw"
+	    	     document.getElementById('cancelAccountLabel1').style.backgroundSize="10vw 3vw";
 	         } 
 	     }
-	    	 
-	     
-	     
-	     screenfull.request();
+
 	 }
 	 /*else if(device.type=='tablet'){
 		 document.getElementById('cancelAccountLabel').style.right="7.5vw"
@@ -468,18 +492,18 @@ function displaycreateAccount(){
 									<div id="crearCuentaLink" style="position:absolute;left:11vw">
 										<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
 									</div>
-									<div id="crearClaseLink" style="position:absolute;left:20vw">
+									<div id="crearClaseLink" style="position:absolute;left:21vw">
 										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
 									</div>
 								</div>
 							</div>
 							<div id="crearBotonones" class="form-group" style="display:none">
 								<div id="capabotonescreacion" class="col-sm-9 col-sm-offset-2" style="padding-left: 0px;margin-top:1.5vw">
-									<div id="createAccountLabel" style="position: relative;float: left;left: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
-										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
+									<div id="createAccountLabel" style="position:absolute;left: 10.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
+										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="position:position:absolute;cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
 										
-									<div id="cancelAccountLabel1" style="position: relative;float: right;right: 9.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
-										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
+									<div id="cancelAccountLabel1" style="position:absolute;left:20.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="position:position:absolute;cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
 							<div class="form-group">
