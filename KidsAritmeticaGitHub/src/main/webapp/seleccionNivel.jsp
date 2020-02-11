@@ -10,6 +10,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <meta http-equiv="Cache-control" content="public">
   <title>PlayAddition</title>
   <style type="text/css">
@@ -353,14 +354,15 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   function fullscreen(obj){
 		if(obj.style.backgroundImage=="url(\"maximize-512.png\")"){
 			obj.style.backgroundImage="url(minimize-512.png)"
-			if(device.iphone())
-				document.body.webkitRequestFullscreen();
+			if(device.iphone()){
+				document.webkitEnterFullscreen();
+			}
 			else
 				screenfull.request();
 		} else {
 			obj.style.backgroundImage="url(maximize-512.png)"
 			if(device.iphone())
-				document.body.webkitExitFullscreen();
+				document.webkitExitFullscreen();
 			else
 				screenfull.exit();
 		}

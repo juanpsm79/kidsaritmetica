@@ -54,16 +54,11 @@ public class DescargaFichero extends HttpServlet {
 
 	private void introducirDatosSession(HttpServletRequest request) {
 		HttpSession sesion = request.getSession();
-		boolean igualUsuarioPass = Boolean.valueOf(request.getParameter("igualUsuarioPass"));
 		int alumnos=0;
 		for (int i=1;i<=30;i++) {
 			if(request.getParameter("usu"+i).length()>0) {
 				alumnos++;
 				sesion.setAttribute("usu"+i, request.getParameter("usu"+i));
-				if(igualUsuarioPass)
-					sesion.setAttribute("pass"+i, request.getParameter("usu"+i));
-				else
-					sesion.setAttribute("pass"+i, request.getParameter("pass"+i));
 			}
 		}
 		if(alumnos<=19) {
@@ -71,6 +66,7 @@ public class DescargaFichero extends HttpServlet {
 		}else {
 			sesion.setAttribute("pdf","playAdditionListadoClase.pdf");
 		}
+		sesion.setAttribute("password", request.getParameter("password"));
 	}
 	
 	protected void doGet(HttpServletRequest request,
@@ -115,7 +111,7 @@ public class DescargaFichero extends HttpServlet {
         		}
 	        	field = acroForm.getField("pass"+i);
 	        	if(field!=null) {
-	        		field.setValue((String)sesion.getAttribute("pass"+i));
+	        		field.setValue((String)sesion.getAttribute("password"));
 	        		field.setReadOnly(true);
 	        	}
         	}else {
