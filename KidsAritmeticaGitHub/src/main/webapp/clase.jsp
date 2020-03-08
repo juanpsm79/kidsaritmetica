@@ -235,13 +235,12 @@ var ultimoAlumnoCreado
 		  for(i=1;i<=30;i++)
 			  checkUserName(i)
 	  } else {*/
-		  for(i=1;i<=30;i++) {
-			  //checkPassword(i)
-			  checkUserName(i)  
-		  }
+	  checkPassword()
+	  for(i=1;i<=30;i++)
+		  checkUserName(i)  
 	 // }
-	  for(i=1;i<=30;i++) 
-	   		if(/*document.getElementById("password"+i+"-error")!=null || */document.getElementById("username"+i+"-error")!=null)
+	  for(i=1;i<=30;i++)
+	   		if(document.getElementById("password-error")!=null || document.getElementById("username"+i+"-error")!=null)
 				return false;
 	  return true;
   }
@@ -497,7 +496,7 @@ var ultimoAlumnoCreado
 							</div>
 							<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
-						            <label><%= password %></label>
+						            <label><%= mismoUsuPass %>:</label>
 						          </div>
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password" placeholder="<%= password %>" required="" style="width:85%">
