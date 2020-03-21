@@ -726,6 +726,108 @@ public class GeneradorRestas {
 		}
 	}
 	
+	
+
+	public Resta getOperandosNivel4142(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = new Random().ints(1, 100, 1000).sum();
+		int operador2 = new Random().ints(1, 10, 100).sum();
+		
+		operador1 = operador1 - 10*((operador1/10)%10);
+		
+		
+		if(operador1%10<operador2%10) {
+			int aux = new Random().ints(1, operador2%10, 10).sum();
+			operador1 = operador1 - operador1%10 + aux;
+		}
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel4142(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			return resta;
+		}
+	}
+	
+	public Resta getOperandosNivel4344(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = new Random().ints(1, 100, 1000).sum();
+		int operador2 = new Random().ints(1, 10, 100).sum();
+		
+		operador1 = operador1 - 10*((operador1/10)%10);
+		operador1 = operador1 - operador1%10 + new Random().ints(1, 0, 9).sum();
+		
+		if(operador1%10>=operador2%10) {
+				int aux = new Random().ints(1, operador1%10+1, 10).sum();
+				operador2 = operador2 - operador2%10 + aux;
+		}
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel4344(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			return resta;
+		}
+	}
+	
+	public Resta getOperandosNivel46(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = new Random().ints(1, 100, 1000).sum();
+		int operador2 = new Random().ints(1, 100, 1000).sum();
+		
+		if(operador1%10<operador2%10) {
+			int aux = new Random().ints(1, operador2%10, 10).sum();
+			operador1 = operador1 - operador1%10 + aux;
+		}
+		
+		if((operador1/10)%10 < (operador2/10)%10) {
+			int aux = new Random().ints(1, (operador2/10)%10, 10).sum();
+			operador1 = operador1 - 10*((operador1/10)%10) + 10*aux;
+		}
+		
+		if((operador1/100)%10 < (operador2/100)%10) {
+			int aux = new Random().ints(1, (operador2/100)%10, 10).sum();
+			operador1 = operador1 - 100*((operador1/100)%10) + 100*aux;
+		}
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel46(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			return resta;
+		}
+	}
+	
 	private boolean nivelContainsResta(List<Resta> restasNivel, Resta resta) {
 		Iterator<Resta> iter = restasNivel.iterator();
 		while (iter.hasNext()) {
@@ -736,13 +838,14 @@ public class GeneradorRestas {
 		return false;
 	}
 
-	
-
-	
-
-	
-
-	
-
+	private boolean nivelContainsResta2(List<Resta> restasNivel, Resta resta) {
+		Iterator<Resta> iter = restasNivel.iterator();
+		while (iter.hasNext()) {
+			Resta rest = iter.next();
+			if (rest.getOperando1()==resta.getOperando1() || rest.getOperando2()==resta.getOperando2())
+				return true;
+		}
+		return false;
+	}
 	
 }

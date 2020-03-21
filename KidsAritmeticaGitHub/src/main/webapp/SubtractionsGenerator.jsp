@@ -225,7 +225,24 @@
 				      <input type="radio" name="nivel" id="nivel40" value="40"/>
 				      <label for="nivel40">Level 40 (Levels 33-39)</label>
 				     
-				    
+				      
+				      <input type="radio" name="nivel" id="nivel41" value="41"/>
+				      <label for="nivel41">Level 41</label>
+				      
+				       <input type="radio" name="nivel" id="nivel42" value="42"/>
+				      <label for="nivel42">Level 42</label>
+				      
+				      
+				      <input type="radio" name="nivel" id="nivel43" value="43"/>
+				      <label for="nivel41">Level 43</label>
+				      
+				       <input type="radio" name="nivel" id="nivel44" value="44"/>
+				      <label for="nivel42">Level 44</label>
+				      
+				       <input type="radio" name="nivel" id="nivel46" value="46"/>
+				      <label for="nivel46">Level 46</label>
+				      
+				      
 				      <input type="button" id="calcularSuma" onclick="javascript:enviarSuma();" value="Generar Restas"/>
 				    </div>
 				    <div id="targetElement">

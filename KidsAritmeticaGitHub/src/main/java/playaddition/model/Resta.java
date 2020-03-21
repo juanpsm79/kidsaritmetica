@@ -55,7 +55,7 @@ public class Resta implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Resta other = (Resta) obj;
-		if (operando1 == other.operando1 && operando2 == other.operando2)
+		if (operando1 == other.operando1 || operando2 == other.operando2)
 			return true;
 		return false;
 	}
