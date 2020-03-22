@@ -22,29 +22,29 @@ public class GeneradorRestas {
 		Integer digitoOp2 = null;
 		resta.setNivel(nivel);
 		if(nivel==1) {
-			digitoOp1 = new Random().nextInt(nivel+1);
+			digitoOp1 = random.nextInt(nivel+1);
 			if (digitoOp1==0)
 				digitoOp2 = 0;
 			else
-				digitoOp2 = new Random().nextInt(digitoOp1+1);
+				digitoOp2 = random.nextInt(digitoOp1+1);
 		}else if(nivel==2) {
-			digitoOp1 = new Random().nextInt(nivel+1);
+			digitoOp1 = random.nextInt(nivel+1);
 			if (digitoOp1==0)
 				digitoOp2 = 0;
 			else
-				digitoOp2 = new Random().nextInt(digitoOp1+1);
+				digitoOp2 = random.nextInt(digitoOp1+1);
 		}else if(nivel==3 || nivel==4) {
-			digitoOp1 = new Random().ints(1, 1, nivel+1).sum();
+			digitoOp1 = random.ints(1, 1, nivel+1).sum();
 			if (digitoOp1==0)
 				digitoOp2 = 0;
 			else
-				digitoOp2 = new Random().ints(1, 1, digitoOp1+1).sum();
+				digitoOp2 = random.ints(1, 1, digitoOp1+1).sum();
 		} else if (nivel>=6 && nivel<=10) {
-	    	digitoOp1 = new Random().ints(1, nivel-5, nivel).sum();
+	    	digitoOp1 = random.ints(1, nivel-5, nivel).sum();
 			if (digitoOp1==0)
 				digitoOp2 = 0;
 			else
-				digitoOp2 = new Random().ints(1, nivel-5, digitoOp1+1).sum();
+				digitoOp2 = random.ints(1, nivel-5, digitoOp1+1).sum();
 	    	
 	    }
 		digitosOperador1.add(digitoOp1);
@@ -80,7 +80,7 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
+		int unidades1 = random.nextInt(10);
 		int unidades2 = 0;
 		
 		if (unidades1==0)
@@ -88,7 +88,7 @@ public class GeneradorRestas {
 		else if (unidades1==1)
 			unidades2 = 1;
 		else
-			unidades2 = new Random().ints(1, 1, unidades1+1).sum();
+			unidades2 = random.ints(1, 1, unidades1+1).sum();
 		int decenas1 =  1;
 		
 		digitosOperador1.add(unidades1);
@@ -127,9 +127,9 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
+		int unidades1 = random.nextInt(9);
 		int decenas1 =  1;
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -166,12 +166,12 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 =  new Random().ints(1, 2, 10).sum();
-		int decenas1 =  new Random().ints(1, 2, 5).sum();
+		int unidades1 =  random.ints(1, 2, 10).sum();
+		int decenas1 =  random.ints(1, 2, 5).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-		   unidades2 = new Random().ints(1, 2, unidades1+1).sum();
+		   unidades2 = random.ints(1, 2, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -208,10 +208,10 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int decenas1 =  new Random().ints(1, 2, 5).sum();
+		int unidades1 = random.nextInt(9);
+		int decenas1 =  random.ints(1, 2, 5).sum();
 		
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -248,12 +248,12 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
-		int decenas1 =  new Random().ints(1, 5, 10).sum();
+		int unidades1 = random.nextInt(10);
+		int decenas1 =  random.ints(1, 5, 10).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-		   unidades2 = new Random().ints(1, 1, unidades1+1).sum();
+		   unidades2 = random.ints(1, 1, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -290,10 +290,10 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int decenas1 =  new Random().ints(1, 5, 10).sum();
+		int unidades1 = random.nextInt(9);
+		int decenas1 =  random.ints(1, 5, 10).sum();
 		
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -330,14 +330,14 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
-		int decenas1 =  new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(10);
+		int decenas1 =  random.ints(1, 1, 10).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-			unidades2 = new Random().ints(1, 1, unidades1+1).sum();
+			unidades2 = random.ints(1, 1, unidades1+1).sum();
 		
-		int decenas2 = new Random().ints(1, 1, decenas1+1).sum();
+		int decenas2 = random.ints(1, 1, decenas1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -375,11 +375,11 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int decenas1 =  new Random().ints(1, 5, 10).sum();
+		int unidades1 = random.nextInt(9);
+		int decenas1 =  random.ints(1, 5, 10).sum();
 		
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
-		int decenas2 = new Random().ints(1, 1, decenas1).sum();
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
+		int decenas2 = random.ints(1, 1, decenas1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -417,13 +417,13 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
-		int decenas1 =  new Random().ints(1, 1, 10).sum();
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(10);
+		int decenas1 =  random.ints(1, 1, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-			unidades2 = new Random().ints(1, 1, unidades1+1).sum();
+			unidades2 = random.ints(1, 1, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -461,11 +461,11 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int decenas1 =  new Random().ints(1, 1, 10).sum();
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(9);
+		int decenas1 =  random.ints(1, 1, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
-		int	unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int	unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -505,11 +505,11 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().ints(1, 1, 9).sum();
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int unidades1 = random.ints(1, 1, 9).sum();
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
 		int decenas1 =  0;
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -549,14 +549,14 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
-		int decenas1 =  new Random().ints(1, 1, 10).sum();
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(10);
+		int decenas1 =  random.ints(1, 1, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
 		int unidades2 = 0;
 		if(unidades1>0)
-			unidades2 = new Random().ints(1, 1, unidades1+1).sum();
-		int decenas2 = new Random().ints(1, 1, decenas1+1).sum();
+			unidades2 = random.ints(1, 1, unidades1+1).sum();
+		int decenas2 = random.ints(1, 1, decenas1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -595,12 +595,12 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int decenas1 =  new Random().ints(1, 2, 10).sum();
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(9);
+		int decenas1 =  random.ints(1, 2, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
-		int	unidades2 = new Random().ints(1, unidades1+1, 10).sum();
-		int	decenas2 = new Random().ints(1, 1, decenas1).sum();
+		int	unidades2 = random.ints(1, unidades1+1, 10).sum();
+		int	decenas2 = random.ints(1, 1, decenas1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -639,14 +639,14 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(10);
-		int decenas1 =  new Random().ints(1, 1, 9).sum();
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int unidades1 = random.nextInt(10);
+		int decenas1 =  random.ints(1, 1, 9).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
 		int	unidades2 = 0;
 		if(unidades1>0)
-			unidades2 = new Random().ints(1, 1, unidades1+1).sum();
-		int	decenas2 = new Random().ints(1, decenas1+1, 10).sum();
+			unidades2 = random.ints(1, 1, unidades1+1).sum();
+		int	decenas2 = random.ints(1, decenas1+1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -685,14 +685,14 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = new Random().nextInt(9);
-		int unidades2 = new Random().ints(1, unidades1+1, 10).sum();
+		int unidades1 = random.nextInt(9);
+		int unidades2 = random.ints(1, unidades1+1, 10).sum();
 		
-		int decenas1 =  new Random().ints(1, 1, 9).sum();
-		int decenas2 = new Random().ints(1, decenas1+1, 10).sum();
+		int decenas1 =  random.ints(1, 1, 9).sum();
+		int decenas2 = random.ints(1, decenas1+1, 10).sum();
 		
 		
-		int centenas1 = new Random().ints(1, 1, 10).sum();
+		int centenas1 = random.ints(1, 1, 10).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -730,14 +730,14 @@ public class GeneradorRestas {
 
 	public Resta getOperandosNivel4142(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
 		Resta resta =  new Resta();
-		int operador1 = new Random().ints(1, 100, 1000).sum();
-		int operador2 = new Random().ints(1, 10, 100).sum();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 10, 100).sum();
 		
 		operador1 = operador1 - 10*((operador1/10)%10);
 		
 		
 		if(operador1%10<operador2%10) {
-			int aux = new Random().ints(1, operador2%10, 10).sum();
+			int aux = random.ints(1, operador2%10, 10).sum();
 			operador1 = operador1 - operador1%10 + aux;
 		}
 			
@@ -761,14 +761,14 @@ public class GeneradorRestas {
 	
 	public Resta getOperandosNivel4344(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
 		Resta resta =  new Resta();
-		int operador1 = new Random().ints(1, 100, 1000).sum();
-		int operador2 = new Random().ints(1, 10, 100).sum();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 10, 100).sum();
 		
 		operador1 = operador1 - 10*((operador1/10)%10);
-		operador1 = operador1 - operador1%10 + new Random().ints(1, 0, 9).sum();
+		operador1 = operador1 - operador1%10 + random.ints(1, 0, 9).sum();
 		
 		if(operador1%10>=operador2%10) {
-				int aux = new Random().ints(1, operador1%10+1, 10).sum();
+				int aux = random.ints(1, operador1%10+1, 10).sum();
 				operador2 = operador2 - operador2%10 + aux;
 		}
 			
@@ -792,21 +792,21 @@ public class GeneradorRestas {
 	
 	public Resta getOperandosNivel46(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
 		Resta resta =  new Resta();
-		int operador1 = new Random().ints(1, 100, 1000).sum();
-		int operador2 = new Random().ints(1, 100, 1000).sum();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 100, 1000).sum();
 		
 		if(operador1%10<operador2%10) {
-			int aux = new Random().ints(1, operador2%10, 10).sum();
+			int aux = random.ints(1, operador2%10, 10).sum();
 			operador1 = operador1 - operador1%10 + aux;
 		}
 		
 		if((operador1/10)%10 < (operador2/10)%10) {
-			int aux = new Random().ints(1, (operador2/10)%10, 10).sum();
+			int aux = random.ints(1, (operador2/10)%10, 10).sum();
 			operador1 = operador1 - 10*((operador1/10)%10) + 10*aux;
 		}
 		
 		if((operador1/100)%10 < (operador2/100)%10) {
-			int aux = new Random().ints(1, (operador2/100)%10, 10).sum();
+			int aux = random.ints(1, (operador2/100)%10, 10).sum();
 			operador1 = operador1 - 100*((operador1/100)%10) + 100*aux;
 		}
 			
@@ -824,6 +824,122 @@ public class GeneradorRestas {
 				return resta;
 			}
 		} else {
+			return resta;
+		}
+	}
+	
+	public Resta getOperandosNivel4748(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 100, 1000).sum();
+		
+		//sumamos unidades a operador2 para que supere en unidades a operador1 que no puede tener un 9 en unidadeos
+		operador1 = operador1 - operador1%10 + random.ints(1, 0, 9).sum();
+		if(operador1%10>=operador2%10)
+			operador2 = operador2 - operador2%10 + random.ints(1, operador1%10+1, 10).sum();
+		
+		//decenas del sustraendo menor que el minuendo->las decenas del sustraendo no pueden ser 9
+		operador2 = operador2 - 10*((operador2/10)%10) + 10*random.ints(1, 0, 9).sum();
+		if((operador1/10)%10 <= (operador2/10)%10) 
+			operador1 = operador1 - 10*((operador1/10)%10) + 10*random.ints(1, (operador2/10)%10+1, 10).sum();
+		
+		
+		if((operador1/100)%10 < (operador2/100)%10)  
+			operador1 = operador1 - 100*((operador1/100)%10) + 100*random.ints(1, (operador2/100)%10, 10).sum();
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel4748(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			
+			return resta;
+		}
+	}
+	
+	public Resta getOperandosNivel4950(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 100, 1000).sum();
+		
+		//sumamos unidades a operador2 para que supere en unidades a operador1 que no puede tener un 9 en unidadeos
+		if(operador1%10<operador2%10)
+			operador1 = operador1 - operador1%10 + random.ints(1, operador2%10, 10).sum();
+		
+		//decenas del sustraendo mayor que el minuendo->las decenas del minuendo no pueden ser 9
+		operador1 = operador1 - 10*((operador1/10)%10) + 10*random.ints(1, 0, 9).sum();
+		if((operador1/10)%10 >= (operador2/10)%10) 
+			operador2 = operador2 - 10*((operador2/10)%10) + 10*random.ints(1, (operador1/10)%10+1, 10).sum();
+		
+		//sustraendo estrictamente menor minuendo
+		operador2 = operador2 - 100*((operador2/100)%10) + 100*random.ints(1, 1, 9).sum();
+		if((operador1/100)%10 <= (operador2/100)%10)  
+			operador1 = operador1 - 100*((operador1/100)%10) + 100*random.ints(1, (operador2/100)%10+1, 10).sum();
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel4950(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			
+			return resta;
+		}
+	}
+	
+	public Resta getOperandosNivel5152(List<Resta> restasNivel, Integer colisiones, int maxColisiones) throws Exception {
+		Resta resta =  new Resta();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 100, 1000).sum();
+		
+		//Unidade y decenas sustraendo mayor minuendo->no 9's en unidades y decenas minuendo
+		operador1 = operador1 - operador1%10 + random.ints(1, 0, 9).sum();
+		operador1 = operador1 - 10*((operador1/10)%10) + 10*random.ints(1, 0, 9).sum();
+		
+		if(operador1%10 >= operador2%10)
+			operador2 = operador2 - operador2%10 + random.ints(1, operador1%10+1, 10).sum();
+		
+		//decenas del sustraendo mayor que el minuendo
+		if((operador1/10)%10 >= (operador2/10)%10) 
+			operador2 = operador2 - 10*((operador2/10)%10) + 10*random.ints(1, (operador1/10)%10+1, 10).sum();
+		
+		//sustraendo estrictamente menor minuendo
+		operador2 = operador2 - 100*((operador2/100)%10) + 100*random.ints(1, 1, 9).sum();
+		if((operador1/100)%10 <= (operador2/100)%10)  
+			operador1 = operador1 - 100*((operador1/100)%10) + 100*random.ints(1, (operador2/100)%10+1, 10).sum();
+			
+		resta.setOperando1(operador1);
+		resta.setOperando2(operador2);
+		resta.setResultadoResta(operador1-operador2);
+		
+		if (restasNivel.contains(resta)){
+			colisiones++;
+			if(colisiones<=maxColisiones) {
+				resta = getOperandosNivel5152(restasNivel,colisiones, maxColisiones);
+				return resta;
+			} else {
+				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);
+				return resta;
+			}
+		} else {
+			
 			return resta;
 		}
 	}
@@ -847,5 +963,40 @@ public class GeneradorRestas {
 		}
 		return false;
 	}
+
+	
+
+	/*public static void main (String args[]) {
+		Random random = new Random();
+		int operador1 = random.ints(1, 100, 1000).sum();
+		int operador2 = random.ints(1, 100, 1000).sum();
+		for (int i=0;i<=400;i++) {
+			 //operador1 = random.ints(1, 100, 1000).sum();
+			operador1 = random.ints(1, 100, 1000).sum();
+			System.out.println(operador1);
+			int aux1 = operador1%10;
+			System.out.println(aux1);
+			int aux = random.ints(1, 0, 9).sum();
+			System.out.println(aux);
+			operador1 = operador1 - aux1 + aux;
+			System.out.println(operador1);
+			System.out.println("-------------");
+		}
+		operador1 = operador1 - operador1%10 + random.ints(1, 0, 9).sum();
+		if(operador1%10>=operador2%10)
+			operador2 = operador2 - operador2%10 + random.ints(1, operador1%10+1, 10).sum();
+		
+		//decenas del sustraendo menor que el minuendo->las decenas del sustraendo no pueden ser 9
+		operador2 = operador2 - 10*((operador2/10)%10) + 10*random.ints(1, 0, 9).sum();
+		if((operador1/10)%10 <= (operador2/10)%10) 
+			operador1 = operador1 - 10*((operador1/10)%10) + 10*random.ints(1, (operador2/10)%10+1, 10).sum();
+		
+		
+		if((operador1/100)%10 < (operador2/100)%10)  
+			operador1 = operador1 - 100*((operador1/100)%10) + 100*random.ints(1, (operador2/100)%10, 10).sum();
+		
+		//System.out.println(operador1);
+		//System.out.println(operador2);
+	}*/
 	
 }
