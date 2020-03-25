@@ -94,7 +94,7 @@ function handleSignUp() {
     var password = document.getElementById('password1').value;
     firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
    	.catch(function(error) {
-   		document.getElementById("loginAjax1").style.visibility="visible";
+   		document.getElementById("loginAjax").style.visibility="visible";
    		document.getElementById("createAccountLabel").onclick=function(){crearCuenta()}
 	    var errorCode = error.code;
 	    var errorMessage = error.message;
@@ -436,7 +436,7 @@ function displaycreateAccount(){
 			<div class="col-sm-8 col-sm-offset-2">
 				<div class="panel panel-default" align="center">
 					<div class="panel-heading">
-						<div id="loginlogo" style="position:relative;width:10vw;height:5vw;background-size:8vw 4vw;background-image:url(login.png);background-repeat:no-repeat"></div>
+						<div id="loginlogo" style="position:relative;width:12.5vw;height:5vw;background-size:12.5vw 5vw;background-image:url(newaccount.png);background-repeat:no-repeat"></div>
 					</div>
 					<div class="panel-body">
 						<form id="signupForm1" class="form-horizontal" action="" method="post">
@@ -454,7 +454,7 @@ function displaycreateAccount(){
 										name="password1" placeholder="<%= password %>" style="width:90%">
 								</div>
 							</div>
-							<div id="repassword" class="form-group" style="display:none">
+							<div id="repassword" class="form-group">
 								<label class="col-sm-4 control-label" for="confirm_password1" style="padding-left: 0px"><%= rpassword %>:</label>
 								<div class="col-sm-5" style="padding-left: 0px">
 									<input type="password" class="form-control"
@@ -462,7 +462,7 @@ function displaycreateAccount(){
 										placeholder="<%= password %>">
 								</div>
 							</div>
-							<div id="terms" class="form-group"  style="display:none">
+							<div id="terms" class="form-group">
 								<div id="terms1" class="col-sm-5 col-sm-offset-4">
 									<div class="checkbox">
 										<label> <input type="checkbox" id="agree1"
@@ -474,9 +474,9 @@ function displaycreateAccount(){
 							
 							<div id="loginBoton" class="form-group" style="cursor:default">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
-									<div id="loginLabel" style="position:absolute;left:13vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:5vw;height:2.5vw;background-size:5vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
-										onclick="login()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw">Login</label></div>
-									<div id="cancelAccountLabel" style="position:absolute;left:19vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="createAccountLabel" style="position:absolute;left:10.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
+										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
+									<div id="cancelAccountLabel1" style="position:absolute;left:20.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>		
 								</div>
 							</div>
@@ -486,21 +486,10 @@ function displaycreateAccount(){
 									  <div id="loginAjax" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>	
 								</div>
 							</div>
+							 
 							
-							<!--  
-							<div id="crearCuenta" class="form-group">
-								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
-									<div id="crearCuentaLink" style="position:absolute;left:11vw">
-										<a style="color:blue;cursor:pointer" onclick="javascript:displaycreateAccount()"><u><%= crearCuenta %></u></a>
-									</div>
-									<div id="crearClaseLink" style="position:absolute;left:21vw">
-										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
-									</div>
-								</div>
-							</div>
-							-->
-							
-							<div id="crearBotonones" class="form-group" style="display:none">
+							<!-- 
+							<div id="crearBotonones" class="form-group">
 								<div id="capabotonescreacion" class="col-sm-9 col-sm-offset-2" style="padding-left: 0px;margin-top:1.5vw">
 									<div id="createAccountLabel" style="position:absolute;left: 10.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
 										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="position:position:absolute;cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
@@ -512,6 +501,14 @@ function displaycreateAccount(){
 							<div class="form-group">
 								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
 									<div id="loginAjax1" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
+								</div>
+							</div>
+							-->
+							<div id="crearCuenta" class="form-group">
+								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
+									<div id="crearClaseLink" style="position:absolute;left:16vw">
+										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
+									</div>
 								</div>
 							</div>
 						</form>

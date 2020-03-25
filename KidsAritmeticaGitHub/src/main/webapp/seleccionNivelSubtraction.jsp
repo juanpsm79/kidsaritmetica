@@ -80,7 +80,7 @@ var dominio = "test.playaddition.com";
 				pintarTodosNivelesUsuario(snapshot.val())
 		  })
 		} else{
-			pintarTodosNivelesUsuario(58);
+			pintarTodosNivelesUsuario(40);
 		}
   	  });
   });
@@ -105,7 +105,7 @@ var dominio = "test.playaddition.com";
 		  html+=pintaNiveles("14.8vw",21, nivelSumaUsuario)
 		  html+=pintaNiveles("22.1vw",31, nivelSumaUsuario)
 		  document.getElementById("capaNiveles").innerHTML = html; 
-	  }else if (nivelSumaUsuario<=50){
+	  }/*else if (nivelSumaUsuario<=50){
 		  html=pintaNiveles("0vw",1, nivelSumaUsuario)
 		  html+=pintaNiveles("7.4vw",11, nivelSumaUsuario)
 		  html+=pintaNiveles("14.8vw",21, nivelSumaUsuario)
@@ -120,7 +120,7 @@ var dominio = "test.playaddition.com";
 		  html+=pintaNiveles("29.5vw",41, nivelSumaUsuario)
 		  html+=pintaNiveles("36.9vw",51, nivelSumaUsuario)
 		  document.getElementById("capaNiveles").innerHTML = html; 
-	  }
+	  }*/
 	  for (i = 1; i <= nivelSumaUsuario; i++)
 		    $("#"+i).flip({axis: 'y',trigger: 'click', reverse: true});
 	  for (i = 1; i <= nivelSumaUsuario; i++)

@@ -75,6 +75,14 @@ var pantallaCompleta=false;
       document.getElementById("loginboton").style.width="3vw";
       document.getElementById("loginboton").style.height="3vw"
       document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+      
+      //document.getElementById("createAccountBoton").style.backgroundImage="url(loading.gif)";
+      document.getElementById("createAccountBoton").style.width="3vw";
+      document.getElementById("createAccountBoton").style.height="3vw"
+      document.getElementById("createAccountBoton").style.backgroundSize="3vw 3vw";
+      
+      
+      
       document.getElementById("playAdditionDiv").onclick=function(){};
       document.getElementById("playSubtractionDiv").onclick=function(){};
       
@@ -100,6 +108,13 @@ var pantallaCompleta=false;
 	          document.getElementById("loginboton").style.width="3vw";
 	          document.getElementById("loginboton").style.height="3vw"
 	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
+	          
+	          document.getElementById("createAccountBoton").style.backgroundImage="";
+	          document.getElementById("createAccountBoton").style.width="3vw";
+	          document.getElementById("createAccountBoton").style.height="3vw"
+	          document.getElementById("createAccountBoton").style.backgroundSize="3vw 3vw";
+	          
+	          
 	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
 	          document.getElementById("logoutDiv").style.display="inline";
 	          usuario = user;
@@ -115,6 +130,13 @@ var pantallaCompleta=false;
 	        document.getElementById("loginboton").style.height="4vw"
 	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
 	        document.getElementById("loginboton").onclick=function(){login()}
+	        
+	        document.getElementById("createAccountBoton").style.backgroundImage="url(login.png)";
+	        document.getElementById("createAccountBoton").style.width="8vw";
+	        document.getElementById("createAccountBoton").style.height="4vw"
+	        document.getElementById("createAccountBoton").style.backgroundSize="8vw 4vw";
+	        document.getElementById("createAccountBoton").onclick=function(){createAccount()}
+	        
 	        document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
 	        document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
 		}
@@ -124,6 +146,10 @@ var pantallaCompleta=false;
   
   function login(){
 		location.href='login.jsp';
+  }
+  
+  function createAccount(){
+	  location.href='createAccount.jsp';
   }
   
   function logout(){
@@ -244,7 +270,7 @@ function fullscreen(obj) {
   
 </head>
 
-  <body id="body" onload="loadImages();resizePage()">
+  <body id="body" onload="resizePage()">
 		<div id="izquierda" style="position:absolute;width:25vw">
 			
 			<div style="position:absolute;top:1vw;width:25vw">
@@ -283,6 +309,14 @@ function fullscreen(obj) {
 		
  		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
+		</div>
+		
+		
+		<div id="createAccountBoton" style="position:absolute;right:15vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
+		</div>
+		
+		<div id="userGuideBoton" style="position:absolute;right:24.5vw;cursor:pointer;width:4vw;height:4.15vw;background-size:4vw 4.15vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
+		    onclick="javascript:window.open('https://storage.cloud.google.com/testplayaddition.appspot.com/UsersGuide.pdf?hl=es', '_blank');">	
 		</div>
 		
 		<div id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
