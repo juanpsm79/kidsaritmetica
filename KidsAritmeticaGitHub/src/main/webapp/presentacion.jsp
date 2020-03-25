@@ -4,7 +4,8 @@
 <%
 Locale locale = request.getLocale();
 ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
-String visitantes = RB.getString("visitantes");  
+String visitantes = RB.getString("visitantes"); 
+String crearCuentaBoton=RB.getString("crearCuentaBoton");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -131,7 +132,7 @@ var pantallaCompleta=false;
 	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
 	        document.getElementById("loginboton").onclick=function(){login()}
 	        
-	        document.getElementById("createAccountBoton").style.backgroundImage="url(login.png)";
+	        //document.getElementById("createAccountBoton").style.backgroundImage="url(login.png)";
 	        document.getElementById("createAccountBoton").style.width="8vw";
 	        document.getElementById("createAccountBoton").style.height="4vw"
 	        document.getElementById("createAccountBoton").style.backgroundSize="8vw 4vw";
@@ -312,7 +313,8 @@ function fullscreen(obj) {
 		</div>
 		
 		
-		<div id="createAccountBoton" style="position:absolute;right:15vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
+		<div id="createAccountBoton" style="position:absolute;right:13.5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
+			<label style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)"><%= crearCuentaBoton %></label>
 		</div>
 		
 		<div id="userGuideBoton" style="position:absolute;right:24.5vw;cursor:pointer;width:4vw;height:4.15vw;background-size:4vw 4.15vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
