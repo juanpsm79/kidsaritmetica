@@ -51,7 +51,7 @@ var verificarRecaptcha="<%= verificarRecaptcha %>"
 var unAvailableUserNames = [];
 var md
 $( function() {
-	     window.addEventListener("orientationchange", screenfull.request());
+	     window.addEventListener("orientationchange", resizePage);
 		 var firebaseConfig = {
 		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 		    authDomain: "fbplayaddition.firebaseapp.com",
@@ -337,81 +337,48 @@ function displaycreateAccount(){
   function resizePage(){
 	  
 	 if(device.type=='mobile'){
-		 
-		 document.getElementById('loginLabel').style.width="20vw";
-		 document.getElementById('loginLabel').style.height="6vw";
-		 document.getElementById('loginLabel').style.fontSize="3.75vw";
-		 document.getElementById('loginLabel').style.left="22vw"
-	     document.getElementById('loginLabel').style.backgroundSize="20vw 6vw";
-		 
+		 document.getElementById('loginlogo').style.width="30vw";
+		 document.getElementById('loginlogo').style.height="12vw";
+	     document.getElementById('loginlogo').style.backgroundSize="30vw 12vw";
+	     
+	     document.getElementById('crearClaseLink').style.left="35vw";
+	     
 		 document.getElementById('cancelAccountLabel').style.width="20vw";
 		 document.getElementById('cancelAccountLabel').style.height="6vw";
 		 document.getElementById('cancelAccountLabel').style.fontSize="3.75vw";
-		 document.getElementById('cancelAccountLabel').style.left="49vw"
+		 document.getElementById('cancelAccountLabel').style.left="51vw"
 	     document.getElementById('cancelAccountLabel').style.backgroundSize="20vw 6vw";
 		 
 		 document.getElementById('createAccountLabel').style.width="30vw";
 		 document.getElementById('createAccountLabel').style.height="6vw";
 		 document.getElementById('createAccountLabel').style.fontSize="3.75vw";
-		 document.getElementById('createAccountLabel').style.left="14vw"
+		 document.getElementById('createAccountLabel').style.left="16vw"
 	     document.getElementById('createAccountLabel').style.backgroundSize="30vw 6vw";
+		 document.getElementById('terms1').className="col-sm-5 col-sm-offset-4";
 		 
-		 document.getElementById('cancelAccountLabel1').style.width="20vw";
-		 document.getElementById('cancelAccountLabel1').style.height="6vw";
-		 document.getElementById('cancelAccountLabel1').style.fontSize="3.75vw";
-		 document.getElementById('cancelAccountLabel1').style.left="50vw"
-	     document.getElementById('cancelAccountLabel1').style.backgroundSize="20vw 6vw";
+		 if(device.landscape()) {
+        	 //BOTONES Y ENLACES DEL LOGIN
+        	 document.getElementById('loginlogo').style.width="28vw";
+		 document.getElementById('loginlogo').style.height="10vw";
+	     document.getElementById('loginlogo').style.backgroundSize="28vw 10vw";
+	     
+	     document.getElementById('crearClaseLink').style.left="42vw";
+	     
+		 document.getElementById('cancelAccountLabel').style.width="18vw";
+		 document.getElementById('cancelAccountLabel').style.height="5vw";
+		 document.getElementById('cancelAccountLabel').style.fontSize="3.5vw";
+		 document.getElementById('cancelAccountLabel').style.left="53vw"
+	     document.getElementById('cancelAccountLabel').style.backgroundSize="18vw 5vw";
 		 
-		 document.getElementById('crearCuentaLink').style.left="15vw"
-	     document.getElementById('crearClaseLink').style.left="50vw"
-		 
-		 document.getElementById('capabotonescreacion').style.marginTop="4vw"
-		 
-		 
-		 
-		 document.getElementById('loginlogo').style.width="27vw";
-		 document.getElementById('loginlogo').style.height="9vw";
-	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
-	     if(device.iphone()){
-	    	 if(device.portrait())
-	    		 document.getElementById('crearCuentaLink').style.left="18vw"
-	         else if(device.landscape()) {
-	        	 //BOTONES Y ENLACES DEL LOGIN
-	        	 document.getElementById('loginLabel').style.width="10vw";
-		 		 document.getElementById('loginLabel').style.height="3vw";
-		 		 document.getElementById('loginLabel').style.fontSize="1.9vw";
-		 		 document.getElementById('loginLabel').style.left="9vw"
-	     		 document.getElementById('loginLabel').style.backgroundSize="10vw 3vw";
-		 
-		 		 document.getElementById('cancelAccountLabel').style.width="10vw";
-		 		 document.getElementById('cancelAccountLabel').style.height="3vw";
-		 		 document.getElementById('cancelAccountLabel').style.fontSize="1.9vw";
-		 		 document.getElementById('cancelAccountLabel').style.left="22vw"
-	     		 document.getElementById('cancelAccountLabel').style.backgroundSize="10vw 3vw";
-	        	 
-	        	 document.getElementById('crearCuentaLink').style.left="7.5vw"
-	     		 document.getElementById('crearClaseLink').style.left="23.5vw"
-	        	 
-	        	 //BOTONES DEL CREATE ACCOUNT
-	        	 document.getElementById('createAccountLabel').style.width="15vw";
-	    		 document.getElementById('createAccountLabel').style.height="3vw";
-	    		 document.getElementById('createAccountLabel').style.fontSize="1.9vw";
-	    		 document.getElementById('createAccountLabel').style.left="7vw"
-	    	     document.getElementById('createAccountLabel').style.backgroundSize="15vw 3vw";
-	    		 
-	    		 document.getElementById('cancelAccountLabel1').style.width="10vw";
-	    		 document.getElementById('cancelAccountLabel1').style.height="3vw";
-	    		 document.getElementById('cancelAccountLabel1').style.fontSize="1.9vw";
-	    		 document.getElementById('cancelAccountLabel1').style.left="24vw"
-	    	     document.getElementById('cancelAccountLabel1').style.backgroundSize="10vw 3vw";
-	         } 
-	     }
-
+		 document.getElementById('createAccountLabel').style.width="28vw";
+		 document.getElementById('createAccountLabel').style.height="5vw";
+		 document.getElementById('createAccountLabel').style.fontSize="3.5vw";
+		 document.getElementById('createAccountLabel').style.left="18vw"
+	     document.getElementById('createAccountLabel').style.backgroundSize="28vw 5vw";
+	 		
+    		 
+         }
 	 }
-	 /*else if(device.type=='tablet'){
-		 document.getElementById('cancelAccountLabel').style.right="7.5vw"
-			 document.getElementById('createAccountLabel').style.left="7.5vw"
-	 }*/
   }
 	
 </script>
@@ -433,7 +400,7 @@ function displaycreateAccount(){
 <body onload="resizePage()">
 	<div class="container">
 		<div class="row">
-			<div class="col-sm-8 col-sm-offset-2">
+			<div class="col-sm-9 col-sm-offset-2">
 				<div class="panel panel-default" align="center">
 					<div class="panel-heading">
 						<div id="loginlogo" style="position:relative;width:12.5vw;height:5vw;background-size:12.5vw 5vw;background-image:url(newaccount.png);background-repeat:no-repeat"></div>
@@ -476,7 +443,7 @@ function displaycreateAccount(){
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createAccountLabel" style="position:absolute;left:10.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" id="signup1"
 										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
-									<div id="cancelAccountLabel1" style="position:absolute;left:20.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
+									<div id="cancelAccountLabel" style="position:absolute;left:20.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>		
 								</div>
 							</div>
@@ -487,23 +454,6 @@ function displaycreateAccount(){
 								</div>
 							</div>
 							 
-							
-							<!-- 
-							<div id="crearBotonones" class="form-group">
-								<div id="capabotonescreacion" class="col-sm-9 col-sm-offset-2" style="padding-left: 0px;margin-top:1.5vw">
-									<div id="createAccountLabel" style="position:absolute;left: 10.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:9vw;height:2.5vw;background-size:9vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat" 
-										onclick="crearCuenta()" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="position:position:absolute;cursor:pointer;margin-top:0.3vw"><%= crearCuentaBoton %></label></div>
-										
-									<div id="cancelAccountLabel1" style="position:absolute;left:20.5vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:7vw;height:2.5vw;background-size:7vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
-										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="position:position:absolute;cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-9 col-sm-offset-2" style="padding-left: 0px">
-									<div id="loginAjax1" style="visibility:hidden;width:2vw;height:2vw;background-size:2vw 2vw;background-image:url(loading.gif);background-repeat:no-repeat"></div>
-								</div>
-							</div>
-							-->
 							<div id="crearCuenta" class="form-group">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
 									<div id="crearClaseLink" style="position:absolute;left:16vw">
@@ -512,7 +462,6 @@ function displaycreateAccount(){
 								</div>
 							</div>
 						</form>
-						<!--  div id="html_element" style="position:relative;top:5vw"></div-->
 					</div>
 					
 				</div>

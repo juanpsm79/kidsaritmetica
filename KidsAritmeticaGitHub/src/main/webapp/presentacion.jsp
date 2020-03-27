@@ -6,6 +6,7 @@ Locale locale = request.getLocale();
 ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
 String visitantes = RB.getString("visitantes"); 
 String crearCuentaBoton=RB.getString("crearCuentaBoton");
+String userGuide=RB.getString("userGuide");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -137,12 +138,12 @@ var pantallaCompleta=false;
 	        document.getElementById("loginboton").onclick=function(){login()}
 	        
 	        document.getElementById("createAccountBoton").style.visibility="visible";
-	        document.getElementById("createAccountBoton").style.width="8vw";
+	        document.getElementById("createAccountBoton").style.width="5vw";
 	        document.getElementById("createAccountBoton").style.height="4vw"
-	        document.getElementById("createAccountBoton").style.backgroundSize="8vw 4vw";
+	        document.getElementById("createAccountBoton").style.backgroundSize="5vw 4vw";
 	        document.getElementById("createAccountBoton").onclick=function(){createAccount()}
 	        
-	        document.getElementById("userGuideBoton").style.right="24.5vw"
+	        document.getElementById("userGuideBoton").style.right="21vw"
 	        
 	        document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
 	        document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
@@ -328,16 +329,13 @@ function fullscreen(obj) {
 		<div id="logoutDiv" style="cursor:pointer;width:6vw;height:2vw;display:none;position:absolute;top:1.35vw;right:7.5vw;font-family:Arial;font-size:1.3vw;color:orange" 
 	  	onmouseover="this.style.textDecoration ='underline';this.style.fontWeight='bold'" onmouseout="this.style.textDecoration ='none';this.style.fontWeight='normal'" onclick="logout()">Log&nbsp;Out</div>  
 		
- 		<div id="loginboton" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
+ 		<div id="loginboton" title="Login" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
 		</div>
-		
-		
-		<div id="createAccountBoton" style="visibility:hidden;position:absolute;right:13.5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
-			<label style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)"><%= crearCuentaBoton %></label>
+		<div id="createAccountBoton" title="<%= crearCuentaBoton %>" style="visibility:hidden;position:absolute;right:13.5vw;cursor:pointer;width:5vw;height:4vw;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(createAccount.png)">	
 		</div>
 		
-		<div id="userGuideBoton" style="position:absolute;right:13.5vw;cursor:pointer;width:6vw;height:6vw;background-size:6vw 6vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
+		<div id="userGuideBoton" title="<%= userGuide %>" style="position:absolute;right:13.5vw;cursor:pointer;width:6vw;height:6vw;background-size:6vw 6vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
 		    onclick="javascript:window.open('https://storage.cloud.google.com/testplayaddition.appspot.com/UsersGuide.pdf?hl=es', '_blank')">	
 		</div>
 		
