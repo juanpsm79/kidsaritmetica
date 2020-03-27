@@ -316,7 +316,8 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   var docLevelsWindow;
 	
   function openDoc(){
-	  docLevelsWindow = window.open("./selectAllLevels.jsp")
+	  window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')
+	  //docLevelsWindow = window.open("./selectAllLevels.jsp")
   }
   
   function callback(nivel){

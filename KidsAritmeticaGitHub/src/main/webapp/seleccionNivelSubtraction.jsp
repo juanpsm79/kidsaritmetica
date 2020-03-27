@@ -323,7 +323,7 @@ var dominio = "test.playaddition.com";
   var docLevelsWindow;
 	
   function openDoc(){
-	  docLevelsWindow = window.open("./selectAllLevels.jsp")
+	 window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank');
   }
   
   function callback(nivel){

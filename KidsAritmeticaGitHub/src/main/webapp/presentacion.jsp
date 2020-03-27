@@ -9,7 +9,7 @@ String crearCuentaBoton=RB.getString("crearCuentaBoton");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
-  <meta http-equiv="Cache-control" content="public">
+  <meta http-equiv="Cache-control" content="public" charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
   <title>PlayAddition</title>
   <style type="text/css">
@@ -77,7 +77,7 @@ var pantallaCompleta=false;
       document.getElementById("loginboton").style.height="3vw"
       document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
       
-      //document.getElementById("createAccountBoton").style.backgroundImage="url(loading.gif)";
+      document.getElementById("createAccountBoton").style.visibility="hidden";
       document.getElementById("createAccountBoton").style.width="3vw";
       document.getElementById("createAccountBoton").style.height="3vw"
       document.getElementById("createAccountBoton").style.backgroundSize="3vw 3vw";
@@ -100,24 +100,28 @@ var pantallaCompleta=false;
 	  firebase.initializeApp(firebaseConfig);
 	  firebase.auth().onAuthStateChanged(function(user) {
 		if (user!=null) {
+			document.getElementById("createAccountBoton").style.visibility="hidden";
+			document.getElementById("userGuideBoton").style.right="13.5vw";
 		  firebase.database().ref('/users/' + user.uid).once('value').then (
 			function(snapshot) {
 			  if(snapshot==null || snapshot.val()==null)
 					 firebase.database().ref('users/' + user.uid).set({"nivelActualSuma": 1,"nivelActualResta": 1,"puntos": 0});
+			  document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
+	          document.getElementById("logoutDiv").style.display="inline";
+	          
 	          document.getElementById("contador").style.display="none";
 	          document.getElementById("loginboton").style.backgroundImage="url(logadoInicialFondo.png)";
 	          document.getElementById("loginboton").style.width="3vw";
 	          document.getElementById("loginboton").style.height="3vw"
 	          document.getElementById("loginboton").style.backgroundSize="3vw 3vw";
 	          
-	          document.getElementById("createAccountBoton").style.backgroundImage="";
-	          document.getElementById("createAccountBoton").style.width="3vw";
-	          document.getElementById("createAccountBoton").style.height="3vw"
-	          document.getElementById("createAccountBoton").style.backgroundSize="3vw 3vw";
+	          
+	          //document.getElementById("createAccountBoton").style.width="3vw";
+	          //document.getElementById("createAccountBoton").style.height="3vw"
+	          //document.getElementById("createAccountBoton").style.backgroundSize="3vw 3vw";
+	         
 	          
 	          
-	          document.getElementById("inicial").innerHTML = user.email.substring(0, 1).toUpperCase();
-	          document.getElementById("logoutDiv").style.display="inline";
 	          usuario = user;
 	          document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
 		      document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
@@ -132,11 +136,13 @@ var pantallaCompleta=false;
 	        document.getElementById("loginboton").style.backgroundSize="8vw 4vw";
 	        document.getElementById("loginboton").onclick=function(){login()}
 	        
-	        //document.getElementById("createAccountBoton").style.backgroundImage="url(login.png)";
+	        document.getElementById("createAccountBoton").style.visibility="visible";
 	        document.getElementById("createAccountBoton").style.width="8vw";
 	        document.getElementById("createAccountBoton").style.height="4vw"
 	        document.getElementById("createAccountBoton").style.backgroundSize="8vw 4vw";
 	        document.getElementById("createAccountBoton").onclick=function(){createAccount()}
+	        
+	        document.getElementById("userGuideBoton").style.right="24.5vw"
 	        
 	        document.getElementById("playAdditionDiv").onclick=function(){irPlayAddition()};
 	        document.getElementById("playSubtractionDiv").onclick=function(){irPlaySubtraction()};
@@ -180,26 +186,31 @@ var pantallaCompleta=false;
 	  window.open("https://www.instagram.com/playaddition");
   }
   
+  function irYouTube(){
+	  window.open("https://www.youtube.com/channel/UC5OuhbCUu5kWILEqYdZV-JA");
+  }
+  
+  
   function resizePage(){
 	 if(device.type=='tablet' || device.type=='mobile'){
-		 document.getElementById("loginboton").style.right="10vw";
-		 document.getElementById("pantallaCompleta").style.visibility="visible";
+		 //document.getElementById("loginboton").style.right="10vw";
+		 //document.getElementById("pantallaCompleta").style.visibility="visible";
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	
 	     }else { //0 ->Portrait Mode
-	    	  	document.getElementById('twitter').style.top="4.5vw";
+	    	  	/*document.getElementById('twitter').style.top="4.5vw";
 				document.getElementById('facebook').style.top="4.5vw";
 				document.getElementById('instagram').style.top="4.5vw";
+				document.getElementById('youtube').style.top="4.5vw";*/
 	   	 }
 	 }
-	 if(device.iphone()){
+	 /*if(device.iphone()){
 		 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
-	 }
+	 }*/
   }
   
   function loadImages(){
-  	var dominio = "test.playaddition.com";
-  	//var dominio = "playaddition.com";
+  	var dominio = "playaddition.com";
  	var img1 = new Image();
 	var img2 = new Image();
 	var img3 = new Image();
@@ -274,9 +285,9 @@ function fullscreen(obj) {
   <body id="body" onload="resizePage()">
 		<div id="izquierda" style="position:absolute;width:25vw">
 			
-			<div style="position:absolute;top:1vw;width:25vw">
+			<div style="position:absolute;width:25vw">
 			
-				<div style="position:absolute">	
+				<div style="position:absolute;left:3vw">	
 					<img src="followUs.png" style="cursor:pointer;width:24vw">
 				</div>
 				
@@ -287,7 +298,7 @@ function fullscreen(obj) {
 				
 				<div id="facebook" style="position:absolute;top:3vw;left:8.5vw">
 					<img src="facebook.png" onmouseout="javascript:this.style.border='0px'" onmouseover="javascript:this.style.border='0.2vw solid rgb(46, 117, 182)'"
-						style="cursor:pointer;width:5.25vw"  onclick="javascritp:irFaceBook()">
+						style="cursor:pointer;width:5vw"  onclick="javascritp:irFaceBook()">
 				</div>
 				
 				<div id="instagram" style="position:absolute;top:3vw;left:15.25vw">
@@ -295,14 +306,23 @@ function fullscreen(obj) {
 					style="cursor:pointer;width:5vw"  onclick="javascritp:irInstagram()">
 				</div>
 				
+				<div id="youtube" style="position:absolute;top:3vw;left:22vw">
+					<img src="YOUTUBE.png" onmouseout="javascript:this.style.border='0px'" onmouseover="javascript:this.style.border='0.2vw solid rgb(46, 117, 182)'"
+					style="cursor:pointer;width:5vw"  onclick="javascritp:irYouTube()">
+				</div>
+				
 			</div>
 	 		
  			
 	 	</div>
 
-		<div id="derecha" style="position:absolute;left:20vw;width:65vw;top:13vw">	
-				<div id="playAdditionDiv" style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw"  onclick="javascript:irPlayAddition()"></div>
-				<div id="playSubtractionDiv" style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw"  onclick="javascript:irPlaySubtraction()"></div>
+		<div id="derecha" style="position:absolute;left:20vw;width:65vw;height:24vw;top:10vw">
+				<div style="position:absolute;left:7.5vw">
+					<label style="cursor:pointer;font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)" onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'" onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/tutorialEN.mp4', '_blank')">English Tutorial</label>
+					<label style="font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)">&nbsp;/&nbsp;</label>
+					<label style="cursor:pointer;font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)" onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'" onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/tutorialES.mp4', '_blank')">Tutorial en Español</label></div>
+				<div id="playAdditionDiv" style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw;top:6vw"  onclick="javascript:irPlayAddition()"></div>
+				<div id="playSubtractionDiv" style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw;top:6vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
  			
 		<div id="logoutDiv" style="cursor:pointer;width:6vw;height:2vw;display:none;position:absolute;top:1.35vw;right:7.5vw;font-family:Arial;font-size:1.3vw;color:orange" 
@@ -313,16 +333,18 @@ function fullscreen(obj) {
 		</div>
 		
 		
-		<div id="createAccountBoton" style="position:absolute;right:13.5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
+		<div id="createAccountBoton" style="visibility:hidden;position:absolute;right:13.5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">	
 			<label style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)"><%= crearCuentaBoton %></label>
 		</div>
 		
-		<div id="userGuideBoton" style="position:absolute;right:24.5vw;cursor:pointer;width:4vw;height:4.15vw;background-size:4vw 4.15vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
-		    onclick="javascript:window.open('https://storage.cloud.google.com/testplayaddition.appspot.com/UsersGuide.pdf?hl=es', '_blank');">	
+		<div id="userGuideBoton" style="position:absolute;right:13.5vw;cursor:pointer;width:6vw;height:6vw;background-size:6vw 6vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
+		    onclick="javascript:window.open('https://storage.cloud.google.com/testplayaddition.appspot.com/UsersGuide.pdf?hl=es', '_blank')">	
 		</div>
 		
+		<!--  
 		<div id="pantallaCompleta" style="visibility:hidden;position:absolute;right:4vw;cursor:pointer;width:5vw;height:5vw;background-size:5vw 5vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
 		</div>
+		-->
 			
 		<div id="contactSupport" style="position:absolute;top:40vw;left:2vw">
 				<img src="contactSupport.png" style="cursor:pointer;width:20vw">
