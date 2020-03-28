@@ -332,7 +332,10 @@ function fullscreen(obj) {
  		<div id="loginboton" title="Login" style="position:absolute;right:5vw;cursor:pointer;width:8vw;height:4vw;background-size:8vw 4vw;background-repeat:no-repeat">
  				<label id="inicial" style="cursor:pointer;position:absolute;right:0.8vw;top:0.15vw;font-family:Arial;font-size:2.3vw;color:white;z-index:5"></label>	
 		</div>
-		<div id="createAccountBoton" title="<%= crearCuentaBoton %>" style="visibility:hidden;position:absolute;right:13.5vw;cursor:pointer;width:5vw;height:4vw;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(createAccount.png)">	
+		<div id="createAccountBoton" title="<%= crearCuentaBoton %>" style="position:absolute;right:13.5vw;cursor:pointer;width:5vw;height:4vw;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(newAccountInicio.png)">	
+			<!--  
+			<label style="cursor:pointer;font-family:BerlinDvwi;font-size:1.8vw;color:rgb(46, 117, 182)"><%= crearCuentaBoton %></label>
+			-->
 		</div>
 		
 		<div id="userGuideBoton" title="<%= userGuide %>" style="position:absolute;right:13.5vw;cursor:pointer;width:6vw;height:6vw;background-size:6vw 6vw;background-image:url(userGuide.png);background-repeat:no-repeat" 
