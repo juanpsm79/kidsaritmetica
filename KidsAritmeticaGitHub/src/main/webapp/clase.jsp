@@ -29,6 +29,13 @@ String validacionesPendientesClase=RB.getString("validacionesPendientesClase");
 String creandoClase=RB.getString("creandoClase");
 String imprimirPdf=RB.getString("imprimirPdf");
 String creado=RB.getString("creado");
+
+String verTodosNivelesSuma = RB.getString("verTodosNivelesSuma");
+String verTodosNivelesResta = RB.getString("verTodosNivelesResta");
+String nivelInicialClase = RB.getString("nivelInicialClase");
+String datosClase = RB.getString("datosClase");
+String nivelesValidosError = RB.getString("nivelesValidosError");
+
 %>
 <html>
 <head>
@@ -58,10 +65,12 @@ var validacionesPendientesClase ="<%=validacionesPendientesClase%>"
 var creandoClase ="<%=creandoClase%>"
 var imprimirPdf ="<%=imprimirPdf%>"
 var creado ="<%=creado%>"
+var nivelesValidosError="<%=nivelesValidosError%>"
 var unAvailableUserNames = [];
 var assignedUserNames = [];
 var igualUsuarioPassword = false;
 var ultimoAlumnoCreado
+var totalAlumnosError;
 
 	$( function() {
 		     window.addEventListener("orientationchange", resizePage);
@@ -78,23 +87,36 @@ var ultimoAlumnoCreado
 			firebase.initializeApp(firebaseConfig);
 		    firebase.auth().onAuthStateChanged(function(user) {
 		    	if(user!=null) {
-		    		document.getElementById("cresultado"+ultimoAlumnoCreado).style.backgroundImage="";
-		    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML=""+creado
-		    		if (ultimoAlumnoCreado<30)
-			    		handleSignUp();
-			    	else {
-			    		document.getElementById("loginAjax1").style.visibility="hidden"
-						document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
-						document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
-						document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
-			    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
-			    		document.getElementById("createClass").onclick=function(){descargarFichero()};
-			    		document.getElementById("createClass1").onclick=function(){descargarFichero()};
-						firebase.auth().signOut().then(function() {
-						}).catch(function(error) {
-							alert("Error deslogue")
-						});
-			    	}
+		    		firebase.database().ref('users/' + user.uid).set(
+		    			{
+		    				"nivelActualSuma": document.getElementById("nivelSuma").value,
+		    				"nivelActualResta": document.getElementById("nivelResta").value,
+		    				"puntos": 0
+		    			},
+		    			function (error) {
+		    				if (error) {
+		    				      alert(""+error);
+		    				} else {
+		    					document.getElementById("cresultado"+ultimoAlumnoCreado).style.backgroundImage="";
+					    		document.getElementById("resultado"+ultimoAlumnoCreado).innerHTML=""+creado
+					    		if (ultimoAlumnoCreado<30)
+						    		handleSignUp();
+						    	else {
+						    		document.getElementById("loginAjax1").style.visibility="hidden"
+									document.getElementById("createClassLabel").innerHTML=""+imprimirPdf
+									document.getElementById("createClassLabel1").innerHTML=""+imprimirPdf
+									document.getElementById("createClass").style.backgroundImage="url('BotonA.png')";
+						    		document.getElementById("createClass1").style.backgroundImage="url('BotonA.png')";
+						    		document.getElementById("createClass").onclick=function(){descargarFichero()};
+						    		document.getElementById("createClass1").onclick=function(){descargarFichero()};
+									firebase.auth().signOut().then(function() {
+									}).catch(function(error) {
+										alert("Error deslogue")
+									});
+						    	}
+		    				}	
+		    			}
+		    		);	    		
 		    	}
 		    });
 		   
@@ -146,10 +168,12 @@ var ultimoAlumnoCreado
 
 	//Username
 	function checkUserName(i){
-		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6)
+		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6){
 			displayerrorUsername(usernameCortoError,i);
+		}
 		if(document.getElementById("username"+i).value.length<1) {
 			displayNormalUsername(i)
+			totalAlumnosError++;
 			//if(document.getElementById("password"+i).value.length<1)
 			//	displayNormalPassword(i)
 		}
@@ -177,18 +201,50 @@ var ultimoAlumnoCreado
 	
 	//Password
 	function checkPassword() {
-
-			if (document.getElementById("password").value.length<1) {
-				displayerrorPassword(usernameObligatorio);
-				return
-			}
-			if (document.getElementById("password").value.length>0 && document.getElementById("password").value.length<6) {
-				displayerrorPassword(usernameCortoError);
-				return
-			}
-			if(document.getElementById("password").value.length>5)
-				displayOkeyPassword();
-
+		if (document.getElementById("password").value.length<1) {
+			displayerrorPassword(usernameObligatorio);
+			return
+		}
+		if (document.getElementById("password").value.length>0 && document.getElementById("password").value.length<6) {
+			displayerrorPassword(usernameCortoError);
+			return
+		}
+		if(document.getElementById("password").value.length>5)
+			displayOkeyPassword();
+	}
+	
+	function checkNivelSuma() {
+		if (isNaN(document.getElementById("nivelSuma").value) || document.getElementById("nivelSuma").value.length<1 || 
+				document.getElementById("nivelSuma").value<1 || document.getElementById("nivelSuma").value>40) {
+			$("#nivelSuma-glyphicon").remove();
+			$("#nivelSuma-error").remove();
+			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
+			$("<em id='nivelSuma-error' class='error help-block'>"+nivelesValidosError+".</em>").insertAfter($("#nivelSuma-glyphicon"));
+			$("input#nivelSuma.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
+			return
+		}else {
+			$("input#nivelSuma.form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
+			$("#nivelSuma-glyphicon").remove();
+			$("#nivelSuma-error").remove();
+			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
+		}
+	}
+	
+	function checkNivelResta() {
+			if (isNaN(document.getElementById("nivelResta").value) || document.getElementById("nivelResta").value.length<1 
+					|| document.getElementById("nivelResta").value<1 || document.getElementById("nivelResta").value>40) {
+			$("#nivelResta-glyphicon").remove();
+			$("#nivelResta-error").remove();
+			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
+			$("<em id='nivelResta-error' class='error help-block'>"+nivelesValidosError+".</em>").insertAfter($("#nivelResta-glyphicon"));
+			$("input#nivelResta.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
+			return
+		}else {
+			$("input#nivelResta.form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
+			$("#nivelResta-glyphicon").remove();
+			$("#nivelResta-error").remove();
+			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
+		}
 	}
 	
 	function displayerrorPassword(error){
@@ -231,17 +287,20 @@ var ultimoAlumnoCreado
   
 	
   function verificarFormulario() {
-	  /*if (igualUsuarioPassword) {
-		  for(i=1;i<=30;i++)
-			  checkUserName(i)
-	  } else {*/
-	  checkPassword()
+	  totalAlumnosError=0;
+	  checkPassword();
+	  checkNivelResta();
+	  checkNivelSuma();
 	  for(i=1;i<=30;i++)
-		  checkUserName(i)  
-	 // }
+		  checkUserName(i)
+	  if(document.getElementById("password-error")!=null || document.getElementById("nivelSuma-error")!=null
+			  || document.getElementById("nivelResta-error")!=null)
+			   return false
 	  for(i=1;i<=30;i++)
-	   		if(document.getElementById("password-error")!=null || document.getElementById("username"+i+"-error")!=null)
+	   		if(document.getElementById("username"+i+"-error")!=null)
 				return false;
+	  if(totalAlumnosError==30)
+		  return false;
 	  return true;
   }
   
@@ -263,6 +322,8 @@ var ultimoAlumnoCreado
 		  
 	  } else {
 		  alert(validacionesPendientesClase);
+		  if(totalAlumnosError==30)
+			  displayerrorUsername(usernameCortoError,1);
 	  }
   }
   
@@ -387,6 +448,18 @@ var ultimoAlumnoCreado
 	  }
   }
   
+  function keyupNivelSuma(e){
+	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		  	checkNivelSuma();
+		}
+  }
+  
+  function keyupNivelResta(e){
+	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
+		  	checkNivelResta();
+		}
+  }
+  
   function keyupUsername(e,index){
 	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18
       		&& e.which != 37 && e.which != 38 && e.which != 39 && e.which != 40) {
@@ -485,7 +558,7 @@ var ultimoAlumnoCreado
 						<div id="loginlogo" style="position:relative;width:12.5vw;height:5vw;background-size:12.5vw 5vw;background-image:url(newaccount.png);background-repeat:no-repeat"></div>
 					</div>
 					<div class="panel-body">
-						<form id="signupForm1" class="form-horizontal" action="" method="post">
+						<form id="signupForm1" class="form-horizontal" action="" method="post">	
 					        <div class="form-group" style="height:2vw">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createClass1" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
@@ -494,6 +567,35 @@ var ultimoAlumnoCreado
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
+							
+							<fieldset>
+								<legend>Datos de la clase</legend>
+								<div class="form-row">
+								    <div class="col-md-3 mb-3" style="width:18vw;margin-top:1.8vw">
+								      <label for="validationCustom03"><%= password %></label>
+								      <input type="text" class="form-control" id="password" placeholder="<%= password %>" required>
+								    </div>
+								    <div class="col-md-3 mb-3" style="width:15vw">
+								      <label>Nivel de las Sumas</label>
+								      <label for="validationCustom04" style="cursor:pointer"
+								      		onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
+								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')">(<%= verTodosNivelesSuma %>)</label>
+								      <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
+								    </div>
+								    <div class="col-md-3 mb-3" style="width:15vw">
+								     <label>Nivel de las Restas</label>
+								      <label for="validationCustom05" style="cursor:pointer"
+								      	onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
+								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')">(<%= verTodosNivelesResta %>)</label>
+								      <input type="text" class="form-control" id="nivelResta" placeholder="<%= nivelInicialClase %>" required>
+								    </div>
+								  </div>
+							</fieldset>
+							<fieldset style="margin-top: 1vw"><legend></legend></fieldset>
+							
+							
+							
+							<!--  
 							<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
 						            <label><%= mismoUsuPass %>:</label>
@@ -502,6 +604,7 @@ var ultimoAlumnoCreado
 						            <input type="text" class="form-control" id="password" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
        						</div>
+       						-->
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
 						            <label><%=alumno %> 1:</label>
@@ -904,6 +1007,33 @@ function initFormulario() {
 			checkPassword();
 		}
 	});
+	
+	
+	
+	$('#nivelSuma').on({
+		"keyup": function(e) {
+			keyupNivelSuma(e);
+		}
+	});
+
+	$('#nivelSuma').on({
+		"focusout": function(e) {
+			checkNivelSuma();
+		}
+	});
+	
+	$('#nivelResta').on({
+		"keyup": function(e) {
+			keyupNivelResta(e);
+		}
+	});
+
+	$('#nivelResta').on({
+		"focusout": function(e) {
+			checkNivelResta();
+		}
+	});
+	
 
 	$('#username1').on({
 		"keyup": function(e) {
