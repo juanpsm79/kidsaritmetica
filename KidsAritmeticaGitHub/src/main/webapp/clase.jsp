@@ -36,6 +36,10 @@ String nivelInicialClase = RB.getString("nivelInicialClase");
 String datosClase = RB.getString("datosClase");
 String nivelesValidosError = RB.getString("nivelesValidosError");
 
+String nivelSumas = RB.getString("nivelSumas");
+String nivelRestas = RB.getString("nivelRestas");
+
+
 %>
 <html>
 <head>
@@ -569,21 +573,21 @@ var totalAlumnosError;
 							</div>
 							
 							<fieldset>
-								<legend>Datos de la clase</legend>
+								<legend><%=datosClase%></legend>
 								<div class="form-row">
-								    <div class="col-md-3 mb-3" style="width:18vw;margin-top:1.8vw">
+								    <div class="col-md-3 mb-3" style="margin-top:1.8vw">
 								      <label for="validationCustom03"><%= password %></label>
 								      <input type="text" class="form-control" id="password" placeholder="<%= password %>" required>
 								    </div>
-								    <div class="col-md-3 mb-3" style="width:15vw">
-								      <label>Nivel de las Sumas</label>
+								    <div class="col-md-3 mb-3">
+								      <label><%=nivelSumas%></label>
 								      <label for="validationCustom04" style="cursor:pointer"
 								      		onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
 								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')">(<%= verTodosNivelesSuma %>)</label>
 								      <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
 								    </div>
-								    <div class="col-md-3 mb-3" style="width:15vw">
-								     <label>Nivel de las Restas</label>
+								    <div class="col-md-3 mb-3">
+								     <label><%=nivelSumas%></label>
 								      <label for="validationCustom05" style="cursor:pointer"
 								      	onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
 								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')">(<%= verTodosNivelesResta %>)</label>

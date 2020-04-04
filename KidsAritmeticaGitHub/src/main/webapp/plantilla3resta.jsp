@@ -9,7 +9,7 @@ String sNivel = RB.getString("nivel").toUpperCase();
 String verTodosNiveles = RB.getString("verTodosNiveles");
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
-boolean assistance = (Boolean)session.getAttribute("assistance");
+boolean reGrouping = (Boolean)session.getAttribute("assistance");
 boolean tensRegrouping = (Boolean)session.getAttribute("tensRegrouping");
 boolean hundredsRegrouping = (Boolean)session.getAttribute("hundredsRegrouping");
 boolean wa = (Boolean)session.getAttribute("wa");
@@ -94,12 +94,11 @@ boolean wa = (Boolean)session.getAttribute("wa");
 var nivelUsuario = null;
 var nivel = <%=nivel%>;
 var assistanceMode = <%=wa%>;
-var assistance = <%=assistance%>;
+var reGrouping = <%=reGrouping%>;
 var tensRegrouping = <%=tensRegrouping%>; 
 var hundredsRegrouping = <%=hundredsRegrouping%>;
 var sumas = [];
 var indexSuma = -1;
-var dominio = "test.playaddition.com";
 var usuario;
 $(function(){
 	window.addEventListener("orientationchange", resizePage);
@@ -209,34 +208,34 @@ $(function(){
 	  	if(nivel == 40 || nivel == 32){
 	  		assistanceMode = false;
 	  		if(sumas[indexSuma].nivel=="27"){
-	  			assistance = false;
+	  			reGrouping = false;
 	  		} else if(sumas[indexSuma].nivel=="28" || sumas[indexSuma].nivel=="29"){
-	  			assistance = true;
+	  			reGrouping = true;
 	  			tensRegrouping=true;
 	  			hundredsRegrouping=false;
 	  		} else if(sumas[indexSuma].nivel=="30" || sumas[indexSuma].nivel=="31"){
-	  			assistance = true;
+	  			reGrouping = true;
 	  			tensRegrouping=true;
 	  			hundredsRegrouping=true;
 	  		} else if(sumas[indexSuma].nivel=="33"){
-	  			assistance = false;
+	  			reGrouping = false;
 	  		} else if(sumas[indexSuma].nivel=="34" || sumas[indexSuma].nivel=="35"){
-	  			assistance = true;
+	  			reGrouping = true;
 	  			tensRegrouping=true;
 	  			hundredsRegrouping=false;
 	  		} else if(sumas[indexSuma].nivel=="36" || sumas[indexSuma].nivel=="37"){
-	  			assistance = true;
+	  			reGrouping = true;
 	  			tensRegrouping=false;
 	  			hundredsRegrouping=true;
 	  		} else if(sumas[indexSuma].nivel=="38" || sumas[indexSuma].nivel=="39"){
-	  			assistance = true;
+	  			reGrouping = true;
 	  			tensRegrouping=true;
 	  			hundredsRegrouping=true;
 	  		}
 			 
 		 }
 	  	 
-	  	 if(!assistance){
+	  	 if(!reGrouping){
 		  	document.getElementById("casillaLlevadaCentenas").style.visibility="hidden";
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("casillaLlevadaDecenas").style.visibility="hidden";
@@ -266,13 +265,15 @@ $(function(){
 		  	document.getElementById("cifraCasillaLlevadaCentenas").style.cursor="default";
 		  	document.getElementById("casillaLlevadaDecenas").style.cursor="default";
 		  	document.getElementById("cifraCasillaLlevadaDecenas").style.cursor="default";
-			document.getElementById("centenasCifra1").style.cursor="default";
-			document.getElementById("decenasCifra1").style.cursor="pointer";
-  			document.getElementById("elunoCentenas").style.left="6vw";
-  			document.getElementById("elunoCentenas").style.top="-3vw";
+		  	if(sumas[indexSuma].nivel=="30" || sumas[indexSuma].nivel=="31"){
+		  		document.getElementById("centenasCifra1").style.cursor="pointer";
+				document.getElementById("decenasCifra1").style.cursor="default";
+		  		
+		  	} else{
+				document.getElementById("centenasCifra1").style.cursor="default";
+				document.getElementById("decenasCifra1").style.cursor="pointer";
+		  	}
 		 } 
-	  	 
-	  	
 	     setSelected ("sumaUnidades");
 	}
 	
@@ -634,46 +635,62 @@ $(function(){
   	}
   	
   	function initAssistance(obj) {
-	  	if(assistance)	{
-	  		
+	  	if(reGrouping)	{
 	  		//////////////
 	  		//assistanceMode: hay que calculárselo todo
-	  		if(assistanceMode){
-				//////////////El tachado del digito del primer operador
-		  		if (hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")){
-		  			document.getElementById("tachadaCentenas").style.visibility="visible";
-		  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
-		  		} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas")){
-		  			document.getElementById("tachadaDecenas").style.visibility="visible";
-	  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
-		  		}
-				
-	  			if(hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")){
-		  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
-		  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
-		  			document.getElementById("elunoCentenas").style.visibility="visible";
-		  			document.getElementById('centenasCifra1').style.cursor="default";
-		  			document.getElementById('tachadaCentenas').style.cursor="default";
-		  			//document.getElementById('casillaLlevadaCentenas').style.cursor="default";
-		  			//document.getElementById('cifraCasillaLlevadaCentenas').style.cursor="default";
-		  			
-	  			} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas")){
-	  				if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
-	  					return;
-	  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
-	  				if (numero==0) 
-	  					numero=9; 
-	  				else 
-	  					numero = numero-1;
-		  			document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+numero;
-		  			document.getElementById("elunoDecenas").style.visibility="visible";
-		  			document.getElementById('decenasCifra1').style.cursor="default";
-		  			document.getElementById('tachadaDecenas').style.cursor="default";
-		  			//document.getElementById('casillaLlevadaDecenas').style.cursor="default";
-		  			//document.getElementById('cifraCasillaLlevadaDecenas').style.cursor="default";
+	  		if(assistanceMode) {
+	  			if(document.getElementById("decenasCifra1").innerHTML=="0") {
+	  				if(hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")) {
+			  			document.getElementById("tachadaCentenas").style.visibility="visible";
+			  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
+			  			document.getElementById("elunoCentenas").style.visibility="visible";
+			  			document.getElementById('centenasCifra1').style.cursor="default";
+			  			document.getElementById('tachadaCentenas').style.cursor="default";
+			  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
+			  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
+			  			document.getElementById('decenasCifra1').style.cursor="pointer";
+		  			} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas")){
+		  				if(document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
+		  					return;
+		  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
+		  				if (numero==0) 
+		  					numero=9; 
+		  				else 
+		  					numero = numero-1;
+			  			document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+numero;
+			  			document.getElementById("tachadaDecenas").style.visibility="visible";
+		  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
+			  			document.getElementById("elunoDecenas").style.visibility="visible";
+			  			document.getElementById('decenasCifra1').style.cursor="default";
+			  			document.getElementById('tachadaDecenas').style.cursor="default";
+		  			}
+  				} else {
+		  			if(hundredsRegrouping && (obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")) {
+			  			document.getElementById("tachadaCentenas").style.visibility="visible";
+			  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
+			  			document.getElementById("elunoCentenas").style.visibility="visible";
+			  			document.getElementById('centenasCifra1').style.cursor="default";
+			  			document.getElementById('tachadaCentenas').style.cursor="default";
+			  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
+			  			document.getElementById("cifraCasillaLlevadaCentenas").innerHTML = ""+numero;
+			  			
+		  			} else if(tensRegrouping && (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas")){
+		  				if(document.getElementById("decenasCifra1").innerHTML=="0" && document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
+		  					return;
+		  				var numero = parseInt(document.getElementById('decenasCifra1').innerHTML, 10);
+		  				if (numero==0) 
+		  					numero=9; 
+		  				else 
+		  					numero = numero-1;
+			  			document.getElementById("cifraCasillaLlevadaDecenas").innerHTML = ""+numero;
+			  			document.getElementById("tachadaDecenas").style.visibility="visible";
+		  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
+			  			document.getElementById("elunoDecenas").style.visibility="visible";
+			  			document.getElementById('decenasCifra1').style.cursor="default";
+			  			document.getElementById('tachadaDecenas').style.cursor="default";
+		  			}
 	  			}
-	  			
-	  		} else{
+	  		} else {
 	  			if(hundredsRegrouping && !tensRegrouping){
 	  				if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas"){
 		  				document.getElementById("tachadaCentenas").style.visibility="visible";
@@ -693,37 +710,53 @@ $(function(){
 				  		if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML=="")
 		  					setSelected ("casillaLlevadaDecenas");
 	  			}
-	  			else if(hundredsRegrouping && tensRegrouping){
-	  				if((obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")
-	  						&& (document.getElementById("cifraCasillaLlevadaDecenas").innerHTML!="" && document.getElementById("elunoDecenas").style.visibility=="visible")
-	  						){
-	  						setSelected("casillaLlevadaCentenas");
-			  				document.getElementById('centenasCifra1').style.cursor="default";
-			  				document.getElementById('tachadaCentenas').style.cursor="default";
-	  			  			document.getElementById("tachadaCentenas").style.visibility="visible";
+	  			else if(hundredsRegrouping && tensRegrouping) {
+	  				
+	  				//0 en las decenas del minuendo
+	  				if(document.getElementById("decenasCifra1").innerHTML=="0") {
+			  			if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas") {
+			  				if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
+			  					return;
+			  				else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "") {
+		  						document.getElementById("elunoCentenas").style.visibility="visible"
+		  						document.getElementById("tachadaDecenas").style.visibility="visible"
+		  						setSelected("casillaLlevadaDecenas");
+		  					}
+			  			} else if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas") {
+			  				setSelected("casillaLlevadaCentenas");
+			  				document.getElementById("tachadaCentenas").style.visibility="visible";
 	  			  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
-	  				}else if (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas"){
-	  					 if(document.getElementById("elunoDecenas").style.visibility=="hidden"){
-	  						document.getElementById("tachadaDecenas").style.visibility="visible";
-	  		  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
-	  		  				if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML == "")
-	  		  					setSelected ("casillaLlevadaDecenas");
-	  					} else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "" && 
-	  							document.getElementById("elunoCentenas").style.visibility=="hidden"){
-	  						document.getElementById("elunoCentenas").style.visibility="visible"
-	  							document.getElementById('decenasCifra1').style.cursor="default";
-			  				document.getElementById('tachadaDecenas').style.cursor="default";
-	  					}
-	  					
+			  			}
+	  				} else {
+			  				///sin 0 en las decenas del minuendo
+			  				if((obj.id=="centenasCifra1" || obj.id=="tachadaCentenas")
+			  						&& (document.getElementById("cifraCasillaLlevadaDecenas").innerHTML!="" && 
+			  								document.getElementById("elunoDecenas").style.visibility=="visible")) {
+		  						setSelected("casillaLlevadaCentenas");
+				  				document.getElementById('centenasCifra1').style.cursor="default";
+				  				document.getElementById('tachadaCentenas').style.cursor="default";
+		  			  			document.getElementById("tachadaCentenas").style.visibility="visible";
+		  			  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
+			  				} else if (obj.id=="decenasCifra1" || obj.id=="tachadaDecenas") {
+			  					 if(document.getElementById("elunoDecenas").style.visibility=="hidden") {
+			  						document.getElementById("tachadaDecenas").style.visibility="visible";
+			  		  				document.getElementById("tachadaDecenas").style.backgroundSize="6vw 6vw";
+			  		  				if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML == "")
+			  		  					setSelected ("casillaLlevadaDecenas");
+			  					} else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "" && document.getElementById("elunoCentenas").style.visibility=="hidden") {
+			  						document.getElementById("elunoCentenas").style.visibility="visible"
+			  						document.getElementById('decenasCifra1').style.cursor="default";
+					  				document.getElementById('tachadaDecenas').style.cursor="default";
+			  					}
+			  				}
 	  				}
-	  					
 	  			}
 	  		}
 	  	}
   	}
   	
   	function setOneUnidades(){
-  		if(assistance){
+  		if(reGrouping){
   			if(document.getElementById("cifraCasillaLlevadaDecenas").innerHTML != ""){
   				if(document.getElementById("elunoDecenas").style.visibility=="hidden")
   					setSelected ("sumaUnidades");
@@ -798,7 +831,7 @@ $(function(){
 							<label id="centenasCifra1" onclick="javascript:initAssistance(this)" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black">&nbsp;</label>
 							
 							<div id="tachadaCentenas" onclick="javascript:initAssistance(this)" style="position:absolute;left:0.2vw;top:3.5vw;width:5vw;height:7vw;background-image:url(tacha.png);background-size:6vw 7.5vw;background-repeat:no-repeat;font-family:Calibri"></div>
-							<label id="elunoCentenas" style="position:absolute;left:5vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
+							<label id="elunoCentenas" style="position:absolute;left:4.85vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							
 							<label id="decenasCifra1" onclick="javascript:initAssistance(this)" style="position:absolute;width:6vw;height:6.5vw;left:7.1vw;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
 							<div id="tachadaDecenas" onclick="javascript:initAssistance(this)" style="left:7.3vw;position:absolute;top:3.5vw;width:5vw;height:7vw;cursor:pointer;background-image:url(tacha.png);background-size:6vw 7.5vw;background-repeat:no-repeat;font-family:Calibri"></div>

@@ -80,15 +80,9 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = random.nextInt(10);
-		int unidades2 = 0;
-		
-		if (unidades1==0)
-			unidades2 = 0;
-		else if (unidades1==1)
-			unidades2 = 1;
-		else
-			unidades2 = random.ints(1, 1, unidades1+1).sum();
+		int unidades1 = random.ints(1, 2, 10).sum();
+		int unidades2 = random.ints(1, 2, unidades1+1).sum();
+		 
 		int decenas1 =  1;
 		
 		digitosOperador1.add(unidades1);
@@ -166,12 +160,9 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 =  random.ints(1, 2, 10).sum();
+		int unidades1 = random.ints(1, 2, 10).sum();
+		int unidades2 = random.ints(1, 2, unidades1+1).sum();
 		int decenas1 =  random.ints(1, 2, 5).sum();
-		
-		int unidades2 = 0;
-		if(unidades1>0)
-		   unidades2 = random.ints(1, 2, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -248,12 +239,9 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = random.nextInt(10);
+		int unidades1 = random.ints(1, 2, 10).sum();
+		int unidades2 = random.ints(1, 2, unidades1+1).sum();
 		int decenas1 =  random.ints(1, 5, 10).sum();
-		
-		int unidades2 = 0;
-		if(unidades1>0)
-		   unidades2 = random.ints(1, 1, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
@@ -715,7 +703,7 @@ public class GeneradorRestas {
 		if (restasNivel.contains(resta)){
 			colisiones++;
 			if(colisiones<=maxColisiones) {
-				resta = getOperandosNivel13(restasNivel,colisiones, maxColisiones);
+				resta = getOperandosNivel3839(restasNivel,colisiones, maxColisiones);
 				return resta;
 			} else {
 				System.out.println("MAXIMO NUMERO COLISIONES PRODUCIDAS: "+resta);

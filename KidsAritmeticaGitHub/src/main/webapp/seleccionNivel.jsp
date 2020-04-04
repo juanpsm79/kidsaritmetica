@@ -60,8 +60,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 <script src="./js/current-device.min.js"></script>
   
   <script>
-  var dominio = "test.playaddition.com";
-  //var dominio = "playaddition.com";
+  var dominio = "playaddition.com";
   var check = false;
   var nivelSumaUsuario;
   $( function() {
