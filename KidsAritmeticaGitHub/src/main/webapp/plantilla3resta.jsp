@@ -669,6 +669,8 @@ $(function(){
 			  			document.getElementById("tachadaCentenas").style.visibility="visible";
 			  			document.getElementById("tachadaCentenas").style.backgroundSize="6vw 6vw";
 			  			document.getElementById("elunoCentenas").style.visibility="visible";
+			  			document.getElementById("elunoCentenas").style.top="-3vw";
+			  			document.getElementById("elunoCentenas").style.left="6vw";
 			  			document.getElementById('centenasCifra1').style.cursor="default";
 			  			document.getElementById('tachadaCentenas').style.cursor="default";
 			  			var numero = parseInt(document.getElementById('centenasCifra1').innerHTML, 10) - 1;
@@ -711,7 +713,6 @@ $(function(){
 		  					setSelected ("casillaLlevadaDecenas");
 	  			}
 	  			else if(hundredsRegrouping && tensRegrouping) {
-	  				
 	  				//0 en las decenas del minuendo
 	  				if(document.getElementById("decenasCifra1").innerHTML=="0") {
 			  			if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas") {
@@ -745,6 +746,8 @@ $(function(){
 			  		  					setSelected ("casillaLlevadaDecenas");
 			  					} else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "" && document.getElementById("elunoCentenas").style.visibility=="hidden") {
 			  						document.getElementById("elunoCentenas").style.visibility="visible"
+			  						document.getElementById("elunoCentenas").style.top="-3vw";
+			  						document.getElementById("elunoCentenas").style.left="6vw";
 			  						document.getElementById('decenasCifra1').style.cursor="default";
 					  				document.getElementById('tachadaDecenas').style.cursor="default";
 			  					}
