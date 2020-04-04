@@ -130,7 +130,8 @@ var totalAlumnosError;
 		ultimoAlumnoCreado++;
 		if(document.getElementById("username"+ultimoAlumnoCreado).value.length>0) {
 		    var user = document.getElementById("username"+ultimoAlumnoCreado).value;
-		    var password = document.getElementById("password").value;
+		    var password;
+		    password = document.getElementById("password"+ultimoAlumnoCreado).value;
 		    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
 		   	.catch(function(error) {
 			    alert(errorCode+" "+errorMessage);
@@ -172,14 +173,13 @@ var totalAlumnosError;
 
 	//Username
 	function checkUserName(i){
-		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6){
+		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6)
 			displayerrorUsername(usernameCortoError,i);
-		}
 		if(document.getElementById("username"+i).value.length<1) {
 			displayNormalUsername(i)
 			totalAlumnosError++;
-			//if(document.getElementById("password"+i).value.length<1)
-			//	displayNormalPassword(i)
+			if(document.getElementById("password"+i).value.length<1)
+				displayNormalPassword(i)
 		}
 	}
 	function displayerrorUsername(error,i){
@@ -204,17 +204,18 @@ var totalAlumnosError;
 	}
 	
 	//Password
-	function checkPassword() {
-		if (document.getElementById("password").value.length<1) {
-			displayerrorPassword(usernameObligatorio);
-			return
-		}
-		if (document.getElementById("password").value.length>0 && document.getElementById("password").value.length<6) {
-			displayerrorPassword(usernameCortoError);
-			return
-		}
-		if(document.getElementById("password").value.length>5)
-			displayOkeyPassword();
+	function checkPassword(i) {
+
+			if (document.getElementById("password"+i).value.length<1 && document.getElementById("username"+i).value.length>0) {
+				displayerrorPassword(usernameObligatorio,i);
+				return
+			}
+			if (document.getElementById("password"+i).value.length>0 && document.getElementById("password"+i).value.length<6) {
+				displayerrorPassword(usernameCortoError,i);
+				return
+			}
+			if(document.getElementById("password"+i).value.length>5)
+				displayOkeyPassword(i);
 	}
 	
 	function checkNivelSuma() {
@@ -251,25 +252,25 @@ var totalAlumnosError;
 		}
 	}
 	
-	function displayerrorPassword(error){
-		$("#password-glyphicon").remove();
-		$("#password-error").remove();
-		$("<span id='password-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#password.form-control"));
-		$("<em id='password-error' class='error help-block'>"+error+".</em>").insertAfter($("#password-glyphicon"));
-		$("input#password.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
+	function displayerrorPassword(error,i){
+		$("#password"+i+"-glyphicon").remove();
+		$("#password"+i+"-error").remove();
+		$("<span id='password"+i+"-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#password"+i+".form-control"));
+		$("<em id='password"+i+"-error' class='error help-block'>"+error+".</em>").insertAfter($("#password"+i+"-glyphicon"));
+		$("input#password"+i+".form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 	}
 	
-	function displayNormalPassword(){
-		$("input#password.form-control").parents(".col-md-3").removeClass("has-error").removeClass("has-success");
-		$("#password-glyphicon").remove();
-		$("#password-error").remove();
+	function displayNormalPassword(i){
+		$("input#password"+i+".form-control").parents(".col-md-3").removeClass("has-error").removeClass("has-success");
+		$("#password"+i+"-glyphicon").remove();
+		$("#password"+i+"-error").remove();
 	}
 	
-	function displayOkeyPassword(){
-		$("input#password.form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
-		$("#password-glyphicon").remove();
-		$("#password-error").remove();
-		$("<span id='password-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#password.form-control"));
+	function displayOkeyPassword(i){
+		$("input#password"+i+".form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
+		$("#password"+i+"-glyphicon").remove();
+		$("#password"+i+"-error").remove();
+		$("<span id='password"+i+"-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#password"+i+".form-control"));
 	}
 	
 	/*function usarMismaUsuarioPassword (checkbox){
@@ -292,16 +293,16 @@ var totalAlumnosError;
 	
   function verificarFormulario() {
 	  totalAlumnosError=0;
-	  checkPassword();
 	  checkNivelResta();
 	  checkNivelSuma();
-	  for(i=1;i<=30;i++)
-		  checkUserName(i)
-	  if(document.getElementById("password-error")!=null || document.getElementById("nivelSuma-error")!=null
-			  || document.getElementById("nivelResta-error")!=null)
+	  for(i=1;i<=30;i++) {
+			  checkPassword(i)
+			  checkUserName(i)  
+	  }
+	  if(document.getElementById("nivelSuma-error")!=null || document.getElementById("nivelResta-error")!=null)
 			   return false
 	  for(i=1;i<=30;i++)
-	   		if(document.getElementById("username"+i+"-error")!=null)
+	   		if(document.getElementById("password"+i+"-error")!=null || document.getElementById("username"+i+"-error")!=null)
 				return false;
 	  if(totalAlumnosError==30)
 		  return false;
@@ -317,7 +318,7 @@ var totalAlumnosError;
 		  document.getElementById("createClassLabel1").innerHTML=""+creandoClase
 		  for(i=1;i<=30;i++) {
 				document.getElementById("username"+i).disabled = true;
-				//document.getElementById("password"+i).disabled = true;
+				document.getElementById("password"+i).disabled = true;
 				if(document.getElementById("username"+i).value.length>0)
 					document.getElementById("cresultado"+i).style.visibility="visible";
 		  }
@@ -337,67 +338,67 @@ var totalAlumnosError;
 		  method: "post",
 		  data:{
 			  accion:'datos',
-			  password:''+ document.getElementById("password").value,
+			  //password:''+ document.getElementById("password").value,
 			  usu1:''+document.getElementById("username1").value,
-			 // pass1:''+document.getElementById("password1").value,
+			  pass1:''+document.getElementById("password1").value,
 			  usu2:''+document.getElementById("username2").value,
-			 // pass2:''+document.getElementById("password2").value,
+			  pass2:''+document.getElementById("password2").value,
 			  usu3:''+document.getElementById("username3").value,
-			 // pass3:''+document.getElementById("password3").value,
+			  pass3:''+document.getElementById("password3").value,
 			  usu4:''+document.getElementById("username4").value,
-			//  pass4:''+document.getElementById("password4").value,
+			  pass4:''+document.getElementById("password4").value,
 			  usu5:''+document.getElementById("username5").value,
-			//  pass5:''+document.getElementById("password5").value,
+			  pass5:''+document.getElementById("password5").value,
 			  usu6:''+document.getElementById("username6").value,
-			//  pass6:''+document.getElementById("password6").value,
+			  pass6:''+document.getElementById("password6").value,
 			  usu7:''+document.getElementById("username7").value,
-			//  pass7:''+document.getElementById("password7").value,
+			  pass7:''+document.getElementById("password7").value,
 			  usu8:''+document.getElementById("username8").value,
-			//  pass8:''+document.getElementById("password8").value,
+			  pass8:''+document.getElementById("password8").value,
 			  usu9:''+document.getElementById("username9").value,
-			//  pass9:''+document.getElementById("password9").value,
+			  pass9:''+document.getElementById("password9").value,
 			  usu10:''+document.getElementById("username10").value,
-			//  pass10:''+document.getElementById("password10").value,
+			  pass10:''+document.getElementById("password10").value,
 			  usu11:''+document.getElementById("username11").value,
-			//  pass11:''+document.getElementById("password11").value,
+			  pass11:''+document.getElementById("password11").value,
 			  usu12:''+document.getElementById("username12").value,
-			//  pass12:''+document.getElementById("password12").value,
+			  pass12:''+document.getElementById("password12").value,
 			  usu13:''+document.getElementById("username13").value,
-			//  pass13:''+document.getElementById("password13").value,
+			  pass13:''+document.getElementById("password13").value,
 			  usu14:''+document.getElementById("username14").value,
-			//  pass14:''+document.getElementById("password14").value,
+			  pass14:''+document.getElementById("password14").value,
 			  usu15:''+document.getElementById("username15").value,
-			//  pass15:''+document.getElementById("password15").value,
+			  pass15:''+document.getElementById("password15").value,
 			  usu16:''+document.getElementById("username16").value,
-			//  pass16:''+document.getElementById("password16").value,
+			  pass16:''+document.getElementById("password16").value,
 			  usu17:''+document.getElementById("username17").value,
-			 // pass17:''+document.getElementById("password17").value,
+			  pass17:''+document.getElementById("password17").value,
 			  usu18:''+document.getElementById("username18").value,
-			 // pass18:''+document.getElementById("password18").value,
+			  pass18:''+document.getElementById("password18").value,
 			  usu19:''+document.getElementById("username19").value,
-			 // pass19:''+document.getElementById("password19").value,
+			  pass19:''+document.getElementById("password19").value,
 			  usu20:''+document.getElementById("username20").value,
-			//  pass20:''+document.getElementById("password20").value,
+			  pass20:''+document.getElementById("password20").value,
 			  usu21:''+document.getElementById("username21").value,
-			//  pass21:''+document.getElementById("password21").value,
+			  pass21:''+document.getElementById("password21").value,
 			  usu22:''+document.getElementById("username22").value,
-			//  pass22:''+document.getElementById("password22").value,
+			  pass22:''+document.getElementById("password22").value,
 			  usu23:''+document.getElementById("username23").value,
-			//  pass23:''+document.getElementById("password23").value,
+			  pass23:''+document.getElementById("password23").value,
 			  usu24:''+document.getElementById("username24").value,
-			//  pass24:''+document.getElementById("password24").value,
+			  pass24:''+document.getElementById("password24").value,
 			  usu25:''+document.getElementById("username25").value,
-			//  pass25:''+document.getElementById("password25").value,
+			  pass25:''+document.getElementById("password25").value,
 			  usu26:''+document.getElementById("username26").value,
-			//  pass26:''+document.getElementById("password26").value,
+			  pass26:''+document.getElementById("password26").value,
 			  usu27:''+document.getElementById("username27").value,
-			//  pass27:''+document.getElementById("password27").value,
+			  pass27:''+document.getElementById("password27").value,
 			  usu28:''+document.getElementById("username28").value,
-			//  pass28:''+document.getElementById("password28").value,
+			  pass28:''+document.getElementById("password28").value,
 			  usu29:''+document.getElementById("username29").value,
-			//  pass29:''+document.getElementById("password29").value,
-			  usu30:''+document.getElementById("username30").value
-			//  pass30:''+document.getElementById("password30").value
+			  pass29:''+document.getElementById("password29").value,
+			  usu30:''+document.getElementById("username30").value,
+			  pass30:''+document.getElementById("password30").value
 			  },
 		  success : function(responseText) {
 			  handleSignUp();
@@ -562,7 +563,7 @@ var totalAlumnosError;
 						<div id="loginlogo" style="position:relative;width:12.5vw;height:5vw;background-size:12.5vw 5vw;background-image:url(newaccount.png);background-repeat:no-repeat"></div>
 					</div>
 					<div class="panel-body">
-						<form id="signupForm1" class="form-horizontal" action="" method="post">	
+						<form id="signupForm1" class="form-horizontal" action="" method="post">
 					        <div class="form-group" style="height:2vw">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px"> 
 									<div id="createClass1" style="position:absolute;left:7vw;font-size:1.3vw;color:white;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;cursor:pointer;width:12vw;height:2.5vw;background-size:12vw 2.5vw;background-image:url(BotonA.png);background-repeat:no-repeat"
@@ -571,14 +572,57 @@ var totalAlumnosError;
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
-							
+							<!--
 							<fieldset>
 								<legend><%=datosClase%></legend>
-								<div class="form-row">
+									  <div class="form-group row">
+									    <label class="col-4"></label> 
+										    <div class="col-8">
+										      <div class="custom-control custom-radio custom-control-inline">
+										        <input name="radio" id="radio_0" type="radio" class="custom-control-input" value="fish"> 
+										        <label for="radio_0" class="custom-control-label">All students start from level 1</label>
+										      </div>
+										    </div>
+										  </div>
+									  <div class="form-group row">
+									    <label class="col-4">Radio Buttons</label> 
+									    <div class="col-8">
+									      <div class="custom-control custom-radio custom-control-inline">
+									        <input name="radio1" id="radio1_0" type="radio" class="custom-control-input" value="rabbit"> 
+									        <label for="radio1_0" class="custom-control-label">Select a different start level</label>
+									      </div>
+									    </div>
+									  </div>
+									  <div class="form-group row">
+									    <label for="text" class="col-4 col-form-label">Text Field</label> 
+									    <div class="col-8">
+									      <input id="text" name="text" type="text" class="form-control">
+									    </div>
+									  </div>
+									  <div class="form-group row">
+									    <label for="text1" class="col-4 col-form-label">Text Field</label> 
+									    <div class="col-8">
+									      <input id="text1" name="text1" type="text" class="form-control">
+									    </div>
+									  </div>
+								 
+								<div class="form-group" align="center">
 								    <div class="col-md-3 mb-3" style="margin-top:1.8vw">
-								      <label for="validationCustom03"><%= password %></label>
-								      <input type="text" class="form-control" id="password" placeholder="<%= password %>" required>
+									      <div class="custom-control custom-radio">
+											  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios">
+											  <label class="custom-control-label" for="defaultGroupExample1">Option 1</label>
+										</div>
 								    </div>
+								  </div>
+								  <div class="form-group" align="center">
+								    <div class="col-md-3 mb-3" style="margin-top:1.8vw">
+									      <div class="custom-control custom-radio">
+										  	<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios" checked>
+										  	<label class="custom-control-label" for="defaultGroupExample2">Option 2</label>
+										  </div>
+								    </div>
+								  </div>
+								  <div class="form-group" align="center">
 								    <div class="col-md-3 mb-3">
 								      <label><%=nivelSumas%></label>
 								      <label for="validationCustom04" style="cursor:pointer"
@@ -586,6 +630,8 @@ var totalAlumnosError;
 								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')">(<%= verTodosNivelesSuma %>)</label>
 								      <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
 								    </div>
+								  </div>
+								  <div class="form-group" align="center">
 								    <div class="col-md-3 mb-3">
 								     <label><%=nivelSumas%></label>
 								      <label for="validationCustom05" style="cursor:pointer"
@@ -594,21 +640,39 @@ var totalAlumnosError;
 								      <input type="text" class="form-control" id="nivelResta" placeholder="<%= nivelInicialClase %>" required>
 								    </div>
 								  </div>
+								  
 							</fieldset>
 							<fieldset style="margin-top: 1vw"><legend></legend></fieldset>
-							
-							
-							
-							<!--  
+							-->
 							<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
-						            <label><%= mismoUsuPass %>:</label>
+						            <label>PlayAddition</label>
+						          </div>
+						          <div class="col-md-3 mb-3" style="width:15vw">
+						            <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
 						          </div>
 						          <div class="col-md-3 mb-3">
-						            <input type="text" class="form-control" id="password" placeholder="<%= password %>" required="" style="width:85%">
+						            <label for="validationCustom04" style="cursor:pointer;color:blue"
+								      		onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
+								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')"><%= verTodosNivelesSuma %></label>
 						          </div>
        						</div>
-       						-->
+							
+							<div class="form-group" align="center">
+       							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
+						            <label>PlaySubtraction</label>
+						          </div>
+						          <div class="col-md-3 mb-3" style="width:15vw">
+						            <input type="text" class="form-control" id="nivelResta" placeholder="<%= nivelInicialClase %>" required>
+						          </div>
+						          <div class="col-md-3 mb-3">
+						            <label for="validationCustom05" style="cursor:pointer;color:blue"
+								      	onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
+								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')">(<%= verTodosNivelesResta %>)</label>
+						          </div>
+       						</div>
+							
+							
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
 						            <label><%=alumno %> 1:</label>
@@ -616,11 +680,10 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username1" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          <!-- 
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password1" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						            -->
+						           
 						          <div id="cresultado1" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado1"></label>
 						          </div>
@@ -633,7 +696,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username2" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password2" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado2" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado2"></label>
 						          </div>
@@ -645,7 +710,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username3" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password3" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado3" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado3"></label>
 						          </div>
@@ -657,7 +724,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username4" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password4" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						         <div id="cresultado4" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado4"></label>
 						          </div>
@@ -669,7 +738,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username5" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password5" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						         <div id="cresultado5" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado5"></label>
 						          </div>
@@ -681,7 +752,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username6" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password6" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado6" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado6"></label>
 						          </div>
@@ -693,7 +766,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username7" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password7" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado7" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado7"></label>
 						          </div>
@@ -705,7 +780,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username8" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password8" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						         <div id="cresultado8" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado8"></label>
 						          </div>
@@ -717,7 +794,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username9" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password9" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado9" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado9"></label>
 						          </div>
@@ -729,7 +808,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username10" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password10" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado10" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado10"></label>
 						          </div>
@@ -741,7 +822,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username11" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password11" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado11" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado11"></label>
 						          </div>
@@ -753,7 +836,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username12" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password12" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado12" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado12"></label>
 						          </div>
@@ -765,7 +850,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username13" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password13" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado13" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado13"></label>
 						          </div>
@@ -777,7 +864,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username14" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password14" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado14" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado14"></label>
 						          </div>
@@ -789,7 +878,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username15" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password15" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado15" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado15"></label>
 						          </div>
@@ -801,7 +892,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username16" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password16" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado16" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado16"></label>
 						          </div>
@@ -813,7 +906,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username17" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password17" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						         <div id="cresultado17" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado17"></label>
 						          </div>
@@ -825,7 +920,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username18" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password18" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado18" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado18"></label>
 						          </div>
@@ -837,7 +934,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username19" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password19" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado19" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado19"></label>
 						          </div>
@@ -849,7 +948,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username20" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password20" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado20" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado20"></label>
 						          </div>
@@ -861,7 +962,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username21" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password21" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado21" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado21"></label>
 						          </div>
@@ -873,7 +976,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username22" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password22" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado22" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado22"></label>
 						          </div>
@@ -885,7 +990,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username23" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password23" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado23" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado23"></label>
 						          </div>
@@ -897,7 +1004,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username24" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password24" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						         <div id="cresultado24" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado24"></label>
 						          </div>
@@ -909,7 +1018,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username25" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password25" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado25" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado25"></label>
 						          </div>
@@ -921,7 +1032,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username26" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password26" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado26" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado26"></label>
 						          </div>
@@ -933,7 +1046,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username27" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						         
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password27" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado27" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado27"></label>
 						          </div>
@@ -945,7 +1060,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username28" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password28" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado28" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado28"></label>
 						          </div>
@@ -957,7 +1074,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username29" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password29" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado29" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado29"></label>
 						          </div>
@@ -969,7 +1088,9 @@ var totalAlumnosError;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="username30" placeholder="<%= usuario %>" required="" style="width:85%">
 						          </div>
-						          
+						          <div class="col-md-3 mb-3">
+						            <input type="text" class="form-control" id="password30" placeholder="<%= password %>" required="" style="width:85%">
+						          </div>
 						          <div id="cresultado30" class="col-md-3 mb-3" style="top:0.5vw;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado30"></label>
 						          </div>
@@ -1000,15 +1121,15 @@ var totalAlumnosError;
 <script type="text/javascript">
 function initFormulario() {
 
-	$('#password').on({
+	$('#password1').on({
 		"keyup": function(e) {
-			keyupPassword(e);
+			keyupPassword(e, 1);
 		}
 	});
 
-	$('#password').on({
+	$('#password1').on({
 		"focusout": function(e) {
-			checkPassword();
+			checkPassword(1);
 		}
 	});
 	
@@ -1064,7 +1185,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password2').on({
+	$('#password2').on({
 		"keyup": function(e) {
 			keyupPassword(e, 2);
 		}
@@ -1074,7 +1195,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(2);
 		}
-	});*/
+	});
 
 	$('#username2').on({
 		"keyup": function(e) {
@@ -1101,7 +1222,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password3').on({
+	$('#password3').on({
 		"keyup": function(e) {
 			keyupPassword(e, 3);
 		}
@@ -1111,7 +1232,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(3);
 		}
-	});*/
+	});
 
 	$('#username3').on({
 		"keyup": function(e) {
@@ -1138,7 +1259,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password4').on({
+	$('#password4').on({
 		"keyup": function(e) {
 			keyupPassword(e, 4);
 		}
@@ -1148,7 +1269,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(4);
 		}
-	});*/
+	});
 
 	$('#username4').on({
 		"keyup": function(e) {
@@ -1175,7 +1296,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password5').on({
+	$('#password5').on({
 		"keyup": function(e) {
 			keyupPassword(e, 5);
 		}
@@ -1185,7 +1306,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(5);
 		}
-	});*/
+	});
 
 	$('#username5').on({
 		"keyup": function(e) {
@@ -1212,7 +1333,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password6').on({
+	$('#password6').on({
 		"keyup": function(e) {
 			keyupPassword(e, 6);
 		}
@@ -1222,7 +1343,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(6);
 		}
-	});*/
+	});
 
 	$('#username6').on({
 		"keyup": function(e) {
@@ -1249,7 +1370,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password7').on({
+	$('#password7').on({
 		"keyup": function(e) {
 			keyupPassword(e, 7);
 		}
@@ -1259,7 +1380,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(7);
 		}
-	});*/
+	});
 
 	$('#username7').on({
 		"keyup": function(e) {
@@ -1286,7 +1407,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password8').on({
+	$('#password8').on({
 		"keyup": function(e) {
 			keyupPassword(e, 8);
 		}
@@ -1296,7 +1417,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(8);
 		}
-	});*/
+	});
 
 	$('#username8').on({
 		"keyup": function(e) {
@@ -1323,7 +1444,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password9').on({
+	$('#password9').on({
 		"keyup": function(e) {
 			keyupPassword(e, 9);
 		}
@@ -1333,7 +1454,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(9);
 		}
-	});*/
+	});
 
 	$('#username9').on({
 		"keyup": function(e) {
@@ -1360,7 +1481,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password10').on({
+	$('#password10').on({
 		"keyup": function(e) {
 			keyupPassword(e, 10);
 		}
@@ -1370,7 +1491,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(10);
 		}
-	});*/
+	});
 
 	$('#username10').on({
 		"keyup": function(e) {
@@ -1397,7 +1518,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password11').on({
+	$('#password11').on({
 		"keyup": function(e) {
 			keyupPassword(e, 11);
 		}
@@ -1407,7 +1528,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(11);
 		}
-	});*/
+	});
 
 	$('#username11').on({
 		"keyup": function(e) {
@@ -1434,7 +1555,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password12').on({
+	$('#password12').on({
 		"keyup": function(e) {
 			keyupPassword(e, 12);
 		}
@@ -1444,7 +1565,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(12);
 		}
-	});*/
+	});
 
 	$('#username12').on({
 		"keyup": function(e) {
@@ -1471,7 +1592,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password13').on({
+	$('#password13').on({
 		"keyup": function(e) {
 			keyupPassword(e, 13);
 		}
@@ -1481,7 +1602,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(13);
 		}
-	});*/
+	});
 
 	$('#username13').on({
 		"keyup": function(e) {
@@ -1508,7 +1629,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password14').on({
+	$('#password14').on({
 		"keyup": function(e) {
 			keyupPassword(e, 14);
 		}
@@ -1518,7 +1639,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(14);
 		}
-	});*/
+	});
 
 	$('#username14').on({
 		"keyup": function(e) {
@@ -1545,7 +1666,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password15').on({
+	$('#password15').on({
 		"keyup": function(e) {
 			keyupPassword(e, 15);
 		}
@@ -1555,7 +1676,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(15);
 		}
-	});*/
+	});
 
 	$('#username15').on({
 		"keyup": function(e) {
@@ -1582,7 +1703,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password16').on({
+	$('#password16').on({
 		"keyup": function(e) {
 			keyupPassword(e, 16);
 		}
@@ -1592,7 +1713,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(16);
 		}
-	});*/
+	});
 
 	$('#username16').on({
 		"keyup": function(e) {
@@ -1619,7 +1740,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password17').on({
+	$('#password17').on({
 		"keyup": function(e) {
 			keyupPassword(e, 17);
 		}
@@ -1629,7 +1750,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(17);
 		}
-	});*/
+	});
 
 	$('#username17').on({
 		"keyup": function(e) {
@@ -1656,7 +1777,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password18').on({
+	$('#password18').on({
 		"keyup": function(e) {
 			keyupPassword(e, 18);
 		}
@@ -1666,7 +1787,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(18);
 		}
-	});*/
+	});
 
 	$('#username18').on({
 		"keyup": function(e) {
@@ -1693,7 +1814,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password19').on({
+	$('#password19').on({
 		"keyup": function(e) {
 			keyupPassword(e, 19);
 		}
@@ -1703,7 +1824,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(19);
 		}
-	});*/
+	});
 
 	$('#username19').on({
 		"keyup": function(e) {
@@ -1730,7 +1851,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password20').on({
+	$('#password20').on({
 		"keyup": function(e) {
 			keyupPassword(e, 20);
 		}
@@ -1740,7 +1861,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(20);
 		}
-	});*/
+	});
 
 	$('#username20').on({
 		"keyup": function(e) {
@@ -1767,7 +1888,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password21').on({
+	$('#password21').on({
 		"keyup": function(e) {
 			keyupPassword(e, 21);
 		}
@@ -1777,7 +1898,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(21);
 		}
-	});*/
+	});
 
 	$('#username21').on({
 		"keyup": function(e) {
@@ -1804,7 +1925,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password22').on({
+	$('#password22').on({
 		"keyup": function(e) {
 			keyupPassword(e, 22);
 		}
@@ -1814,7 +1935,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(22);
 		}
-	});*/
+	});
 
 	$('#username22').on({
 		"keyup": function(e) {
@@ -1841,7 +1962,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password23').on({
+	$('#password23').on({
 		"keyup": function(e) {
 			keyupPassword(e, 23);
 		}
@@ -1851,7 +1972,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(23);
 		}
-	});*/
+	});
 
 	$('#username23').on({
 		"keyup": function(e) {
@@ -1878,7 +1999,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password24').on({
+	$('#password24').on({
 		"keyup": function(e) {
 			keyupPassword(e, 24);
 		}
@@ -1888,7 +2009,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(24);
 		}
-	});*/
+	});
 
 	$('#username24').on({
 		"keyup": function(e) {
@@ -1915,7 +2036,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password25').on({
+	$('#password25').on({
 		"keyup": function(e) {
 			keyupPassword(e, 25);
 		}
@@ -1925,7 +2046,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(25);
 		}
-	});*/
+	});
 
 	$('#username25').on({
 		"keyup": function(e) {
@@ -1952,7 +2073,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password26').on({
+	$('#password26').on({
 		"keyup": function(e) {
 			keyupPassword(e, 26);
 		}
@@ -1962,7 +2083,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(26);
 		}
-	});*/
+	});
 
 	$('#username26').on({
 		"keyup": function(e) {
@@ -1989,7 +2110,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password27').on({
+	$('#password27').on({
 		"keyup": function(e) {
 			keyupPassword(e, 27);
 		}
@@ -1999,7 +2120,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(27);
 		}
-	});*/
+	});
 
 	$('#username27').on({
 		"keyup": function(e) {
@@ -2026,7 +2147,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password28').on({
+	$('#password28').on({
 		"keyup": function(e) {
 			keyupPassword(e, 28);
 		}
@@ -2036,7 +2157,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(28);
 		}
-	});*/
+	});
 
 	$('#username28').on({
 		"keyup": function(e) {
@@ -2063,7 +2184,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password29').on({
+	$('#password29').on({
 		"keyup": function(e) {
 			keyupPassword(e, 29);
 		}
@@ -2073,7 +2194,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(29);
 		}
-	});*/
+	});
 
 	$('#username29').on({
 		"keyup": function(e) {
@@ -2100,7 +2221,7 @@ function initFormulario() {
 		minLength: 6
 	});
 
-	/*$('#password30').on({
+	$('#password30').on({
 		"keyup": function(e) {
 			keyupPassword(e, 30);
 		}
@@ -2110,7 +2231,7 @@ function initFormulario() {
 		"focusout": function(e) {
 			checkPassword(30);
 		}
-	});*/
+	});
 
 	$('#username30').on({
 		"keyup": function(e) {
