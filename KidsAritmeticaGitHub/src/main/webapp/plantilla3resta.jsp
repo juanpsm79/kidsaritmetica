@@ -203,6 +203,8 @@ $(function(){
 		 
 		 document.getElementById("tachadaCentenas").style.visibility="hidden";
 	  	 document.getElementById("elunoCentenas").style.visibility="hidden";
+	  	 document.getElementById("elunoCentenas").style.top="1.7vw";
+	  	 document.getElementById("elunoCentenas").style.left="4.85vw";
 	  	 document.getElementById("tachadaDecenas").style.visibility="hidden";
 	  	 document.getElementById("elunoDecenas").style.visibility="hidden";
 	  	if(nivel == 40 || nivel == 32){
