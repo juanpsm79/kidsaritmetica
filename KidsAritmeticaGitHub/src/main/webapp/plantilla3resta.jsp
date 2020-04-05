@@ -720,10 +720,13 @@ $(function(){
 			  			if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas") {
 			  				if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
 			  					return;
-			  				else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "") {
-		  						document.getElementById("elunoCentenas").style.visibility="visible"
-		  						document.getElementById("tachadaDecenas").style.visibility="visible"
-		  						setSelected("casillaLlevadaDecenas");
+			  				else  {
+			  					if (document.getElementById("elunoCentenas").style.visibility=="hidden")
+			  							document.getElementById("elunoCentenas").style.visibility="visible"
+			  					else {
+		  							document.getElementById("tachadaDecenas").style.visibility="visible"
+		  							setSelected("casillaLlevadaDecenas");
+			  					}
 		  					}
 			  			} else if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas") {
 			  				setSelected("casillaLlevadaCentenas");
