@@ -249,7 +249,7 @@ gapi.analytics.ready(function() {
 						  'ids': 'ga:185994770',   // <-- testPlayAddition.
 					      'start-date': '2018-11-01',
 					      'end-date': 'yesterday',
-					      'metrics': 'ga:users'
+					      'metrics': 'ga:pageviews'
 					  }
 					});
 				  	report.on('success', function(response) {

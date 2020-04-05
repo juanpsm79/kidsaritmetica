@@ -203,6 +203,8 @@ $(function(){
 		 
 		 document.getElementById("tachadaCentenas").style.visibility="hidden";
 	  	 document.getElementById("elunoCentenas").style.visibility="hidden";
+	  	 document.getElementById("elunoCentenas").style.top="1.7vw";
+	  	 document.getElementById("elunoCentenas").style.left="4.85vw";
 	  	 document.getElementById("tachadaDecenas").style.visibility="hidden";
 	  	 document.getElementById("elunoDecenas").style.visibility="hidden";
 	  	if(nivel == 40 || nivel == 32){
@@ -718,10 +720,13 @@ $(function(){
 			  			if(obj.id=="decenasCifra1" || obj.id=="tachadaDecenas") {
 			  				if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML=="")
 			  					return;
-			  				else if (document.getElementById("cifraCasillaLlevadaCentenas").innerHTML != "") {
-		  						document.getElementById("elunoCentenas").style.visibility="visible"
-		  						document.getElementById("tachadaDecenas").style.visibility="visible"
-		  						setSelected("casillaLlevadaDecenas");
+			  				else  {
+			  					if (document.getElementById("elunoCentenas").style.visibility=="hidden")
+			  							document.getElementById("elunoCentenas").style.visibility="visible"
+			  					else {
+		  							document.getElementById("tachadaDecenas").style.visibility="visible"
+		  							setSelected("casillaLlevadaDecenas");
+			  					}
 		  					}
 			  			} else if(obj.id=="centenasCifra1" || obj.id=="tachadaCentenas") {
 			  				setSelected("casillaLlevadaCentenas");
