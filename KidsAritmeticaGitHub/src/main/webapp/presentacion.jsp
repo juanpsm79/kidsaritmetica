@@ -322,8 +322,8 @@ function fullscreen(obj) {
 					<label style="cursor:pointer;font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)" onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'" onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/tutorialEN.mp4', '_blank')">English Tutorial</label>
 					<label style="font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)">&nbsp;/&nbsp;</label>
 					<label style="cursor:pointer;font-family:BerlinDvwi;font-size:3.3vw;color:rgb(46, 117, 182)" onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'" onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/tutorialES.mp4', '_blank')">Tutorial en Español</label></div>
-				<div id="playAdditionDiv" style="cursor:pointer;background-image:url(playadditionLogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;width:34vw;height:24vw;top:6vw"  onclick="javascript:irPlayAddition()"></div>
-				<div id="playSubtractionDiv" style="cursor:pointer;background-image:url(playSubtractionlogo.png);background-repeat:no-repeat;background-size:34vw 24vw;position:absolute;left:35vw;width:34vw;height:24vw;top:6vw"  onclick="javascript:irPlaySubtraction()"></div>
+				<div id="playAdditionDiv" style="cursor:pointer;background-image:url(PlayAddition_btn.png);background-repeat:no-repeat;background-size:31vw 24vw;position:absolute;width:31vw;height:24vw;top:6vw"  onclick="javascript:irPlayAddition()"></div>
+				<div id="playSubtractionDiv" style="cursor:pointer;background-image:url(PlaySubtraction_btn.png);background-repeat:no-repeat;background-size:31vw 24vw;position:absolute;left:35vw;width:31vw;height:24vw;top:6vw"  onclick="javascript:irPlaySubtraction()"></div>
  		</div>
  			
 		<div id="logoutDiv" style="cursor:pointer;width:6vw;height:2vw;display:none;position:absolute;top:1.35vw;right:7.5vw;font-family:Arial;font-size:1.3vw;color:orange" 
