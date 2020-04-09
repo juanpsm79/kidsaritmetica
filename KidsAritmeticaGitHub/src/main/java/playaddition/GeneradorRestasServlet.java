@@ -747,18 +747,19 @@ public class GeneradorRestasServlet extends HttpServlet {
 							MAX_COLISIONES);
 					restas27.add(nuevaResta);
 				}
-				for (int i=0;i<33;i++) {
+				for (int i=0;i<24;i++) {
 					nuevaResta = generador.getOperandosNivel2829(restaNiveles.get(request.getParameter("nivel")), colisiones,
 							MAX_COLISIONES);
 					restas29.add(nuevaResta);
 				}
-				for (int i=0;i<33;i++) {
+				for (int i=0;i<9;i++) {
 					nuevaResta = generador.getOperandosNivel3031(restaNiveles.get(request.getParameter("nivel")), colisiones,
 							MAX_COLISIONES);
 					restas31.add(nuevaResta);
 				}
 				//misma distribución 30% - 70% que en nivel 18
-				ordenarRestasNivel18(restas29, restas31, restaNiveles.get(request.getParameter("nivel")));
+				ordenarRestasNivel32(restas27, restas29,  restas31, restaNiveles.get(request.getParameter("nivel")));
+				//ordenarRestasNivel18(restas29, restas31, restaNiveles.get(request.getParameter("nivel")));
 				List<Resta> restas = restaNiveles.get(request.getParameter("nivel"));
 				Iterator<Resta> iter = restas.iterator();
 				while (iter.hasNext()) {
@@ -769,7 +770,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 					
 				}
 				resultado.deleteCharAt(resultado.lastIndexOf(","));
-				resultado.append("], \"leyenda\": \"Level 29: 4, Level 31: 11\"}");
+				resultado.append("], \"leyenda\": \"Level 27:30%, Level 29: 50%, Level 31: 20%\"}");
 				response.getWriter().write(resultado.toString());
 				request.getSession().setAttribute("assistance", false);
 			}catch(Exception ex) {
@@ -1708,7 +1709,141 @@ public class GeneradorRestasServlet extends HttpServlet {
 		
 	}
 	
-	
+	private void ordenarRestasNivel32(List<Resta> restas27, List<Resta> restas29,
+			List<Resta> restas31, List<Resta> restas) {
+		//%      L27 30%, L29 50%, L31 20%
+        
+		for (int i=0;i<45;i++)
+			restas.add(null);
+		int posicionLibre = 0;
+		
+			while (restas.get(0)== null || restas.get(1)==null || restas.get(2)==null || restas.get(3)==null || restas.get(4)==null ||
+					restas.get(5)== null || restas.get(6)==null || restas.get(7)==null || restas.get(8)==null || restas.get(9)==null ||
+					restas.get(10)== null || restas.get(11)==null || restas.get(12)==null || restas.get(13)==null || restas.get(14)==null) {
+				
+				//3
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas31.get(0));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas31.get(1));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas31.get(2));
+				
+				
+				//4
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas27.get(0));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas27.get(1));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas27.get(2));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas27.get(3));
+				
+				//8
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(0));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(1));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(2));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(3));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(4));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(5));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(6));
+				posicionLibre = calcularPosicionLibreRango(restas,15);
+				restas.add(posicionLibre, restas29.get(7));
+				
+				
+			}
+			
+			while(restas.get(15)== null || restas.get(16)==null || restas.get(17)==null || restas.get(18)==null || restas.get(19)==null ||
+					restas.get(20)== null || restas.get(21)==null || restas.get(22)==null || restas.get(23)==null || restas.get(24)==null ||
+					restas.get(25)== null || restas.get(26)==null || restas.get(27)==null || restas.get(28)==null || restas.get(29)==null) {
+				//3
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas31.get(3));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas31.get(4));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas31.get(5));
+				
+				
+				//4
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas27.get(4));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas27.get(5));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas27.get(6));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas27.get(7));
+				
+				//8
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(8));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(9));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(10));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(11));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(12));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(13));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(14));
+				posicionLibre = calcularPosicionLibreRango(restas,30);
+				restas.add(posicionLibre, restas29.get(15));
+			}
+			while(restas.get(30)== null || restas.get(31)==null || restas.get(32)==null || restas.get(33)==null || restas.get(34)==null ||
+					restas.get(35)== null || restas.get(36)==null || restas.get(37)==null || restas.get(38)==null || restas.get(39)==null ||
+					restas.get(40)== null || restas.get(41)==null || restas.get(42)==null || restas.get(43)==null || restas.get(44)==null) {
+				
+				//3
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas31.get(6));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas31.get(7));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas31.get(8));
+				
+				
+				//4
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas27.get(8));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas27.get(9));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas27.get(10));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas27.get(11));
+				
+				//8
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(16));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(17));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(18));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(19));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(20));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(21));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(22));
+				posicionLibre = calcularPosicionLibreRango(restas,45);
+				restas.add(posicionLibre, restas29.get(23));
+			}
+		
+	}
 	
 	private void ordenarRestasNivel40(List<Resta> restas33, List<Resta> restas35, List<Resta> restas37,
 			List<Resta> restas39, List<Resta> restas) {
