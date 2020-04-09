@@ -129,14 +129,17 @@ $(function(){
   <%i++;}%>
   
   function subirNivel() {
-		$.ajax({
-			  url: "/hello",
-			  method: "post",
-			  data:{nivel: ''+nivel, accion:'subirNivel'},
-			  success : function(responseText) {
-				  location.href = "descripcionNivel.jsp";
-			  }
-			});
+	  if(nivel<=40)
+			$.ajax({
+				  url: "/hello",
+				  method: "post",
+				  data:{nivel: ''+nivel, accion:'subirNivel'},
+				  success : function(responseText) {
+						location.href = "descripcionNivel.jsp";
+				  }
+				});
+	  else
+		  location.href = "seleccionNivel.jsp"; 
 	}
   	
 

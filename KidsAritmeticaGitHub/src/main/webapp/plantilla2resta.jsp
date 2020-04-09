@@ -9,7 +9,6 @@ String sNivel = RB.getString("nivel").toUpperCase();
 String verTodosNiveles = RB.getString("verTodosNiveles");
 String nivel =  (String) session.getAttribute("nivel");
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
-boolean assistance = (Boolean)session.getAttribute("assistance");
 boolean wa = (Boolean)session.getAttribute("wa");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -92,8 +91,8 @@ boolean wa = (Boolean)session.getAttribute("wa");
 var nivelUsuario = null;
 var nivel = <%=nivel%>;
 var assistanceMode = <%=wa%>;
-var assistance = <%=assistance%>;
-var dominio = "test.playaddition.com";
+var reGrouping;
+var dominio = "playaddition.com";
 var usuario;
 $(function(){
 	window.addEventListener("orientationchange", resizePage);
@@ -151,7 +150,6 @@ $(function(){
 		 if(sumas[indexSuma].operador1<10){
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1;
 			 document.getElementById('decenasCifra1').innerHTML = "";
-			// document.getElementById("unidadesCifra1").style.left = "84px";
 		 }else {
 			 document.getElementById('unidadesCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(1);
 			 document.getElementById('decenasCifra1').innerHTML = ""+sumas[indexSuma].operador1.charAt(0);
@@ -160,7 +158,6 @@ $(function(){
 		 if(sumas[indexSuma].operador2<10){
 			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2;
 			 document.getElementById('decenasCifra2').innerHTML = "";
-			 //document.getElementById("unidadesCifra2").style.left = "84px";
 		 }else {
 			 document.getElementById('unidadesCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(1);
 			 document.getElementById('decenasCifra2').innerHTML = ""+sumas[indexSuma].operador2.charAt(0);
@@ -168,19 +165,20 @@ $(function(){
 		 
 		 document.getElementById('sumaUnidadesCifra').innerHTML ="";
 		 document.getElementById('sumaDecenasCifra').innerHTML ="";
-		 //document.getElementById('sumaCentenasCifra').innerHTML ="";
 		 
 		 document.getElementById('sumaUnidadesCifra').style.color="rgb(0,110,188)";
 		 document.getElementById('sumaDecenasCifra').style.color="rgb(0,110,188)";
-		// document.getElementById('sumaCentenasCifra').style.color="rgb(0,110,188)";
-		assistance = true;
+		 
+		 document.getElementById("casillaLlevada").style.visibility="hidden";
+		
+		 reGrouping = true;
 		
 		 
 		 <%if(nivel.equalsIgnoreCase("12") || nivel.equalsIgnoreCase("15") || nivel.equalsIgnoreCase("13")|| nivel.equalsIgnoreCase("14")
 				 || nivel.equalsIgnoreCase("19") || nivel.equalsIgnoreCase("23")){%>
-		 		document.getElementById("casillaLlevada").style.visibility="hidden";
+		 		
 		 		document.getElementById("decenasCifra1").style.cursor="default";
-		 		assistance = false;
+		 		reGrouping = false;
 		  <%}%>
 	     
 	     document.getElementById("casillaLlevada").style.borderStyle = "none";
@@ -477,7 +475,8 @@ $(function(){
   	}
   	
   	function initAssistance() {
-	  	if(assistance){
+	  	if(reGrouping){
+	  		document.getElementById("casillaLlevada").style.visibility="visible";
 	  		document.getElementById("tachada").style.visibility="visible";
 	  		document.getElementById("tachada").style.backgroundSize="6vw 6vw";
 	  		if(assistanceMode){
@@ -561,15 +560,15 @@ $(function(){
 			<div style="position:absolute;left:22.45vw;width:34.5vw;height:34.5vw;background-size:34.5vw 33.5vw;background-image:url(cuadroResta2.png);background-repeat:no-repeat">
 				<!--CASILLAS LLEVADA -->
 				<div style="width:62vw;left:18.82vw;position:absolute;top:1vw">
-					<div id="casillaLlevada" onclick="javascript:if(document.getElementById('tachada').style.visibility=='visible')setSelected('casillaLlevada')" style="position:absolute;z-index:2;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.5vw 3.5vw;width:2.5vw;height:3.5vw">
+					<div id="casillaLlevada" onclick="javascript:if(document.getElementById('tachada').style.visibility=='visible')setSelected('casillaLlevada')" style="visibility:hidden;position:absolute;z-index:2;background-image:url(casillaLlevada.png);background-repeat:no-repeat;background-size:2.5vw 3.5vw;width:2.5vw;height:3.5vw">
 							<label id="cifraCasillaLlevada" style="position:absolute;left:0.15vw;top:-1.15vw;font-family:Calibri;font-size:4.5vw;font-weight:bold;font-color:black"></label>
 					</div>
 				</div>
 					
 				<!--PRIMER OPERADOR  -->
 				<div style="width:62vw;left:17.5vw;position:absolute;bottom:31.5vw">
-							<label id="decenasCifra1" style="position:absolute;cursor:pointer;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
-							<div id="tachada" onclick="javascript:initAssistance()" style="width:6vw;height:6vw;cursor:pointer;background-image:url(tacha.png);background-repeat:no-repeat;left:-0.5vw;position:absolute;top:3.5vw;font-family:Calibri"></div>
+							<label id="decenasCifra1" style="position:absolute;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:initAssistance()">&nbsp;</label>
+							<div id="tachada" onclick="javascript:initAssistance()" style="visibility:hidden;width:6vw;height:6vw;background-image:url(tacha.png);background-repeat:no-repeat;left:-0.5vw;position:absolute;top:3.5vw;font-family:Calibri"></div>
 							<label id="eluno" style="position:absolute;left:5.9vw;top:1.7vw;font-family:Calibri;font-size:5vw;font-weight:bold;font-color:black;visibility:hidden">1</label>
 							<label id="unidadesCifra1" style="position:absolute;left:8.1vw;font-family:Calibri;font-size:10vw;font-weight:bold;font-color:black" onclick="javascript:setOneAssistance()">&nbsp;</label>
 				</div>	

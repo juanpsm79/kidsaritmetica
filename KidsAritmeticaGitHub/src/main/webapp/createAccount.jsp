@@ -454,8 +454,8 @@ function displaycreateAccount(){
 							 
 							<div id="crearCuenta" class="form-group">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
-									<div id="crearClaseLink" style="position:absolute;left:17.5vw">
-										<a style="color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><u><%= crearClase %></u></a>
+									<div id="crearClaseLink" style="left:17.5vw">
+										<a style=" text-decoration: underline;font-size:1.5vw;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><%= crearClase %></a>
 									</div>
 								</div>
 							</div>
