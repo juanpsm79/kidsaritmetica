@@ -422,7 +422,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 		</div>
 		
 		<div style="position:absolute;width:76vw;top:6vw">
-			<img src="logoPlayAdditionMini.png" style="position:absolute;width:15vw;left:71vw">
+			<img src="PlayAddition_logo.png" style="position:absolute;width:15vw;left:71vw">
 		</div>
 
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw">

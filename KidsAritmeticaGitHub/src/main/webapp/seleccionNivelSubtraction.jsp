@@ -424,7 +424,7 @@ function closeFullscreen() {
 		</div>
 		
 		<div style="position:absolute;width:76vw;top:9vw">
-			<img src="logoPlaySubtractionMini.png" style="position:absolute;width:18vw;left:71vw">
+			<img src="PlaySubtraction_logo.png" style="position:absolute;width:18vw;left:71vw">
 		</div>
 
 		<div id="capaNiveles" style="position:absolute;width:75vw;top:14.5vw"> 
