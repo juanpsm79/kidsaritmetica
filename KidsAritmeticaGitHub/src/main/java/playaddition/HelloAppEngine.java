@@ -38,6 +38,8 @@ public class HelloAppEngine extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		if(request.getParameter("nivel")==null && request.getParameter("nivel").equalsIgnoreCase(""))
+			response.sendRedirect(request.getContextPath() + "/presentacion.jsp");
 		response.setContentType("application/json");
 		Locale currentLocale = request.getLocale();
 		System.out.println("### Language: "+currentLocale.getLanguage());

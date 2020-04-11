@@ -51,7 +51,7 @@ var verificarRecaptcha="<%= verificarRecaptcha %>"
 var unAvailableUserNames = [];
 var md
 $( function() {
-	     window.addEventListener("orientationchange", screenfull.request());
+	     window.addEventListener("orientationchange", resizePage);
 		 var firebaseConfig = {
 		    apiKey: "AIzaSyDxPBEOIlqaXki7LVRLLVunVrwWmLXiyBQ",
 		    authDomain: "fbplayaddition.firebaseapp.com",

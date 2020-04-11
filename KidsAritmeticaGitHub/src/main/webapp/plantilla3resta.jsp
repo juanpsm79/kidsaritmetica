@@ -8,6 +8,10 @@ ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
 String sNivel = RB.getString("nivel").toUpperCase();
 String verTodosNiveles = RB.getString("verTodosNiveles");
 String nivel =  (String) session.getAttribute("nivel");
+if(nivel==null){
+	response.sendRedirect(request.getContextPath() + "/presentacion.jsp");
+	return;
+}
 List<Resta>  restas = (List<Resta>) session.getAttribute("restas");
 boolean reGrouping = (Boolean)session.getAttribute("assistance");
 boolean tensRegrouping = (Boolean)session.getAttribute("tensRegrouping");
@@ -798,12 +802,12 @@ $(function(){
   		}
   	}
   	function resizePage() {
-		 if(device.type=='tablet' || device.type=='mobile'){
+		 /*if(device.type=='tablet' || device.type=='mobile'){
 			 document.getElementById("pantallaCompleta").style.visibility="visible";
 		 }
 		 if(device.iphone()){
   			 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
-  		 }
+  		 }*/
 	}
 		  
   	function fullscreen(obj){
@@ -900,8 +904,8 @@ $(function(){
 				<div onclick="javascript:location.href='seleccionNivelSubtraction.jsp'" onmouseout="this.style.backgroundImage='url(cerrarAspa.png)'" onmouseover="this.style.backgroundImage='url(cerrarAspaSelect.png)'"
 					 style="position:absolute;background-size:9.5vw 8.5vw;cursor:pointer;background-image:url(cerrarAspa.png);background-repeat:no-repeat;width:9.5vw;height:8.5vw">
 				</div>
-				<div id="pantallaCompleta" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
-		    	</div>
+				<!--  div id="pantallaCompleta" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
+		    	</div-->
 			</div>
 				
 		   

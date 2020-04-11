@@ -1,6 +1,10 @@
 <%@page import="java.util.*"%>
 <%
 String nivel =  (String) session.getAttribute("nivel");
+if(nivel==null){
+	response.sendRedirect(request.getContextPath() + "/presentacion.jsp");
+	return;
+}
 String nombreImagen = "GoToLevel"+nivel+"S.png";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -22,8 +26,8 @@ String nombreImagen = "GoToLevel"+nivel+"S.png";
   <script src="./js/screenfull.js"></script>
   <script src="./js/current-device.min.js"></script>
   <script>
-var dominio = "test.playaddition.com";
-//  var dominio = "playaddition.com";
+
+  var dominio = "playaddition.com";
   var nivel = <%=nivel%>;
   $( function() {
 	     window.addEventListener("orientationchange", resizePage);
@@ -46,12 +50,12 @@ var dominio = "test.playaddition.com";
   }
   
   function resizePage() {
-	 if(device.type=='tablet' || device.type=='mobile'){
+	 /*if(device.type=='tablet' || device.type=='mobile'){
 		 document.getElementById("pantallaCompleta").style.visibility="visible";
 	 }
 	 if(device.iphone()){
 		 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
-	 }
+	 }*/
   }
 	  
   function fullscreen(obj){
@@ -121,8 +125,8 @@ var dominio = "test.playaddition.com";
 				style="top:2vw;width:9vw;height:8vw;position:absolute;left:10vw;background-size:8vw 7vw;
 					background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;cursor:pointer">
  			</div>
- 			<div id="pantallaCompleta" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)">	
-		    </div>	
+ 			<!--  div id="pantallaCompleta" onclick="fullscreen(this)" style="visibility:hidden;position:absolute;left:26vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)">	
+		    </div-->	
 			<div style="top:9.5vw;width:20vw;height:30vw;position:absolute;background-size:18vw 28vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
  			<div onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/HOW_TO_PLAYSUB_LEVEL_<%=nivel%>.mp4', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=150,left=300,width=600,height=400');" style="width:8.5vw;height:6.5vw;position:absolute;left:0.5vw;cursor:pointer;background-size:8.5vw 6.5vw;top:38.25vw;

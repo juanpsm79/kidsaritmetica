@@ -66,7 +66,6 @@ String userGuide=RB.getString("userGuide");
 
 <script>
 var usuario;
-var pantallaCompleta=false;
   $( function() {
 	  window.addEventListener("orientationchange", resizePage);
 	  

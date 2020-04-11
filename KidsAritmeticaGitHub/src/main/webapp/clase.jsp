@@ -38,15 +38,35 @@ String nivelesValidosError = RB.getString("nivelesValidosError");
 
 String nivelSumas = RB.getString("nivelSumas");
 String nivelRestas = RB.getString("nivelRestas");
-
-
+String sameLevel = RB.getString("sameLevel");
+String differentLevel = RB.getString("differentLevel");
 %>
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PlayAddition | Login</title>
 <link rel="stylesheet" href="./css/bootstrap.min.css">
-
+<style>
+@media only screen and (max-width: 1210)  {
+	.playLabelDiv{
+		position:relative;top:0.75vw;left:5vw;width:10vw;float:left;margin-left:8vw
+	}
+	
+	.inputAdditionDiv{
+		width:15vw;float:left
+	}
+	.inputAddition{
+		width:3.5vw
+	}
+	.seallLevelsDiv{
+		width:10vw;float:left
+	}
+	.seeallLevelsLabel{
+		position:relative;top:0.5vw;right:2.5vw;cursor:pointer;color:blue
+	}
+	
+}
+</style>
 <script src="./js/jquery/jquery-3.3.1.js"></script>
 <script src="./js/jquery/jquery-ui.min.js"></script>
 <script src="./js/current-device.min.js"></script>
@@ -75,6 +95,8 @@ var assignedUserNames = [];
 var igualUsuarioPassword = false;
 var ultimoAlumnoCreado
 var totalAlumnosError;
+var nivelSuma;
+var nivelResta;
 
 	$( function() {
 		     window.addEventListener("orientationchange", resizePage);
@@ -93,8 +115,8 @@ var totalAlumnosError;
 		    	if(user!=null) {
 		    		firebase.database().ref('users/' + user.uid).set(
 		    			{
-		    				"nivelActualSuma": document.getElementById("nivelSuma").value,
-		    				"nivelActualResta": document.getElementById("nivelResta").value,
+		    				"nivelActualSuma": nivelSuma,
+		    				"nivelActualResta": nivelResta,
 		    				"puntos": 0
 		    			},
 		    			function (error) {
@@ -223,15 +245,15 @@ var totalAlumnosError;
 				document.getElementById("nivelSuma").value<1 || document.getElementById("nivelSuma").value>40) {
 			$("#nivelSuma-glyphicon").remove();
 			$("#nivelSuma-error").remove();
-			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
-			$("<em id='nivelSuma-error' class='error help-block'>"+nivelesValidosError+".</em>").insertAfter($("#nivelSuma-glyphicon"));
+			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelSuma.form-control"));
+			$("<em id='nivelSuma-error' class='error help-block' style='width:12vw'>"+nivelesValidosError+".</em>").insertAfter($("#nivelSuma-glyphicon"));
 			$("input#nivelSuma.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 			return
 		}else {
 			$("input#nivelSuma.form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
 			$("#nivelSuma-glyphicon").remove();
 			$("#nivelSuma-error").remove();
-			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
+			$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelSuma.form-control"));
 		}
 	}
 	
@@ -240,16 +262,28 @@ var totalAlumnosError;
 					|| document.getElementById("nivelResta").value<1 || document.getElementById("nivelResta").value>40) {
 			$("#nivelResta-glyphicon").remove();
 			$("#nivelResta-error").remove();
-			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
-			$("<em id='nivelResta-error' class='error help-block'>"+nivelesValidosError+".</em>").insertAfter($("#nivelResta-glyphicon"));
+			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelResta.form-control"));
+			$("<em id='nivelResta-error' class='error help-block' style='width:12vw'>"+nivelesValidosError+".</em>").insertAfter($("#nivelResta-glyphicon"));
 			$("input#nivelResta.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 			return
 		}else {
 			$("input#nivelResta.form-control").parents(".col-md-3").addClass("has-success").removeClass("has-error");
 			$("#nivelResta-glyphicon").remove();
 			$("#nivelResta-error").remove();
-			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
+			$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelResta.form-control"));
 		}
+	}
+	
+	function displayNormalSuma(){
+		$("input#nivelSuma.form-control").parents(".col-md-3").removeClass("has-error").removeClass("has-success");
+		$("#nivelSuma-glyphicon").remove();
+		$("#nivelSuma-error").remove();
+	}
+	
+	function displayNormalResta(){
+		$("input#nivelResta.form-control").parents(".col-md-3").removeClass("has-error").removeClass("has-success");
+		$("#nivelResta-glyphicon").remove();
+		$("#nivelResta-error").remove();
 	}
 	
 	function displayerrorPassword(error,i){
@@ -293,8 +327,10 @@ var totalAlumnosError;
 	
   function verificarFormulario() {
 	  totalAlumnosError=0;
-	  checkNivelResta();
-	  checkNivelSuma();
+	  if(document.getElementById("differentLevel").checked) {
+	  		checkNivelResta();
+	  		checkNivelSuma();
+	  }
 	  for(i=1;i<=30;i++) {
 			  checkPassword(i)
 			  checkUserName(i)  
@@ -311,6 +347,13 @@ var totalAlumnosError;
   
   function crearClase() {
 	  if(verificarFormulario()) {
+		  if(document.getElementById("differentLevel").checked) {
+		  	nivelSuma = document.getElementById('nivelSuma').value;
+		  	nivelResta = document.getElementById('nivelResta').value;
+		  } else{
+			  nivelSuma= 1;
+			  nivelResta= 1;
+		  }
 		  document.getElementById('createClass').onclick=function(){;}
 		  document.getElementById('createClass1').onclick=function(){;}
 		  document.getElementById("loginAjax1").style.visibility="visible";
@@ -443,7 +486,7 @@ var totalAlumnosError;
 				document.getElementById("cresultado"+i).style.height="4.5vw";
 				document.getElementById("cresultado"+i).style.backgroundSize="4.5vw 4.5vw";
 	     }
-	     screenfull.request();
+	     //screenfull.request();
 	 }
 	 
   }
@@ -537,6 +580,20 @@ var totalAlumnosError;
 		});
 	  
   }
+  function differentLevelf(){
+	  document.getElementById('nivelSuma').disabled=false;
+	  document.getElementById('nivelResta').disabled=false;
+  }
+  
+  function oneLevel(){
+	  
+	  document.getElementById('nivelSuma').disabled=true;
+	  document.getElementById('nivelResta').disabled=true;
+	  document.getElementById('nivelSuma').value="";
+	  document.getElementById('nivelResta').value="";
+	  displayNormalSuma();
+	  displayNormalResta();
+  }
 	
 </script>
 <!-- 
@@ -554,7 +611,7 @@ var totalAlumnosError;
 </script>
  -->
 </head>
-<body onload="initFormulario();resizePage()">
+<body onload="initFormulario();resizePage();oneLevel()">
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-8 col-sm-offset-2">
@@ -572,106 +629,62 @@ var totalAlumnosError;
 										onclick="location.href='presentacion.jsp'" onmouseover="this.style.backgroundImage='url(BotonB.png)'" onmouseout="this.style.backgroundImage='url(BotonA.png)'"><label style="cursor:pointer;margin-top:0.3vw"><%= cancelarBoton %></label></div>
 								</div>
 							</div>
-							<!--
-							<fieldset>
+       						<fieldset>
 								<legend><%=datosClase%></legend>
-									  <div class="form-group row">
-									    <label class="col-4"></label> 
-										    <div class="col-8">
-										      <div class="custom-control custom-radio custom-control-inline">
-										        <input name="radio" id="radio_0" type="radio" class="custom-control-input" value="fish"> 
-										        <label for="radio_0" class="custom-control-label">All students start from level 1</label>
-										      </div>
-										    </div>
-										  </div>
-									  <div class="form-group row">
-									    <label class="col-4">Radio Buttons</label> 
-									    <div class="col-8">
-									      <div class="custom-control custom-radio custom-control-inline">
-									        <input name="radio1" id="radio1_0" type="radio" class="custom-control-input" value="rabbit"> 
-									        <label for="radio1_0" class="custom-control-label">Select a different start level</label>
+							<div class="form-group" align="left">
+       							  <div class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:10vw;width:30vw;float:left">
+						            <div class="custom-control custom-radio custom-control-inline">
+									        <input name="radio1" id="onLevel" checked type="radio" class="custom-control-input" onclick="oneLevel()"> 
+									        <label for="onLevel" class="custom-control-label"><%=sameLevel%></label>
 									      </div>
-									    </div>
-									  </div>
-									  <div class="form-group row">
-									    <label for="text" class="col-4 col-form-label">Text Field</label> 
-									    <div class="col-8">
-									      <input id="text" name="text" type="text" class="form-control">
-									    </div>
-									  </div>
-									  <div class="form-group row">
-									    <label for="text1" class="col-4 col-form-label">Text Field</label> 
-									    <div class="col-8">
-									      <input id="text1" name="text1" type="text" class="form-control">
-									    </div>
-									  </div>
-								 
-								<div class="form-group" align="center">
-								    <div class="col-md-3 mb-3" style="margin-top:1.8vw">
-									      <div class="custom-control custom-radio">
-											  <input type="radio" class="custom-control-input" id="defaultGroupExample1" name="groupOfDefaultRadios">
-											  <label class="custom-control-label" for="defaultGroupExample1">Option 1</label>
-										</div>
-								    </div>
-								  </div>
-								  <div class="form-group" align="center">
-								    <div class="col-md-3 mb-3" style="margin-top:1.8vw">
-									      <div class="custom-control custom-radio">
-										  	<input type="radio" class="custom-control-input" id="defaultGroupExample2" name="groupOfDefaultRadios" checked>
-										  	<label class="custom-control-label" for="defaultGroupExample2">Option 2</label>
-										  </div>
-								    </div>
-								  </div>
-								  <div class="form-group" align="center">
-								    <div class="col-md-3 mb-3">
-								      <label><%=nivelSumas%></label>
-								      <label for="validationCustom04" style="cursor:pointer"
-								      		onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
-								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')">(<%= verTodosNivelesSuma %>)</label>
-								      <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
-								    </div>
-								  </div>
-								  <div class="form-group" align="center">
-								    <div class="col-md-3 mb-3">
-								     <label><%=nivelSumas%></label>
-								      <label for="validationCustom05" style="cursor:pointer"
-								      	onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
-								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')">(<%= verTodosNivelesResta %>)</label>
-								      <input type="text" class="form-control" id="nivelResta" placeholder="<%= nivelInicialClase %>" required>
-								    </div>
-								  </div>
-								  
-							</fieldset>
-							<fieldset style="margin-top: 1vw"><legend></legend></fieldset>
-							-->
-							<div class="form-group" align="center">
-       							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
+       								</div>	
+							</div>
+							
+							<div class="form-group" align="left">
+       							  <div class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:10vw;width:30vw;float:left">
+						            <div class="custom-control custom-radio custom-control-inline">
+									        <input name="radio1" id="differentLevel" type="radio" class="custom-control-input" onclick="differentLevelf()"> 
+									        <label for="differentLevel" class="custom-control-label"><%=differentLevel%></label>
+									      </div>
+       								</div>	
+							</div>
+							
+								
+       						<div class="form-group" align="left">
+       							  <div class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:5vw;width:10vw;float:left;margin-left:8vw">
 						            <label>PlayAddition</label>
 						          </div>
-						          <div class="col-md-3 mb-3" style="width:15vw">
-						            <input type="text" class="form-control" id="nivelSuma" placeholder="<%= nivelInicialClase %>" required>
+						          <div class="col-md-3 mb-3" style="left:3vw;width:10vw;float:left">
+						            <input type="text" class="form-control" id="nivelSuma" required style="width:4vw">
 						          </div>
-						          <div class="col-md-3 mb-3">
-						            <label for="validationCustom04" style="cursor:pointer;color:blue"
+						          <div  class="col-md-3 mb-3" style="width:10vw;float:left">
+						            <label for="validationCustom04" style="position:relative;top:0.5vw;cursor:pointer;color:blue"
 								      		onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
 								      		onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelsAddition.pdf', '_blank')"><%= verTodosNivelesSuma %></label>
 						          </div>
+						          
        						</div>
-							
-							<div class="form-group" align="center">
-       							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
+       						<div class="form-group" align="left">
+       							  <div class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:5vw;width:10vw;float:left;margin-left:8vw">
 						            <label>PlaySubtraction</label>
 						          </div>
-						          <div class="col-md-3 mb-3" style="width:15vw">
-						            <input type="text" class="form-control" id="nivelResta" placeholder="<%= nivelInicialClase %>" required>
+						          <div class="col-md-3 mb-3" style="left:3vw;width:10vw;float:left">
+						            <input type="text" class="form-control" id="nivelResta" required style="width:4vw">
 						          </div>
-						          <div class="col-md-3 mb-3">
-						            <label for="validationCustom05" style="cursor:pointer;color:blue"
+						          
+						          <div class="col-md-3 mb-3" style="width:10vw;float:left">
+						           <label for="validationCustom05" style="position:relative;top:0.5vw;cursor:pointer;color:blue"
 								      	onmouseout="javascript:this.style.textDecoration='none'" onmouseover="javascript:this.style.textDecoration='underline'"
-								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')">(<%= verTodosNivelesResta %>)</label>
+								      	onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/allevelSubtraction.pdf', '_blank')"><%= verTodosNivelesResta %></label>
 						          </div>
+						          
        						</div>
-							
+       						
+       						</fieldset>
+       						
+							<fieldset>
+								<legend></legend>
+								</fieldset>
 							
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
@@ -689,6 +702,7 @@ var totalAlumnosError;
 						          </div>
 						          
        						</div>
+       						
        						<div class="form-group" align="center">
        							  <div class="col-md-3 mb-3" style="margin-left: 5vw">
 						            <label ><%=alumno %> 2:</label>

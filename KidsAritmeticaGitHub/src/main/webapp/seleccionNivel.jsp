@@ -6,6 +6,7 @@ Locale locale = request.getLocale();
 ResourceBundle RB = ResourceBundle.getBundle("Messages", locale);
 String sNivel = RB.getString("nivel").toUpperCase();
 String verTodosNiveles = RB.getString("verTodosNiveles");
+String pleaseSelectLevel = RB.getString("pleaseSelectLevel");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
@@ -288,28 +289,38 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   function irPrincipal(obj){
 	  if(obj!=null)
 	  	obj.style.backgroundImage="url(playBotonSS.png)";
-	  setTimeout(function(){
-		  $.ajax({
-			  url: "/hello",
-			  method: "post",
-			  data:{nivel: ''+nivelAnterior},
-			 // dataType: "json",
-			  success : function(responseText) {
-					location.href = "descripcionNivel.jsp";
-			  }
-			})
-		  },500);
-	  
-		 
-}
+	  if(nivelAnterior!=null && !isNaN(nivelAnterior))
+		  setTimeout(function(){
+			  $.ajax({
+				  url: "/hello",
+				  method: "post",
+				  data:{nivel: ''+nivelAnterior},
+				 // dataType: "json",
+				  success : function(responseText) {
+						location.href = "descripcionNivel.jsp";
+				  }
+				})
+			  },500);
+	  else 
+		  alert ("<%= pleaseSelectLevel %>");
+	}
   
-  function seleccionarNivel(idNivel){
-	  if(nivelAnterior==idNivel)
-		  return;
-	  document.getElementById(""+idNivel).firstElementChild.nextElementSibling.style.borderColor="rgb(91, 155, 213)";
-	  if(nivelAnterior!=null)
-		  document.getElementById(""+nivelAnterior).firstElementChild.nextElementSibling.style.borderColor="rgb(126, 0, 0)";
-	  nivelAnterior = idNivel;
+  function seleccionarNivel(idNivel) {
+	  if(nivelAnterior==null){
+		  document.getElementById(""+idNivel).firstElementChild.style.borderColor="rgb(91, 155, 213)";
+		  document.getElementById(""+idNivel).firstElementChild.nextElementSibling.style.borderColor="rgb(91, 155, 213)";
+		  nivelAnterior = idNivel;
+	  } else {
+		  if(nivelAnterior==idNivel){
+			  return;
+		  } else {
+			  document.getElementById(""+idNivel).firstElementChild.style.borderColor="rgb(91, 155, 213)";
+			  document.getElementById(""+idNivel).firstElementChild.nextElementSibling.style.borderColor="rgb(91, 155, 213)";
+			  document.getElementById(""+nivelAnterior).firstElementChild.style.borderColor="rgb(126, 0, 0)";
+			  document.getElementById(""+nivelAnterior).firstElementChild.nextElementSibling.style.borderColor="rgb(126, 0, 0)";
+			  nivelAnterior = idNivel;
+		  }
+	  }
   }
   
   var docLevelsWindow;
@@ -332,8 +343,8 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   
   function resizePage(){
 	 if(device.type=='tablet' || device.type=='mobile'){
-		 document.getElementById("pantallaCompletaDiv").style.left="83vw";
-		 document.getElementById("pantallaCompleta").style.visibility="visible";
+		 //document.getElementById("pantallaCompletaDiv").style.left="83vw";
+		// document.getElementById("pantallaCompleta").style.visibility="visible";
 		 document.getElementById("botonSalir").style.right="5vw";
 	     if (window.orientation == 90 || window.orientation == -90) { //landscape Mode
 	      	  	document.getElementById('seeAllLevels').style.top="11vw";
@@ -346,9 +357,9 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
 				document.getElementById('playSelectAllLevel').style.top="40vw";
 	   	 }
 	 }
-	 if(device.iphone()){
+	 /*if(device.iphone()){
 		 document.getElementById("pantallaCompleta").ontouchstart=function(){fullscreen(document.getElementById("pantallaCompleta"))};
-	 }
+	 }*/
   }
   
   function fullscreen(obj){
@@ -397,7 +408,7 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
   </script>
 </head>
 
-  <body onload="resizePage();seleccionarNivel('1')">
+  <body onload="resizePage()">
   		<div class="hidden">
 	<script type="text/javascript">
 		<!--//--><![CDATA[//><!--
@@ -430,8 +441,9 @@ String verTodosNiveles = RB.getString("verTodosNiveles");
  		
  		<div id="pantallaCompletaDiv" style="position:absolute;width:14vw;top:1vw;left:85vw">
  			<div id="botonSalir" onclick="irPresentacion(this)" onmouseout="this.style.backgroundImage='url(aspaCerrarSelectYourLevel.png)'" onmouseover="this.style.backgroundImage='url(aspaCerrarSelectYourLevelSelect.png)'"  style="background-image:url(aspaCerrarSelectYourLevel.png);background-repeat:no-repeat;background-size:7vw 7vw;position:absolute;width:7vw;height:7vw;cursor:pointer;right:3vw"></div>
- 			<div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:11vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
-		    </div>
+ 			
+ 			<!--  div id="pantallaCompleta" style="visibility:hidden;position:absolute;left:11vw;cursor:pointer;width:5vw;height:4vw;background-color:white;background-size:5vw 4vw;background-repeat:no-repeat;background-image:url(maximize-512.png)" onclick="fullscreen(this)">
+		    </div-->
  			
  			<div id= "playSelectAllLevel" onclick="javascript:irPrincipal(this)" style="background-image:url(playBoton.png);background-repeat:no-repeat;background-size:12vw 9vw;position:absolute;right:3vw;top:34.5vw;cursor:pointer;width:12vw;height:9vw" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
  		</div>
