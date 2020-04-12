@@ -247,8 +247,11 @@ var nivelResta;
 			$("#nivelSuma-error").remove();
 			if(device.type=='mobile')
 				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='left:14vw'></span>").insertAfter($("input#nivelSuma.form-control"));
-			else	
+			else if( device.tablet() && device.portrait())
+				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
+			else
 				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelSuma.form-control"));
+			
 			$("<em id='nivelSuma-error' class='error help-block' style='width:12vw'>"+nivelesValidosError+".</em>").insertAfter($("#nivelSuma-glyphicon"));
 			$("input#nivelSuma.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 			return
@@ -258,8 +261,11 @@ var nivelResta;
 			$("#nivelSuma-error").remove();
 			if(device.type=='mobile')
 				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='left:14vw'></span>").insertAfter($("input#nivelSuma.form-control"));
+			else if( device.tablet() && device.portrait())
+				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelSuma.form-control"));
 			else
 				$("<span id='nivelSuma-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelSuma.form-control"));
+			
 		}
 	}
 	
@@ -270,8 +276,11 @@ var nivelResta;
 			$("#nivelResta-error").remove();
 			if(device.type=='mobile')
 				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='left:14vw'></span>").insertAfter($("input#nivelResta.form-control"));
+			else if( device.tablet() && device.portrait())
+				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
 			else
 				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-remove form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelResta.form-control"));
+			
 			$("<em id='nivelResta-error' class='error help-block' style='width:12vw'>"+nivelesValidosError+".</em>").insertAfter($("#nivelResta-glyphicon"));
 			$("input#nivelResta.form-control").parents(".col-md-3").addClass("has-error").removeClass("has-success");
 			return
@@ -281,6 +290,8 @@ var nivelResta;
 			$("#nivelResta-error").remove();
 			if(device.type=='mobile')
 				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='left:14vw'></span>").insertAfter($("input#nivelResta.form-control"));
+		    else if( device.tablet() && device.portrait())
+				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#nivelResta.form-control"));
 		    else
 				$("<span id='nivelResta-glyphicon' class='glyphicon glyphicon-ok form-control-feedback' style='right:2.5vw'></span>").insertAfter($("input#nivelResta.form-control"));
 		}
@@ -520,6 +531,48 @@ var nivelResta;
 	     }
 	 }
 	 
+	 if(device.tablet()){
+		 if(device.landscape()){
+			 document.getElementById('levelSubDiv').style.left="7vw";
+			 document.getElementById('levelSubDiv').style.width="10vw";
+			 
+			 document.getElementById('levelAddDiv').style.left="7vw";
+			 document.getElementById('levelAddDiv').style.width="10vw";
+			 
+			 document.getElementById('verTodosAddLabelDiv').style.left="5vw";
+			 document.getElementById('verTodosAddLabelDiv').style.width="10vw";
+			 
+			 document.getElementById('verTodosSubLabelDiv').style.left="5vw";
+			 document.getElementById('verTodosSubLabelDiv').style.width="10vw";
+			 
+			 document.getElementById('nivelSuma').style.width="7vw";
+			 document.getElementById('nivelResta').style.width="7vw";
+			 
+		 } else{
+			 document.getElementById('radioDifNivelDiv').style.left="5vw";
+			 document.getElementById('radioSameNivelDiv').style.left="5vw";
+			 
+			 document.getElementById('playAddLavelDiv').style.marginLeft="5vw";
+			 document.getElementById('playSubLavelDiv').style.marginLeft="5vw";
+			 
+			 document.getElementById('levelSubDiv').style.left="10vw";
+			 document.getElementById('levelSubDiv').style.width="10vw";
+			 
+			 document.getElementById('levelAddDiv').style.left="10vw";
+			 document.getElementById('levelAddDiv').style.width="10vw";
+			 
+			 document.getElementById('nivelSuma').style.width="9vw";
+			 document.getElementById('nivelResta').style.width="9vw";
+			 
+			 document.getElementById('verTodosAddLabelDiv').style.left="14vw";
+			 document.getElementById('verTodosAddLabelDiv').style.width="15vw";
+			 
+			 document.getElementById('verTodosSubLabelDiv').style.left="14vw";
+			 document.getElementById('verTodosSubLabelDiv').style.width="15vw";
+		 }
+		 
+	 }
+	 
   }
   function keyupPassword(e, index) {
 	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18) {
@@ -696,7 +749,7 @@ var nivelResta;
 						          
        						</div>
        						<div class="form-group" align="left">
-       							  <div class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:5vw;width:10vw;float:left;margin-left:8vw">
+       							  <div id="playSubLavelDiv" class="col-md-3 mb-3" style="position:relative;top:0.75vw;left:5vw;width:10vw;float:left;margin-left:8vw">
 						            <label>PlaySubtraction</label>
 						          </div>
 						          <div id="levelSubDiv" class="col-md-3 mb-3" style="left:3vw;width:10vw;float:left">
