@@ -59,6 +59,7 @@ public class DescargaFichero extends HttpServlet {
 			if(request.getParameter("usu"+i).length()>0) {
 				alumnos++;
 				sesion.setAttribute("usu"+i, request.getParameter("usu"+i));
+				sesion.setAttribute("pass"+i, request.getParameter("pass"+i));
 			}
 		}
 		if(alumnos<=19) {
@@ -111,7 +112,7 @@ public class DescargaFichero extends HttpServlet {
         		}
 	        	field = acroForm.getField("pass"+i);
 	        	if(field!=null) {
-	        		field.setValue((String)sesion.getAttribute("password"));
+	        		field.setValue((String)sesion.getAttribute("pass"+i));
 	        		field.setReadOnly(true);
 	        	}
         	}else {
