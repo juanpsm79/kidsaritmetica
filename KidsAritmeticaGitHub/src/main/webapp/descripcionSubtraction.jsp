@@ -73,6 +73,12 @@ String nombreImagen = "GoToLevel"+nivel+"S.png";
 				screenfull.exit();
 		}
 	}
+  
+  function abrirVideo(nivel){
+	  var url;
+	  url="https://storage.googleapis.com/testplayaddition.appspot.com/HOW_TO_PLAYSUB_LEVEL_"+nivel+".mp4";
+	  window.open(url, "_blank", "toolbar=no,scrollbars=no,resizable=no,top=150,left=300,width=600,height=400");
+  }
   </script>
 <!-- Global site tag (gtag.js) - Google Analytics
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-130256336-3"></script>
@@ -129,7 +135,7 @@ String nombreImagen = "GoToLevel"+nivel+"S.png";
 		    </div-->	
 			<div style="top:9.5vw;width:20vw;height:30vw;position:absolute;background-size:18vw 28vw;background-image:url(instrucciones.png);background-repeat:no-repeat">
  			</div>
- 			<div onclick="javascript:window.open('https://storage.googleapis.com/testplayaddition.appspot.com/HOW_TO_PLAYSUB_LEVEL_<%=nivel%>.mp4', '_blank', 'toolbar=no,scrollbars=no,resizable=no,top=150,left=300,width=600,height=400');" style="width:8.5vw;height:6.5vw;position:absolute;left:0.5vw;cursor:pointer;background-size:8.5vw 6.5vw;top:38.25vw;
+ 			<div onclick="abrirVideo(<%=nivel%>)" style="width:8.5vw;height:6.5vw;position:absolute;left:0.5vw;cursor:pointer;background-size:8.5vw 6.5vw;top:38.25vw;
  			background-image:url(HOW_TO_PLAY.png);background-repeat:no-repeat" onmouseout="this.style.backgroundImage='url(HOW_TO_PLAY.png)'" onmouseover="this.style.backgroundImage='url(HOW_TO_PLAY_top.png)'"></div>
  			<div id= "playSelectAllLevel" onclick="javascript:irNivel(this)" style="width:10vw;height:8vw;position:absolute;left:10vw;cursor:pointer;background-size:9vw 7vw;top:38vw;background-image:url(playBoton.png);background-repeat:no-repeat" onmouseout="this.style.backgroundImage='url(playBoton.png)'" onmouseover="this.style.backgroundImage='url(playBottonSelected.png)'"></div>
  		</div>

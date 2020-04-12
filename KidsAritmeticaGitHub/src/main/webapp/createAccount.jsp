@@ -40,7 +40,7 @@ String cancelarBoton=RB.getString("cancelarBoton");
 <script type="text/javascript">
 var comprobandoLogin = false;
 var userNameDisponible = false;
-var action="login";
+var action="crearCuenta";
 var vRecaptcha=true
 var unAvailableUserNameError="<%= unAvailableUserNameError %>"
 var usernameCortoError="<%= usernameCortoError %>"
@@ -69,25 +69,6 @@ $( function() {
 	    	}
 	    });
 });
-
-
-  
-function fBLogin(){
-	var user = document.getElementById("username1").value;
-	var password = document.getElementById("password1").value;
-
-	firebase.auth().signInWithEmailAndPassword(user+"@playaddition.com", password)
-	   .then(function(firebaseUser) {
-	   })
-	  .catch(function(error) {
-		  document.getElementById("loginAjax").style.visibility="hidden";
-		  var errorCode = error.code;
-	      var errorMessage = error.message;
-	      if (errorCode == 'auth/user-not-found' || errorCode =='auth/wrong-password') {
-	        alert(loginIncorrecto);
-	      } 
-	});
-}
  
 function handleSignUp() {
     var user = document.getElementById('username1').value;
@@ -102,61 +83,7 @@ function handleSignUp() {
 	    console.log(error);
    	});
 }
-function displayLogin(){
-	displayNormalPassword();
-	displayNormalRePassword();
-	displayNormalUsername();
-	document.getElementById("username1").value="";
-	document.getElementById("password1").value="";
-	document.getElementById("confirm_password1").value="";
-	document.getElementById("repassword").style.display="none";
-	document.getElementById("terms").style.display="none";
-	
-	document.getElementById("crearBotonones").style.display="none";
-	
-	document.getElementById("crearCuenta").style.display="block";
-	document.getElementById("loginBoton").style.display="block";
-	
-	document.getElementById("loginlogo").style.backgroundImage="url(login.png)";
-	document.getElementById("loginlogo").style.backgroundSize="10vw 5vw";
-	document.getElementById("loginlogo").style.width="10vw";
-	document.getElementById("loginlogo").style.height="5vw";
-	if(device.type=='mobile'){
-		 document.getElementById('loginlogo').style.width="27vw";
-		 document.getElementById('loginlogo').style.height="9vw";
-	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
-	}
-	action="login";
-}
-	
-function displaycreateAccount(){
-	displayNormalPassword();
-	displayNormalRePassword();
-	displayNormalUsername();
-	document.getElementById("username1").value="";
-	document.getElementById("password1").value="";
-	document.getElementById("confirm_password1").value="";
-	document.getElementById("repassword").style.display="block";
-	document.getElementById("terms").style.display="inline";
 
-	document.getElementById("crearBotonones").style.display="block";
-	document.getElementById("crearCuenta").style.display="none";
-	document.getElementById("cocoa").style.display="none";
-	document.getElementById("cocoa").style.visibility="hidden";
-	document.getElementById("loginBoton").style.display="none";
-
-	document.getElementById("loginlogo").style.backgroundImage="url(newaccount.png)";
-	document.getElementById("loginlogo").style.backgroundSize="12.5vw 5vw";
-	document.getElementById("loginlogo").style.width="12.5vw";
-	document.getElementById("loginlogo").style.height="5vw";
-	if(device.type=='mobile'){
-		 document.getElementById('loginlogo').style.width="27vw";
-		 document.getElementById('loginlogo').style.height="9vw";
-	     document.getElementById('loginlogo').style.backgroundSize="27vw 9vw";
-	     document.getElementById('capabotonescreacion').style.marginTop="4vw"
-	}
-	action="crearCuenta";
-}
 	//Username
 	function checkUserName(){
 		if (document.getElementById("username1").value.length<1){
@@ -167,14 +94,8 @@ function displaycreateAccount(){
 			displayerrorUsername(usernameCortoError);
 			return false;
 		}
-		else{
-			if(action=="login") {
-				displayOkeyUserName();
-				return true;
-			} else if(action=="crearCuenta"){
-				return userNameDisponible;
-			}
-		}
+		else
+			return userNameDisponible;
 	}
 	function displayerrorUsername(error){
 		$("#username1-glyphicon").remove();
@@ -206,22 +127,17 @@ function displaycreateAccount(){
 			return false;
 		}
 		else {
-			if(action=="crearCuenta"){
-					if(document.getElementById("confirm_password1").value==document.getElementById("password1").value){
-						displayOkeyRePassword();
-						displayOkeyPassword();
-						return true;
-					}
-					else {
-						if(document.getElementById("confirm_password1").value.length>0)
-							displayerrorPassword(passordsInvalidas)
-						else
-							displayOkeyPassword();	
-						return false;
-					}
-			} else if (action=="login") {
+			if(document.getElementById("confirm_password1").value==document.getElementById("password1").value){
+				displayOkeyRePassword();
 				displayOkeyPassword();
 				return true;
+			}
+			else {
+				if(document.getElementById("confirm_password1").value.length>0)
+					displayerrorPassword(passordsInvalidas)
+				else
+					displayOkeyPassword();	
+				return false;
 			}
 		}
 	}
@@ -296,15 +212,9 @@ function displaycreateAccount(){
 		return bUsername && bPassword && bRePassword;
 	}
 	
-	function validarLogin(){
-		var bUsername = checkUserName();
-		var bPassword = checkPassword();
-		return bUsername && bPassword;
-	}
-	
 	function crearCuenta(){
 		var vformularioCorrecto = validarDatos();
-		if(vformularioCorrecto && vRecaptcha){
+		if(vformularioCorrecto){
 			document.getElementById("loginAjax").style.visibility="visible";
 			document.getElementById("createAccountLabel").onclick=function(){;}
 			handleSignUp();
@@ -313,15 +223,6 @@ function displaycreateAccount(){
 			alert (verificarRecaptcha)
 	}
 	
-	function login(){
-		var vlogin = validarLogin();
-		if(vlogin && vRecaptcha){
-			document.getElementById("loginAjax").style.visibility="visible";
-			fBLogin();
-		}
-		if(vlogin && !vRecaptcha)
-			alert (verificarRecaptcha)
-	}
 	function verifyCallback() {
 		vRecaptcha = true;
     }
@@ -354,8 +255,11 @@ function displaycreateAccount(){
 		 document.getElementById('createAccountLabel').style.fontSize="3.75vw";
 		 document.getElementById('createAccountLabel').style.left="16vw"
 	     document.getElementById('createAccountLabel').style.backgroundSize="30vw 6vw";
-		 
+		 document.getElementById('linkCreacionClase').style.fontSize="4vw";
 		 document.getElementById('terms1').className="col-sm-5 col-sm-offset-4";
+		 document.getElementById('loginAjax').style.width="6vw";
+		 document.getElementById('loginAjax').style.height="6vw";
+		 document.getElementById('loginAjax').style.backgroundSize="6vw 6vw";
 		 
 		 if(device.landscape()) {
 	         document.getElementById('loginlogo').style.width="28vw";
@@ -455,7 +359,7 @@ function displaycreateAccount(){
 							<div id="crearCuenta" class="form-group">
 								<div class="col-sm-9 col-sm-offset-2" style="cursor:default;padding-left: 0px">
 									<div id="crearClaseLink" style="left:17.5vw">
-										<a style=" text-decoration: underline;font-size:1.5vw;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><%= crearClase %></a>
+										<a id="linkCreacionClase" style=" text-decoration: underline;font-size:1.5vw;font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;color:blue;cursor:pointer" onclick="location.href='clase.jsp'"><%= crearClase %></a>
 									</div>
 								</div>
 							</div>
@@ -541,13 +445,5 @@ $( "#username1" ).autocomplete({
     },
     minLength: 6
 });
-	/*$(document).ready(function(){
-		$("#signupForm1").validate({
-			  debug:true,
-			  submitHandler: function(form) {
-				  return;
-			  }
-		});
-  });*/
 </script>
 </html>
