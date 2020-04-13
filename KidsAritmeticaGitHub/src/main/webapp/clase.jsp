@@ -572,11 +572,11 @@ var nivelResta;
 		 }
 		 
 	 } else if(device.type=="desktop" && screen.width<1000){
-		 document.getElementById('radioDifNivelDiv').style.marginLeft="4vw";
-		 document.getElementById('radioSameNivelDiv').style.marginLeft="4vw";
+		 document.getElementById('radioDifNivelDiv').style.marginLeft="0vw";
+		 document.getElementById('radioSameNivelDiv').style.marginLeft="0vw";
 		 
-		 document.getElementById('playAddLavelDiv').style.left="7vw";
-		 document.getElementById('playSubLavelDiv').style.left="7vw";
+		 document.getElementById('levelAddDiv').style.left="7vw";
+		 document.getElementById('levelSubDiv').style.left="7vw";
 		 
 		 document.getElementById('nivelSuma').style.width="6vw";
 		 document.getElementById('nivelResta').style.width="6vw";
