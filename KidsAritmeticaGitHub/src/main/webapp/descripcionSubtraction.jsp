@@ -75,9 +75,58 @@ String nombreImagen = "GoToLevel"+nivel+"S.png";
 	}
   
   function abrirVideo(nivel){
-	  var url;
-	  url="https://storage.googleapis.com/testplayaddition.appspot.com/HOW_TO_PLAYSUB_LEVEL_"+nivel+".mp4";
-	  window.open(url, "_blank", "toolbar=no,scrollbars=no,resizable=no,top=150,left=300,width=600,height=400");
+	      var url;
+	      if(nivel==40) url="https://www.youtube.com/watch?v=-F6PRdHeNcc";
+	      else if(nivel==39)url="https://www.youtube.com/watch?v=AoxrjQwFHVA";
+	      else if(nivel==38)url="https://www.youtube.com/watch?v=CC4JbVUFZas";
+	      else if(nivel==37)url="https://www.youtube.com/watch?v=_QQBkVnyNPs";
+	      else if(nivel==36)url="https://www.youtube.com/watch?v=G1sKDiNQudQ";
+	      else if(nivel==35)url="https://www.youtube.com/watch?v=r7PE3mxJ_g8";
+	      else if(nivel==34)url="https://www.youtube.com/watch?v=LkUy1KcPghg";
+	      else if(nivel==33)url="https://www.youtube.com/watch?v=X0LdoJNP42k";
+	      else if(nivel==32)url="https://www.youtube.com/watch?v=lUf1ADt6CFg";
+	      else if(nivel==31)url="https://www.youtube.com/watch?v=PfHLWN5n8XI";
+	      else if(nivel==30)url="https://www.youtube.com/watch?v=mMsO5rM6j5w";
+	      else if(nivel==29)url="https://www.youtube.com/watch?v=NuYbTyHu58U";
+	      else if(nivel==28)url="https://www.youtube.com/watch?v=Ab1zGEm0Vuo";
+	      else if(nivel==27)url="https://www.youtube.com/watch?v=dbGAxIdkMYw";
+	      else if(nivel==26)url="https://www.youtube.com/watch?v=k9d5YUpxn78";
+	      else if(nivel==25)url="https://www.youtube.com/watch?v=FS2i1sWcp-k";
+	      else if(nivel==24)url="https://www.youtube.com/watch?v=0xaHci-BBqs";
+	      else if(nivel==23)url="https://www.youtube.com/watch?v=3EXipn-nPQg";
+	      else if(nivel==22)url="https://www.youtube.com/watch?v=cVE5qhziHsE";
+	      else if(nivel==21)url="https://www.youtube.com/watch?v=O3DGg6dWvOU";
+	      else if(nivel==20)url="https://www.youtube.com/watch?v=bFqynShAfwI";
+	      else if(nivel==19)url="https://www.youtube.com/watch?v=Ryo-Ewowmmo";
+	      else if(nivel==18)url="https://www.youtube.com/watch?v=xGWNml2ObDw";
+	      else if(nivel==17)url="https://www.youtube.com/watch?v=FCZJBCp4IU0";
+	      else if(nivel==16)url="https://www.youtube.com/watch?v=VfVcgwQ2Dko";
+	      else if(nivel==15)url="https://www.youtube.com/watch?v=YChtcCWajow";
+	      else if(nivel==14)url="https://www.youtube.com/watch?v=uy_9IFrpIJk";
+	      else if(nivel==13)url="https://www.youtube.com/watch?v=TE8gaYLKlhU";
+	      else if(nivel==12)url="https://www.youtube.com/watch?v=yo8VgXtHD_M";
+	      else if(nivel==11)url="https://www.youtube.com/watch?v=G1K9WaPtY0k";
+	      else if(nivel==10)url="https://www.youtube.com/watch?v=-PhsqkySfNU";
+	      else if(nivel==9) url="https://www.youtube.com/watch?v=XF_TIq11QO8";
+	      else if(nivel==8) url="https://www.youtube.com/watch?v=lKOo2J49PiY";
+	      else if(nivel==7) url="https://www.youtube.com/watch?v=65bpfc8aLaA";
+	      else if(nivel==6) url="https://www.youtube.com/watch?v=q90Shzq7T-Y";
+	      else if(nivel==5) url="https://www.youtube.com/watch?v=FGbWZfTu0Ag";
+	      else if(nivel==4) url="https://www.youtube.com/watch?v=n9Tk3U6wOfs";
+	      else if(nivel==3) url="https://www.youtube.com/watch?v=nLlHBy1-JDU";
+	      else if(nivel==2) url="https://www.youtube.com/watch?v=Yk_WVMNh95A";
+	      else if(nivel==1) url="https://www.youtube.com/watch?v=EGY_Dkc6L9w";
+
+	      var params = [
+			    'height='+screen.availHeight,
+			    'width='+screen.availWidth,
+			    'fullscreen=yes',
+			    'resizable=yes',
+			    'scrollbars=yes'
+			    // only works in IE, but here for completeness
+			].join(',');	
+		  window.open(url, "_blank", params);
+		  popup.moveTo(0,0);
   }
   </script>
 <!-- Global site tag (gtag.js) - Google Analytics

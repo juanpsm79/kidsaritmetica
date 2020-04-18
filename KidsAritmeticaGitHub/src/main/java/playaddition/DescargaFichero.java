@@ -54,12 +54,16 @@ public class DescargaFichero extends HttpServlet {
 
 	private void introducirDatosSession(HttpServletRequest request) {
 		HttpSession sesion = request.getSession();
+		boolean igualUsuarioPass = Boolean.valueOf(request.getParameter("igualUsuarioPass"));
 		int alumnos=0;
 		for (int i=1;i<=30;i++) {
 			if(request.getParameter("usu"+i).length()>0) {
 				alumnos++;
 				sesion.setAttribute("usu"+i, request.getParameter("usu"+i));
-				sesion.setAttribute("pass"+i, request.getParameter("pass"+i));
+				if(igualUsuarioPass)
+					sesion.setAttribute("pass"+i, request.getParameter("pass1"));
+				else
+					sesion.setAttribute("pass"+i, request.getParameter("pass"+i));
 			}
 		}
 		if(alumnos<=19) {

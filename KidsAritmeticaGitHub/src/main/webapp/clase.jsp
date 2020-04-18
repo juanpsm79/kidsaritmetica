@@ -97,6 +97,7 @@ var ultimoAlumnoCreado
 var totalAlumnosError;
 var nivelSuma;
 var nivelResta;
+var ctrlActive = false;
 
 	$( function() {
 		     window.addEventListener("orientationchange", resizePage);
@@ -153,7 +154,10 @@ var nivelResta;
 		if(document.getElementById("username"+ultimoAlumnoCreado).value.length>0) {
 		    var user = document.getElementById("username"+ultimoAlumnoCreado).value;
 		    var password;
-		    password = document.getElementById("password"+ultimoAlumnoCreado).value;
+		    if(igualUsuarioPassword)
+		    	password = document.getElementById("password1").value;
+		    else
+		    	password = document.getElementById("password"+ultimoAlumnoCreado).value;
 		    firebase.auth().createUserWithEmailAndPassword(user+"@playaddition.com", password)
 		   	.catch(function(error) {
 			    alert(errorCode+" "+errorMessage);
@@ -195,15 +199,42 @@ var nivelResta;
 
 	//Username
 	function checkUserName(i){
-		if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6)
-			displayerrorUsername(usernameCortoError,i);
-		if(document.getElementById("username"+i).value.length<1) {
-			displayNormalUsername(i)
-			totalAlumnosError++;
-			if(document.getElementById("password"+i).value.length<1)
-				displayNormalPassword(i)
+		if(igualUsuarioPassword) {
+			if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6){
+				displayerrorUsername(usernameCortoError,i);
+				document.getElementById("password"+i).value = "";
+			}
+			if(document.getElementById("username"+i).value.length<1) {
+				displayNormalUsername(i)
+				totalAlumnosError++;
+				document.getElementById("password"+i).value = "";
+				for (j = 0; j < assignedUserNames.length; j++) {
+		      		if(assignedUserNames[j][0]==i) {
+	      				 assignedUserNames[j].pop(0);
+	         			 assignedUserNames[j].pop(1);
+						break;
+				    }
+		      	 }
+			}
+		} else {
+			if (document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i).value.length<6)
+				displayerrorUsername(usernameCortoError,i);
+			if(document.getElementById("username"+i).value.length<1) {
+				displayNormalUsername(i)
+				totalAlumnosError++;
+				for (j = 0; j < assignedUserNames.length; j++) {
+		      		if(assignedUserNames[j][0]==i) {
+	      				 assignedUserNames[j].pop(0);
+	         			 assignedUserNames[j].pop(1);
+						break;
+				    }
+		      	}
+				if(document.getElementById("password"+i).value.length<1)
+					displayNormalPassword(i)
+			}
 		}
 	}
+	
 	function displayerrorUsername(error,i){
 		$("#username"+i+"-glyphicon").remove();
 		$("#username"+i+"-error").remove();
@@ -227,7 +258,40 @@ var nivelResta;
 	
 	//Password
 	function checkPassword(i) {
-
+		if (igualUsuarioPassword){
+			if(i==1){
+				if (document.getElementById("password"+i).value.length<1) {
+					displayerrorPassword(usernameObligatorio,i);
+					document.getElementById("credit").checked = false;
+					igualUsuarioPassword=false;
+					for(i=2;i<=30;i++) {
+						document.getElementById("password"+i).value = "";
+						document.getElementById("password"+i).disabled = false;
+					}
+					return false;
+				}
+				if (document.getElementById("password"+i).value.length>0 && document.getElementById("password"+i).value.length<6) {
+					displayerrorPassword(usernameCortoError,i);
+					document.getElementById("credit").checked = false;
+					igualUsuarioPassword=false;
+					for(i=2;i<=30;i++) {
+						document.getElementById("password"+i).value = "";
+						document.getElementById("password"+i).disabled = false;
+					}
+					return false;
+				}
+				if(document.getElementById("password"+i).value.length>5) {
+					displayOkeyPassword(i);
+					for(i=2;i<=30;i++) {
+						document.getElementById("password"+i).disabled = true;
+						if(document.getElementById("username"+i).value.length>0)
+							document.getElementById("password"+i).value = document.getElementById("password1").value;
+					}
+					return true;
+				}
+			} else
+			 	return
+		} else {
 			if (document.getElementById("password"+i).value.length<1 && document.getElementById("username"+i).value.length>0) {
 				displayerrorPassword(usernameObligatorio,i);
 				return
@@ -238,6 +302,7 @@ var nivelResta;
 			}
 			if(document.getElementById("password"+i).value.length>5)
 				displayOkeyPassword(i);
+		}
 	}
 	
 	function checkNivelSuma() {
@@ -330,22 +395,28 @@ var nivelResta;
 		$("<span id='password"+i+"-glyphicon' class='glyphicon glyphicon-ok form-control-feedback'></span>").insertAfter($("input#password"+i+".form-control"));
 	}
 	
-	/*function usarMismaUsuarioPassword (checkbox){
+	function usarMismaUsuarioPassword (checkbox){
 		if(checkbox.checked) {
 			igualUsuarioPassword=true;
-			for(i=1;i<=30;i++){
-				displayNormalPassword(i);
-				document.getElementById("password"+i).value = "";
-				document.getElementById("password"+i).disabled = true;
+			if(checkPassword(1))
+					for(i=2;i<=30;i++){
+						displayNormalPassword(i);
+						document.getElementById("password"+i).disabled = true;
+						document.getElementById("password"+i).placeholder="";
+						if(document.getElementById("username"+i).value.length>0 && document.getElementById("username"+i+"-error")==null)
+							document.getElementById("password"+i).value = document.getElementById("password1").value;
+					}
+			else {
+				igualUsuarioPassword=false;
+				checkbox.checked=false;
 			}
 		} else {
 			igualUsuarioPassword=false;
-			for(i=1;i<=30;i++) {
+			for(i=2;i<=30;i++) {
 				document.getElementById("password"+i).disabled = false;
-				checkPassword(i);
 			}
 		}
-	}*/
+	}
   
 	
   function verificarFormulario() {
@@ -403,8 +474,8 @@ var nivelResta;
 		  url: "/DescargaFichero",
 		  method: "post",
 		  data:{
+			  igualUsuarioPass: ''+igualUsuarioPassword,
 			  accion:'datos',
-			  //password:''+ document.getElementById("password").value,
 			  usu1:''+document.getElementById("username1").value,
 			  pass1:''+document.getElementById("password1").value,
 			  usu2:''+document.getElementById("username2").value,
@@ -531,7 +602,33 @@ var nivelResta;
 	     }
 	 }
 	 
-	 if(device.tablet()){
+	 if(device.tablet()) {
+		 document.getElementById('createClass').style.left="8vw";
+		 document.getElementById('createClass1').style.left="8vw";
+		 document.getElementById('createClassCancel').style.left="23vw"
+		 document.getElementById('createClassCancel1').style.left="23vw"
+		 
+		 document.getElementById('createClass').style.fontSize="1.75vw";
+		 document.getElementById('createClass1').style.fontSize="1.75vw";
+		 document.getElementById('createClassCancel').style.fontSize="1.75vw";
+		 document.getElementById('createClassCancel1').style.fontSize="1.75vw";
+		 
+		 document.getElementById("createClassCancel").style.width="10vw";
+		 document.getElementById("createClassCancel").style.height="3vw";
+		 document.getElementById("createClassCancel").style.backgroundSize="10vw 3vw";
+		 
+		 document.getElementById("createClassCancel1").style.width="10vw";
+		 document.getElementById("createClassCancel1").style.height="3vw";
+		 document.getElementById("createClassCancel1").style.backgroundSize="10vw 3vw";
+		 
+		 document.getElementById("createClass").style.width="14vw";
+		 document.getElementById("createClass").style.height="3vw";
+		 document.getElementById("createClass").style.backgroundSize="14vw 3vw";
+		 
+		 document.getElementById("createClass1").style.width="14vw";
+		 document.getElementById("createClass1").style.height="3vw";
+		 document.getElementById("createClass1").style.backgroundSize="14vw 3vw";
+		 
 		 if(device.landscape()){
 			 document.getElementById('levelSubDiv').style.left="7vw";
 			 document.getElementById('levelSubDiv').style.width="10vw";
@@ -549,6 +646,11 @@ var nivelResta;
 			 document.getElementById('nivelResta').style.width="7vw";
 			 
 		 } else{
+			 document.getElementById('createClass').style.fontSize="2vw";
+			 document.getElementById('createClass1').style.fontSize="2vw";
+			 document.getElementById('createClassCancel').style.fontSize="2vw";
+			 document.getElementById('createClassCancel1').style.fontSize="2vw";
+			 
 			 document.getElementById('radioDifNivelDiv').style.left="5vw";
 			 document.getElementById('radioSameNivelDiv').style.left="5vw";
 			 
@@ -615,11 +717,15 @@ var nivelResta;
 	  if (e.which != 9 && e.which != 20 && e.which != 13 && e.which != 16 && e.which != 17 && e.which != 18
       		&& e.which != 37 && e.which != 38 && e.which != 39 && e.which != 40) {
       	for (i = 0; i < assignedUserNames.length; i++) {
-      		if(assignedUserNames[i][0]==index){
-      			  assignedUserNames[i].pop(0);
-      			  assignedUserNames[i].pop(1);
-					  break;
-				  }
+      		if(assignedUserNames[i][0]==index) {
+      			if(document.getElementById("username"+index).value.length>0)
+      			  	assignedUserNames[i][1]=document.getElementById("username"+index).value;
+      			else {
+      				 assignedUserNames[i].pop(0);
+         			 assignedUserNames[i].pop(1);
+      			}
+				break;
+		    }
       	 }
       }
   }
@@ -638,6 +744,7 @@ var nivelResta;
 				}
 	  		if(encontrado) {
 	  			displayerrorUsername(assignedUserNameError,index);
+	  			document.getElementById("password"+index).value = "";
 	  			return
 	  		}
   		}
@@ -650,6 +757,7 @@ var nivelResta;
 				}
 	  		if(encontrado) {
 	  			displayerrorUsername(unAvailableUserNameError,index);
+	  			document.getElementById("password"+index).value = "";
 	  			return
 	  		}
   		} 
@@ -660,6 +768,7 @@ var nivelResta;
 		  	if (errorCode == 'auth/wrong-password') {
 		  		unAvailableUserNames.push(user)
 		  		displayerrorUsername(unAvailableUserNameError,index)
+		  		document.getElementById("password"+index).value = "";
 		  	} else if (errorCode=='auth/user-not-found'){
 		  		var existente = false
 		  		for (j = 0; j < fAsg; j++) {
@@ -670,7 +779,10 @@ var nivelResta;
 				}
 		  		if(!existente)
 		  			assignedUserNames.push([index, user]);
-		  		displayOkeyUserName(index);
+	  			displayOkeyUserName(index);
+				if(igualUsuarioPassword)
+					document.getElementById("password"+index).value = document.getElementById("password1").value;
+		  		
 		  	}
 		  	console.log(error);
 		});
@@ -682,7 +794,6 @@ var nivelResta;
   }
   
   function oneLevel(){
-	  
 	  document.getElementById('nivelSuma').disabled=true;
 	  document.getElementById('nivelResta').disabled=true;
 	  document.getElementById('nivelSuma').value="";
@@ -792,11 +903,16 @@ var nivelResta;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password1" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						           
-						          <div id="cresultado1" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
+						          <div id="cresultado1" class="col-md-3 mb-3" style="top:0.5vw;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado1"></label>
 						          </div>
 						          
+       						</div>
+       						
+       						<div class="form-group" align="center">
+      							 <div id="mismoUsuPassword" class="custom-control custom-radio">
+							            <label class="custom-control-label" style="font-weight:normal" for="credit"><input id="credit" type="checkbox" class="custom-control-input" onclick="usarMismaUsuarioPassword(this)"><%=mismoUsuPass %></label>
+							      </div>
        						</div>
        						
        						<div class="form-group" align="center">
@@ -809,7 +925,7 @@ var nivelResta;
 						          <div class="col-md-3 mb-3">
 						            <input type="text" class="form-control" id="password2" placeholder="<%= password %>" required="" style="width:85%">
 						          </div>
-						          <div id="cresultado2" class="col-md-3 mb-3" style="top:0.5vw;;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
+						          <div id="cresultado2" class="col-md-3 mb-3" style="top:0.5vw;visibility:hidden;width:1vw;height:1vw;background-size:1vw 1vw;background-image:url(loading.gif);background-repeat:no-repeat">
 						            <label id="resultado2"></label>
 						          </div>
        						</div>
