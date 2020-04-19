@@ -64,7 +64,7 @@ public class GeneradorRestasServlet extends HttpServlet {
 		Resta nuevaResta = null;
 		int nivel = new Integer((String) request.getSession().getAttribute("nivel"));
 		String leyenda = "";
-		if (nivel<11 && nivel!=5) {
+		if (nivel<11 && nivel!=5) {  
 			StringBuilder resultado = new StringBuilder("{\"restas\":[");
 			try {
 				while (restaNiveles.get(request.getParameter("nivel")).size() < NUMSUMAS) {

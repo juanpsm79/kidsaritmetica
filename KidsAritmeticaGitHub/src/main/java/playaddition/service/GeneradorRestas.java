@@ -41,11 +41,7 @@ public class GeneradorRestas {
 				digitoOp2 = random.ints(1, 1, digitoOp1+1).sum();
 		} else if (nivel>=6 && nivel<=10) {
 	    	digitoOp1 = random.ints(1, nivel-5, nivel).sum();
-			if (digitoOp1==0)
-				digitoOp2 = 0;
-			else
-				digitoOp2 = random.ints(1, nivel-5, digitoOp1+1).sum();
-	    	
+			digitoOp2 = random.ints(1, nivel-5, digitoOp1+1).sum();
 	    }
 		digitosOperador1.add(digitoOp1);
 		digitosOperador2.add(digitoOp2);
@@ -405,13 +401,11 @@ public class GeneradorRestas {
 		List<Integer> digitosOperador1 = new ArrayList<Integer>();
 		List<Integer> digitosOperador2 = new ArrayList<Integer>();
 
-		int unidades1 = random.nextInt(10);
+		int unidades1 = random.ints(1, 1, 10).sum();
 		int decenas1 =  random.ints(1, 1, 10).sum();
 		int centenas1 = random.ints(1, 1, 10).sum();
 		
-		int unidades2 = 0;
-		if(unidades1>0)
-			unidades2 = random.ints(1, 1, unidades1+1).sum();
+		int unidades2 = random.ints(1, 1, unidades1+1).sum();
 		
 		digitosOperador1.add(unidades1);
 		digitosOperador1.add(decenas1);
